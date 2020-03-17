@@ -93,7 +93,8 @@ memo_getPrioritizationTable <- function(ou_uid="cDGPF739ZZr") {
     "IzmZerN7tDN","PPG Scale-Up: Saturation", "Scale-Up: Saturation",
     "AHMMjoPYta6","PPG Scale Up: Aggressive", "Scale-Up: Aggressive",
     "b1X6pxMHgs6","PPG Sustained","Sustained",
-    "pibJV72pMyW","PPG Centrally Supported","Centrally Supported"
+    "pibJV72pMyW","PPG Centrally Supported","Centrally Supported",
+    "CJYtvFbjeG2", "PPG No Prioritization","No Prioritization"
   )
   
   df_rows<-tibble::tribble(
@@ -163,7 +164,11 @@ memo_getPrioritizationTable <- function(ou_uid="cDGPF739ZZr") {
     dplyr::rename("Indicator" = ind,
                   Age = options)
   
-  df <- d2_analyticsResponse(url) %>% 
+  df <- d2_analyticsResponse(url) 
+  
+  if (is.null(df)) {return(NULL)}
+  
+  df %<>% 
     dplyr::mutate(Value = as.numeric(Value)) %>% 
     dplyr::mutate(Data = stringr::str_replace_all(Data,"COP20 Targets ","")) %>% 
     dplyr::mutate(Data = stringr::str_trim(Data)) %>% 
@@ -216,7 +221,11 @@ LdiiIrW3GAg&dimension=bw8KHXzxd9i:OO5qyDIwoMk;FPUgmtt8HRi;RGC9tURSc3W;cL6cHd6QJ5
     stringr::str_replace_all( "[\r\n]" , "") %>% 
     URLencode(.) 
   
-  d2_analyticsResponse(url) %>% 
+  df <- d2_analyticsResponse(url) 
+  
+  if (is.null(df)) { return(NULL)}
+  
+  df %>% 
     dplyr::mutate(Value = as.numeric(Value)) %>% 
     dplyr::mutate(Data = stringr::str_replace_all(Data,"COP20 Targets ","")) %>% 
     dplyr::mutate(Data = stringr::str_trim(Data)) %>% 

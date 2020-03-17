@@ -28,7 +28,15 @@ shinyServer(function(input, output, session) {
       shinyjs::enable("fetch")
       shinyjs::enable("downloadReport")
       closeSweetAlert(session)
-      return(list(prio=prio,partners=partners))
+      my_data<-list(prio=prio,partners=partners)
+      if (is.null(my_data$prio) & is.null(my_data$partners)) {
+        sendSweetAlert(
+          session,
+          title = "Oops!",
+          text = "Sorry, I could not find any data for you!"
+        )
+      }
+      return(my_data)
     }
     
   }
