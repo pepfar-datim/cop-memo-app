@@ -8,9 +8,29 @@ require(httr)
 require(tidyr)
 require(stringr)
 require(DT)
+require(datapackr)
+
 
 config <- config::get()
+options("baseurl" = config$baseurl)
 flog.appender(appender.file(config$log_path), name="cop_memo")
+
+getUserOperatingUnits<-function(uid) {
+  
+  ous<-datapackr::configFile %>% 
+    dplyr::select(DataPack_name,model_uid,countryName,countryUID) %>% 
+    dplyr::filter(!stringr::str_detect(countryName,"_Military")) %>% 
+    dplyr::distinct() %>% 
+    dplyr::arrange(countryName)
+  
+  if ( is.null(uid) ) {return("")} 
+  
+  if ( uid != "ybg3MO3hcf4") {
+    ous %<>% 
+      dplyr::filter(model_uid == uid) 
+  }
+  setNames(ous$countryUID,ous$countryName)
+}
 
 DHISLogin <- function(baseurl, username, password) {
   httr::set_config(httr::config(http_version = 0))
@@ -177,5 +197,39 @@ memo_getPrioritizationTable <- function(ou_uid="cDGPF739ZZr") {
     dplyr::arrange(Indicator,col_name) %>% 
     tidyr::pivot_wider(names_from = col_name ,values_from = "Value") %>% 
     dplyr::mutate("Total *" = rowSums(.[3:7]) )
+  
+}
 
+memo_getPartnersTable<-function(ou_uid="cDGPF739ZZr") {
+  
+  base_url<-config$baseurl
+  
+  url<-glue::glue("{base_url}api/29/analytics.json?dimension=dx:pyD3q4hsocw;mpoYh9odYG5;
+DJF6GKEa9Jw;uzrCoPjSHAM;LejpyPTzSop;yoaC47zCSML;gVjB3hNi3r6;
+o8zSyUaIPRR;TadWkOKgCYt;dIhPb5PaNak;niYlMjiztpL;egV0AFr0hcJ;fUeLws683gU;
+tYNTb7iXfB5;kCfFLyrsr63;baC8xbo39Ih;H9jkgrFTECK;FcWaUSDQyaK;dBZCfaRJHpl;
+wpBQqYCcUvl;BnLh5JaCvH9;yse3LYDict6;Z4B96JB9FPp;EPZB5449dks;mQrwwNQ61nF;
+mFD2sZFAABk;rpayStjaa1a;AggcL3yaPE6;CwKwrnJIo6r;zdR0UbSXAvP;gg20xBdjq7V;jHwvOp0wwkk;
+luxafh3nWng;sUwQqFDiuzq;dYKVOITB5ju;RrBIFT7aQDh;egyFeGZVxGf;A4emI2AABjd;OxiC4DAZNxh;YgCYwt8Jshb;
+LdiiIrW3GAg&dimension=bw8KHXzxd9i:OO5qyDIwoMk;FPUgmtt8HRi;RGC9tURSc3W;cL6cHd6QJ5B;a7p2WOqhhzQ;PpCZbJvQyjL;r3bmih0XRCe;NLV6dy7BE2O
+&dimension=SH885jaRe0o&filter=ou:{ou_uid}&filter=pe:2020Oct&displayProperty=SHORTNAME&skipData=false&includeMetadataDetails=false") %>% 
+    stringr::str_replace_all( "[\r\n]" , "") %>% 
+    URLencode(.) 
+  
+  d2_analyticsResponse(url) %>% 
+    dplyr::mutate(Value = as.numeric(Value)) %>% 
+    dplyr::mutate(Data = stringr::str_replace_all(Data,"COP20 Targets ","")) %>% 
+    dplyr::mutate(Data = stringr::str_trim(Data)) %>% 
+    tidyr::separate("Data",into=c("Indicator","Numerator","Age"),sep=" ") %>% 
+    dplyr::mutate(Age = case_when(Age == "15-" ~ "<15",
+                                  Age == "15+" ~ "15+",
+                                  Age == "18-" ~"<18",
+                                  Age == "18+" ~ "18+",
+                                  TRUE ~ "Total")) %>% 
+    dplyr::mutate( Age = case_when( Indicator %in% c("CXCA_SCRN","OVC_HIVSTAT","KP_PREV","PMTCT_EID","KP_MAT","VMMC_CIRC","PrEP_NEW","PrEP_CURR","GEND_GBV")  ~ "Total",
+                                    TRUE ~ Age)) %>% 
+    dplyr::select(-Numerator) %>% 
+    tidyr::pivot_wider(names_from = c("Indicator", "Age") ,values_from = "Value")
+  
+  
 }
