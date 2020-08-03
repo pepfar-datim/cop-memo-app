@@ -201,7 +201,7 @@ memo_getPrioritizationTable <- function(ou_uid="cDGPF739ZZr") {
     dplyr::mutate(Indicator = factor(Indicator,levels = unique(df_rows$ind))) %>% 
     dplyr::arrange(Indicator,col_name) %>% 
     tidyr::pivot_wider(names_from = col_name ,values_from = "Value") %>% 
-    dplyr::mutate("Total *" = rowSums(.[3:7]) )
+    dplyr::mutate("Total *" = rowSums(.[3:7]) ) 
   
 }
 

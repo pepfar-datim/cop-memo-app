@@ -3,6 +3,8 @@ library(shinyjs)
 require(datimvalidation)
 require(shinyWidgets)
 require(magrittr)
+require(knitr)
+require(kableExtra)
 source("./utils.R")
 
 shinyServer(function(input, output, session) {
@@ -157,7 +159,9 @@ shinyServer(function(input, output, session) {
           tags$hr(),
           actionButton("fetch","Get Data"),
           tags$hr(),
-          downloadButton("downloadReport", "Download Report"),
+          downloadButton("downloadXLSX", "Download XLSX"),
+          tags$hr(),
+          downloadButton("downloadPDF", "Download PDF"),
           width = 2
         ),
         mainPanel(tabsetPanel(
@@ -171,7 +175,31 @@ shinyServer(function(input, output, session) {
     
   })
   
-  output$downloadReport <- downloadHandler(
+  
+  output$downloadPDF <- downloadHandler(
+    filename = function() {
+      
+      paste0('narrative-report', '.', 'pdf')
+    },
+    
+    content = function(file) {
+      
+      src <- normalizePath('approval_memo_template.Rmd')
+      #img <- normalizePath('pepfar.png')
+      # temporarily switch to the temp dir, in case you do not have write
+      # permission to the current working directory
+      owd <- setwd(tempdir())
+      on.exit(setwd(owd))
+      file.copy(src, 'report.Rmd', overwrite = TRUE)
+      #file.copy(img, 'pepfar.png', overwrite = TRUE)
+      
+      library(rmarkdown)
+      out <- rmarkdown::render('report.Rmd', pdf_document(latex_engine = "xelatex"))
+      file.rename(out, file)
+    }
+  )
+  
+  output$downloadXLSX <- downloadHandler(
     filename = function() {
       
       

@@ -1,0 +1,54 @@
+---
+title: "COP20 Approval Memo"
+date: "`r paste0('Generated on ' , format(Sys.time(), '%Y-%m-%d'))`"
+output:
+  pdf_document:
+    toc: no
+    latex_engine: xelatex
+header-includes:
+    - \usepackage{amsfonts}
+    - \usepackage{tabularx,booktabs}
+    - \usepackage{multirow}
+    - \usepackage{float}
+classoption: 
+    - landscape
+    - legal
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r prio_table ,results='asis', echo=FALSE}
+
+d <- memo_data()
+
+
+kable(d$prio, "latex", booktabs = T,format.args = list(big.mark = ",")) %>%
+  column_spec(1,width = "1.2in",bold=TRUE) %>%
+  column_spec(2,width = "0.25in") %>% 
+  column_spec(3:9, width = "0.6in") %>% 
+  collapse_rows(columns = 1, latex_hline = "major", valign = "middle") %>% 
+  kable_styling(font_size = 8)
+
+  cat('\n\n')
+  cat('\\pagebreak')
+  cat('\n\n')
+  
+```
+
+
+
+```{r partner_table ,results='asis', echo=FALSE}
+
+
+
+
+kable(d$partners, "latex", booktabs = T,format.args = list(big.mark = ",")) %>%
+  kable_styling(font_size = 4) %>% 
+  column_spec(3:ncol(d$partners),width = "0.33in")
+
+```
+
+
