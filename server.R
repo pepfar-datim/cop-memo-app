@@ -179,7 +179,9 @@ shinyServer(function(input, output, session) {
   output$downloadPDF <- downloadHandler(
     filename = function() {
       
-      paste0('narrative-report', '.', 'pdf')
+      prefix <-"cop_20_approval_memo_"
+      date<-format(Sys.time(),"%Y%m%d_%H%M%S")
+      paste0(paste(prefix,date,sep="_"),".pdf")
     },
     
     content = function(file) {
