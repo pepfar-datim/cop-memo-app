@@ -110,7 +110,7 @@ shinyServer(function(input, output, session) {
     wellPanel(fluidRow(
       img(src = 'pepfar.png', align = "center"),
       h4(
-        "Welcome to the  COP20 DataPack Validation App. Please login with your DATIM credentials:"
+        "Welcome to the COP20 Memo App. Please login with your DATIM credentials:"
       )
     ),
     fluidRow(
