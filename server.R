@@ -185,13 +185,13 @@ shinyServer(function(input, output, session) {
     content = function(file) {
       
       src <- normalizePath('approval_memo_template.Rmd')
-      #img <- normalizePath('pepfar.png')
+      img <- normalizePath('pepfar.png')
       # temporarily switch to the temp dir, in case you do not have write
       # permission to the current working directory
       owd <- setwd(tempdir())
       on.exit(setwd(owd))
       file.copy(src, 'report.Rmd', overwrite = TRUE)
-      #file.copy(img, 'pepfar.png', overwrite = TRUE)
+      file.copy(img, 'pepfar.png', overwrite = TRUE)
       
       library(rmarkdown)
       out <- rmarkdown::render('report.Rmd', pdf_document(latex_engine = "xelatex"))

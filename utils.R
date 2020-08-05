@@ -68,6 +68,72 @@ d2_analyticsResponse <- function(url,remapCols=TRUE) {
     }
 }
 
+
+indicatorOrder<-function() {
+  
+  tibble::tribble(
+    ~ind,~options, ~in_partner_table,
+    "HTS_INDEX","<15",TRUE,
+    "HTS_INDEX","15+",TRUE,
+    "HTS_INDEX","Total",FALSE,
+    "HTS_TST","<15",TRUE,
+    "HTS_TST","15+",TRUE,
+    "HTS_TST","Total",FALSE,
+    "HTS_TST_POS","<15",TRUE,
+    "HTS_TST_POS","15+",TRUE,
+    "HTS_TST_POS","Total",FALSE,
+    "TX_NEW","<15",TRUE,
+    "TX_NEW","15+",TRUE,
+    "TX_NEW","Total",FALSE,
+    "TX_CURR","<15",TRUE,
+    "TX_CURR","15+",TRUE,
+    "TX_CURR","Total",FALSE,
+    "TX_PVLS","<15",TRUE,
+    "TX_PVLS","15+",TRUE,
+    "TX_PVLS","Total",FALSE,
+    "CXCA_SCRN","Total",TRUE,
+    "OVC_SERV","<18",TRUE,
+    "OVC_SERV","18+",TRUE,
+    "OVC_SERV","Total",FALSE,
+    "OVC_HIVSTAT", "Total",TRUE,
+    "PMTCT_STAT","<15",TRUE,
+    "PMTCT_STAT","15+",TRUE,
+    "PMTCT_STAT","Total",FALSE,
+    "PMTCT_STAT_POS","<15",TRUE,
+    "PMTCT_STAT_POS","15+",TRUE,
+    "PMTCT_STAT_POS","Total",FALSE,
+    "PMTCT_ART","<15",TRUE,
+    "PMTCT_ART","15+",TRUE,
+    "PMTCT_ART","Total",FALSE,
+    "PMTCT_EID","Total",TRUE,
+    "PP_PREV","<15",TRUE,
+    "PP_PREV","15+",TRUE,
+    "PP_PREV","Total",FALSE,
+    "KP_PREV","Total",TRUE,
+    "KP_MAT","Total",TRUE,
+    "VMMC_CIRC","Total",TRUE,
+    "HTS_SELF","<15",TRUE,
+    "HTS_SELF","15+",TRUE,
+    "HTS_SELF","Total",TRUE,
+    "PrEP_NEW","Total",TRUE,
+    "PrEP_CURR","Total",TRUE,
+    "TB_STAT","<15",TRUE,
+    "TB_STAT","15+",TRUE,
+    "TB_STAT","Total",FALSE,
+    "TB_ART","<15",TRUE,
+    "TB_ART","15+",TRUE,
+    "TB_ART","Total",FALSE,
+    "TB_PREV","<15",TRUE,
+    "TB_PREV","15+",TRUE,
+    "TB_PREV","Total",FALSE,
+    "TX_TB","<15",TRUE,
+    "TX_TB","15+",TRUE,
+    "TX_TB","Total",FALSE,
+    "GEND_GBV","Total",TRUE)
+}
+
+  
+
 memo_getPrioritizationTable <- function(ou_uid="cDGPF739ZZr") {
   
   base_url<-config$baseurl
@@ -97,66 +163,7 @@ memo_getPrioritizationTable <- function(ou_uid="cDGPF739ZZr") {
     "CJYtvFbjeG2", "PPG No Prioritization","No Prioritization"
   )
   
-  df_rows<-tibble::tribble(
-    ~ind,~options,
-    "HTS_INDEX","<15",
-    "HTS_INDEX","15+",
-    "HTS_INDEX","Total",
-    "HTS_TST","<15",
-    "HTS_TST","15+",
-    "HTS_TST","Total",
-    "HTS_TST_POS","<15",
-    "HTS_TST_POS","15+",
-    "HTS_TST_POS","Total",
-    "TX_NEW","<15",
-    "TX_NEW","15+",
-    "TX_NEW","Total",
-    "TX_CURR","<15",
-    "TX_CURR","15+",
-    "TX_CURR","Total",
-    "TX_PVLS","<15",
-    "TX_PVLS","15+",
-    "TX_PVLS","Total",
-    "CXCA_SCRN","Total",
-    "OVC_SERV","<18",
-    "OVC_SERV","18+",
-    "OVC_SERV","18+",
-    "OVC_SERV","Total",
-    "OVC_HIVSTAT", "Total",
-    "PMTCT_STAT","<15",
-    "PMTCT_STAT","15+",
-    "PMTCT_STAT","Total",
-    "PMTCT_STAT_POS","<15",
-    "PMTCT_STAT_POS","15+",
-    "PMTCT_STAT_POS","Total",
-    "PMTCT_ART","<15",
-    "PMTCT_ART","15+",
-    "PMTCT_ART","Total",
-    "PMTCT_EID","Total",
-    "PP_PREV","<15",
-    "PP_PREV","15+",
-    "PP_PREV","Total",
-    "KP_PREV","Total",
-    "KP_MAT","Total",
-    "VMMC_CIRC","Total",
-    "HTS_SELF","<15",
-    "HTS_SELF","15+",
-    "HTS_SELF","Total",
-    "PrEP_NEW","Total",
-    "PrEP_CURR","Total",
-    "TB_STAT","<15",
-    "TB_STAT","15+",
-    "TB_STAT","Total",
-    "TB_ART","<15",
-    "TB_ART","15+",
-    "TB_ART","Total",
-    "TB_PREV","<15",
-    "TB_PREV","15+",
-    "TB_PREV","Total",
-    "TX_TB","<15",
-    "TX_TB","15+",
-    "TX_TB","Total",
-    "GEND_GBV","Total")
+  df_rows<-indicatorOrder() %>% dplyr::select(ind,options)
   
   df_base<-tidyr::crossing(df_rows,dplyr::select(df_cols,col_name)) %>% 
     dplyr::arrange(ind,options,col_name) %>% 
@@ -225,7 +232,24 @@ LdiiIrW3GAg&dimension=bw8KHXzxd9i:OO5qyDIwoMk;FPUgmtt8HRi;RGC9tURSc3W;cL6cHd6QJ5
   
   if (is.null(df)) { return(NULL)}
   
-  df %>% 
+  #Agencies/Partners view
+  
+  partners_agencies<-glue::glue("{base_url}api/sqlViews/IMg2pQJRHCr/data.csv") %>% 
+    httr::GET(.) %>% 
+    httr::content(.,"text") %>% 
+    readr::read_csv(.) %>% 
+    dplyr::select('Funding Mechanism' = mechname,
+                  'Partner' = partnername) %>% 
+    dplyr::mutate(mech_code = ( stringr::str_split(`Funding Mechanism`,"-") 
+                                 %>% purrr::map(.,purrr::pluck(1)) 
+                                 %>% unlist() 
+                                 %>%  stringr::str_trim())) %>% 
+    dplyr::select(mech_code,`Partner`)
+    
+  
+  
+  
+  d_partners<-df %>% 
     dplyr::mutate(Value = as.numeric(Value)) %>% 
     dplyr::mutate(Data = stringr::str_replace_all(Data,"COP20 Targets ","")) %>% 
     dplyr::mutate(Data = stringr::str_trim(Data)) %>% 
@@ -235,10 +259,62 @@ LdiiIrW3GAg&dimension=bw8KHXzxd9i:OO5qyDIwoMk;FPUgmtt8HRi;RGC9tURSc3W;cL6cHd6QJ5
                                   Age == "18-" ~"<18",
                                   Age == "18+" ~ "18+",
                                   TRUE ~ "Total")) %>% 
-    dplyr::mutate( Age = case_when( Indicator %in% c("CXCA_SCRN","OVC_HIVSTAT","KP_PREV","PMTCT_EID","KP_MAT","VMMC_CIRC","PrEP_NEW","PrEP_CURR","GEND_GBV")  ~ "Total",
+    dplyr::mutate( Age = case_when( Indicator %in% c("CXCA_SCRN","OVC_HIVSTAT","KP_PREV",
+                                                     "PMTCT_EID","KP_MAT","VMMC_CIRC","PrEP_NEW","PrEP_CURR","GEND_GBV")  ~ "Total",
                                     TRUE ~ Age)) %>% 
-    dplyr::select(-Numerator) %>% 
-    tidyr::pivot_wider(names_from = c("Indicator", "Age") ,values_from = "Value")
+    dplyr::mutate(mech_code  =  ( stringr::str_split(df$`Funding Mechanism`,"-") 
+                                  %>% purrr::map(.,purrr::pluck(2)) 
+                                  %>% unlist() 
+                                  %>%  stringr::str_trim()) ) %>% 
+    dplyr::inner_join(partners_agencies,by='mech_code') %>% 
+    dplyr::select(`Funding Agency`,`Partner`,`Indicator`,`Age`,`Value`)
+
+  #We need to pad for zeros
+  df_rows<-indicatorOrder() %>% 
+    dplyr::filter(in_partner_table) %>% 
+    dplyr::select(ind,options)
   
+  d_base<-tidyr::crossing(df_rows,dplyr::distinct(unique(d_partners[,1:2]))) %>% 
+    dplyr::mutate(Value = 0) %>% 
+    dplyr::rename("Indicator" = ind,
+                  Age = options)
   
+  d_totals<-dplyr::bind_rows(d_base,d_partners) %>% 
+    dplyr::group_by(`Funding Agency`,`Indicator`,`Age`) %>% 
+    dplyr::summarise(`Value` = sum(`Value`)) %>% 
+    dplyr::ungroup() %>% 
+    dplyr::mutate(`Partner` = '')
+  
+  d_partners <- d_partners %>% 
+    dplyr::group_by(`Funding Agency`,`Partner`,`Indicator`,`Age`) %>% 
+    dplyr::summarise(`Value` = sum(`Value`)) %>% 
+    dplyr::ungroup()
+  
+  d_indicators<- indicatorOrder() %>% 
+    dplyr::filter(in_partner_table) %>%
+    dplyr::select(ind,options) %>% 
+    dplyr::mutate(indicator_name = factor(paste(ind, options)))
+  
+
+  
+  #Return the final data frame 
+  dplyr::bind_rows(d_totals,d_partners) %>% 
+    dplyr::mutate(indicator_name = paste(`Indicator`, `Age`)) %>% 
+    dplyr::mutate(indicator_name = factor(indicator_name,levels=unique(d_indicators$indicator_name))) %>% 
+    dplyr::mutate(`Label` = indicator_name) %>% 
+  dplyr::arrange(`Funding Agency`,`Partner`,indicator_name) %>% 
+    dplyr::select(`Funding Agency`,`Partner`,`Label`,`Value`) %>% 
+    tidyr::pivot_wider(names_from = `Label`, values_from = `Value`, values_fill = 0) 
+  
+}
+
+
+
+getOrgtuniNamefromUID<-function(uid) {
+  
+  glue(getOption("baseurl"),"api/organisationUnits/{uid}?fields=name") %>% 
+    httr::GET(.) %>% 
+    httr::content(.,"text") %>% 
+    jsonlite::fromJSON(.) %>% 
+    purrr::pluck("name")
 }
