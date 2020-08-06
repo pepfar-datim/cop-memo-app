@@ -36,7 +36,7 @@ options(kableExtra.latex.load_packages = FALSE)
 ```{r header_name ,results='asis', echo=FALSE}
 ou_name<-getOrgtuniNamefromUID(input$ou)
 cat(paste("\\rhead{Operating Unit: ",ou_name," }"))
-#cat(paste("\\rhead{Date: ",format(Sys.time(), '%Y-%m-%d'),"}"))
+cat(paste("\\lhead{Date: ",format(Sys.time(), '%Y-%m-%d'),"}"))
 ```
 \renewcommand{\headrulewidth}{0pt}
 
@@ -85,7 +85,7 @@ group_heading<-names(d$partners)[3:length(d$partners)] %>% stringr::str_split(.,
 #HTS_INDEX -> TX_PVLS
 kable(d$partners[,c(1:14)], "latex", booktabs = T, longtable=T,format.args = list(big.mark = ","),
       col.names = c("Funding Agency","Partner",sub_heading[1:12]), caption = "HTS\\_INDEX to TX\\_PVLS") %>%
-  kable_styling(font_size = 6) %>% 
+  kable_styling(font_size = 8) %>% 
   column_spec(2,width = "1in") %>% 
   column_spec(3:14,width = "0.33in") %>% 
   add_header_above(c("","",group_heading[1:6])) %>% 
@@ -103,7 +103,7 @@ kable(d$partners[,c(1:14)], "latex", booktabs = T, longtable=T,format.args = lis
 kable(d$partners[,c(1:2,15:25)], "latex", booktabs = T, longtable=T,format.args = list(big.mark = ","),
       col.names = c("Funding Agency","Partner",sub_heading[13:23]),
       caption = "CXCA\\_SCRN to PMTCT\\_EID" ) %>%
-  kable_styling(font_size = 6, latex_options = c("repeat_header")) %>% 
+  kable_styling(font_size = 8, latex_options = c("repeat_header")) %>% 
   column_spec(2,width = "1in") %>% 
   column_spec(3:10,width = "0.33in") %>% 
   add_header_above(c("","",group_heading[7:13])) %>% 
@@ -121,7 +121,7 @@ kable(d$partners[,c(1:2,15:25)], "latex", booktabs = T, longtable=T,format.args 
 kable(d$partners[,c(1:2,26:34)], "latex", booktabs = T, longtable=T,format.args = list(big.mark = ","),
       col.names = c("Funding Agency","Partner",sub_heading[24:32]),
       caption = "PP\\_PREV to PrEP\\_CURR ") %>%
-   kable_styling(font_size = 6, latex_options = c("repeat_header")) %>% 
+   kable_styling(font_size = 8, latex_options = c("repeat_header")) %>% 
   column_spec(2,width = "1in") %>% 
   column_spec(3:10,width = "0.33in") %>% 
   add_header_above(c("","",group_heading[14:20])) %>% 
@@ -140,7 +140,7 @@ kable(d$partners[,c(1:2,26:34)], "latex", booktabs = T, longtable=T,format.args 
   kable(d$partners[,c(1:2,35:43)], "latex", booktabs = T, longtable=T,format.args = list(big.mark = ","),
       col.names = c("Funding Agency","Partner",sub_heading[33:41]),
       caption = "TB\\_STAT to GEND\\_GBV") %>%
-   kable_styling(font_size = 6, latex_options = c("repeat_header")) %>% 
+   kable_styling(font_size = 8, latex_options = c("repeat_header")) %>% 
   column_spec(2,width = "1in") %>% 
   column_spec(3:10,width = "0.33in") %>% 
   add_header_above(c("","",group_heading[21:25])) %>% 
