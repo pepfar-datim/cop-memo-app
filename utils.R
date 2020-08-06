@@ -114,7 +114,7 @@ indicatorOrder<-function() {
     "VMMC_CIRC","Total",TRUE,
     "HTS_SELF","<15",TRUE,
     "HTS_SELF","15+",TRUE,
-    "HTS_SELF","Total",TRUE,
+    "HTS_SELF","Total",FALSE,
     "PrEP_NEW","Total",TRUE,
     "PrEP_CURR","Total",TRUE,
     "TB_STAT","<15",TRUE,
@@ -309,12 +309,12 @@ LdiiIrW3GAg&dimension=bw8KHXzxd9i:OO5qyDIwoMk;FPUgmtt8HRi;RGC9tURSc3W;cL6cHd6QJ5
 }
 
 
-
-getOrgtuniNamefromUID<-function(uid) {
   
-  glue(getOption("baseurl"),"api/organisationUnits/{uid}?fields=name") %>% 
-    httr::GET(.) %>% 
-    httr::content(.,"text") %>% 
-    jsonlite::fromJSON(.) %>% 
-    purrr::pluck("name")
-}
+  getOrgtuniNamefromUID<-function(uid) {
+    
+    glue(getOption("baseurl"),"api/organisationUnits/{uid}?fields=name") %>% 
+      httr::GET(.) %>% 
+      httr::content(.,"text") %>% 
+      jsonlite::fromJSON(.) %>% 
+      purrr::pluck("name")
+  }
