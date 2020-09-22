@@ -1,13 +1,13 @@
 ---
-title: "COP20 Approval Memo"
-date: "`r paste0('Generated on ' , format(Sys.time(), '%Y-%m-%d'))`"
+#title: "COP20 Approval Memo"
+#date: "`r paste0('Generated on ' , format(Sys.time(), '%Y-%m-%d'))`"
 output:
-  html_document:
-    toc: no
-    df_print: paged
   pdf_document:
     toc: no
     latex_engine: xelatex
+  html_document:
+    toc: no
+    df_print: paged
 header-includes:
 - \usepackage{tabularx,booktabs}
 - \usepackage{multirow}
@@ -19,11 +19,10 @@ header-includes:
 - \usepackage{wrapfig}
 - \usepackage{float}
 - \usepackage{colortbl}
-- \usepackage{pdflscape}
 - \usepackage[normalem]{ulem}
 - \usepackage{makecell}
 - \usepackage{fancyhdr}
-classoption: landscape
+mainfont: FreeSans
 ---
 
 ```{r setup, include=FALSE}
@@ -39,20 +38,30 @@ cat(paste("\\rhead{Operating Unit: ",ou_name," }"))
 cat(paste("\\lhead{Date: ",format(Sys.time(), '%Y-%m-%d'),"}"))
 ```
 \renewcommand{\headrulewidth}{0pt}
-
+\setlength\aboverulesep{0pt}
+\setlength\belowrulesep{0pt}
 
 ```{r prio_table ,results='asis', echo=FALSE}
 if (!exists("d")) {
   d <- memo_data()
 }
 
+
+#Transform all zeros to dashes
+
+
+d$prio %<>% 
+  dplyr::mutate_if(is.numeric, function(x) ifelse(x == 0 ,"-",formatC(x, format="f", big.mark=",",digits = 0)))
+
+total_rows<- ifelse( d$prio$Age ==  "Total",
+                     "lightgray","white")
+
 kable(d$prio, "latex", 
       booktabs = T,
-      format.args = list(big.mark = ","), 
       longtable = T,caption = "Prioritization Table") %>%
-  column_spec(1,width = "1.2in",bold=TRUE) %>%
-  column_spec(2,width = "0.25in") %>% 
-  column_spec(3:9, width = "0.6in") %>% 
+  column_spec(1,width = "1.2in",bold=TRUE, background = 'white') %>%
+  column_spec(2,width = "0.25in", background = total_rows) %>% 
+  column_spec(3:9, width = "0.6in", background = total_rows) %>% 
   collapse_rows(columns = 1, latex_hline = "major", valign = "middle") %>% 
   kable_styling(font_size = 8, latex_options = c("repeat_header"))
 
