@@ -46,24 +46,29 @@ if (!exists("d")) {
   d <- memo_data()
 }
 
+#Format each cell
+total_rows_bg<- ifelse( d$prio$Age ==  "Total",
+                     "#E4DFEC","#FFFFFF")
+
+total_rows_bold<-ifelse( d$prio$Age ==  "Total", TRUE,FALSE)
 
 #Transform all zeros to dashes
+ d$prio %<>% 
+  dplyr::mutate_if(is.numeric, function(x) ifelse(x == 0 ,"-",formatC(x, format="f", big.mark=",",digits = 0))) 
 
-
-d$prio %<>% 
-  dplyr::mutate_if(is.numeric, function(x) ifelse(x == 0 ,"-",formatC(x, format="f", big.mark=",",digits = 0)))
-
-total_rows<- ifelse( d$prio$Age ==  "Total",
-                     "lightgray","white")
 
 kable(d$prio, "latex", 
       booktabs = T,
-      longtable = T,caption = "Prioritization Table") %>%
-  column_spec(1,width = "1.2in",bold=TRUE, background = 'white') %>%
-  column_spec(2,width = "0.25in", background = total_rows) %>% 
-  column_spec(3:9, width = "0.6in", background = total_rows) %>% 
+      longtable = F,caption = "Prioritization Table") %>%
+  add_header_above(c("Angola"=2,"SNU Prioritizations" = 7),background ="#CCC0D9", bold = TRUE ) %>%
+  row_spec(row=0,background ="#CCC0D9",hline_after = TRUE, bold = TRUE) %>% 
+  column_spec(1,width = "1.2in",bold=TRUE, background = 'white',border_left = TRUE,border_right = TRUE) %>%
+  column_spec(2,width = "0.25in", background = total_rows_bg, bold = total_rows_bold, border_right = TRUE) %>% 
+  column_spec(3:8, width = "0.6in", background = total_rows_bg, bold=total_rows_bold) %>% 
+  column_spec(9, width = "0.6in", background = total_rows_bg, bold=total_rows_bold, border_left = TRUE, border_right = TRUE) %>% 
   collapse_rows(columns = 1, latex_hline = "major", valign = "middle") %>% 
-  kable_styling(font_size = 8, latex_options = c("repeat_header"))
+  kable_styling(font_size = 8) %>% 
+    add_footnote("* Totals may be greater than the sum of categories due to activities outside of the SNU prioritization areas outlined above", notation = "number")
 
   cat('\n\n')
   cat('\\pagebreak')
