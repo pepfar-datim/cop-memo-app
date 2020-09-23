@@ -1,6 +1,5 @@
 library(shiny)
 library(shinyjs)
-require(datimvalidation)
 require(shinyWidgets)
 require(magrittr)
 require(knitr)
