@@ -23,6 +23,7 @@ header-includes:
 - \usepackage{makecell}
 - \usepackage{fancyhdr}
 mainfont: FreeSans
+geometry: margin=1.5cm
 ---
 
 ```{r setup, include=FALSE}
@@ -56,11 +57,12 @@ total_rows_bold<-ifelse( d$prio$Age ==  "Total", TRUE,FALSE)
  d$prio %<>% 
   dplyr::mutate_if(is.numeric, function(x) ifelse(x == 0 ,"-",formatC(x, format="f", big.mark=",",digits = 0))) 
 
+ above_header_df<-data.frame(header_names=c(ou_name,"SNU Prioritizations"),colspan=c(2,7),stringsAsFactors = FALSE)
 
 kable(d$prio, "latex", 
       booktabs = T,
-      longtable = F,caption = "Prioritization Table") %>%
-  add_header_above(c("Angola"=2,"SNU Prioritizations" = 7),background ="#CCC0D9", bold = TRUE ) %>%
+      longtable = T,caption = "Prioritization Table") %>%
+  add_header_above(header=above_header_df,background ="#CCC0D9", bold = TRUE ) %>%
   row_spec(row=0,background ="#CCC0D9",hline_after = TRUE, bold = TRUE) %>% 
   column_spec(1,width = "1.2in",bold=TRUE, background = 'white',border_left = TRUE,border_right = TRUE) %>%
   column_spec(2,width = "0.25in", background = total_rows_bg, bold = total_rows_bold, border_right = TRUE) %>% 
@@ -97,11 +99,15 @@ group_heading<-names(d$partners)[3:length(d$partners)] %>% stringr::str_split(.,
 
 ```{r partner_table_1 ,results='asis', echo=FALSE}
 #HTS_INDEX -> TX_PVLS
-kable(d$partners[,c(1:14)], "latex", booktabs = T, longtable=T,format.args = list(big.mark = ","),
-      col.names = c("Funding Agency","Partner",sub_heading[1:12]), caption = "HTS\\_INDEX to TX\\_PVLS") %>%
-  kable_styling(font_size = 8) %>% 
+kable(d$partners[,c(1:14)], "latex", booktabs = T, 
+      longtable=T,
+      format.args = list(big.mark = ","),
+      col.names = c("Funding Agency","Partner",sub_heading[1:12]), 
+      caption = "HTS\\_INDEX to TX\\_PVLS") %>%
+  kable_styling(font_size = 7) %>% 
+  column_spec(1,width = "0.5in") %>% 
   column_spec(2,width = "1in") %>% 
-  column_spec(3:14,width = "0.33in") %>% 
+  column_spec(3:14,width = "0.25in") %>% 
   add_header_above(c("","",group_heading[1:6])) %>% 
   row_spec(which(d$partners$Partner == ""),background = "lightgray")
 
@@ -117,11 +123,12 @@ kable(d$partners[,c(1:14)], "latex", booktabs = T, longtable=T,format.args = lis
 kable(d$partners[,c(1:2,15:25)], "latex", booktabs = T, longtable=T,format.args = list(big.mark = ","),
       col.names = c("Funding Agency","Partner",sub_heading[13:23]),
       caption = "CXCA\\_SCRN to PMTCT\\_EID" ) %>%
-  kable_styling(font_size = 8, latex_options = c("repeat_header")) %>% 
+  kable_styling(font_size = 7, latex_options = c("repeat_header")) %>% 
+  column_spec(1,width = "0.5in") %>% 
   column_spec(2,width = "1in") %>% 
-  column_spec(3:10,width = "0.33in") %>% 
+  column_spec(3:10,width = "0.25in") %>% 
   add_header_above(c("","",group_heading[7:13])) %>% 
-  row_spec(which(d$partners$Partner == ""),background = "lightgray")
+  row_spec(which(d$partners$Partner == ""),background = "lightgray", )
 
  cat('\n\n')
   cat('\\pagebreak')
@@ -135,9 +142,10 @@ kable(d$partners[,c(1:2,15:25)], "latex", booktabs = T, longtable=T,format.args 
 kable(d$partners[,c(1:2,26:34)], "latex", booktabs = T, longtable=T,format.args = list(big.mark = ","),
       col.names = c("Funding Agency","Partner",sub_heading[24:32]),
       caption = "PP\\_PREV to PrEP\\_CURR ") %>%
-   kable_styling(font_size = 8, latex_options = c("repeat_header")) %>% 
+   kable_styling(font_size = 7, latex_options = c("repeat_header")) %>% 
+  column_spec(1,width = "0.5in") %>%
   column_spec(2,width = "1in") %>% 
-  column_spec(3:10,width = "0.33in") %>% 
+  column_spec(3:10,width = "0.25in") %>% 
   add_header_above(c("","",group_heading[14:20])) %>% 
   row_spec(which(d$partners$Partner == ""),background = "lightgray")
 
@@ -154,9 +162,10 @@ kable(d$partners[,c(1:2,26:34)], "latex", booktabs = T, longtable=T,format.args 
   kable(d$partners[,c(1:2,35:43)], "latex", booktabs = T, longtable=T,format.args = list(big.mark = ","),
       col.names = c("Funding Agency","Partner",sub_heading[33:41]),
       caption = "TB\\_STAT to GEND\\_GBV") %>%
-   kable_styling(font_size = 8, latex_options = c("repeat_header")) %>% 
+   kable_styling(font_size = 7, latex_options = c("repeat_header")) %>% 
+  column_spec(1,width = "0.5in") %>%
   column_spec(2,width = "1in") %>% 
-  column_spec(3:10,width = "0.33in") %>% 
+  column_spec(3:10,width = "0.25in") %>% 
   add_header_above(c("","",group_heading[21:25])) %>% 
   row_spec(which(d$partners$Partner == ""),background = "lightgray")
 
