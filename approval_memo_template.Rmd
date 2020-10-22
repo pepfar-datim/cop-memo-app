@@ -34,7 +34,7 @@ options(kableExtra.latex.load_packages = FALSE)
 \addtolength{\headheight}{0.1cm}
 \pagestyle{fancyplain}
 ```{r header_name ,results='asis', echo=FALSE}
-ou_name<-getOrgtuniNamefromUID(input$ou)
+ou_name<-getOrgtunitNamefromUID(input$ou, user_input$httr_handle)
 cat(paste("\\rhead{Operating Unit: ",ou_name," }"))
 cat(paste("\\lhead{Date: ",format(Sys.time(), '%Y-%m-%d'),"}"))
 ```

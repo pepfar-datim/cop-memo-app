@@ -24,8 +24,8 @@ shinyServer(function(input, output, session) {
         btn_labels= NA
       )
       
-      prio<-memo_getPrioritizationTable(input$ou)
-      partners<-memo_getPartnersTable(input$ou)
+      prio<-memo_getPrioritizationTable(input$ou, handle = user_input$httr_handle)
+      partners<-memo_getPartnersTable(input$ou, handle = user_input$httr_handle)
       shinyjs::enable("fetch")
       shinyjs::enable("downloadReport")
       closeSweetAlert(session)
@@ -48,13 +48,20 @@ shinyServer(function(input, output, session) {
   
   user_input <- reactiveValues(authenticated = FALSE, 
                                status = "",
-                               user_orgunit = NA)
+                               username = NA,
+                               user_orgunit = NA,
+                               httr_handle = NULL)
   
   observeEvent(input$login_button, {
     is_logged_in <- FALSE
-    user_input$authenticated <- DHISLogin(input$server, input$user_name, input$password)
+    login_status <- DHISLogin(config$baseurl, input$user_name, input$password)
+    user_input$authenticated<-login_status$status
+    user_input$username <- input$user_name
+    user_input$user_orgunit<-login_status$user_org_unit
+    user_input$httr_handle<-login_status$handle
+    
     if (user_input$authenticated) {
-      user_input$user_orgunit<-getOption("organisationUnit")
+      
       flog.info(paste0("User ", input$user_name, " logged in."), name = "datapack")
     } else {
       sendSweetAlert(
