@@ -170,6 +170,8 @@ shinyServer(function(input, output, session) {
           downloadButton("downloadXLSX", "Download XLSX"),
           tags$hr(),
           downloadButton("downloadPDF", "Download PDF"),
+          tags$hr(),
+          downloadButton("downloadDOCX", "Download DOCX"),
           width = 2
         ),
         mainPanel(tabsetPanel(
@@ -208,6 +210,33 @@ shinyServer(function(input, output, session) {
       file.rename(out, file)
     }
   )
+  
+  
+  output$downloadDOCX <- downloadHandler(
+    filename = function() {
+      
+      prefix <-"cop_20_approval_memo_"
+      date<-format(Sys.time(),"%Y%m%d_%H%M%S")
+      paste0(paste(prefix,date,sep="_"),".docx")
+    },
+    
+    content = function(file) {
+      
+      src <- normalizePath('approval_memo_template.Rmd')
+      img <- normalizePath('pepfar.png')
+      # temporarily switch to the temp dir, in case you do not have write
+      # permission to the current working directory
+      owd <- setwd(tempdir())
+      on.exit(setwd(owd))
+      file.copy(src, 'report.Rmd', overwrite = TRUE)
+      file.copy(img, 'pepfar.png', overwrite = TRUE)
+      
+      library(rmarkdown)
+      out <- rmarkdown::render('report.Rmd', "word_document")
+      file.rename(out, file)
+    }
+  )
+  
   
   output$downloadXLSX <- downloadHandler(
     filename = function() {
