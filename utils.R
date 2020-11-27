@@ -9,10 +9,11 @@ require(tidyr)
 require(stringr)
 require(DT)
 require(datapackr)
+require(datimutils)
 
 
 config <- config::get()
-options("baseurl" = config$baseurl)
+
 flog.appender(appender.file(config$log_path), name="cop_memo")
 
 getUserOperatingUnits<-function(uid) {
@@ -32,29 +33,11 @@ getUserOperatingUnits<-function(uid) {
   setNames(ous$countryUID,ous$countryName)
 }
 
-DHISLogin <- function(baseurl, username, password) {
-  httr::set_config(httr::config(http_version = 0))
-  url <- URLencode(URL = paste0(baseurl, "api/me"))
-  #Logging in here will give us a handle which we need to return if successful
-  
-  httr_handle <-httr::handle("custom")
-  r<-httr::with_config(config = httr::config(httpauth = 1, userpwd = paste0(username,":",password)),
-                       httr::GET(url, handle = httr_handle),
-                       override = TRUE)
-  
-  if (r$status != 200L) {
-    flog.info(paste0("User ", username, " log in failed."), name = "narratives")
-    return(list(status = FALSE, handle = NULL, user_org_unit = NULL))
-  } else {
-    flog.info(paste0("User ", username, " logged in."), name = "narratives")
-    me <- jsonlite::fromJSON(httr::content(r, as = "text"))
-    options("organisationUnit" = me$organisationUnits$id)
-    return(list(status = TRUE,handle = httr_handle, user_org_unit = me$organisationUnits$id))
-  }
-}
 
-d2_analyticsResponse <- function(url,remapCols=TRUE,handle) {
-  d <- jsonlite::fromJSON(content(GET(url, handle = handle), "text"))
+
+
+d2_analyticsResponse <- function(url,remapCols=TRUE,d2_session) {
+  d <- jsonlite::fromJSON(content(GET(url, handle = d2_session$handle), "text"))
   if ( NROW(d$rows) > 0 ) {
     metadata <- do.call(rbind,
                         lapply(d$metaData$items,
@@ -139,9 +122,9 @@ indicatorOrder<-function() {
 
   
 
-memo_getPrioritizationTable <- function(ou_uid="cDGPF739ZZr", handle) {
+memo_getPrioritizationTable <- function(ou_uid="cDGPF739ZZr", d2_session) {
   
-  base_url<-config$baseurl
+  base_url<-d2_session$base_url
   
   url<-glue::glue("{base_url}api/33/analytics?dimension=riR005xJPsS:IzmZerN7tDN;AHMMjoPYta6;b1X6pxMHgs6;
                   pibJV72pMyW;ATX2xv8PsrX;CJYtvFbjeG2;p0JrTY2hLii&dimension=dx:pyD3q4hsocw;
@@ -176,7 +159,7 @@ memo_getPrioritizationTable <- function(ou_uid="cDGPF739ZZr", handle) {
     dplyr::rename("Indicator" = ind,
                   Age = options)
   
-  df <- d2_analyticsResponse(url, handle = handle) 
+  df <- d2_analyticsResponse(url, d2_session = d2_session) 
   
   if (is.null(df)) {return(NULL)}
   
@@ -217,9 +200,9 @@ memo_getPrioritizationTable <- function(ou_uid="cDGPF739ZZr", handle) {
   
 }
 
-memo_getPartnersTable<-function(ou_uid="cDGPF739ZZr", handle = handle) {
+memo_getPartnersTable<-function(ou_uid="cDGPF739ZZr", d2_session) {
   
-  base_url<-config$baseurl
+  base_url<-d2_session$base_url
   
   url<-glue::glue("{base_url}api/29/analytics.json?dimension=dx:pyD3q4hsocw;mpoYh9odYG5;
 DJF6GKEa9Jw;uzrCoPjSHAM;LejpyPTzSop;yoaC47zCSML;gVjB3hNi3r6;
@@ -233,14 +216,14 @@ LdiiIrW3GAg&dimension=bw8KHXzxd9i:OO5qyDIwoMk;FPUgmtt8HRi;RGC9tURSc3W;cL6cHd6QJ5
     stringr::str_replace_all( "[\r\n]" , "") %>% 
     URLencode(.) 
   
-  df <- d2_analyticsResponse(url, handle = handle) 
+  df <- d2_analyticsResponse(url, d2_session = d2_session ) 
   
   if (is.null(df)) { return(NULL)}
   
   #Agencies/Partners view
   
   partners_agencies<-glue::glue("{base_url}api/sqlViews/IMg2pQJRHCr/data.csv") %>% 
-    httr::GET(., handle = handle )  %>% 
+    httr::GET(., handle = d2_session$handle )  %>% 
     httr::content(.,"text") %>% 
     readr::read_csv(.) %>% 
     dplyr::select('Funding Mechanism' = mechname,
@@ -250,9 +233,6 @@ LdiiIrW3GAg&dimension=bw8KHXzxd9i:OO5qyDIwoMk;FPUgmtt8HRi;RGC9tURSc3W;cL6cHd6QJ5
                                  %>% unlist() 
                                  %>%  stringr::str_trim())) %>% 
     dplyr::select(mech_code,`Partner`)
-    
-  
-  
   
   d_partners<-df %>% 
     dplyr::mutate(Value = as.numeric(Value)) %>% 
@@ -300,8 +280,6 @@ LdiiIrW3GAg&dimension=bw8KHXzxd9i:OO5qyDIwoMk;FPUgmtt8HRi;RGC9tURSc3W;cL6cHd6QJ5
     dplyr::select(ind,options) %>% 
     dplyr::mutate(indicator_name = factor(paste(ind, options)))
   
-
-  
   #Return the final data frame 
   dplyr::bind_rows(d_totals,d_partners) %>% 
     dplyr::mutate(indicator_name = paste(`Indicator`, `Age`)) %>% 
@@ -312,13 +290,11 @@ LdiiIrW3GAg&dimension=bw8KHXzxd9i:OO5qyDIwoMk;FPUgmtt8HRi;RGC9tURSc3W;cL6cHd6QJ5
     tidyr::pivot_wider(names_from = `Label`, values_from = `Value`, values_fill = 0) 
   
 }
-
-
-  
-  getOrgtunitNamefromUID<-function(uid, handle) {
+ 
+ getOrgtunitNamefromUID<-function(uid, d2_session) {
     
-    glue(config$baseurl,"api/organisationUnits/{uid}?fields=name") %>% 
-      httr::GET(., handle = handle) %>% 
+    glue(d2_session$base_url,"api/organisationUnits/{uid}?fields=name") %>% 
+      httr::GET(., handle = d2_session$handle) %>% 
       httr::content(.,"text") %>% 
       jsonlite::fromJSON(.) %>% 
       purrr::pluck("name")
