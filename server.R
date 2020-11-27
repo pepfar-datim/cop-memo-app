@@ -24,8 +24,8 @@ shinyServer(function(input, output, session) {
         btn_labels= NA
       )
       
-      prio<-memo_getPrioritizationTable(input$ou, handle = user_input$httr_handle)
-      partners<-memo_getPartnersTable(input$ou, handle = user_input$httr_handle)
+      prio<-memo_getPrioritizationTable(input$ou, d2_session = user_input$d2_session)
+      partners<-memo_getPartnersTable(input$ou, d2_session = user_input$d2_session)
       shinyjs::enable("fetch")
       shinyjs::enable("downloadReport")
       closeSweetAlert(session)
@@ -48,29 +48,31 @@ shinyServer(function(input, output, session) {
   
   user_input <- reactiveValues(authenticated = FALSE, 
                                status = "",
-                               username = NA,
-                               user_orgunit = NA,
-                               httr_handle = NULL)
+                               d2_session = NULL)
   
   observeEvent(input$login_button, {
-    is_logged_in <- FALSE
-    login_status <- DHISLogin(config$baseurl, input$user_name, input$password)
-    user_input$authenticated<-login_status$status
-    user_input$username <- input$user_name
-    user_input$user_orgunit<-login_status$user_org_unit
-    user_input$httr_handle<-login_status$handle
     
-    if (user_input$authenticated) {
-      
-      flog.info(paste0("User ", input$user_name, " logged in."), name = "datapack")
-    } else {
-      sendSweetAlert(
-        session,
-        title = "Login failed",
-        text = "Please check your username/password!",
-        type = "error")
-      flog.info(paste0("User ", input$user_name, " login failed."), name = "datapack")
-    }
+    tryCatch(  {  datimutils::loginToDATIM(base_url = config$baseurl,
+                                           username = input$user_name,
+                                           password = input$password) },
+               #This function throws an error if the login is not successful
+               error=function(e) {
+                 sendSweetAlert(
+                   session,
+                   title = "Login failed",
+                   text = "Please check your username/password!",
+                   type = "error")
+                 flog.info(paste0("User ", input$user_name, " login failed."), name = "datapack")
+               } )
+    
+     if ( exists("d2_default_session"))  {
+       
+       flog.info(paste0("User ", d2_default_session$user_name, " logged in."), name = "datapack")
+       user_input$authenticated<-TRUE
+       user_input$d2_session<-d2_default_session$clone()
+
+       }
+    
   })
   
   output$prio_table <- DT::renderDataTable({
@@ -161,7 +163,7 @@ shinyServer(function(input, output, session) {
           id = "side-panel",
           tagList(wiki_url),
           tags$hr(),
-          selectInput("ou", "Operating Unit",getUserOperatingUnits(user_input$user_orgunit)),
+          selectInput("ou", "Operating Unit",getUserOperatingUnits(user_input$d2_session$user_orgunit)),
           tags$hr(),
           actionButton("fetch","Get Data"),
           tags$hr(),
