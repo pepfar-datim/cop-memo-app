@@ -69,6 +69,7 @@ shinyServer(function(input, output, session) {
        
        flog.info(paste0("User ", d2_default_session$user_name, " logged in."), name = "datapack")
        user_input$authenticated<-TRUE
+       
        user_input$d2_session<-d2_default_session$clone()
 
        }
@@ -80,7 +81,7 @@ shinyServer(function(input, output, session) {
     d <- memo_data() %>% purrr::pluck("prio")
     
     if (!inherits(d, "error") & !is.null(d)) {
-      
+      print(NROW(d))
       DT::datatable(d,options = list(pageLength = 50, 
                                      columnDefs = list(list(className = 'dt-right', 
                                                             targets = 3:8)))) %>% 
@@ -177,8 +178,8 @@ shinyServer(function(input, output, session) {
         mainPanel(tabsetPanel(
           id = "main-panel",
           type = "tabs",
-          tabPanel("Prioritization", dataTableOutput("prio_table")),
-          tabPanel("Partners/Agencies", dataTableOutput("partners_table"))
+          tabPanel("Prioritization", DT::dataTableOutput("prio_table")),
+          tabPanel("Partners/Agencies", DT::dataTableOutput("partners_table"))
         ))
       ))
     }

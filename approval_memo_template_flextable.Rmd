@@ -28,7 +28,7 @@ library(officer)
        purrr::pluck("name")
   }
  
- ou_name<-getOrgtunitNamefromUID(user_input$d2_sesession$user_orgunit)
+ ou_name<-getOrgtunitNamefromUID(user_input$d2_session$user_orgunit,user_input$d2_session)
 # cat(paste("\\rhead{Operating Unit: ",ou_name," }"))
 # cat(paste("\\lhead{Date: ",format(Sys.time(), '%Y-%m-%d'),"}"))
 ```
