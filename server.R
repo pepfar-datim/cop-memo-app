@@ -27,7 +27,9 @@ shinyServer(function(input, output, session) {
       prio<-memo_getPrioritizationTable(input$ou, d2_session = user_input$d2_session)
       partners<-memo_getPartnersTable(input$ou, d2_session = user_input$d2_session)
       shinyjs::enable("fetch")
-      shinyjs::enable("downloadReport")
+      shinyjs::enable("downloadXLSX")
+      shinyjs::enable("downloadPDF")
+      shinyjs::enable("downloadDOCX")
       closeSweetAlert(session)
       my_data<-list(prio=prio,partners=partners)
       if (is.null(my_data$prio) & is.null(my_data$partners)) {
@@ -168,11 +170,11 @@ shinyServer(function(input, output, session) {
           tags$hr(),
           actionButton("fetch","Get Data"),
           tags$hr(),
-          downloadButton("downloadXLSX", "Download XLSX"),
+          disabled(downloadButton("downloadXLSX", "Download XLSX")),
           tags$hr(),
-          downloadButton("downloadPDF", "Download PDF"),
+          disabled(downloadButton("downloadPDF", "Download PDF")),
           tags$hr(),
-          downloadButton("downloadDOCX", "Download DOCX"),
+          disabled(downloadButton("downloadDOCX", "Download DOCX")),
           width = 2
         ),
         mainPanel(tabsetPanel(
