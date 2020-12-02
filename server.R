@@ -222,7 +222,7 @@ shinyServer(function(input, output, session) {
     
     content = function(file) {
       
-      src <- normalizePath('approval_memo_template.Rmd')
+      src <- normalizePath('approval_memo_template_flextable.Rmd')
       img <- normalizePath('pepfar.png')
       # temporarily switch to the temp dir, in case you do not have write
       # permission to the current working directory

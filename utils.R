@@ -34,8 +34,6 @@ getUserOperatingUnits<-function(uid) {
 }
 
 
-
-
 d2_analyticsResponse <- function(url,remapCols=TRUE,d2_session) {
   d <- jsonlite::fromJSON(content(GET(url, handle = d2_session$handle), "text"))
   if ( NROW(d$rows) > 0 ) {

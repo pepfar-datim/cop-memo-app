@@ -1,0 +1,58 @@
+---
+output:
+  word_document:
+    toc: no
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+options(kableExtra.latex.load_packages = FALSE)
+```
+
+\addtolength{\headheight}{0.1cm}
+\pagestyle{fancyplain}
+```{r header_name ,results='asis', echo=FALSE, results='hide', message=FALSE}
+#load("my_work_space.RData")
+
+require(magrittr)
+require(glue)
+library(flextable)
+library(officer)
+
+  getOrgtunitNamefromUID<-function(uid, d2_session) {
+     
+     glue(d2_session$base_url,"api/organisationUnits/{uid}?fields=name") %>% 
+       httr::GET(., handle = d2_session$handle) %>% 
+       httr::content(.,"text") %>% 
+       jsonlite::fromJSON(.) %>% 
+       purrr::pluck("name")
+  }
+ 
+ ou_name<-getOrgtunitNamefromUID(user_input$d2_sesession$user_orgunit)
+# cat(paste("\\rhead{Operating Unit: ",ou_name," }"))
+# cat(paste("\\lhead{Date: ",format(Sys.time(), '%Y-%m-%d'),"}"))
+```
+
+
+```{r prio_table , echo=FALSE}
+
+partners_table<-flextable(d$prio) %>% 
+  line_spacing(.,space = 1.15, part = "body") %>% 
+  height(., height = 0.01, part = "body")  %>% 
+  fontsize(., size = 7, part = "body") %>% 
+  merge_v(.,j="Indicator") %>% 
+  add_header_row(., values = c(ou_name, ou_name,rep("SNU Prioritizations",7))) %>% 
+  merge_h(., part = "header") %>% 
+  align(., align = "center", part = "header") %>% 
+  bg(.,bg = "#CCC0D9", part = "header") %>% 
+  bg(., i = ~ Age == "Total", bg = "#E4DFEC", part = "body") %>% 
+  bold(., i = ~ Age == "Total", bold = TRUE, part = "body")  %>% 
+  bg(.,j= "Indicator", bg = "#FFFFFF" , part="body") %>% 
+  bold(., j = "Indicator", bold = FALSE)
+
+partners_table
+  
+```
+
+
+
