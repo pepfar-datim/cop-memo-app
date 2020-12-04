@@ -155,7 +155,7 @@
     },
     "XML": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://foo.com/XML",
       "description": {
         "Package": "XML",
         "Version": "3.99-0.3",
