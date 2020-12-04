@@ -650,7 +650,7 @@
     },
     "datimutils": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://github.com/pepfar-datim/datimutils",
       "description": {
         "Package": "datimutils",
         "Type": "Package",
