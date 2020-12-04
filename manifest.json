@@ -676,7 +676,7 @@
     },
     "datimvalidation": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://github.com/jason-p-pickering/datim-validation",
       "description": {
         "Package": "datimvalidation",
         "Type": "Package",
