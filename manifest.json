@@ -599,7 +599,7 @@
     },
     "datapackcommons": {
       "Source": "RSPM",
-      "Repository": null,
+      "Repository": "https://github.com/pepfar-datim/data-pack-commons",
       "description": {
         "Package": "datapackcommons",
         "Type": "Package",
