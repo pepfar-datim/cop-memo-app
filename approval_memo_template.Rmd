@@ -82,17 +82,17 @@ kable(d$prio, "latex",
 
 ```{r partner_table ,results='asis', echo=FALSE}
 
-
-
-sub_heading<-names(d$partners)[3:length(d$partners)] %>% stringr::str_split(.," ") %>% purrr::map(purrr::pluck(2)) %>%
+sub_heading<-names(d$partners)[3:length(d$partners)] %>% 
+  stringr::str_split(.," ") %>% 
+  purrr::map(purrr::pluck(2)) %>%
   unlist()
 
-
-group_heading<-names(d$partners)[3:length(d$partners)] %>% stringr::str_split(.," ") %>% purrr::map(purrr::pluck(1)) %>% 
+group_heading<-names(d$partners)[3:length(d$partners)] %>% 
+  stringr::str_split(.," ") %>% 
+  purrr::map(purrr::pluck(1)) %>% 
   unlist() %>% 
   factor(.,levels = unique(.)) %>%
   table(.)
-
 
 ```
 
