@@ -34,8 +34,6 @@ getUserOperatingUnits<-function(uid) {
 }
 
 
-
-
 d2_analyticsResponse <- function(url,remapCols=TRUE,d2_session) {
   d <- jsonlite::fromJSON(content(GET(url, handle = d2_session$handle), "text"))
   if ( NROW(d$rows) > 0 ) {
@@ -57,76 +55,80 @@ d2_analyticsResponse <- function(url,remapCols=TRUE,d2_session) {
 }
 
 
-indicatorOrder<-function() {
+indicatorOrder<-function(cop_year="2020Oct") {
   
-  tibble::tribble(
-    ~ind,~options, ~in_partner_table,
-    "HTS_INDEX","<15",TRUE,
-    "HTS_INDEX","15+",TRUE,
-    "HTS_INDEX","Total",FALSE,
-    "HTS_TST","<15",TRUE,
-    "HTS_TST","15+",TRUE,
-    "HTS_TST","Total",FALSE,
-    "HTS_TST_POS","<15",TRUE,
-    "HTS_TST_POS","15+",TRUE,
-    "HTS_TST_POS","Total",FALSE,
-    "TX_NEW","<15",TRUE,
-    "TX_NEW","15+",TRUE,
-    "TX_NEW","Total",FALSE,
-    "TX_CURR","<15",TRUE,
-    "TX_CURR","15+",TRUE,
-    "TX_CURR","Total",FALSE,
-    "TX_PVLS","<15",TRUE,
-    "TX_PVLS","15+",TRUE,
-    "TX_PVLS","Total",FALSE,
-    "CXCA_SCRN","Total",TRUE,
-    "OVC_SERV","<18",TRUE,
-    "OVC_SERV","18+",TRUE,
-    "OVC_SERV","Total",FALSE,
-    "OVC_HIVSTAT", "Total",TRUE,
-    "PMTCT_STAT","<15",TRUE,
-    "PMTCT_STAT","15+",TRUE,
-    "PMTCT_STAT","Total",FALSE,
-    "PMTCT_STAT_POS","<15",TRUE,
-    "PMTCT_STAT_POS","15+",TRUE,
-    "PMTCT_STAT_POS","Total",FALSE,
-    "PMTCT_ART","<15",TRUE,
-    "PMTCT_ART","15+",TRUE,
-    "PMTCT_ART","Total",FALSE,
-    "PMTCT_EID","Total",TRUE,
-    "PP_PREV","<15",TRUE,
-    "PP_PREV","15+",TRUE,
-    "PP_PREV","Total",FALSE,
-    "KP_PREV","Total",TRUE,
-    "KP_MAT","Total",TRUE,
-    "VMMC_CIRC","Total",TRUE,
-    "HTS_SELF","<15",TRUE,
-    "HTS_SELF","15+",TRUE,
-    "HTS_SELF","Total",FALSE,
-    "PrEP_NEW","Total",TRUE,
-    "PrEP_CURR","Total",TRUE,
-    "TB_STAT","<15",TRUE,
-    "TB_STAT","15+",TRUE,
-    "TB_STAT","Total",FALSE,
-    "TB_ART","<15",TRUE,
-    "TB_ART","15+",TRUE,
-    "TB_ART","Total",FALSE,
-    "TB_PREV","<15",TRUE,
-    "TB_PREV","15+",TRUE,
-    "TB_PREV","Total",FALSE,
-    "TX_TB","<15",TRUE,
-    "TX_TB","15+",TRUE,
-    "TX_TB","Total",FALSE,
-    "GEND_GBV","Total",TRUE)
+  if (cop_year == "2020Oct") {
+    tibble::tribble(
+      ~ind,~options, ~in_partner_table,
+      "HTS_INDEX","<15",TRUE,
+      "HTS_INDEX","15+",TRUE,
+      "HTS_INDEX","Total",FALSE,
+      "HTS_TST","<15",TRUE,
+      "HTS_TST","15+",TRUE,
+      "HTS_TST","Total",FALSE,
+      "HTS_TST_POS","<15",TRUE,
+      "HTS_TST_POS","15+",TRUE,
+      "HTS_TST_POS","Total",FALSE,
+      "TX_NEW","<15",TRUE,
+      "TX_NEW","15+",TRUE,
+      "TX_NEW","Total",FALSE,
+      "TX_CURR","<15",TRUE,
+      "TX_CURR","15+",TRUE,
+      "TX_CURR","Total",FALSE,
+      "TX_PVLS","<15",TRUE,
+      "TX_PVLS","15+",TRUE,
+      "TX_PVLS","Total",FALSE,
+      "CXCA_SCRN","Total",TRUE,
+      "OVC_SERV","<18",TRUE,
+      "OVC_SERV","18+",TRUE,
+      "OVC_SERV","Total",FALSE,
+      "OVC_HIVSTAT", "Total",TRUE,
+      "PMTCT_STAT","<15",TRUE,
+      "PMTCT_STAT","15+",TRUE,
+      "PMTCT_STAT","Total",FALSE,
+      "PMTCT_STAT_POS","<15",TRUE,
+      "PMTCT_STAT_POS","15+",TRUE,
+      "PMTCT_STAT_POS","Total",FALSE,
+      "PMTCT_ART","<15",TRUE,
+      "PMTCT_ART","15+",TRUE,
+      "PMTCT_ART","Total",FALSE,
+      "PMTCT_EID","Total",TRUE,
+      "PP_PREV","<15",TRUE,
+      "PP_PREV","15+",TRUE,
+      "PP_PREV","Total",FALSE,
+      "KP_PREV","Total",TRUE,
+      "KP_MAT","Total",TRUE,
+      "VMMC_CIRC","Total",TRUE,
+      "HTS_SELF","<15",TRUE,
+      "HTS_SELF","15+",TRUE,
+      "HTS_SELF","Total",FALSE,
+      "PrEP_NEW","Total",TRUE,
+      "PrEP_CURR","Total",TRUE,
+      "TB_STAT","<15",TRUE,
+      "TB_STAT","15+",TRUE,
+      "TB_STAT","Total",FALSE,
+      "TB_ART","<15",TRUE,
+      "TB_ART","15+",TRUE,
+      "TB_ART","Total",FALSE,
+      "TB_PREV","<15",TRUE,
+      "TB_PREV","15+",TRUE,
+      "TB_PREV","Total",FALSE,
+      "TX_TB","<15",TRUE,
+      "TX_TB","15+",TRUE,
+      "TX_TB","Total",FALSE,
+      "GEND_GBV","Total",TRUE)  
+  }
+  
 }
 
   
 
-memo_getPrioritizationTable <- function(ou_uid="cDGPF739ZZr", d2_session) {
+memo_getPrioritizationTable <- function(ou_uid="cDGPF739ZZr", d2_session, cop_year = "2020Oct") {
   
   base_url<-d2_session$base_url
   
-  url<-glue::glue("{base_url}api/33/analytics?dimension=riR005xJPsS:IzmZerN7tDN;AHMMjoPYta6;b1X6pxMHgs6;
+  if (cop_year == "2020Oct") {
+    url<-glue::glue("{base_url}api/33/analytics?dimension=riR005xJPsS:IzmZerN7tDN;AHMMjoPYta6;b1X6pxMHgs6;
                   pibJV72pMyW;ATX2xv8PsrX;CJYtvFbjeG2;p0JrTY2hLii&dimension=dx:pyD3q4hsocw;
                   mpoYh9odYG5;DJF6GKEa9Jw;uzrCoPjSHAM;LejpyPTzSop;yoaC47zCSML;gVjB3hNi3r6;
                   o8zSyUaIPRR;TadWkOKgCYt;dIhPb5PaNak;niYlMjiztpL;egV0AFr0hcJ;fUeLws683gU;
@@ -137,8 +139,13 @@ memo_getPrioritizationTable <- function(ou_uid="cDGPF739ZZr", d2_session) {
                   A4emI2AABjd;OxiC4DAZNxh;YgCYwt8Jshb;LdiiIrW3GAg&filter=ou:{ou_uid}
                   &filter=pe:2020Oct&displayProperty=SHORTNAME&skipData=false
                   &includeMetadataDetails=false") %>% 
-    stringr::str_replace_all( "[\r\n]" , "") %>% 
-    URLencode(.) 
+      stringr::str_replace_all( "[\r\n]" , "") %>% 
+      URLencode(.)     
+  } else
+  {
+    stop("Fiscal year not implemented yet!")
+  }
+
   
   
   df_cols<-tibble::tribble(
@@ -200,11 +207,12 @@ memo_getPrioritizationTable <- function(ou_uid="cDGPF739ZZr", d2_session) {
   
 }
 
-memo_getPartnersTable<-function(ou_uid="cDGPF739ZZr", d2_session) {
+memo_getPartnersTable<-function(ou_uid="cDGPF739ZZr", d2_session, cop_year = "2020Oct") {
   
   base_url<-d2_session$base_url
   
-  url<-glue::glue("{base_url}api/29/analytics.json?dimension=dx:pyD3q4hsocw;mpoYh9odYG5;
+  if ( cop_year == "2020Oct") {
+    url<-glue::glue("{base_url}api/33/analytics.json?dimension=dx:pyD3q4hsocw;mpoYh9odYG5;
 DJF6GKEa9Jw;uzrCoPjSHAM;LejpyPTzSop;yoaC47zCSML;gVjB3hNi3r6;
 o8zSyUaIPRR;TadWkOKgCYt;dIhPb5PaNak;niYlMjiztpL;egV0AFr0hcJ;fUeLws683gU;
 tYNTb7iXfB5;kCfFLyrsr63;baC8xbo39Ih;H9jkgrFTECK;FcWaUSDQyaK;dBZCfaRJHpl;
@@ -213,8 +221,12 @@ mFD2sZFAABk;rpayStjaa1a;AggcL3yaPE6;CwKwrnJIo6r;zdR0UbSXAvP;gg20xBdjq7V;jHwvOp0w
 luxafh3nWng;sUwQqFDiuzq;dYKVOITB5ju;RrBIFT7aQDh;egyFeGZVxGf;A4emI2AABjd;OxiC4DAZNxh;YgCYwt8Jshb;
 LdiiIrW3GAg&dimension=bw8KHXzxd9i:OO5qyDIwoMk;FPUgmtt8HRi;RGC9tURSc3W;cL6cHd6QJ5B;a7p2WOqhhzQ;PpCZbJvQyjL;r3bmih0XRCe;NLV6dy7BE2O
 &dimension=SH885jaRe0o&filter=ou:{ou_uid}&filter=pe:2020Oct&displayProperty=SHORTNAME&skipData=false&includeMetadataDetails=false") %>% 
-    stringr::str_replace_all( "[\r\n]" , "") %>% 
-    URLencode(.) 
+      stringr::str_replace_all( "[\r\n]" , "") %>% 
+      URLencode(.)     
+  } else {
+    stop("Fiscal year not supported yet!")
+  }
+
   
   df <- d2_analyticsResponse(url, d2_session = d2_session ) 
   

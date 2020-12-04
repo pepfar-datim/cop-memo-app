@@ -27,7 +27,9 @@ shinyServer(function(input, output, session) {
       prio<-memo_getPrioritizationTable(input$ou, d2_session = user_input$d2_session)
       partners<-memo_getPartnersTable(input$ou, d2_session = user_input$d2_session)
       shinyjs::enable("fetch")
-      shinyjs::enable("downloadReport")
+      shinyjs::enable("downloadXLSX")
+      shinyjs::enable("downloadPDF")
+      shinyjs::enable("downloadDOCX")
       closeSweetAlert(session)
       my_data<-list(prio=prio,partners=partners)
       if (is.null(my_data$prio) & is.null(my_data$partners)) {
@@ -69,6 +71,7 @@ shinyServer(function(input, output, session) {
        
        flog.info(paste0("User ", d2_default_session$user_name, " logged in."), name = "datapack")
        user_input$authenticated<-TRUE
+       
        user_input$d2_session<-d2_default_session$clone()
 
        }
@@ -80,7 +83,7 @@ shinyServer(function(input, output, session) {
     d <- memo_data() %>% purrr::pluck("prio")
     
     if (!inherits(d, "error") & !is.null(d)) {
-      
+      print(NROW(d))
       DT::datatable(d,options = list(pageLength = 50, 
                                      columnDefs = list(list(className = 'dt-right', 
                                                             targets = 3:8)))) %>% 
@@ -167,16 +170,18 @@ shinyServer(function(input, output, session) {
           tags$hr(),
           actionButton("fetch","Get Data"),
           tags$hr(),
-          downloadButton("downloadXLSX", "Download XLSX"),
+          disabled(downloadButton("downloadXLSX", "Download XLSX")),
           tags$hr(),
-          downloadButton("downloadPDF", "Download PDF"),
+          disabled(downloadButton("downloadPDF", "Download PDF")),
+          tags$hr(),
+          disabled(downloadButton("downloadDOCX", "Download DOCX")),
           width = 2
         ),
         mainPanel(tabsetPanel(
           id = "main-panel",
           type = "tabs",
-          tabPanel("Prioritization", dataTableOutput("prio_table")),
-          tabPanel("Partners/Agencies", dataTableOutput("partners_table"))
+          tabPanel("Prioritization", DT::dataTableOutput("prio_table")),
+          tabPanel("Partners/Agencies", DT::dataTableOutput("partners_table"))
         ))
       ))
     }
@@ -208,6 +213,102 @@ shinyServer(function(input, output, session) {
       file.rename(out, file)
     }
   )
+  
+  
+  output$downloadDOCX <- downloadHandler(
+    filename = function() {
+      
+      prefix <-"cop_20_approval_memo_"
+      date<-format(Sys.time(),"%Y%m%d_%H%M%S")
+      paste0(paste(prefix,date,sep="_"),".docx")
+    },
+    
+    content = function(file) {
+      
+      library(flextable)
+      library(officer)
+      
+      d <- memo_data()
+      
+      ou_name<-getOrgtunitNamefromUID(input$ou,user_input$d2_session)
+
+      #Transform all zeros to dashes
+      d$prio %<>% 
+        dplyr::mutate_if(is.numeric, 
+                         function(x) ifelse(x == 0 ,"-",formatC(x, format="f", big.mark=",",digits = 0))) 
+      
+      style_para_prio<-fp_par(text.align = "right",
+                              padding.right = 0.04,
+                              padding.bottom = 0,
+                              padding.top = 0,
+                              line_spacing = 1)
+      
+      header_old<-names(d$prio)
+      header_new<-c(ou_name,ou_name,header_old[3:9])
+      
+      prio_table<-flextable(d$prio) %>% 
+        fontsize(., size = 7, part = "body") %>% 
+        style(.,pr_p = style_para_prio,part = "body") %>%
+        merge_v(.,j="Indicator") %>% 
+        delete_part(.,part = "header") %>% 
+        add_header_row(.,values = header_new) %>% 
+        add_header_row(., values = c(ou_name, ou_name,rep("SNU Prioritizations",7))) %>% 
+        merge_h(., part = "header") %>% 
+        merge_v(.,part="header") %>% 
+        align(., align = "center", part = "header") %>% 
+        align(.,j=1:2,align = "center") %>%  #Align first two columns center
+        bg(.,bg = "#CCC0D9", part = "header") %>% 
+        bg(., i = ~ Age == "Total", bg = "#E4DFEC", part = "body") %>% #Highlight total rows
+        bold(., i = ~ Age == "Total", bold = TRUE, part = "body")  %>% 
+        bg(.,j= "Indicator", bg = "#FFFFFF" , part="body") %>% 
+        bold(., j = "Indicator", bold = FALSE) %>% 
+        flextable::add_footer_lines(.,values="* Totals may be greater than the sum of categories due to activities outside of the SNU prioritization areas outlined above")
+      
+      doc <- read_docx()
+      doc<-body_add_flextable(doc,value=prio_table)
+      doc<-body_add_break(doc,pos="after")
+      
+      #Partners tables
+      sub_heading<-names(d$partners)[3:length(d$partners)] %>% 
+        stringr::str_split(.," ") %>% 
+        purrr::map(purrr::pluck(2)) %>%
+        unlist() %>% 
+        c("Funding Agency","Partner",.)
+      
+      group_heading<-names(d$partners)[3:length(d$partners)] %>% 
+        stringr::str_split(.," ") %>% 
+        purrr::map(purrr::pluck(1)) %>% 
+        unlist() %>% 
+        c("Funding Agency","Partner",.)
+      
+      chunks<-list(c(1:14),c(1:2,15:25),c(1:2,26:34),c(1:2,35:43))
+      
+      renderPartnerTable<-function(chunk) {
+        
+        flextable(d$partners[,chunk]) %>% 
+          bg(., i = ~ Partner == "", bg = "#D3D3D3", part = "body") %>% 
+          bold(.,i = ~ Partner == "", bold=TRUE) %>% 
+          delete_part(.,part = "header") %>% 
+          add_header_row(.,values=sub_heading[chunk]) %>% 
+          add_header_row(.,top = TRUE,values = group_heading[chunk] ) %>% 
+          merge_h(.,part="header") %>% 
+          merge_v(.,part = "header")  %>% 
+          fontsize(., size = 7, part = "all") %>% 
+          style(.,pr_p = style_para_prio,part = "body")
+        
+      }
+
+      for (i in 1:length(chunks)) {
+        chunk<-chunks[[i]]
+        partner_table_ft<-renderPartnerTable(chunk = chunk)
+        doc<-body_add_flextable(doc,partner_table_ft)
+        doc<-body_add_break(doc,pos="after")
+      }
+      
+      print(doc,target=file)
+    }
+  )
+  
   
   output$downloadXLSX <- downloadHandler(
     filename = function() {
