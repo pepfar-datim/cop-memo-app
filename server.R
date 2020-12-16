@@ -4,6 +4,7 @@ require(shinyWidgets)
 require(magrittr)
 require(knitr)
 require(kableExtra)
+require(gdtools)
 source("./utils.R")
 
 shinyServer(function(input, output, session) {
@@ -19,8 +20,8 @@ shinyServer(function(input, output, session) {
       
       sendSweetAlert(
         session,
-        title = "Fetching data",
-        text = "Sit tight. I'm getting your data",
+        title = "Retreiving data.",
+        text = "This process may take a few minutes. Please wait.",
         btn_labels= NA
       )
       
@@ -243,27 +244,41 @@ shinyServer(function(input, output, session) {
                               padding.top = 0,
                               line_spacing = 1)
       
+      style_header_prio<-fp_par(text.align = "center",
+                              padding.right = 0,
+                              padding.bottom = 0,
+                              padding.top = 0,
+                              line_spacing = 1)
+      
+      
       header_old<-names(d$prio)
       header_new<-c(ou_name,ou_name,header_old[3:9])
       
       prio_table<-flextable(d$prio) %>% 
-        fontsize(., size = 7, part = "body") %>% 
-        style(.,pr_p = style_para_prio,part = "body") %>%
+
         merge_v(.,j="Indicator") %>% 
         delete_part(.,part = "header") %>% 
         add_header_row(.,values = header_new) %>% 
         add_header_row(., values = c(ou_name, ou_name,rep("SNU Prioritizations",7))) %>% 
         merge_h(., part = "header") %>% 
         merge_v(.,part="header") %>% 
-        align(., align = "center", part = "header") %>% 
-        align(.,j=1:2,align = "center") %>%  #Align first two columns center
         bg(.,bg = "#CCC0D9", part = "header") %>% 
         bg(., i = ~ Age == "Total", bg = "#E4DFEC", part = "body") %>% #Highlight total rows
         bold(., i = ~ Age == "Total", bold = TRUE, part = "body")  %>% 
         bg(.,j= "Indicator", bg = "#FFFFFF" , part="body") %>% 
         bold(., j = "Indicator", bold = FALSE) %>% 
+        bold(.,bold = TRUE,part = "header") %>% 
+        fontsize(., size = 7, part = "all") %>%
+        style(.,pr_p = style_header_prio,part="header") %>% 
+        style(.,pr_p = style_para_prio,part = "body") %>%
+        align(.,j=1:2,align = "center") %>%  #Align first two columns center
         flextable::add_footer_lines(.,values="* Totals may be greater than the sum of categories due to activities outside of the SNU prioritization areas outlined above")
       
+      fontname<-"Arial"
+      if ( gdtools::font_family_exists(fontname) ) {
+        prio_table <- font(prio_table,fontname = fontname,part = "header") 
+      } 
+        
       doc <- read_docx()
       doc<-body_add_flextable(doc,value=prio_table)
       doc<-body_add_break(doc,pos="after")
@@ -285,7 +300,7 @@ shinyServer(function(input, output, session) {
       
       renderPartnerTable<-function(chunk) {
         
-        flextable(d$partners[,chunk]) %>% 
+       partner_table<- flextable(d$partners[,chunk]) %>% 
           bg(., i = ~ Partner == "", bg = "#D3D3D3", part = "body") %>% 
           bold(.,i = ~ Partner == "", bold=TRUE) %>% 
           delete_part(.,part = "header") %>% 
@@ -294,8 +309,16 @@ shinyServer(function(input, output, session) {
           merge_h(.,part="header") %>% 
           merge_v(.,part = "header")  %>% 
           fontsize(., size = 7, part = "all") %>% 
-          style(.,pr_p = style_para_prio,part = "body")
+          style(.,pr_p = style_para_prio,part = "body") %>% 
+          width(.,j=1:2,0.75) %>% 
+          width(.,j=3:(length(chunk)-2),0.4)
         
+        fontname<-"Arial"
+        if ( gdtools::font_family_exists(fontname) ) {
+          partner_table <- font(partner_table,fontname = fontname, part = "all") 
+        } 
+        
+        partner_table
       }
 
       for (i in 1:length(chunks)) {
