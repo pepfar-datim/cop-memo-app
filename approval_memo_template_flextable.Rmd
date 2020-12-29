@@ -14,11 +14,15 @@ options(kableExtra.latex.load_packages = FALSE)
 ```{r header_name ,results='asis', echo=FALSE, results='hide', message=FALSE}
 #load("my_work_space.RData")
 
+
 require(magrittr)
 require(glue)
 library(flextable)
 library(officer)
 
+if (!exists("d")) {
+  d <- memo_data()
+}
   getOrgtunitNamefromUID<-function(uid, d2_session) {
      
      glue(d2_session$base_url,"api/organisationUnits/{uid}?fields=name") %>% 
