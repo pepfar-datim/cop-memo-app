@@ -1,0 +1,3 @@
+default:
+  baseurl: "https://www.datim.org/"
+  log_path: "/opt/rstudio-connect/log/cop20-memo/cop20-memo.log"
