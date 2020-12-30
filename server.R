@@ -117,7 +117,18 @@ shinyServer(function(input, output, session) {
   observeEvent(input$fetch, {
     shinyjs::disable("fetch")
     ready$ok <- TRUE
+
   })
+  
+  observeEvent(input$logout,{
+    flog.info(paste0("User ", user_input$d2_session$me$userCredentials$username, " logged out."))
+    ready$ok <- FALSE
+    user_input$authenticated<-FALSE
+    user_input$d2_session<-NULL
+    gc()
+    
+  } )
+  
   
   output$uiLogin <- renderUI({
     wellPanel(fluidRow(
@@ -135,6 +146,8 @@ shinyServer(function(input, output, session) {
       actionButton("login_button", "Log in!")
     ))
   })
+  
+
   
   output$ui <- renderUI({
     if (user_input$authenticated == FALSE) {
@@ -181,6 +194,8 @@ shinyServer(function(input, output, session) {
           disabled(downloadButton("downloadPDF", "Download PDF")),
           tags$hr(),
           disabled(downloadButton("downloadDOCX", "Download DOCX")),
+          tags$hr(),
+          actionButton("logout","Log out"),
           width = 2
         ),
         mainPanel(tabsetPanel(
