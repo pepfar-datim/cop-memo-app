@@ -66,12 +66,12 @@ shinyServer(function(input, output, session) {
                    title = "Login failed",
                    text = "Please check your username/password!",
                    type = "error")
-                 flog.info(paste0("User ", input$user_name, " login failed."), name = "datapack")
+                 flog.info(paste0("User ", input$user_name, " login failed."), name = "cop_memo")
                } )
     
      if ( exists("d2_default_session"))  {
        
-       flog.info(paste0("User ", d2_default_session$me$userCredentials$username, " logged in."), name = "datapack")
+       flog.info(paste0("User ", d2_default_session$me$userCredentials$username, " logged in to ", d2_default_session$base_url), name = "cop_memo")
        user_input$authenticated<-TRUE
        user_input$baseurl<- input$base_url
        user_input$d2_session<-d2_default_session$clone()
