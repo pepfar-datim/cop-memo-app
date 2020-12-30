@@ -14,7 +14,11 @@ require(datimutils)
 
 config <- config::get()
 
-flog.appender(appender.file(config$log_path), name="cop_memo")
+if ( file.access(config$log_path,2) == 1 ) {
+  flog.appender(appender.file(config$log_path), name="cop_memo")
+} else {
+  flog.appender(appender.console(), name = "cop_memo")
+}
 
 getUserOperatingUnits<-function(uid) {
   
