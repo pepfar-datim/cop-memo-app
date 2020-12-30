@@ -51,11 +51,12 @@ shinyServer(function(input, output, session) {
   
   user_input <- reactiveValues(authenticated = FALSE, 
                                status = "",
+                               base_url = "https://www.datim.org/",
                                d2_session = NULL)
   
   observeEvent(input$login_button, {
     
-    tryCatch(  {  datimutils::loginToDATIM(base_url = config$baseurl,
+    tryCatch(  {  datimutils::loginToDATIM(base_url = input$base_url,
                                            username = input$user_name,
                                            password = input$password) },
                #This function throws an error if the login is not successful
@@ -70,9 +71,9 @@ shinyServer(function(input, output, session) {
     
      if ( exists("d2_default_session"))  {
        
-       flog.info(paste0("User ", d2_default_session$user_name, " logged in."), name = "datapack")
+       flog.info(paste0("User ", d2_default_session$me$userCredentials$username, " logged in."), name = "datapack")
        user_input$authenticated<-TRUE
-       
+       user_input$baseurl<- input$base_url
        user_input$d2_session<-d2_default_session$clone()
 
        }
@@ -126,6 +127,9 @@ shinyServer(function(input, output, session) {
       )
     ),
     fluidRow(
+      selectInput(inputId = "base_url", label = "Server", 
+      choices = c("https://www.datim.org/","https://cop-test.datim.org/"), 
+      multiple = FALSE), 
       textInput("user_name", "Username: ", width = "600px"),
       passwordInput("password", "Password:", width = "600px"),
       actionButton("login_button", "Log in!")
@@ -143,6 +147,7 @@ shinyServer(function(input, output, session) {
           br(),
           br(),
           br(),
+          uiOutput("base_url"),
           uiOutput("uiLogin"),
           uiOutput("pass")
         )
