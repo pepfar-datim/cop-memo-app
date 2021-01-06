@@ -12,7 +12,7 @@
   "packages": {
     "BH": {
       "Source": "CRAN",
-      "Repository": "https://rstudio-package.testing.ap.datim.org/prod/latest",
+      "Repository": "https://cran.rstudio.com/",
       "description": {
         "Package": "BH",
         "Type": "Package",
@@ -34,7 +34,7 @@
     },
     "DT": {
       "Source": "CRAN",
-      "Repository": "https://rstudio-package.testing.ap.datim.org/prod/latest",
+      "Repository": "https://cran.rstudio.com/",
       "description": {
         "Package": "DT",
         "Type": "Package",
@@ -61,7 +61,7 @@
     },
     "ISOweek": {
       "Source": "CRAN",
-      "Repository": "https://rstudio-package.testing.ap.datim.org/prod/latest",
+      "Repository": "https://cran.rstudio.com/",
       "description": {
         "Package": "ISOweek",
         "Type": "Package",
@@ -84,7 +84,7 @@
     },
     "R6": {
       "Source": "CRAN",
-      "Repository": "https://rstudio-package.testing.ap.datim.org/prod/latest",
+      "Repository": "https://cran.rstudio.com/",
       "description": {
         "Package": "R6",
         "Title": "Encapsulated Classes with Reference Semantics",
@@ -109,7 +109,7 @@
     },
     "RColorBrewer": {
       "Source": "CRAN",
-      "Repository": "https://rstudio-package.testing.ap.datim.org/prod/latest",
+      "Repository": "https://cran.rstudio.com/",
       "description": {
         "Package": "RColorBrewer",
         "Version": "1.1-2",
@@ -130,7 +130,7 @@
     },
     "Rcpp": {
       "Source": "CRAN",
-      "Repository": "https://rstudio-package.testing.ap.datim.org/prod/latest",
+      "Repository": "https://cran.rstudio.com/",
       "description": {
         "Package": "Rcpp",
         "Title": "Seamless R and C++ Integration",
@@ -155,7 +155,7 @@
     },
     "XML": {
       "Source": "CRAN",
-      "Repository": "http://www.omegahat.net/RSXML",
+      "Repository": null,
       "description": {
         "Package": "XML",
         "Version": "3.99-0.3",
@@ -179,7 +179,7 @@
     },
     "askpass": {
       "Source": "CRAN",
-      "Repository": "https://rstudio-package.testing.ap.datim.org/prod/latest",
+      "Repository": "https://cran.rstudio.com/",
       "description": {
         "Package": "askpass",
         "Type": "Package",
@@ -207,7 +207,7 @@
     },
     "assertthat": {
       "Source": "CRAN",
-      "Repository": "https://rstudio-package.testing.ap.datim.org/prod/latest",
+      "Repository": "https://cran.rstudio.com/",
       "description": {
         "Package": "assertthat",
         "Title": "Easy Pre and Post Assertions",
@@ -230,7 +230,7 @@
     },
     "base64enc": {
       "Source": "CRAN",
-      "Repository": "https://rstudio-package.testing.ap.datim.org/prod/latest",
+      "Repository": "https://cran.rstudio.com/",
       "description": {
         "Package": "base64enc",
         "Version": "0.1-3",
@@ -251,7 +251,7 @@
     },
     "callr": {
       "Source": "CRAN",
-      "Repository": "https://rstudio-package.testing.ap.datim.org/prod/latest",
+      "Repository": "https://cran.rstudio.com/",
       "description": {
         "Package": "callr",
         "Title": "Call R from R",
@@ -278,7 +278,7 @@
     },
     "cellranger": {
       "Source": "CRAN",
-      "Repository": "https://rstudio-package.testing.ap.datim.org/prod/latest",
+      "Repository": "https://cran.rstudio.com/",
       "description": {
         "Package": "cellranger",
         "Title": "Translate Spreadsheet Cell Ranges to Rows and Columns",
@@ -305,7 +305,7 @@
     },
     "cli": {
       "Source": "CRAN",
-      "Repository": "https://rstudio-package.testing.ap.datim.org/prod/latest",
+      "Repository": "https://cran.rstudio.com/",
       "description": {
         "Package": "cli",
         "Title": "Helpers for Developing Command Line Interfaces",
@@ -332,7 +332,7 @@
     },
     "clipr": {
       "Source": "CRAN",
-      "Repository": "https://rstudio-package.testing.ap.datim.org/prod/latest",
+      "Repository": "https://cran.rstudio.com/",
       "description": {
         "Type": "Package",
         "Package": "clipr",
@@ -362,7 +362,7 @@
     },
     "codetools": {
       "Source": "CRAN",
-      "Repository": "https://rstudio-package.testing.ap.datim.org/prod/latest",
+      "Repository": "https://cran.rstudio.com/",
       "description": {
         "Package": "codetools",
         "Version": "0.2-16",
@@ -382,7 +382,7 @@
     },
     "colorspace": {
       "Source": "CRAN",
-      "Repository": "https://rstudio-package.testing.ap.datim.org/prod/latest",
+      "Repository": "https://cran.rstudio.com/",
       "description": {
         "Package": "colorspace",
         "Version": "2.0-0",
@@ -410,7 +410,7 @@
     },
     "commonmark": {
       "Source": "CRAN",
-      "Repository": "https://rstudio-package.testing.ap.datim.org/prod/latest",
+      "Repository": "https://cran.rstudio.com/",
       "description": {
         "Package": "commonmark",
         "Type": "Package",
@@ -434,7 +434,7 @@
     },
     "config": {
       "Source": "CRAN",
-      "Repository": "https://rstudio-package.testing.ap.datim.org/prod/latest",
+      "Repository": "https://cran.rstudio.com/",
       "description": {
         "Package": "config",
         "Type": "Package",
@@ -462,7 +462,7 @@
     },
     "cpp11": {
       "Source": "CRAN",
-      "Repository": "https://rstudio-package.testing.ap.datim.org/prod/latest",
+      "Repository": "https://cran.rstudio.com/",
       "description": {
         "Package": "cpp11",
         "Title": "A C++11 Interface for R's C Interface",
@@ -491,7 +491,7 @@
     },
     "crayon": {
       "Source": "CRAN",
-      "Repository": "https://rstudio-package.testing.ap.datim.org/prod/latest",
+      "Repository": "https://cran.rstudio.com/",
       "description": {
         "Package": "crayon",
         "Title": "Colored Terminal Output",
@@ -518,7 +518,7 @@
     },
     "crosstalk": {
       "Source": "CRAN",
-      "Repository": "https://rstudio-package.testing.ap.datim.org/prod/latest",
+      "Repository": "https://cran.rstudio.com/",
       "description": {
         "Package": "crosstalk",
         "Type": "Package",
@@ -544,7 +544,7 @@
     },
     "curl": {
       "Source": "CRAN",
-      "Repository": "https://rstudio-package.testing.ap.datim.org/prod/latest",
+      "Repository": "https://cran.rstudio.com/",
       "description": {
         "Package": "curl",
         "Type": "Package",
@@ -574,10 +574,10 @@
     },
     "data.table": {
       "Source": "CRAN",
-      "Repository": "https://rstudio-package.testing.ap.datim.org/prod/latest",
+      "Repository": "https://cran.rstudio.com/",
       "description": {
         "Package": "data.table",
-        "Version": "1.13.4",
+        "Version": "1.13.6",
         "Title": "Extension of `data.frame`",
         "Authors@R": "c(\n  person(\"Matt\",\"Dowle\",           role=c(\"aut\",\"cre\"), email=\"mattjdowle@gmail.com\"),\n  person(\"Arun\",\"Srinivasan\",      role=\"aut\",          email=\"arunkumar.sriniv@gmail.com\"),\n  person(\"Jan\",\"Gorecki\",          role=\"ctb\"),\n  person(\"Michael\",\"Chirico\",      role=\"ctb\"),\n  person(\"Pasha\",\"Stetsenko\",      role=\"ctb\"),\n  person(\"Tom\",\"Short\",            role=\"ctb\"),\n  person(\"Steve\",\"Lianoglou\",      role=\"ctb\"),\n  person(\"Eduard\",\"Antonyan\",      role=\"ctb\"),\n  person(\"Markus\",\"Bonsch\",        role=\"ctb\"),\n  person(\"Hugh\",\"Parsonage\",       role=\"ctb\"),\n  person(\"Scott\",\"Ritchie\",        role=\"ctb\"),\n  person(\"Kun\",\"Ren\",              role=\"ctb\"),\n  person(\"Xianying\",\"Tan\",         role=\"ctb\"),\n  person(\"Rick\",\"Saporta\",         role=\"ctb\"),\n  person(\"Otto\",\"Seiskari\",        role=\"ctb\"),\n  person(\"Xianghui\",\"Dong\",        role=\"ctb\"),\n  person(\"Michel\",\"Lang\",          role=\"ctb\"),\n  person(\"Watal\",\"Iwasaki\",        role=\"ctb\"),\n  person(\"Seth\",\"Wenchel\",         role=\"ctb\"),\n  person(\"Karl\",\"Broman\",          role=\"ctb\"),\n  person(\"Tobias\",\"Schmidt\",       role=\"ctb\"),\n  person(\"David\",\"Arenburg\",       role=\"ctb\"),\n  person(\"Ethan\",\"Smith\",          role=\"ctb\"),\n  person(\"Francois\",\"Cocquemas\",   role=\"ctb\"),\n  person(\"Matthieu\",\"Gomez\",       role=\"ctb\"),\n  person(\"Philippe\",\"Chataignon\",  role=\"ctb\"),\n  person(\"Nello\",\"Blaser\",         role=\"ctb\"),\n  person(\"Dmitry\",\"Selivanov\",     role=\"ctb\"),\n  person(\"Andrey\",\"Riabushenko\",   role=\"ctb\"),\n  person(\"Cheng\",\"Lee\",            role=\"ctb\"),\n  person(\"Declan\",\"Groves\",        role=\"ctb\"),\n  person(\"Daniel\",\"Possenriede\",   role=\"ctb\"),\n  person(\"Felipe\",\"Parages\",       role=\"ctb\"),\n  person(\"Denes\",\"Toth\",           role=\"ctb\"),\n  person(\"Mus\",\"Yaramaz-David\",    role=\"ctb\"),\n  person(\"Ayappan\",\"Perumal\",      role=\"ctb\"),\n  person(\"James\",\"Sams\",           role=\"ctb\"),\n  person(\"Martin\",\"Morgan\",        role=\"ctb\"),\n  person(\"Michael\",\"Quinn\",        role=\"ctb\"),\n  person(\"@javrucebo\",\"\",          role=\"ctb\"),\n  person(\"@marc-outins\",\"\",        role=\"ctb\"),\n  person(\"Roy\",\"Storey\",           role=\"ctb\"),\n  person(\"Manish\",\"Saraswat\",      role=\"ctb\"),\n  person(\"Morgan\",\"Jacob\",         role=\"ctb\"),\n  person(\"Michael\",\"Schubmehl\",    role=\"ctb\"),\n  person(\"Davis\",\"Vaughan\",        role=\"ctb\"),\n  person(\"Toby\",\"Hocking\",         role=\"ctb\"),\n  person(\"Leonardo\",\"Silvestri\",   role=\"ctb\"),\n  person(\"Tyson\",\"Barrett\",        role=\"ctb\"),\n  person(\"Jim\",\"Hester\",           role=\"ctb\"),\n  person(\"Anthony\",\"Damico\",       role=\"ctb\"),\n  person(\"Sebastian\",\"Freundt\",    role=\"ctb\"),\n  person(\"David\",\"Simons\",         role=\"ctb\"),\n  person(\"Elliott\",\"Sales de Andrade\", role=\"ctb\"),\n  person(\"Cole\",\"Miller\",          role=\"ctb\"),\n  person(\"Jens Peder\",\"Meldgaard\", role=\"ctb\"),\n  person(\"Vaclav\",\"Tlapak\",        role=\"ctb\"),\n  person(\"Kevin\",\"Ushey\",          role=\"ctb\"),\n  person(\"Dirk\",\"Eddelbuettel\",    role=\"ctb\"))",
         "Depends": "R (>= 3.1.0)",
@@ -591,17 +591,17 @@
         "VignetteBuilder": "knitr",
         "ByteCompile": "TRUE",
         "NeedsCompilation": "yes",
-        "Packaged": "2020-12-08 02:57:13 UTC; mdowle",
+        "Packaged": "2020-12-15 07:08:14 UTC; mdowle",
         "Author": "Matt Dowle [aut, cre],\n  Arun Srinivasan [aut],\n  Jan Gorecki [ctb],\n  Michael Chirico [ctb],\n  Pasha Stetsenko [ctb],\n  Tom Short [ctb],\n  Steve Lianoglou [ctb],\n  Eduard Antonyan [ctb],\n  Markus Bonsch [ctb],\n  Hugh Parsonage [ctb],\n  Scott Ritchie [ctb],\n  Kun Ren [ctb],\n  Xianying Tan [ctb],\n  Rick Saporta [ctb],\n  Otto Seiskari [ctb],\n  Xianghui Dong [ctb],\n  Michel Lang [ctb],\n  Watal Iwasaki [ctb],\n  Seth Wenchel [ctb],\n  Karl Broman [ctb],\n  Tobias Schmidt [ctb],\n  David Arenburg [ctb],\n  Ethan Smith [ctb],\n  Francois Cocquemas [ctb],\n  Matthieu Gomez [ctb],\n  Philippe Chataignon [ctb],\n  Nello Blaser [ctb],\n  Dmitry Selivanov [ctb],\n  Andrey Riabushenko [ctb],\n  Cheng Lee [ctb],\n  Declan Groves [ctb],\n  Daniel Possenriede [ctb],\n  Felipe Parages [ctb],\n  Denes Toth [ctb],\n  Mus Yaramaz-David [ctb],\n  Ayappan Perumal [ctb],\n  James Sams [ctb],\n  Martin Morgan [ctb],\n  Michael Quinn [ctb],\n  @javrucebo [ctb],\n  @marc-outins [ctb],\n  Roy Storey [ctb],\n  Manish Saraswat [ctb],\n  Morgan Jacob [ctb],\n  Michael Schubmehl [ctb],\n  Davis Vaughan [ctb],\n  Toby Hocking [ctb],\n  Leonardo Silvestri [ctb],\n  Tyson Barrett [ctb],\n  Jim Hester [ctb],\n  Anthony Damico [ctb],\n  Sebastian Freundt [ctb],\n  David Simons [ctb],\n  Elliott Sales de Andrade [ctb],\n  Cole Miller [ctb],\n  Jens Peder Meldgaard [ctb],\n  Vaclav Tlapak [ctb],\n  Kevin Ushey [ctb],\n  Dirk Eddelbuettel [ctb]",
         "Maintainer": "Matt Dowle <mattjdowle@gmail.com>",
         "Repository": "CRAN",
-        "Date/Publication": "2020-12-08 10:10:02 UTC",
-        "Built": "R 3.6.3; x86_64-pc-linux-gnu; 2020-12-29 17:33:29 UTC; unix"
+        "Date/Publication": "2020-12-30 15:50:03 UTC",
+        "Built": "R 3.6.3; x86_64-pc-linux-gnu; 2021-01-05 08:23:39 UTC; unix"
       }
     },
     "datapackcommons": {
-      "Source": "REPO_NAME",
-      "Repository": "https://rstudio-package.testing.ap.datim.org/prod/latest",
+      "Source": "pepfar",
+      "Repository": "https://rstudio-package.ap.datim.org/prod/latest",
       "description": {
         "Package": "datapackcommons",
         "Type": "Package",
@@ -627,8 +627,8 @@
       }
     },
     "datapackr": {
-      "Source": "REPO_NAME",
-      "Repository": "https://rstudio-package.testing.ap.datim.org/prod/latest",
+      "Source": "pepfar",
+      "Repository": "https://rstudio-package.ap.datim.org/prod/latest",
       "description": {
         "Package": "datapackr",
         "Type": "Package",
@@ -646,49 +646,48 @@
         "LazyData": "true",
         "RoxygenNote": "7.1.1",
         "Repository": "RSPM",
-        "RemoteSha": "85a932015df70d5c3c22cf010f1c0ea275dbb599",
-        "Version": "4.0.1.0.0.0.1609051529",
+        "RemoteSha": "78e18e2d133bd69b391aab3f056ca55a9f8ea6b4",
+        "Version": "4.0.1.0.0.0.1609434972",
         "Date": "2020-12-26",
         "NeedsCompilation": "no",
-        "Packaged": "2020-12-27 06:49:32 UTC; root",
+        "Packaged": "2020-12-31 17:19:46 UTC; root",
         "Author": "Scott Jackson [aut, cre],\n  Jason Pickering [aut, rev],\n  Sam Garman [aut],\n  William Shiflett [ctb],\n  Chris Nemarich [ctb],\n  Christian Domaas [ctb],\n  Max Chandler [ctb]",
         "Maintainer": "Scott Jackson <sjackson@baosystems.com>",
-        "Built": "R 3.6.3; ; 2020-12-30 05:04:20 UTC; unix"
+        "Built": "R 3.6.3; ; 2021-01-06 07:21:14 UTC; unix"
       }
     },
     "datimutils": {
-      "Source": "REPO_NAME",
-      "Repository": "https://rstudio-package.testing.ap.datim.org/prod/latest",
+      "Source": "pepfar",
+      "Repository": "https://rstudio-package.ap.datim.org/prod/latest",
       "description": {
         "Package": "datimutils",
         "Type": "Package",
         "Title": "Utilities for interacting with the DATIM api from R",
-        "Authors@R": "\n    c(\n    person(\"Scott\", \"Jackson\", email = \"sjackson@baosystems.com\",\n        role = c(\"aut\", \"cre\")),\n    person(\"Jason\", \"Pickering\", email = \"jason.p.pickering@gmail.com\",\n        role = c(\"aut\")),\n    person(\"Sam\", \"Garman\", email = \"sgarman@baosystems.com\",\n        role = c(\"aut\")),\n    person(\"Maxwell\", \"Chandler\", email = \"mchandler@baosystems.com\",\n        role = c(\"aut\"))\n  )",
+        "Authors@R": "\n    c(\n    person(\"Scott\", \"Jackson\", email = \"sjackson@baosystems.com\",\n        role = c(\"aut\", \"cre\")),\n    person(\"Jason\", \"Pickering\", email = \"jason.p.pickering@gmail.com\",\n        role = c(\"aut\")),\n    person(\"Sam\", \"Garman\", email = \"sgarman@baosystems.com\",\n        role = c(\"aut\"))\n  )",
         "Description": "General utilities for interacting with the DATIM api from R.",
         "URL": "https://github.com/pepfar-datim/datimutils",
         "BugReports": "https://github.com/pepfar-datim/datimutils",
         "Depends": "R (>= 3.6.0)",
-        "Imports": "dplyr (>= 0.8.3), tidyr (>= 0.8.3), readr (>= 1.3.1), jsonlite\n(>= 1.6), purrr (>= 0.3.2), tibble (>= 2.1.1), stringr (>=\n1.4.0), stringi (>= 1.4.3), httr (>= 1.4.0), rlist (>=\n0.4.6.1), magrittr (>= 1.5), keyring, lazyeval, stats,\nlubridate, data.table, getPass, rlang",
-        "Suggests": "devtools (>= 2.0.1), httptest, knitr, rmarkdown, testthat (>=\n2.1.0)",
-        "License": "GPL-3 + file LICENSE",
+        "Imports": "dplyr (>= 0.8.3), tidyr (>= 0.8.3), readr (>= 1.3.1), jsonlite\n(>= 1.6), purrr (>= 0.3.2), tibble (>= 2.1.1), stringr (>=\n1.4.0), stringi (>= 1.4.3), httr (>= 1.4.0), rlist (>=\n0.4.6.1), magrittr (>= 1.5), lazyeval, stats, lubridate,\ndata.table, getPass",
+        "Suggests": "devtools (>= 2.0.1), testthat (>= 2.1.0)",
+        "License": "GPL-2",
         "Encoding": "UTF-8",
         "LazyData": "true",
-        "RoxygenNote": "7.1.1",
-        "VignetteBuilder": "knitr",
+        "RoxygenNote": "6.1.1",
         "Repository": "RSPM",
-        "RemoteSha": "a12b51d3fe3d94cdda55d3a87d35ede72902d1d6",
-        "Version": "0.1.0.0.0.0.1607515617",
+        "RemoteSha": "9371cc57cd3bf5ff863faaf47d83291ba04ec220",
+        "Version": "1.0.0.0.0.0.1569226567",
         "Date": "2019-09-11",
         "NeedsCompilation": "no",
-        "Packaged": "2020-12-09 12:09:50 UTC; root",
-        "Author": "Scott Jackson [aut, cre],\n  Jason Pickering [aut],\n  Sam Garman [aut],\n  Maxwell Chandler [aut]",
+        "Packaged": "2020-09-22 15:22:41 UTC; root",
+        "Author": "Scott Jackson [aut, cre],\n  Jason Pickering [aut],\n  Sam Garman [aut]",
         "Maintainer": "Scott Jackson <sjackson@baosystems.com>",
-        "Built": "R 3.6.3; ; 2020-12-30 05:04:06 UTC; unix"
+        "Built": "R 3.6.3; ; 2021-01-05 13:40:44 UTC; unix"
       }
     },
     "datimvalidation": {
-      "Source": "REPO_NAME",
-      "Repository": "https://rstudio-package.testing.ap.datim.org/prod/latest",
+      "Source": "pepfar",
+      "Repository": "https://rstudio-package.ap.datim.org/prod/latest",
       "description": {
         "Package": "datimvalidation",
         "Type": "Package",
@@ -718,7 +717,7 @@
     },
     "digest": {
       "Source": "CRAN",
-      "Repository": "https://rstudio-package.testing.ap.datim.org/prod/latest",
+      "Repository": "https://cran.rstudio.com/",
       "description": {
         "Package": "digest",
         "Author": "Dirk Eddelbuettel <edd@debian.org> with contributions \n by Antoine Lucas, Jarek Tuszynski, Henrik Bengtsson, Simon Urbanek,\n Mario Frasca, Bryan Lewis, Murray Stokely, Hannes Muehleisen,\n Duncan Murdoch, Jim Hester, Wush Wu, Qiang Kou, Thierry Onkelinx, \n Michel Lang, Viliam Simko, Kurt Hornik, Radford Neal, Kendon Bell,\n Matthew de Queljoe, Ion Suruceanu, Bill Denney, Dirk Schumacher,\n and Winston Chang.",
@@ -743,7 +742,7 @@
     },
     "doMC": {
       "Source": "CRAN",
-      "Repository": "https://rstudio-package.testing.ap.datim.org/prod/latest",
+      "Repository": "https://cran.rstudio.com/",
       "description": {
         "Package": "doMC",
         "Type": "Package",
@@ -767,7 +766,7 @@
     },
     "dplyr": {
       "Source": "CRAN",
-      "Repository": "https://rstudio-package.testing.ap.datim.org/prod/latest",
+      "Repository": "https://cran.rstudio.com/",
       "description": {
         "Type": "Package",
         "Package": "dplyr",
@@ -796,7 +795,7 @@
     },
     "ellipsis": {
       "Source": "CRAN",
-      "Repository": "https://rstudio-package.testing.ap.datim.org/prod/latest",
+      "Repository": "https://cran.rstudio.com/",
       "description": {
         "Package": "ellipsis",
         "Version": "0.3.1",
@@ -823,7 +822,7 @@
     },
     "evaluate": {
       "Source": "CRAN",
-      "Repository": "https://rstudio-package.testing.ap.datim.org/prod/latest",
+      "Repository": "https://cran.rstudio.com/",
       "description": {
         "Package": "evaluate",
         "Type": "Package",
@@ -850,7 +849,7 @@
     },
     "fansi": {
       "Source": "CRAN",
-      "Repository": "https://rstudio-package.testing.ap.datim.org/prod/latest",
+      "Repository": "https://cran.rstudio.com/",
       "description": {
         "Package": "fansi",
         "Title": "ANSI Control Sequence Aware String Functions",
@@ -878,7 +877,7 @@
     },
     "farver": {
       "Source": "CRAN",
-      "Repository": "https://rstudio-package.testing.ap.datim.org/prod/latest",
+      "Repository": "https://cran.rstudio.com/",
       "description": {
         "Package": "farver",
         "Type": "Package",
@@ -904,7 +903,7 @@
     },
     "fastmap": {
       "Source": "CRAN",
-      "Repository": "https://rstudio-package.testing.ap.datim.org/prod/latest",
+      "Repository": "https://cran.rstudio.com/",
       "description": {
         "Package": "fastmap",
         "Title": "Fast Implementation of a Key-Value Store",
@@ -927,33 +926,9 @@
         "Built": "R 3.6.2; x86_64-pc-linux-gnu; 2020-01-16 08:30:53 UTC; unix"
       }
     },
-    "filelock": {
-      "Source": "CRAN",
-      "Repository": "https://rstudio-package.testing.ap.datim.org/prod/latest",
-      "description": {
-        "Package": "filelock",
-        "Title": "Portable File Locking",
-        "Version": "1.0.2",
-        "Author": "Gábor Csárdi",
-        "Maintainer": "Gábor Csárdi <csardi.gabor@gmail.com>",
-        "Description": "Place an exclusive or shared lock on a file. It uses 'LockFile'\n    on Windows and 'fcntl' locks on Unix-like systems.",
-        "License": "MIT + file LICENSE",
-        "LazyData": "true",
-        "URL": "https://github.com/r-lib/filelock#readme",
-        "BugReports": "https://github.com/r-lib/filelock/issues",
-        "RoxygenNote": "6.0.1.9000",
-        "Suggests": "callr (>= 2.0.0), covr, testthat",
-        "Encoding": "UTF-8",
-        "NeedsCompilation": "yes",
-        "Packaged": "2018-10-05 10:03:40 UTC; gaborcsardi",
-        "Repository": "CRAN",
-        "Date/Publication": "2018-10-05 10:30:12 UTC",
-        "Built": "R 3.6.3; x86_64-pc-linux-gnu; 2020-10-14 09:23:28 UTC; unix"
-      }
-    },
     "flextable": {
       "Source": "CRAN",
-      "Repository": "https://rstudio-package.testing.ap.datim.org/prod/latest",
+      "Repository": "https://cran.rstudio.com/",
       "description": {
         "Package": "flextable",
         "Type": "Package",
@@ -981,7 +956,7 @@
     },
     "foreach": {
       "Source": "CRAN",
-      "Repository": "https://rstudio-package.testing.ap.datim.org/prod/latest",
+      "Repository": "https://cran.rstudio.com/",
       "description": {
         "Package": "foreach",
         "Type": "Package",
@@ -1009,7 +984,7 @@
     },
     "formatR": {
       "Source": "CRAN",
-      "Repository": "https://rstudio-package.testing.ap.datim.org/prod/latest",
+      "Repository": "https://cran.rstudio.com/",
       "description": {
         "Package": "formatR",
         "Type": "Package",
@@ -1036,7 +1011,7 @@
     },
     "futile.logger": {
       "Source": "CRAN",
-      "Repository": "https://rstudio-package.testing.ap.datim.org/prod/latest",
+      "Repository": "https://cran.rstudio.com/",
       "description": {
         "Package": "futile.logger",
         "Type": "Package",
@@ -1063,7 +1038,7 @@
     },
     "futile.options": {
       "Source": "CRAN",
-      "Repository": "https://rstudio-package.testing.ap.datim.org/prod/latest",
+      "Repository": "https://cran.rstudio.com/",
       "description": {
         "Package": "futile.options",
         "Type": "Package",
@@ -1085,7 +1060,7 @@
     },
     "gdtools": {
       "Source": "CRAN",
-      "Repository": "https://rstudio-package.testing.ap.datim.org/prod/latest",
+      "Repository": "https://cran.rstudio.com/",
       "description": {
         "Package": "gdtools",
         "Version": "0.2.2",
@@ -1112,7 +1087,7 @@
     },
     "generics": {
       "Source": "CRAN",
-      "Repository": "https://rstudio-package.testing.ap.datim.org/prod/latest",
+      "Repository": "https://cran.rstudio.com/",
       "description": {
         "Package": "generics",
         "Title": "Common S3 Generics not Provided by Base R Methods Related to\nModel Fitting",
@@ -1139,7 +1114,7 @@
     },
     "getPass": {
       "Source": "CRAN",
-      "Repository": "https://rstudio-package.testing.ap.datim.org/prod/latest",
+      "Repository": "https://cran.rstudio.com/",
       "description": {
         "Package": "getPass",
         "Type": "Package",
@@ -1166,7 +1141,7 @@
     },
     "glue": {
       "Source": "CRAN",
-      "Repository": "https://rstudio-package.testing.ap.datim.org/prod/latest",
+      "Repository": "https://cran.rstudio.com/",
       "description": {
         "Package": "glue",
         "Title": "Interpreted String Literals",
@@ -1195,7 +1170,7 @@
     },
     "highr": {
       "Source": "CRAN",
-      "Repository": "https://rstudio-package.testing.ap.datim.org/prod/latest",
+      "Repository": "https://cran.rstudio.com/",
       "description": {
         "Package": "highr",
         "Type": "Package",
@@ -1221,7 +1196,7 @@
     },
     "hms": {
       "Source": "CRAN",
-      "Repository": "https://rstudio-package.testing.ap.datim.org/prod/latest",
+      "Repository": "https://cran.rstudio.com/",
       "description": {
         "Package": "hms",
         "Title": "Pretty Time of Day",
@@ -1248,7 +1223,7 @@
     },
     "htmltools": {
       "Source": "CRAN",
-      "Repository": "https://rstudio-package.testing.ap.datim.org/prod/latest",
+      "Repository": "https://cran.rstudio.com/",
       "description": {
         "Package": "htmltools",
         "Type": "Package",
@@ -1277,7 +1252,7 @@
     },
     "htmlwidgets": {
       "Source": "CRAN",
-      "Repository": "https://rstudio-package.testing.ap.datim.org/prod/latest",
+      "Repository": "https://cran.rstudio.com/",
       "description": {
         "Package": "htmlwidgets",
         "Type": "Package",
@@ -1304,7 +1279,7 @@
     },
     "httpuv": {
       "Source": "CRAN",
-      "Repository": "https://rstudio-package.testing.ap.datim.org/prod/latest",
+      "Repository": "https://cran.rstudio.com/",
       "description": {
         "Package": "httpuv",
         "Type": "Package",
@@ -1334,7 +1309,7 @@
     },
     "httr": {
       "Source": "CRAN",
-      "Repository": "https://rstudio-package.testing.ap.datim.org/prod/latest",
+      "Repository": "https://cran.rstudio.com/",
       "description": {
         "Package": "httr",
         "Title": "Tools for Working with URLs and HTTP",
@@ -1361,7 +1336,7 @@
     },
     "iterators": {
       "Source": "CRAN",
-      "Repository": "https://rstudio-package.testing.ap.datim.org/prod/latest",
+      "Repository": "https://cran.rstudio.com/",
       "description": {
         "Package": "iterators",
         "Type": "Package",
@@ -1384,7 +1359,7 @@
     },
     "jsonlite": {
       "Source": "CRAN",
-      "Repository": "https://rstudio-package.testing.ap.datim.org/prod/latest",
+      "Repository": "https://cran.rstudio.com/",
       "description": {
         "Package": "jsonlite",
         "Version": "1.7.2",
@@ -1410,7 +1385,7 @@
     },
     "kableExtra": {
       "Source": "CRAN",
-      "Repository": "https://rstudio-package.testing.ap.datim.org/prod/latest",
+      "Repository": "https://cran.rstudio.com/",
       "description": {
         "Package": "kableExtra",
         "Type": "Package",
@@ -1437,37 +1412,9 @@
         "Built": "R 3.6.3; ; 2020-11-24 10:07:26 UTC; unix"
       }
     },
-    "keyring": {
-      "Source": "CRAN",
-      "Repository": "https://rstudio-package.testing.ap.datim.org/prod/latest",
-      "description": {
-        "Package": "keyring",
-        "Title": "Access the System Credential Store from R",
-        "Version": "1.1.0",
-        "Authors@R": "\n    c(person(given = \"Gábor\", family = \"Csárdi\", role = c(\"aut\", \"cre\"),\n             email = \"csardi.gabor@gmail.com\"),\n      person(\"RStudio\", role = \"cph\"))",
-        "Description": "Platform independent 'API' to access the operating system's\n    credential store. Currently supports: 'Keychain' on 'macOS', Credential\n    Store on 'Windows', the Secret Service 'API' on 'Linux', and a simple,\n    platform independent store implemented with environment variables.\n    Additional storage back-ends can be added easily.",
-        "License": "MIT + file LICENSE",
-        "LazyData": "true",
-        "URL": "https://github.com/r-lib/keyring#readme",
-        "BugReports": "https://github.com/r-lib/keyring/issues",
-        "RoxygenNote": "6.0.1",
-        "Imports": "assertthat, getPass, openssl, R6, utils, sodium, yaml,\nfilelock, rappdirs, tools",
-        "Suggests": "callr, covr, mockery, testthat, withr",
-        "Encoding": "UTF-8",
-        "SystemRequirements": "Optional: libsecret on Linux (libsecret-1-dev on\nDebian/Ubuntu, libsecret-devel on Fedora/CentOS)",
-        "Collate": "'api.R' 'assertions.R' 'backend-class.R' 'backend-env.R'\n'backend-file.R' 'backend-macos.R' 'backend-secret-service.R'\n'backend-wincred.R' 'default_backend.R' 'package.R' 'pass.R'\n'utils.R'",
-        "NeedsCompilation": "yes",
-        "Packaged": "2018-07-16 11:55:49 UTC; gaborcsardi",
-        "Author": "Gábor Csárdi [aut, cre],\n  RStudio [cph]",
-        "Maintainer": "Gábor Csárdi <csardi.gabor@gmail.com>",
-        "Repository": "CRAN",
-        "Date/Publication": "2018-07-16 12:20:03 UTC",
-        "Built": "R 3.6.3; x86_64-pc-linux-gnu; 2020-11-24 10:23:05 UTC; unix"
-      }
-    },
     "knitr": {
       "Source": "CRAN",
-      "Repository": "https://rstudio-package.testing.ap.datim.org/prod/latest",
+      "Repository": "https://cran.rstudio.com/",
       "description": {
         "Package": "knitr",
         "Type": "Package",
@@ -1497,7 +1444,7 @@
     },
     "labeling": {
       "Source": "CRAN",
-      "Repository": "https://rstudio-package.testing.ap.datim.org/prod/latest",
+      "Repository": "https://cran.rstudio.com/",
       "description": {
         "Package": "labeling",
         "Type": "Package",
@@ -1519,7 +1466,7 @@
     },
     "lambda.r": {
       "Source": "CRAN",
-      "Repository": "https://rstudio-package.testing.ap.datim.org/prod/latest",
+      "Repository": "https://cran.rstudio.com/",
       "description": {
         "Package": "lambda.r",
         "Type": "Package",
@@ -1543,7 +1490,7 @@
     },
     "later": {
       "Source": "CRAN",
-      "Repository": "https://rstudio-package.testing.ap.datim.org/prod/latest",
+      "Repository": "https://cran.rstudio.com/",
       "description": {
         "Package": "later",
         "Type": "Package",
@@ -1570,7 +1517,7 @@
     },
     "lazyeval": {
       "Source": "CRAN",
-      "Repository": "https://rstudio-package.testing.ap.datim.org/prod/latest",
+      "Repository": "https://cran.rstudio.com/",
       "description": {
         "Package": "lazyeval",
         "Version": "0.2.2",
@@ -1594,7 +1541,7 @@
     },
     "lifecycle": {
       "Source": "CRAN",
-      "Repository": "https://rstudio-package.testing.ap.datim.org/prod/latest",
+      "Repository": "https://cran.rstudio.com/",
       "description": {
         "Package": "lifecycle",
         "Title": "Manage the Life Cycle of your Package Functions",
@@ -1622,7 +1569,7 @@
     },
     "lubridate": {
       "Source": "CRAN",
-      "Repository": "https://rstudio-package.testing.ap.datim.org/prod/latest",
+      "Repository": "https://cran.rstudio.com/",
       "description": {
         "Type": "Package",
         "Package": "lubridate",
@@ -1655,7 +1602,7 @@
     },
     "magrittr": {
       "Source": "CRAN",
-      "Repository": "https://rstudio-package.testing.ap.datim.org/prod/latest",
+      "Repository": "https://cran.rstudio.com/",
       "description": {
         "Type": "Package",
         "Package": "magrittr",
@@ -1682,7 +1629,7 @@
     },
     "markdown": {
       "Source": "CRAN",
-      "Repository": "https://rstudio-package.testing.ap.datim.org/prod/latest",
+      "Repository": "https://cran.rstudio.com/",
       "description": {
         "Package": "markdown",
         "Type": "Package",
@@ -1710,7 +1657,7 @@
     },
     "mime": {
       "Source": "CRAN",
-      "Repository": "https://rstudio-package.testing.ap.datim.org/prod/latest",
+      "Repository": "https://cran.rstudio.com/",
       "description": {
         "Package": "mime",
         "Type": "Package",
@@ -1736,7 +1683,7 @@
     },
     "munsell": {
       "Source": "CRAN",
-      "Repository": "https://rstudio-package.testing.ap.datim.org/prod/latest",
+      "Repository": "https://cran.rstudio.com/",
       "description": {
         "Package": "munsell",
         "Type": "Package",
@@ -1759,17 +1706,17 @@
     },
     "officer": {
       "Source": "CRAN",
-      "Repository": "https://rstudio-package.testing.ap.datim.org/prod/latest",
+      "Repository": "https://cran.rstudio.com/",
       "description": {
         "Package": "officer",
         "Type": "Package",
         "Title": "Manipulation of Microsoft Word and PowerPoint Documents",
-        "Version": "0.3.15",
-        "Authors@R": "c(\n    person(\"David\", \"Gohel\", role = c(\"aut\", \"cre\"),\n    email = \"david.gohel@ardata.fr\"),\n    person(\"Frank\", \"Hangler\", role = \"ctb\", email = \"frank@plotandscatter.com\", comment = \"function body_replace_all_text\"),\n    person(\"Liz\", \"Sander\", role = \"ctb\", email = 'lsander@civisanalytics.com', comment = \"several documentation fixes\"),\n    person(\"Anton\", \"Victorson\", role = \"ctb\", email = 'anton@victorson.se',comment = \"fixes xml structures\"),\n    person(\"Jon\", \"Calder\", role = \"ctb\", email = 'jonmcalder@gmail.com', comment = \"update vignettes\"),\n    person(\"John\", \"Harrold\", role = \"ctb\", email = 'john.m.harrold@gmail.com', comment = \"fuction annotate_base\"),\n    person(\"John\", \"Muschelli\", role = \"ctb\", email = 'muschellij2@gmail.com', comment = \"google doc compatibility\")\n    )",
+        "Version": "0.3.16",
+        "Authors@R": "c(\n    person(\"David\", \"Gohel\", role = c(\"aut\", \"cre\"),\n    email = \"david.gohel@ardata.fr\"),\n    person(\"Frank\", \"Hangler\", role = \"ctb\", email = \"frank@plotandscatter.com\", comment = \"function body_replace_all_text\"),\n    person(\"Liz\", \"Sander\", role = \"ctb\", email = 'lsander@civisanalytics.com', comment = \"several documentation fixes\"),\n    person(\"Anton\", \"Victorson\", role = \"ctb\", email = 'anton@victorson.se',comment = \"fixes xml structures\"),\n    person(\"Jon\", \"Calder\", role = \"ctb\", email = 'jonmcalder@gmail.com', comment = \"update vignettes\"),\n    person(\"John\", \"Harrold\", role = \"ctb\", email = 'john.m.harrold@gmail.com', comment = \"function annotate_base\"),\n    person(\"John\", \"Muschelli\", role = \"ctb\", email = 'muschellij2@gmail.com', comment = \"google doc compatibility\")\n    )",
         "Description": "Access and manipulate 'Microsoft Word' and 'Microsoft PowerPoint' documents from R. \n  The package focuses on tabular and graphical reporting from R; it also provides two functions\n  that let users get document content into data objects. A set of functions \n  lets add and remove images, tables and paragraphs of text in new or existing documents. \n  The package does not require any installation of Microsoft products to be able to write Microsoft \n  files.",
         "License": "GPL-3",
         "LazyData": "TRUE",
-        "Imports": "R6, grDevices, zip (>= 2.1.0), uuid (>= 0.1-4), stats,\nmagrittr, utils, xml2 (>= 1.1.0), graphics",
+        "Imports": "R6, grDevices, stats, graphics, utils, zip (>= 2.1.0), uuid\n(>= 0.1-4), xml2 (>= 1.1.0)",
         "URL": "https://ardata-fr.github.io/officeverse/,\nhttps://davidgohel.github.io/officer/",
         "Encoding": "UTF-8",
         "BugReports": "https://github.com/davidgohel/officer/issues",
@@ -1777,17 +1724,17 @@
         "Suggests": "testthat, devEMF, ggplot2, rmarkdown, base64enc, knitr, rsvg",
         "VignetteBuilder": "knitr",
         "NeedsCompilation": "no",
-        "Packaged": "2020-10-31 23:53:08 UTC; davidgohel",
-        "Author": "David Gohel [aut, cre],\n  Frank Hangler [ctb] (function body_replace_all_text),\n  Liz Sander [ctb] (several documentation fixes),\n  Anton Victorson [ctb] (fixes xml structures),\n  Jon Calder [ctb] (update vignettes),\n  John Harrold [ctb] (fuction annotate_base),\n  John Muschelli [ctb] (google doc compatibility)",
+        "Packaged": "2021-01-03 20:38:05 UTC; davidgohel",
+        "Author": "David Gohel [aut, cre],\n  Frank Hangler [ctb] (function body_replace_all_text),\n  Liz Sander [ctb] (several documentation fixes),\n  Anton Victorson [ctb] (fixes xml structures),\n  Jon Calder [ctb] (update vignettes),\n  John Harrold [ctb] (function annotate_base),\n  John Muschelli [ctb] (google doc compatibility)",
         "Maintainer": "David Gohel <david.gohel@ardata.fr>",
         "Repository": "CRAN",
-        "Date/Publication": "2020-11-01 05:30:14 UTC",
-        "Built": "R 3.6.3; ; 2020-12-01 13:05:28 UTC; unix"
+        "Date/Publication": "2021-01-04 17:30:10 UTC",
+        "Built": "R 3.6.3; ; 2021-01-05 08:24:00 UTC; unix"
       }
     },
     "openssl": {
       "Source": "CRAN",
-      "Repository": "https://rstudio-package.testing.ap.datim.org/prod/latest",
+      "Repository": "https://cran.rstudio.com/",
       "description": {
         "Package": "openssl",
         "Type": "Package",
@@ -1815,7 +1762,7 @@
     },
     "openxlsx": {
       "Source": "CRAN",
-      "Repository": "https://rstudio-package.testing.ap.datim.org/prod/latest",
+      "Repository": "https://cran.rstudio.com/",
       "description": {
         "Type": "Package",
         "Package": "openxlsx",
@@ -1847,7 +1794,7 @@
     },
     "pillar": {
       "Source": "CRAN",
-      "Repository": "https://rstudio-package.testing.ap.datim.org/prod/latest",
+      "Repository": "https://cran.rstudio.com/",
       "description": {
         "Package": "pillar",
         "Title": "Coloured Formatting for Columns",
@@ -1873,7 +1820,7 @@
     },
     "piton": {
       "Source": "CRAN",
-      "Repository": "https://rstudio-package.testing.ap.datim.org/prod/latest",
+      "Repository": "https://cran.rstudio.com/",
       "description": {
         "Package": "piton",
         "Type": "Package",
@@ -1902,7 +1849,7 @@
     },
     "pkgconfig": {
       "Source": "CRAN",
-      "Repository": "https://rstudio-package.testing.ap.datim.org/prod/latest",
+      "Repository": "https://cran.rstudio.com/",
       "description": {
         "Package": "pkgconfig",
         "Title": "Private Configuration for 'R' Packages",
@@ -1926,7 +1873,7 @@
     },
     "plyr": {
       "Source": "CRAN",
-      "Repository": "https://rstudio-package.testing.ap.datim.org/prod/latest",
+      "Repository": "https://cran.rstudio.com/",
       "description": {
         "Package": "plyr",
         "Title": "Tools for Splitting, Applying and Combining Data",
@@ -1954,7 +1901,7 @@
     },
     "prettyunits": {
       "Source": "CRAN",
-      "Repository": "https://rstudio-package.testing.ap.datim.org/prod/latest",
+      "Repository": "https://cran.rstudio.com/",
       "description": {
         "Package": "prettyunits",
         "Title": "Pretty, Human Readable Formatting of Quantities",
@@ -1978,7 +1925,7 @@
     },
     "processx": {
       "Source": "CRAN",
-      "Repository": "https://rstudio-package.testing.ap.datim.org/prod/latest",
+      "Repository": "https://cran.rstudio.com/",
       "description": {
         "Package": "processx",
         "Title": "Execute and Control System Processes",
@@ -2004,7 +1951,7 @@
     },
     "progress": {
       "Source": "CRAN",
-      "Repository": "https://rstudio-package.testing.ap.datim.org/prod/latest",
+      "Repository": "https://cran.rstudio.com/",
       "description": {
         "Package": "progress",
         "Title": "Terminal Progress Bars",
@@ -2029,7 +1976,7 @@
     },
     "promises": {
       "Source": "CRAN",
-      "Repository": "https://rstudio-package.testing.ap.datim.org/prod/latest",
+      "Repository": "https://cran.rstudio.com/",
       "description": {
         "Package": "promises",
         "Type": "Package",
@@ -2058,7 +2005,7 @@
     },
     "ps": {
       "Source": "CRAN",
-      "Repository": "https://rstudio-package.testing.ap.datim.org/prod/latest",
+      "Repository": "https://cran.rstudio.com/",
       "description": {
         "Package": "ps",
         "Version": "1.5.0",
@@ -2085,7 +2032,7 @@
     },
     "purrr": {
       "Source": "CRAN",
-      "Repository": "https://rstudio-package.testing.ap.datim.org/prod/latest",
+      "Repository": "https://cran.rstudio.com/",
       "description": {
         "Package": "purrr",
         "Title": "Functional Programming Tools",
@@ -2111,35 +2058,9 @@
         "Built": "R 3.6.3; x86_64-pc-linux-gnu; 2020-08-12 12:58:23 UTC; unix"
       }
     },
-    "rappdirs": {
-      "Source": "CRAN",
-      "Repository": "https://rstudio-package.testing.ap.datim.org/prod/latest",
-      "description": {
-        "Package": "rappdirs",
-        "Type": "Package",
-        "Title": "Application Directories: Determine Where to Save Data, Caches,\nand Logs",
-        "Version": "0.3.1",
-        "Authors@R": "c(\n    person(\"Hadley\", \"Wickham\", email = \"hadley@rstudio.com\",\n    role = c(\"trl\", \"cre\", \"cph\")),\n    person(\"RStudio\", role = \"cph\"),\n    person(\"Sridhar\", \"Ratnakumar\", role = \"aut\"),\n    person(\"Trent\", \"Mick\", role = \"aut\"),\n    person(\"ActiveState\", role = \"cph\", comment =\n      \"R/appdir.r, R/cache.r, R/data.r, R/log.r translated from appdirs\"),\n    person(\"Eddy\", \"Petrisor\", role = \"ctb\"),\n    person(\"Trevor\", \"Davis\", role = c(\"trl\", \"aut\")),\n    person(\"Gabor\", \"Csardi\", role = \"ctb\"),\n    person(\"Gregory\", \"Jefferis\", role = \"ctb\")\n    )",
-        "Depends": "R (>= 2.14), methods",
-        "Suggests": "testthat, roxygen2",
-        "Description": "An easy way to determine which directories on the users computer\n    you should use to save data, caches and logs. A port of Python's 'Appdirs'\n    (\\url{https://github.com/ActiveState/appdirs}) to R.",
-        "BugReports": "https://github.com/hadley/rappdirs/issues",
-        "URL": "https://github.com/hadley/rappdirs\nhttps://github.com/ActiveState/appdirs",
-        "License": "MIT + file LICENSE",
-        "Copyright": "Original python appdirs module copyright (c) 2010\nActiveState Software Inc. R port copyright Hadley Wickham,\nRStudio. See file LICENSE for details.",
-        "RoxygenNote": "5.0.1",
-        "NeedsCompilation": "yes",
-        "Packaged": "2016-03-28 19:04:15 UTC; hadley",
-        "Author": "Hadley Wickham [trl, cre, cph],\n  RStudio [cph],\n  Sridhar Ratnakumar [aut],\n  Trent Mick [aut],\n  ActiveState [cph] (R/appdir.r, R/cache.r, R/data.r, R/log.r translated\n    from appdirs),\n  Eddy Petrisor [ctb],\n  Trevor Davis [trl, aut],\n  Gabor Csardi [ctb],\n  Gregory Jefferis [ctb]",
-        "Maintainer": "Hadley Wickham <hadley@rstudio.com>",
-        "Repository": "CRAN",
-        "Date/Publication": "2016-03-28 23:10:10",
-        "Built": "R 3.6.3; x86_64-pc-linux-gnu; 2020-06-17 14:39:52 UTC; unix"
-      }
-    },
     "readr": {
       "Source": "CRAN",
-      "Repository": "https://rstudio-package.testing.ap.datim.org/prod/latest",
+      "Repository": "https://cran.rstudio.com/",
       "description": {
         "Package": "readr",
         "Title": "Read Rectangular Text Data",
@@ -2173,7 +2094,7 @@
     },
     "readxl": {
       "Source": "CRAN",
-      "Repository": "https://rstudio-package.testing.ap.datim.org/prod/latest",
+      "Repository": "https://cran.rstudio.com/",
       "description": {
         "Package": "readxl",
         "Title": "Read Excel Files",
@@ -2202,7 +2123,7 @@
     },
     "rematch": {
       "Source": "CRAN",
-      "Repository": "https://rstudio-package.testing.ap.datim.org/prod/latest",
+      "Repository": "https://cran.rstudio.com/",
       "description": {
         "Package": "rematch",
         "Title": "Match Regular Expressions with a Nicer 'API'",
@@ -2226,7 +2147,7 @@
     },
     "reshape2": {
       "Source": "CRAN",
-      "Repository": "https://rstudio-package.testing.ap.datim.org/prod/latest",
+      "Repository": "https://cran.rstudio.com/",
       "description": {
         "Package": "reshape2",
         "Title": "Flexibly Reshape Data: A Reboot of the Reshape Package",
@@ -2253,36 +2174,38 @@
     },
     "rlang": {
       "Source": "CRAN",
-      "Repository": "https://rstudio-package.testing.ap.datim.org/prod/latest",
+      "Repository": "https://cran.rstudio.com/",
       "description": {
         "Package": "rlang",
-        "Version": "0.4.9",
+        "Version": "0.4.10",
         "Title": "Functions for Base Types and Core R and 'Tidyverse' Features",
         "Description": "A toolbox for working with base types, core R features\n  like the condition system, and core 'Tidyverse' features like tidy\n  evaluation.",
-        "Authors@R": "c(\n    person(\"Lionel\", \"Henry\", ,\"lionel@rstudio.com\", c(\"aut\", \"cre\")),\n    person(\"Hadley\", \"Wickham\", ,\"hadley@rstudio.com\", \"aut\"),\n    person(\"RStudio\", role = \"cph\")\n    )",
-        "License": "GPL-3",
+        "Authors@R": "c(\n    person(\"Lionel\", \"Henry\", ,\"lionel@rstudio.com\", c(\"aut\", \"cre\")),\n    person(\"Hadley\", \"Wickham\", ,\"hadley@rstudio.com\", \"aut\"),\n    person(given = \"mikefc\",\n           email = \"mikefc@coolbutuseless.com\", \n           role = \"cph\", \n           comment = \"Hash implementation based on Mike's xxhashlite\"),\n    person(given = \"Yann\",\n           family = \"Collet\",\n           role = \"cph\", \n           comment = \"Author of the embedded xxHash library\"),\n    person(\"RStudio\", role = \"cph\")\n    )",
+        "License": "MIT + file LICENSE",
         "LazyData": "true",
         "ByteCompile": "true",
         "Biarch": "true",
         "Depends": "R (>= 3.3.0)",
-        "Suggests": "cli, covr, crayon, glue, magrittr, methods, pillar,\nrmarkdown, testthat (>= 2.3.0), vctrs (>= 0.2.3), withr",
+        "Imports": "utils",
+        "Suggests": "cli, covr, crayon, glue, magrittr, methods, pak, pillar,\nrmarkdown, testthat (>= 3.0.0), vctrs (>= 0.2.3), withr",
         "Enhances": "winch",
         "Encoding": "UTF-8",
         "RoxygenNote": "7.1.1",
         "URL": "https://rlang.r-lib.org, https://github.com/r-lib/rlang",
         "BugReports": "https://github.com/r-lib/rlang/issues",
+        "Config/testthat/edition": "3",
         "NeedsCompilation": "yes",
-        "Packaged": "2020-11-25 15:30:31 UTC; lionel",
-        "Author": "Lionel Henry [aut, cre],\n  Hadley Wickham [aut],\n  RStudio [cph]",
+        "Packaged": "2020-12-18 09:35:30 UTC; lionel",
+        "Author": "Lionel Henry [aut, cre],\n  Hadley Wickham [aut],\n  mikefc [cph] (Hash implementation based on Mike's xxhashlite),\n  Yann Collet [cph] (Author of the embedded xxHash library),\n  RStudio [cph]",
         "Maintainer": "Lionel Henry <lionel@rstudio.com>",
         "Repository": "CRAN",
-        "Date/Publication": "2020-11-26 00:20:03 UTC",
-        "Built": "R 3.6.3; x86_64-pc-linux-gnu; 2020-12-29 17:36:18 UTC; unix"
+        "Date/Publication": "2020-12-30 15:00:02 UTC",
+        "Built": "R 3.6.3; x86_64-pc-linux-gnu; 2021-01-05 08:24:27 UTC; unix"
       }
     },
     "rlist": {
       "Source": "CRAN",
-      "Repository": "https://rstudio-package.testing.ap.datim.org/prod/latest",
+      "Repository": "https://cran.rstudio.com/",
       "description": {
         "Package": "rlist",
         "Type": "Package",
@@ -2310,7 +2233,7 @@
     },
     "rmarkdown": {
       "Source": "CRAN",
-      "Repository": "https://rstudio-package.testing.ap.datim.org/prod/latest",
+      "Repository": "https://cran.rstudio.com/",
       "description": {
         "Package": "rmarkdown",
         "Type": "Package",
@@ -2339,7 +2262,7 @@
     },
     "rstudioapi": {
       "Source": "CRAN",
-      "Repository": "https://rstudio-package.testing.ap.datim.org/prod/latest",
+      "Repository": "https://cran.rstudio.com/",
       "description": {
         "Package": "rstudioapi",
         "Title": "Safely Access the RStudio API",
@@ -2364,7 +2287,7 @@
     },
     "rvest": {
       "Source": "CRAN",
-      "Repository": "https://rstudio-package.testing.ap.datim.org/prod/latest",
+      "Repository": "https://cran.rstudio.com/",
       "description": {
         "Package": "rvest",
         "Title": "Easily Harvest (Scrape) Web Pages",
@@ -2393,7 +2316,7 @@
     },
     "scales": {
       "Source": "CRAN",
-      "Repository": "https://rstudio-package.testing.ap.datim.org/prod/latest",
+      "Repository": "https://cran.rstudio.com/",
       "description": {
         "Package": "scales",
         "Title": "Scale Functions for Visualization",
@@ -2420,7 +2343,7 @@
     },
     "selectr": {
       "Source": "CRAN",
-      "Repository": "https://rstudio-package.testing.ap.datim.org/prod/latest",
+      "Repository": "https://cran.rstudio.com/",
       "description": {
         "Package": "selectr",
         "Type": "Package",
@@ -2446,7 +2369,7 @@
     },
     "shiny": {
       "Source": "CRAN",
-      "Repository": "https://rstudio-package.testing.ap.datim.org/prod/latest",
+      "Repository": "https://cran.rstudio.com/",
       "description": {
         "Package": "shiny",
         "Type": "Package",
@@ -2474,7 +2397,7 @@
     },
     "shinyWidgets": {
       "Source": "CRAN",
-      "Repository": "https://rstudio-package.testing.ap.datim.org/prod/latest",
+      "Repository": "https://cran.rstudio.com/",
       "description": {
         "Package": "shinyWidgets",
         "Title": "Custom Inputs Widgets for Shiny",
@@ -2501,7 +2424,7 @@
     },
     "shinyjs": {
       "Source": "CRAN",
-      "Repository": "https://rstudio-package.testing.ap.datim.org/prod/latest",
+      "Repository": "https://cran.rstudio.com/",
       "description": {
         "Package": "shinyjs",
         "Title": "Easily Improve the User Experience of Your Shiny Apps in Seconds",
@@ -2527,34 +2450,9 @@
         "Built": "R 3.6.3; ; 2020-09-23 11:18:28 UTC; unix"
       }
     },
-    "sodium": {
-      "Source": "CRAN",
-      "Repository": "https://rstudio-package.testing.ap.datim.org/prod/latest",
-      "description": {
-        "Package": "sodium",
-        "Type": "Package",
-        "Title": "A Modern and Easy-to-Use Crypto Library",
-        "Version": "1.1",
-        "Author": "Jeroen Ooms",
-        "Maintainer": "Jeroen Ooms <jeroen@berkeley.edu>",
-        "Description": "Bindings to 'libsodium': a modern, easy-to-use software library for\n    encryption, decryption, signatures, password hashing and more. Sodium uses\n    curve25519, a state-of-the-art Diffie-Hellman function by Daniel Bernstein,\n    which has become very popular after it was discovered that the NSA had\n    backdoored Dual EC DRBG.",
-        "License": "MIT + file LICENSE",
-        "URL": "https://github.com/jeroen/sodium#readme (devel)\nhttps://download.libsodium.org/doc/ (upstream)",
-        "BugReports": "https://github.com/jeroen/sodium/issues",
-        "SystemRequirements": "libsodium (>= 1.0.3)",
-        "VignetteBuilder": "knitr",
-        "Suggests": "knitr, rmarkdown",
-        "RoxygenNote": "6.0.1",
-        "NeedsCompilation": "yes",
-        "Packaged": "2017-03-30 18:45:44 UTC; jeroen",
-        "Repository": "CRAN",
-        "Date/Publication": "2017-03-30 21:34:36 UTC",
-        "Built": "R 3.6.3; x86_64-pc-linux-gnu; 2020-11-24 10:23:03 UTC; unix"
-      }
-    },
     "sourcetools": {
       "Source": "CRAN",
-      "Repository": "https://rstudio-package.testing.ap.datim.org/prod/latest",
+      "Repository": "https://cran.rstudio.com/",
       "description": {
         "Package": "sourcetools",
         "Type": "Package",
@@ -2579,7 +2477,7 @@
     },
     "stringi": {
       "Source": "CRAN",
-      "Repository": "https://rstudio-package.testing.ap.datim.org/prod/latest",
+      "Repository": "https://cran.rstudio.com/",
       "description": {
         "Package": "stringi",
         "Version": "1.5.3",
@@ -2607,7 +2505,7 @@
     },
     "stringr": {
       "Source": "CRAN",
-      "Repository": "https://rstudio-package.testing.ap.datim.org/prod/latest",
+      "Repository": "https://cran.rstudio.com/",
       "description": {
         "Package": "stringr",
         "Title": "Simple, Consistent Wrappers for Common String Operations",
@@ -2635,7 +2533,7 @@
     },
     "sys": {
       "Source": "CRAN",
-      "Repository": "https://rstudio-package.testing.ap.datim.org/prod/latest",
+      "Repository": "https://cran.rstudio.com/",
       "description": {
         "Package": "sys",
         "Type": "Package",
@@ -2662,7 +2560,7 @@
     },
     "systemfonts": {
       "Source": "CRAN",
-      "Repository": "https://rstudio-package.testing.ap.datim.org/prod/latest",
+      "Repository": "https://cran.rstudio.com/",
       "description": {
         "Package": "systemfonts",
         "Type": "Package",
@@ -2691,7 +2589,7 @@
     },
     "tibble": {
       "Source": "CRAN",
-      "Repository": "https://rstudio-package.testing.ap.datim.org/prod/latest",
+      "Repository": "https://cran.rstudio.com/",
       "description": {
         "Package": "tibble",
         "Title": "Simple Data Frames",
@@ -2719,7 +2617,7 @@
     },
     "tidyr": {
       "Source": "CRAN",
-      "Repository": "https://rstudio-package.testing.ap.datim.org/prod/latest",
+      "Repository": "https://cran.rstudio.com/",
       "description": {
         "Package": "tidyr",
         "Title": "Tidy Messy Data",
@@ -2749,7 +2647,7 @@
     },
     "tidyselect": {
       "Source": "CRAN",
-      "Repository": "https://rstudio-package.testing.ap.datim.org/prod/latest",
+      "Repository": "https://cran.rstudio.com/",
       "description": {
         "Package": "tidyselect",
         "Title": "Select from a Set of Strings",
@@ -2778,7 +2676,7 @@
     },
     "tidyxl": {
       "Source": "CRAN",
-      "Repository": "https://rstudio-package.testing.ap.datim.org/prod/latest",
+      "Repository": "https://cran.rstudio.com/",
       "description": {
         "Package": "tidyxl",
         "Title": "Read Untidy Excel Files",
@@ -2807,7 +2705,7 @@
     },
     "tinytex": {
       "Source": "CRAN",
-      "Repository": "https://rstudio-package.testing.ap.datim.org/prod/latest",
+      "Repository": "https://cran.rstudio.com/",
       "description": {
         "Package": "tinytex",
         "Type": "Package",
@@ -2834,7 +2732,7 @@
     },
     "utf8": {
       "Source": "CRAN",
-      "Repository": "https://rstudio-package.testing.ap.datim.org/prod/latest",
+      "Repository": "https://cran.rstudio.com/",
       "description": {
         "Package": "utf8",
         "Version": "1.1.4",
@@ -2860,7 +2758,7 @@
     },
     "uuid": {
       "Source": "CRAN",
-      "Repository": "https://rstudio-package.testing.ap.datim.org/prod/latest",
+      "Repository": "https://cran.rstudio.com/",
       "description": {
         "Package": "uuid",
         "Version": "0.1-4",
@@ -2880,7 +2778,7 @@
     },
     "vctrs": {
       "Source": "CRAN",
-      "Repository": "https://rstudio-package.testing.ap.datim.org/prod/latest",
+      "Repository": "https://cran.rstudio.com/",
       "description": {
         "Package": "vctrs",
         "Title": "Vector Helpers",
@@ -2909,7 +2807,7 @@
     },
     "viridisLite": {
       "Source": "CRAN",
-      "Repository": "https://rstudio-package.testing.ap.datim.org/prod/latest",
+      "Repository": "https://cran.rstudio.com/",
       "description": {
         "Package": "viridisLite",
         "Type": "Package",
@@ -2936,7 +2834,7 @@
     },
     "webshot": {
       "Source": "CRAN",
-      "Repository": "https://rstudio-package.testing.ap.datim.org/prod/latest",
+      "Repository": "https://cran.rstudio.com/",
       "description": {
         "Package": "webshot",
         "Title": "Take Screenshots of Web Pages",
@@ -2963,7 +2861,7 @@
     },
     "withr": {
       "Source": "CRAN",
-      "Repository": "https://rstudio-package.testing.ap.datim.org/prod/latest",
+      "Repository": "https://cran.rstudio.com/",
       "description": {
         "Package": "withr",
         "Title": "Run Code 'With' Temporarily Modified Global State",
@@ -2992,7 +2890,7 @@
     },
     "xfun": {
       "Source": "CRAN",
-      "Repository": "https://rstudio-package.testing.ap.datim.org/prod/latest",
+      "Repository": "https://cran.rstudio.com/",
       "description": {
         "Package": "xfun",
         "Type": "Package",
@@ -3020,7 +2918,7 @@
     },
     "xml2": {
       "Source": "CRAN",
-      "Repository": "https://rstudio-package.testing.ap.datim.org/prod/latest",
+      "Repository": "https://cran.rstudio.com/",
       "description": {
         "Package": "xml2",
         "Title": "Parse XML",
@@ -3049,7 +2947,7 @@
     },
     "xtable": {
       "Source": "CRAN",
-      "Repository": "https://rstudio-package.testing.ap.datim.org/prod/latest",
+      "Repository": "https://cran.rstudio.com/",
       "description": {
         "Package": "xtable",
         "Version": "1.8-4",
@@ -3074,7 +2972,7 @@
     },
     "yaml": {
       "Source": "CRAN",
-      "Repository": "https://rstudio-package.testing.ap.datim.org/prod/latest",
+      "Repository": "https://cran.rstudio.com/",
       "description": {
         "Package": "yaml",
         "Type": "Package",
@@ -3097,7 +2995,7 @@
     },
     "zip": {
       "Source": "CRAN",
-      "Repository": "https://rstudio-package.testing.ap.datim.org/prod/latest",
+      "Repository": "https://cran.rstudio.com/",
       "description": {
         "Package": "zip",
         "Title": "Cross-Platform 'zip' Compression",
@@ -3204,16 +3102,16 @@
       "checksum": "cab899c648475c3400623a52a742d5b7"
     },
     "packrat/desc/data.table": {
-      "checksum": "08812385ab3db71f3bb8d335a78f8005"
+      "checksum": "af3d62746671376e9c0c68daf2e848a9"
     },
     "packrat/desc/datapackcommons": {
       "checksum": "1661c547412e36896c4c393e73bc3d99"
     },
     "packrat/desc/datapackr": {
-      "checksum": "17cb931cb8ed0d14e457106c509d7088"
+      "checksum": "b64dca1f50d26372f3645e60557043af"
     },
     "packrat/desc/datimutils": {
-      "checksum": "a3742c8965bdd6d5cadd35699efaa3f9"
+      "checksum": "411f3cc57a23c536fa5555ac5313eeae"
     },
     "packrat/desc/datimvalidation": {
       "checksum": "cd937b630a151eeb6fe8740e0d3d8934"
@@ -3244,9 +3142,6 @@
     },
     "packrat/desc/fastmap": {
       "checksum": "4c4d23a016c608bccd29ef83550d5318"
-    },
-    "packrat/desc/filelock": {
-      "checksum": "9ac020ee6661771a27eeb6bcbc6b05bd"
     },
     "packrat/desc/flextable": {
       "checksum": "5f9c913043e0543d6921ba77495870d8"
@@ -3305,9 +3200,6 @@
     "packrat/desc/kableExtra": {
       "checksum": "844047f6555c9ad51141d68f0511fbae"
     },
-    "packrat/desc/keyring": {
-      "checksum": "d5f600589a1f65a822c42467963f8873"
-    },
     "packrat/desc/knitr": {
       "checksum": "43e3d33e9390f709e937c3d604e8f144"
     },
@@ -3342,7 +3234,7 @@
       "checksum": "91642ad7ce5de16527ae8a22a69a976c"
     },
     "packrat/desc/officer": {
-      "checksum": "8fbcdcfe941e3ffd540b3c0687438834"
+      "checksum": "415b5a6a52b5f3970b51c3849e6b64b3"
     },
     "packrat/desc/openssl": {
       "checksum": "7eef1729f90c8cefb2052e63c7927c98"
@@ -3383,9 +3275,6 @@
     "packrat/desc/R6": {
       "checksum": "8a9a6fd6ebb2448ea821be28f490223d"
     },
-    "packrat/desc/rappdirs": {
-      "checksum": "e318402c40957100d53741a04a2cee18"
-    },
     "packrat/desc/RColorBrewer": {
       "checksum": "8b4c76528322a866d0ada90893fba819"
     },
@@ -3405,7 +3294,7 @@
       "checksum": "fe522b871cb5a1bd72310848623b8e42"
     },
     "packrat/desc/rlang": {
-      "checksum": "2158477d7ee8baeea18e6b9235e8180c"
+      "checksum": "20afb81c4ccae252ce219f43d95882a1"
     },
     "packrat/desc/rlist": {
       "checksum": "0439e445355223c96f253cd386d2f03c"
@@ -3433,9 +3322,6 @@
     },
     "packrat/desc/shinyWidgets": {
       "checksum": "26a3f5ebf18b6042523bb2beda58e5d0"
-    },
-    "packrat/desc/sodium": {
-      "checksum": "d71db593891b890b6b144044713bfd0b"
     },
     "packrat/desc/sourcetools": {
       "checksum": "507765f0e40d0810774be848455a2cf6"
@@ -3504,19 +3390,19 @@
       "checksum": "c0e692997328fca72b0a258d351e8647"
     },
     "packrat/packrat.lock": {
-      "checksum": "56db5ec419cbf7ef1f9ab8da41d65f13"
+      "checksum": "967282dec9b64350686d85a82da959d7"
     },
     "pepfar.png": {
       "checksum": "cd04d9e778b00519de3e0e2afc97eb28"
     },
     "server.R": {
-      "checksum": "052060f80a8681965f677660354859b2"
+      "checksum": "ef9d5a7b534d03cb0f91a2c1b29eae0c"
     },
     "ui.R": {
       "checksum": "112ea97d13f284c982d07294b31e4cdd"
     },
     "utils.R": {
-      "checksum": "bd68881348ef0604ace65ec1f889b928"
+      "checksum": "1721b7ea4ec1eb7a46b891f780041631"
     },
     "vr_rules_annotated.csv": {
       "checksum": "09f74400369217ef095e9af343ddfbdd"
