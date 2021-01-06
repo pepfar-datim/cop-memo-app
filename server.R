@@ -187,16 +187,15 @@ shinyServer(function(input, output, session) {
           tags$hr(),
           selectInput("ou", "Operating Unit",getUserOperatingUnits(user_input$d2_session$user_orgunit)),
           tags$hr(),
-          actionButton("fetch","Get Data"),
+          actionButton("fetch","Get data"),
           tags$hr(),
-          disabled(downloadButton("downloadXLSX", "Download XLSX")),
-          tags$hr(),
-          disabled(downloadButton("downloadPDF", "Download PDF")),
-          tags$hr(),
-          disabled(downloadButton("downloadDOCX", "Download DOCX")),
+          h4("Download report:"),
+          div(style = "display: inline-block; vertical-align:top; width: 60 px; font-size:80%'",disabled(downloadButton("downloadXLSX", "XLSX"))),
+          div(style = "display: inline-block; vertical-align:top; width: 60 px;font-size:80%'",disabled(downloadButton("downloadPDF", "PDF"))),
+          div(style = "display: inline-block; vertical-align:top; width: 60 px;font-size:80%'",disabled(downloadButton("downloadDOCX", "DOCX"))),
           tags$hr(),
           actionButton("logout","Log out"),
-          width = 2
+          width = 3
         ),
         mainPanel(tabsetPanel(
           id = "main-panel",
