@@ -14,7 +14,7 @@ require(datimutils)
 
 config <- config::get()
 #Setup a persistent cache
-cache_disk <- cachem::cache_disk(rappdirs::user_cache_dir("R-memoapp-cache"))
+cache_disk <- rappdirs::user_cache_dir("R-memoapp-cache")
 
 
 if ( file.access(config$log_path,2) == 1 ) {
@@ -216,7 +216,7 @@ memo_getPrioritizationTable <- function(ou_uid="cDGPF739ZZr", d2_session, cop_ye
 
 getAgencyPartnersMechsView<-function(d2_session) {
   
-  agencies_partners_cached_file<-"agencies_partners_mechs.rds"
+  agencies_partners_cached_file<- paste0(rappdirs::user_cache_dir("R-memoapp-cache"),"/agencies_partners_mechs.rds")
   can_read_file<-file.access(agencies_partners_cached_file,mode=4) == 0
   
   if (can_read_file) {
@@ -231,7 +231,7 @@ getAgencyPartnersMechsView<-function(d2_session) {
     is_fresh <-
       lubridate::as.duration(lubridate::interval(Sys.time(), file.info(agencies_partners_cached_file)$mtime)) < lubridate::duration(max_cache_age)
     if (is_fresh) {
-      print(paste0("Using cached support file at ", agencies_partners_cached_file))
+      flog.info(paste0("Using cached support file at ", agencies_partners_cached_file))
       partners_agencies <- readRDS(agencies_partners_cached_file)
     }
   }
@@ -248,7 +248,8 @@ getAgencyPartnersMechsView<-function(d2_session) {
                                  %>% unlist() 
                                  %>%  stringr::str_trim())) %>% 
      dplyr::select(mech_code,`Partner`)
-   print(paste0("Overwriting stale mechanisms view to ", agencies_partners_cached_file))
+   flog.info(paste0("Overwriting stale mechanisms view to ", agencies_partners_cached_file))
+   if (!dir.exists(rappdirs::user_cache_dir("R-memoapp-cache"))) {dir.create(rappdirs::user_cache_dir("R-memoapp-cache"))}
    saveRDS(partners_agencies, file = agencies_partners_cached_file)
  }
 
