@@ -13,6 +13,9 @@ require(datimutils)
 
 
 config <- config::get()
+#Setup a persistent cache
+cache_disk <- cachem::cache_disk(rappdirs::user_cache_dir("R-memoapp-cache"))
+
 
 if ( file.access(config$log_path,2) == 1 ) {
   flog.appender(appender.file(config$log_path), name="cop_memo")
@@ -211,12 +214,54 @@ memo_getPrioritizationTable <- function(ou_uid="cDGPF739ZZr", d2_session, cop_ye
   
 }
 
+getAgencyPartnersMechsView<-function(d2_session) {
+  
+  agencies_partners_cached_file<-"agencies_partners_mechs.rds"
+  can_read_file<-file.access(agencies_partners_cached_file,mode=4) == 0
+  
+  if (can_read_file) {
+    
+    #Set a reasonable default here
+    if (is.null(d2_session$max_cache_age)) {
+      max_cache_age <- "1 day"
+    } else {
+      max_cache_age <- d2_session$max_cache_age
+    }
+    
+    is_fresh <-
+      lubridate::as.duration(lubridate::interval(Sys.time(), file.info(agencies_partners_cached_file)$mtime)) < lubridate::duration(max_cache_age)
+    if (is_fresh) {
+      print(paste0("Using cached support file at ", agencies_partners_cached_file))
+      partners_agencies <- readRDS(agencies_partners_cached_file)
+    }
+  }
+
+ if (!exists("partners_agencies")) {
+   partners_agencies<-glue::glue("{d2_session$base_url}api/sqlViews/IMg2pQJRHCr/data.csv") %>% 
+     httr::GET(., handle = d2_session$handle )  %>% 
+     httr::content(.,"text") %>% 
+     readr::read_csv(.) %>% 
+     dplyr::select('Funding Mechanism' = mechname,
+                   'Partner' = partnername) %>% 
+     dplyr::mutate(mech_code = ( stringr::str_split(`Funding Mechanism`,"-") 
+                                 %>% purrr::map(.,purrr::pluck(1)) 
+                                 %>% unlist() 
+                                 %>%  stringr::str_trim())) %>% 
+     dplyr::select(mech_code,`Partner`)
+   print(paste0("Overwriting stale mechanisms view to ", agencies_partners_cached_file))
+   saveRDS(partners_agencies, file = agencies_partners_cached_file)
+ }
+
+  partners_agencies
+
+}
+
 memo_getPartnersTable<-function(ou_uid="cDGPF739ZZr", d2_session, cop_year = "2020Oct") {
   
-  base_url<-d2_session$base_url
+
   
   if ( cop_year == "2020Oct") {
-    url<-glue::glue("{base_url}api/33/analytics.json?dimension=dx:pyD3q4hsocw;mpoYh9odYG5;
+    url<-glue::glue("{d2_session$base_url}api/33/analytics.json?dimension=dx:pyD3q4hsocw;mpoYh9odYG5;
 DJF6GKEa9Jw;uzrCoPjSHAM;LejpyPTzSop;yoaC47zCSML;gVjB3hNi3r6;
 o8zSyUaIPRR;TadWkOKgCYt;dIhPb5PaNak;niYlMjiztpL;egV0AFr0hcJ;fUeLws683gU;
 tYNTb7iXfB5;kCfFLyrsr63;baC8xbo39Ih;H9jkgrFTECK;FcWaUSDQyaK;dBZCfaRJHpl;
@@ -238,17 +283,7 @@ LdiiIrW3GAg&dimension=bw8KHXzxd9i:OO5qyDIwoMk;FPUgmtt8HRi;RGC9tURSc3W;cL6cHd6QJ5
   
   #Agencies/Partners view
   
-  partners_agencies<-glue::glue("{base_url}api/sqlViews/IMg2pQJRHCr/data.csv") %>% 
-    httr::GET(., handle = d2_session$handle )  %>% 
-    httr::content(.,"text") %>% 
-    readr::read_csv(.) %>% 
-    dplyr::select('Funding Mechanism' = mechname,
-                  'Partner' = partnername) %>% 
-    dplyr::mutate(mech_code = ( stringr::str_split(`Funding Mechanism`,"-") 
-                                 %>% purrr::map(.,purrr::pluck(1)) 
-                                 %>% unlist() 
-                                 %>%  stringr::str_trim())) %>% 
-    dplyr::select(mech_code,`Partner`)
+  partners_agencies<-getAgencyPartnersMechsView(d2_session)
   
   d_partners<-df %>% 
     dplyr::mutate(Value = as.numeric(Value)) %>% 

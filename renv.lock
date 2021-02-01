@@ -4,10 +4,10 @@
     "Repositories": [
       {
         "Name": "CRAN",
-        "URL": "https://ftpmirror1.infania.net/mirror/CRAN"
+        "URL": "https://cran.rstudio.com"
       },
       {
-        "Name": "PEPFAR",
+        "Name": "pepfar",
         "URL": "https://rstudio-package.ap.datim.org/prod/latest"
       }
     ]
@@ -111,13 +111,6 @@
       "Repository": "CRAN",
       "Hash": "ebaa97ac99cc2daf04e77eecc7b781d7"
     },
-    "codetools": {
-      "Package": "codetools",
-      "Version": "0.2-16",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Hash": "89cf4b8207269ccf82fbeb6473fd662b"
-    },
     "colorspace": {
       "Package": "colorspace",
       "Version": "2.0-0",
@@ -176,20 +169,24 @@
     },
     "datapackcommons": {
       "Package": "datapackcommons",
-      "Version": "0.2.0.0.0.0.1609228900",
-      "Source": "Repository",
-      "Repository": "RSPM",
-      "RemoteSha": "5a1b88e69782d61e41dfa16a988aabd648d67a35",
-      "Hash": "17e68bccb5ba0c1b53f51dd02b78240a"
+      "Version": "0.2.2",
+      "Source": "GitHub",
+      "RemoteType": "github",
+      "RemoteHost": "api.github.com",
+      "RemoteUsername": "pepfar-datim",
+      "RemoteRepo": "data-pack-commons",
+      "RemoteRef": "master",
+      "RemoteSha": "811a405f09793aa990a202085f942dd95f5e48a1",
+      "Hash": "ecdad65fa6d3b6552c143013e9b273f4"
     },
     "datapackr": {
       "Package": "datapackr",
-      "Version": "4.0.2.0.0.0.1610384887",
+      "Version": "4.1.4.0.0.0.1611934566",
       "Source": "Repository",
       "Repository": "RSPM",
       "Remotes": "jason-p-pickering/datim-validation,\npepfar-datim/data-pack-commons",
-      "RemoteSha": "0154ff997430283473735a674076f78040ec19a8",
-      "Hash": "b43459e30650ab514cdf0e0e697f08a9"
+      "RemoteSha": "9dfa6906bd04029e6ddb77535e09198b88e6672d",
+      "Hash": "61d0d7d350e75990dc0df5f2158aaaa9"
     },
     "datimutils": {
       "Package": "datimutils",
@@ -201,12 +198,15 @@
     },
     "datimvalidation": {
       "Package": "datimvalidation",
-      "Version": "1.0.112.0.0.0.1608550523",
-      "Source": "Repository",
-      "Repository": "RSPM",
-      "Remotes": "pepfar-datim/datimutils",
-      "RemoteSha": "3d4bdc8a3cd6ae4b98cdd96c9f3c7781e715f688",
-      "Hash": "c204195e4676a74968ea1b5c655c6098"
+      "Version": "1.0.112",
+      "Source": "GitHub",
+      "RemoteType": "github",
+      "RemoteHost": "api.github.com",
+      "RemoteUsername": "jason-p-pickering",
+      "RemoteRepo": "datim-validation",
+      "RemoteRef": "master",
+      "RemoteSha": "1c3f196288984c4330a998d673376623a20e1401",
+      "Hash": "f0171b6b12769178ca1a0feb456ee239"
     },
     "digest": {
       "Package": "digest",
@@ -214,14 +214,6 @@
       "Source": "Repository",
       "Repository": "CRAN",
       "Hash": "a0cbe758a531d054b537d16dff4d58a1"
-    },
-    "doMC": {
-      "Package": "doMC",
-      "Version": "1.3.7",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "OS_type": "unix",
-      "Hash": "a51780731e2ec5eee714097df69ea204"
     },
     "dplyr": {
       "Package": "dplyr",
@@ -278,13 +270,6 @@
       "Source": "Repository",
       "Repository": "CRAN",
       "Hash": "dc14081449242ef1e01ee5e43d255d33"
-    },
-    "foreach": {
-      "Package": "foreach",
-      "Version": "1.5.1",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Hash": "e32cfc0973caba11b65b1fa691b4d8c9"
     },
     "formatR": {
       "Package": "formatR",
@@ -376,13 +361,6 @@
       "Source": "Repository",
       "Repository": "CRAN",
       "Hash": "a525aba14184fec243f9eaec62fbed43"
-    },
-    "iterators": {
-      "Package": "iterators",
-      "Version": "1.0.13",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Hash": "64778782a89480e9a644f69aad9a2877"
     },
     "jsonlite": {
       "Package": "jsonlite",
@@ -582,10 +560,10 @@
     },
     "rappdirs": {
       "Package": "rappdirs",
-      "Version": "0.3.1",
+      "Version": "0.3.3",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "8c8298583adbbe76f3c2220eef71bebc"
+      "Hash": "5e3c5dc0b071b21fa128676560dbe94d"
     },
     "readr": {
       "Package": "readr",
@@ -610,10 +588,10 @@
     },
     "renv": {
       "Package": "renv",
-      "Version": "0.12.5",
+      "Version": "0.12.3",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "5c0cdb37f063c58cdab3c7e9fbb8bd2c"
+      "Hash": "b5510c50c7f31d453c385c7b460af2b9"
     },
     "reshape2": {
       "Package": "reshape2",
@@ -829,7 +807,7 @@
       "Package": "xml2",
       "Version": "1.3.2",
       "Source": "Repository",
-      "Repository": "RSPM",
+      "Repository": "CRAN",
       "Hash": "d4d71a75dd3ea9eb5fa28cc21f9585e2"
     },
     "xtable": {
