@@ -56,9 +56,15 @@ shinyServer(function(input, output, session) {
   
   observeEvent(input$login_button, {
     
+    is_authorized<-FALSE
     tryCatch(  {  datimutils::loginToDATIM(base_url = input$base_url,
                                            username = input$user_name,
-                                           password = input$password) },
+                                           password = input$password)
+      
+          #Need to check the user is a member of the PRIME Data Systems Group"
+          is_authorized<-grepl("VDEqY8YeCEk", d2_default_session$me$userGroups)
+      
+      },
                #This function throws an error if the login is not successful
                error=function(e) {
                  sendSweetAlert(
@@ -69,13 +75,21 @@ shinyServer(function(input, output, session) {
                  flog.info(paste0("User ", input$user_name, " login failed."), name = "cop_memo")
                } )
     
-     if ( exists("d2_default_session"))  {
+         if ( exists("d2_default_session") & is_authorized )  {
        
        flog.info(paste0("User ", d2_default_session$me$userCredentials$username, " logged in to ", d2_default_session$base_url), name = "cop_memo")
        user_input$authenticated<-TRUE
        user_input$baseurl<- input$base_url
        user_input$d2_session<-d2_default_session$clone()
 
+         } else {
+           sendSweetAlert(
+             session,
+             title = "Not authorized",
+             text = "This app is for specific DATIM users. Please contact DATIM support for more information.",
+             type = "error")
+           user_authenticated<-FALSE
+           rm(d2_default_session)
        }
     
   })
