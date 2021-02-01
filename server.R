@@ -61,8 +61,8 @@ shinyServer(function(input, output, session) {
                                            username = input$user_name,
                                            password = input$password)
       
-          #Need to check the user is a member of the PRIME Data Systems Group"
-          is_authorized<-grepl("VDEqY8YeCEk", d2_default_session$me$userGroups)
+          #Need to check the user is a member of the PRIME Data Systems Group, COP Memo group, or a super user
+          is_authorized<-grepl("VDEqY8YeCEk|ezh8nmc4JbX", d2_default_session$me$userGroups) | grepl("jtzbVV4ZmdP",d2_default_session$me$userCredentials$userRoles)
       
       },
                #This function throws an error if the login is not successful
@@ -75,7 +75,7 @@ shinyServer(function(input, output, session) {
                  flog.info(paste0("User ", input$user_name, " login failed."), name = "cop_memo")
                } )
     
-         if ( exists("d2_default_session") & is_authorized )  {
+       if ( exists("d2_default_session") & is_authorized )  {
        
        flog.info(paste0("User ", d2_default_session$me$userCredentials$username, " logged in to ", d2_default_session$base_url), name = "cop_memo")
        user_input$authenticated<-TRUE
