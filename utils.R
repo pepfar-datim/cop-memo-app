@@ -13,8 +13,6 @@ require(datimutils)
 
 
 config <- config::get()
-#Setup a persistent cache
-cache_disk <- rappdirs::user_cache_dir("R-memoapp-cache")
 
 
 if ( file.access(config$log_path,2) == 1 ) {
@@ -216,7 +214,7 @@ memo_getPrioritizationTable <- function(ou_uid="cDGPF739ZZr", d2_session, cop_ye
 
 getAgencyPartnersMechsView<-function(d2_session) {
   
-  agencies_partners_cached_file<- paste0(rappdirs::user_cache_dir("R-memoapp-cache"),"/agencies_partners_mechs.rds")
+  agencies_partners_cached_file<- "agencies_partners_mechs.rds"
   can_read_file<-file.access(agencies_partners_cached_file,mode=4) == 0
   
   if (can_read_file) {
@@ -249,7 +247,6 @@ getAgencyPartnersMechsView<-function(d2_session) {
                                  %>%  stringr::str_trim())) %>% 
      dplyr::select(mech_code,`Partner`)
    flog.info(paste0("Overwriting stale mechanisms view to ", agencies_partners_cached_file))
-   if (!dir.exists(rappdirs::user_cache_dir("R-memoapp-cache"))) {dir.create(rappdirs::user_cache_dir("R-memoapp-cache"))}
    saveRDS(partners_agencies, file = agencies_partners_cached_file)
  }
 
