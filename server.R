@@ -99,7 +99,6 @@ shinyServer(function(input, output, session) {
     d <- memo_data() %>% purrr::pluck("prio")
     
     if (!inherits(d, "error") & !is.null(d)) {
-      print(NROW(d))
       DT::datatable(d,options = list(pageLength = 50, 
                                      columnDefs = list(list(className = 'dt-right', 
                                                             targets = 3:dim(d)[2])))) %>% 
