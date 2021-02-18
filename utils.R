@@ -192,7 +192,8 @@ memo_getPrioritizationTable <- function(ou_uid="cDGPF739ZZr", d2_session, cop_ye
     dplyr::mutate(col_name = plyr::mapvalues(col_name,from=df_cols$shortName,to=df_cols$col_name))
   
   
-  df_totals<-df %>% 
+  df_totals<-df %>%
+    dplyr::filter(Age != 'Total') %>% 
     group_by(Indicator,col_name) %>% 
     dplyr::summarise(Value = sum(Value)) %>% 
     dplyr::mutate(Age = "Total") %>% 

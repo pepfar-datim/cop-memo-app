@@ -102,8 +102,8 @@ shinyServer(function(input, output, session) {
       print(NROW(d))
       DT::datatable(d,options = list(pageLength = 50, 
                                      columnDefs = list(list(className = 'dt-right', 
-                                                            targets = 3:8)))) %>% 
-        formatCurrency(3:8, '',digits =0)
+                                                            targets = 3:dim(d)[2])))) %>% 
+        formatCurrency(3:dim(d)[2], '',digits =0)
       
     } else
     {
