@@ -208,7 +208,9 @@ memo_getPrioritizationTable <- function(ou_uid="cDGPF739ZZr", d2_session, cop_ye
     dplyr::mutate(Indicator = factor(Indicator,levels = unique(df_rows$ind))) %>% 
     dplyr::arrange(Indicator,col_name) %>% 
     tidyr::pivot_wider(names_from = col_name ,values_from = "Value") %>% 
-    dplyr::mutate("Total *" = rowSums(.[3:8]) ) 
+    dplyr::select(-"NA") %>% 
+    mutate("Total" = rowSums(across(where(is.numeric)))) %>% 
+    dplyr::select("Indicator","Age",3:dim(.)[2])
   
 }
 

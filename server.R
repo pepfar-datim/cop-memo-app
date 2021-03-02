@@ -287,7 +287,6 @@ shinyServer(function(input, output, session) {
       header_new<-c(ou_name,ou_name,header_old[3:9])
       
       prio_table<-flextable(d$prio) %>% 
-
         merge_v(.,j="Indicator") %>% 
         delete_part(.,part = "header") %>% 
         add_header_row(.,values = header_new) %>% 
