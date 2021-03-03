@@ -25,7 +25,7 @@ shinyServer(function(input, output, session) {
         btn_labels= NA
       )
       
-      prio<-memo_getPrioritizationTable(input$ou, d2_session = user_input$d2_session)
+      prio<-memo_getPrioritizationTable(input$ou, d2_session = user_input$d2_session, cop_year= user_input$cop_year)
       partners<-memo_getPartnersTable(input$ou, d2_session = user_input$d2_session)
       shinyjs::enable("fetch")
       shinyjs::enable("downloadXLSX")
@@ -142,6 +142,11 @@ shinyServer(function(input, output, session) {
     
   } )
   
+  observeEvent(input$cop_year, {
+
+    user_input$cop_year <- input$cop_year
+    
+  })
   
   output$uiLogin <- renderUI({
     wellPanel(fluidRow(
@@ -199,6 +204,8 @@ shinyServer(function(input, output, session) {
           tagList(wiki_url),
           tags$hr(),
           selectInput("ou", "Operating Unit",getUserOperatingUnits(user_input$d2_session$user_orgunit)),
+          tags$hr(),
+          selectInput("cop_year","COP Year",c(2020,2021)),
           tags$hr(),
           actionButton("fetch","Get data"),
           tags$hr(),

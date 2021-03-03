@@ -131,26 +131,33 @@ memo_getPrioritizationTable <- function(ou_uid="cDGPF739ZZr", d2_session, cop_ye
   
   base_url<-d2_session$base_url
   
-  if (cop_year == "2020Oct") {
-    url<-glue::glue("{base_url}api/33/analytics?dimension=riR005xJPsS:IzmZerN7tDN;AHMMjoPYta6;b1X6pxMHgs6;
-                  pibJV72pMyW;ATX2xv8PsrX;CJYtvFbjeG2;p0JrTY2hLii&dimension=dx:pyD3q4hsocw;
-                  mpoYh9odYG5;DJF6GKEa9Jw;uzrCoPjSHAM;LejpyPTzSop;yoaC47zCSML;gVjB3hNi3r6;
-                  o8zSyUaIPRR;TadWkOKgCYt;dIhPb5PaNak;niYlMjiztpL;egV0AFr0hcJ;fUeLws683gU;
-                  tYNTb7iXfB5;kCfFLyrsr63;baC8xbo39Ih;H9jkgrFTECK;FcWaUSDQyaK;dBZCfaRJHpl;
-                  wpBQqYCcUvl;BnLh5JaCvH9;yse3LYDict6;Z4B96JB9FPp;EPZB5449dks;mQrwwNQ61nF;
-                  mFD2sZFAABk;rpayStjaa1a;AggcL3yaPE6;CwKwrnJIo6r;zdR0UbSXAvP;gg20xBdjq7V;
-                  jHwvOp0wwkk;luxafh3nWng;sUwQqFDiuzq;dYKVOITB5ju;RrBIFT7aQDh;egyFeGZVxGf;
-                  A4emI2AABjd;OxiC4DAZNxh;YgCYwt8Jshb;LdiiIrW3GAg&filter=ou:{ou_uid}
-                  &filter=pe:2020Oct&displayProperty=SHORTNAME&skipData=false
-                  &includeMetadataDetails=false") %>% 
-      stringr::str_replace_all( "[\r\n]" , "") %>% 
-      URLencode(.)     
-  } else
-  {
-    stop("Fiscal year not implemented yet!")
-  }
-
   
+  if (cop_year == 2020) {
+    ind_group <-"wWi08ToZ2gR"
+  } else if (cop_year == 2021) {
+    #TODO: Fix this with the real indicator group once it has been finalized
+    ind_group <-"TslxbFe3VUZ"
+  }
+  
+  inds <-
+    datimutils::getIndicatorGroups(ind_group, 
+                                   d2_session = d2_session, 
+                                   fields = "indicators[id,shortName]") %>% 
+    dplyr::rename(indicator_name = shortName) %>% 
+    dplyr::mutate(indicator_name = stringr::str_replace_all(indicator_name,"COP20 Targets ","")) %>%
+    dplyr::mutate(indicator_name = stringr::str_trim(indicator_name)) %>% 
+    tidyr::separate("indicator_name",into=c("Indicator","Numerator","Age"),sep=" ") %>% 
+    dplyr::mutate(Age = case_when(Age == "15-" ~ "<15",
+                                  Age == "15+" ~ "15+",
+                                  Age == "18-" ~"<18",
+                                  Age == "18+" ~ "18+",
+                                  TRUE ~ "Total")) %>% 
+    dplyr::mutate( Age = case_when( Indicator %in% c("CXCA_SCRN","OVC_HIVSTAT","KP_PREV","PMTCT_EID","KP_MAT","VMMC_CIRC","PrEP_NEW","PrEP_CURR","GEND_GBV")  ~ "Total",
+                                    TRUE ~ Age)) %>% 
+    dplyr::select(-Numerator)
+  
+  if (class(inds) != "data.frame") { stop("No indicator metadata  was returned from DATIM")}
+
   
   df_cols<-tibble::tribble(
     ~id,~shortName,~col_name,
@@ -159,8 +166,11 @@ memo_getPrioritizationTable <- function(ou_uid="cDGPF739ZZr", d2_session, cop_ye
     "AHMMjoPYta6","PPG Scale Up: Aggressive", "Scale-Up: Aggressive",
     "b1X6pxMHgs6","PPG Sustained","Sustained",
     "pibJV72pMyW","PPG Centrally Supported","Centrally Supported",
-    "CJYtvFbjeG2", "PPG No Prioritization","No Prioritization"
+    "CJYtvFbjeG2", "PPG No Prioritization","No Prioritization",
+    "p0JrTY2hLii","PPG Not PEPFAR Supported","Not PEPFAR Supported"
   )
+  
+
   
   df_rows<-indicatorOrder() %>% dplyr::select(ind,options)
   
@@ -170,27 +180,24 @@ memo_getPrioritizationTable <- function(ou_uid="cDGPF739ZZr", d2_session, cop_ye
     dplyr::rename("Indicator" = ind,
                   Age = options)
   
-  df <- d2_analyticsResponse(url, d2_session = d2_session) 
-  
-  if (is.null(df)) {return(NULL)}
-  
-  df %<>% 
-    dplyr::mutate(Value = as.numeric(Value)) %>% 
-    dplyr::mutate(Data = stringr::str_replace_all(Data,"COP20 Targets ","")) %>% 
-    dplyr::mutate(Data = stringr::str_trim(Data)) %>% 
-    tidyr::separate("Data",into=c("Indicator","Numerator","Age"),sep=" ") %>% 
-    dplyr::mutate(Age = case_when(Age == "15-" ~ "<15",
-                                  Age == "15+" ~ "15+",
-                                  Age == "18-" ~"<18",
-                                  Age == "18+" ~ "18+",
-                                  TRUE ~ "Total")) %>% 
-    dplyr::mutate( Age = case_when( Indicator %in% c("CXCA_SCRN","OVC_HIVSTAT","KP_PREV","PMTCT_EID","KP_MAT","VMMC_CIRC","PrEP_NEW","PrEP_CURR","GEND_GBV")  ~ "Total",
-                                    TRUE ~ Age)) %>% 
-    dplyr::select(-Numerator) %>% 
-    dplyr::rename("col_name" = `Planning Prioritization Set` ) %>% 
-    dplyr::mutate(col_name = plyr::mapvalues(col_name,from=df_cols$shortName,to=df_cols$col_name))
-  
-  
+
+   df<-datimutils::getAnalytics( "riR005xJPsS" %.d% df_cols$id,
+                            dx=inds$id,
+                            ou_f = ou_uid,
+                            pe_f = paste0(cop_year,"Oct"),
+                            d2_session = d2_session
+  ) 
+   
+   if (is.null(df)) {return(NULL)}
+   
+   df <- df %>%  
+    dplyr::inner_join(inds,by=c(`Data` = "id")) %>% 
+    dplyr::select(-Data) %>% 
+    dplyr::left_join(., ( dplyr::select(df_cols,id,col_name) ),
+                     by=c(`Planning Prioritization Set` = "id")) %>% 
+    dplyr::select(-`Planning Prioritization Set`) %>% 
+    dplyr::mutate(Value = as.numeric(Value)) 
+
   df_totals<-df %>%
     dplyr::filter(Age != 'Total') %>% 
     group_by(Indicator,col_name) %>% 
@@ -199,7 +206,7 @@ memo_getPrioritizationTable <- function(ou_uid="cDGPF739ZZr", d2_session, cop_ye
     dplyr::ungroup() %>% 
     dplyr::select(names(df))
   
-  dplyr::bind_rows(df,df_totals,df_base) %>% 
+    df_final<-dplyr::bind_rows(df,df_totals,df_base) %>% 
     dplyr::group_by(Indicator,Age,col_name) %>% 
     dplyr::summarise(Value = sum(Value)) %>% 
     dplyr::distinct() %>% 
@@ -208,7 +215,16 @@ memo_getPrioritizationTable <- function(ou_uid="cDGPF739ZZr", d2_session, cop_ye
     dplyr::mutate(Indicator = factor(Indicator,levels = unique(df_rows$ind))) %>% 
     dplyr::arrange(Indicator,col_name) %>% 
     tidyr::pivot_wider(names_from = col_name ,values_from = "Value") %>% 
-    dplyr::select(-"NA") %>% 
+    dplyr::select(-one_of("NA")) %>%  #Drop weird NA columns if these exist
+    suppressWarnings()
+    
+    #Remove NOT pepfar supported if its only zeros, otherwise, show this, since its potentially problematic
+    if (df_final %>%  dplyr::select("Not PEPFAR Supported") %>% sum(.) == 0) {
+      df_final<-df_final %>%  select(-`Not PEPFAR Supported`)
+    } 
+    
+    
+    df_final %>% 
     mutate("Total" = rowSums(across(where(is.numeric)))) %>% 
     dplyr::select("Indicator","Age",3:dim(.)[2])
   
