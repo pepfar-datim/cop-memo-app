@@ -38,7 +38,6 @@ getUserOperatingUnits<-function(uid) {
   setNames(ous$countryUID,ous$countryName)
 }
 
-
 d2_analyticsResponse <- function(url,remapCols=TRUE,d2_session) {
   d <- jsonlite::fromJSON(content(GET(url, handle = d2_session$handle), "text"))
   if ( NROW(d$rows) > 0 ) {
@@ -59,10 +58,9 @@ d2_analyticsResponse <- function(url,remapCols=TRUE,d2_session) {
     }
 }
 
-
-indicatorOrder<-function(cop_year="2020Oct") {
+indicatorOrder<-function(cop_year="2020") {
   
-  if (cop_year == "2020Oct") {
+  if (cop_year == "2020") {
     tibble::tribble(
       ~ind,~options, ~in_partner_table,
       "HTS_INDEX","<15",TRUE,
@@ -126,18 +124,21 @@ indicatorOrder<-function(cop_year="2020Oct") {
   
 }
 
+getIndicatorGroups<-function(cop_year = "2020") {
+  if (cop_year == "2020") {
+    "wWi08ToZ2gR"
+  } else if (cop_year == "2021") {
+    #TODO: Fix this once the COP21 indicator group has been finalized
+    "wWi08ToZ2gR"
 
-memo_getPrioritizationTable <- function(ou_uid="cDGPF739ZZr", d2_session, cop_year = "2020Oct") {
+  }
+}
+
+memo_getPrioritizationTable <- function(ou_uid="cDGPF739ZZr", d2_session, cop_year = "2020") {
   
   base_url<-d2_session$base_url
   
-  
-  if (cop_year == 2020) {
-    ind_group <-"wWi08ToZ2gR"
-  } else if (cop_year == 2021) {
-    #TODO: Fix this with the real indicator group once it has been finalized
-    ind_group <-"TslxbFe3VUZ"
-  }
+  ind_group<-getIndicatorGroups(cop_year)
   
   inds <-
     datimutils::getIndicatorGroups(ind_group, 
@@ -180,7 +181,6 @@ memo_getPrioritizationTable <- function(ou_uid="cDGPF739ZZr", d2_session, cop_ye
     dplyr::rename("Indicator" = ind,
                   Age = options)
   
-
    df<-datimutils::getAnalytics( "riR005xJPsS" %.d% df_cols$id,
                             dx=inds$id,
                             ou_f = ou_uid,
@@ -258,12 +258,14 @@ getAgencyPartnersMechsView<-function(d2_session) {
      httr::content(.,"text") %>% 
      readr::read_csv(.) %>% 
      dplyr::select('Funding Mechanism' = mechname,
-                   'Partner' = partnername) %>% 
+                   'Agency' = agencyname,
+                   'Partner' = partnername,
+                   mechuid) %>% 
      dplyr::mutate(mech_code = ( stringr::str_split(`Funding Mechanism`,"-") 
                                  %>% purrr::map(.,purrr::pluck(1)) 
                                  %>% unlist() 
                                  %>%  stringr::str_trim())) %>% 
-     dplyr::select(mech_code,`Partner`)
+     dplyr::select(mechuid,mech_code,`Partner`,'Agency')
    flog.info(paste0("Overwriting stale mechanisms view to ", agencies_partners_cached_file))
    saveRDS(partners_agencies, file = agencies_partners_cached_file)
  }
@@ -272,75 +274,61 @@ getAgencyPartnersMechsView<-function(d2_session) {
 
 }
 
-memo_getPartnersTable<-function(ou_uid="cDGPF739ZZr", d2_session, cop_year = "2020Oct") {
+memo_getPartnersTable<-function(ou_uid="cDGPF739ZZr", d2_session, cop_year = "2020") {
   
-
+  ind_group<-getIndicatorGroups(cop_year)
   
-  if ( cop_year == "2020Oct") {
-    url<-glue::glue("{d2_session$base_url}api/33/analytics.json?dimension=dx:pyD3q4hsocw;mpoYh9odYG5;
-DJF6GKEa9Jw;uzrCoPjSHAM;LejpyPTzSop;yoaC47zCSML;gVjB3hNi3r6;
-o8zSyUaIPRR;TadWkOKgCYt;dIhPb5PaNak;niYlMjiztpL;egV0AFr0hcJ;fUeLws683gU;
-tYNTb7iXfB5;kCfFLyrsr63;baC8xbo39Ih;H9jkgrFTECK;FcWaUSDQyaK;dBZCfaRJHpl;
-wpBQqYCcUvl;BnLh5JaCvH9;yse3LYDict6;Z4B96JB9FPp;EPZB5449dks;mQrwwNQ61nF;
-mFD2sZFAABk;rpayStjaa1a;AggcL3yaPE6;CwKwrnJIo6r;zdR0UbSXAvP;gg20xBdjq7V;jHwvOp0wwkk;
-luxafh3nWng;sUwQqFDiuzq;dYKVOITB5ju;RrBIFT7aQDh;egyFeGZVxGf;A4emI2AABjd;OxiC4DAZNxh;YgCYwt8Jshb;
-LdiiIrW3GAg&dimension=bw8KHXzxd9i:OO5qyDIwoMk;FPUgmtt8HRi;RGC9tURSc3W;cL6cHd6QJ5B;a7p2WOqhhzQ;PpCZbJvQyjL;r3bmih0XRCe;NLV6dy7BE2O
-&dimension=SH885jaRe0o&filter=ou:{ou_uid}&filter=pe:2020Oct&displayProperty=SHORTNAME&skipData=false&includeMetadataDetails=false") %>% 
-      stringr::str_replace_all( "[\r\n]" , "") %>% 
-      URLencode(.)     
-  } else {
-    stop("Fiscal year not supported yet!")
-  }
-
-  
-  df <- d2_analyticsResponse(url, d2_session = d2_session ) 
-  
-  if (is.null(df)) { return(NULL)}
-  
-  #Agencies/Partners view
-  
-  partners_agencies<-getAgencyPartnersMechsView(d2_session)
-  
-  d_partners<-df %>% 
-    dplyr::mutate(Value = as.numeric(Value)) %>% 
-    dplyr::mutate(Data = stringr::str_replace_all(Data,"COP20 Targets ","")) %>% 
-    dplyr::mutate(Data = stringr::str_trim(Data)) %>% 
-    tidyr::separate("Data",into=c("Indicator","Numerator","Age"),sep=" ") %>% 
+  inds <-
+    datimutils::getIndicatorGroups(ind_group, 
+                                   d2_session = d2_session, 
+                                   fields = "indicators[id,shortName]") %>% 
+    dplyr::rename(indicator_name = shortName) %>% 
+    dplyr::mutate(indicator_name = stringr::str_replace_all(indicator_name,"COP20 Targets ","")) %>%
+    dplyr::mutate(indicator_name = stringr::str_trim(indicator_name)) %>% 
+    tidyr::separate("indicator_name",into=c("Indicator","Numerator","Age"),sep=" ") %>% 
     dplyr::mutate(Age = case_when(Age == "15-" ~ "<15",
                                   Age == "15+" ~ "15+",
                                   Age == "18-" ~"<18",
                                   Age == "18+" ~ "18+",
                                   TRUE ~ "Total")) %>% 
-    dplyr::mutate( Age = case_when( Indicator %in% c("CXCA_SCRN","OVC_HIVSTAT","KP_PREV",
-                                                     "PMTCT_EID","KP_MAT","VMMC_CIRC","PrEP_NEW","PrEP_CURR","GEND_GBV")  ~ "Total",
+    dplyr::mutate( Age = case_when( Indicator %in% c("CXCA_SCRN","OVC_HIVSTAT","KP_PREV","PMTCT_EID","KP_MAT","VMMC_CIRC","PrEP_NEW","PrEP_CURR","GEND_GBV")  ~ "Total",
                                     TRUE ~ Age)) %>% 
-    dplyr::mutate(mech_code  =  ( stringr::str_split(df$`Funding Mechanism`,"-") 
-                                  %>% purrr::map(.,purrr::pluck(2)) 
-                                  %>% unlist() 
-                                  %>%  stringr::str_trim()) ) %>% 
-    dplyr::inner_join(partners_agencies,by='mech_code') %>% 
-    dplyr::select(`Funding Agency`,`Partner`,`Indicator`,`Age`,`Value`)
+    dplyr::select(-Numerator)
+  
+  df<-datimutils::getAnalytics( "dimension=SH885jaRe0o",
+                                dx=inds$id,
+                                ou_f = ou_uid,
+                                pe_f = paste0(cop_year,"Oct"),
+                                d2_session = d2_session
+  ) 
+  
+  if (is.null(df)) {return(NULL)}
+  
+  partners_agencies<-getAgencyPartnersMechsView(d2_session)
+  d_partners <- df   %>% 
+    dplyr::mutate(Value = as.numeric(Value)) %>% 
+    dplyr::inner_join(inds,by=c(`Data` = "id")) %>% 
+    dplyr::select(-Data) %>% 
+    dplyr::inner_join(partners_agencies,by=c(`Funding Mechanism` = "mechuid")) %>% 
+    dplyr::group_by(Indicator,Age,Agency,Partner) %>% 
+    dplyr::summarise(Value = sum(Value)) %>% 
+    dplyr::ungroup()
 
   #We need to pad for zeros
   df_rows<-indicatorOrder() %>% 
     dplyr::filter(in_partner_table) %>% 
     dplyr::select(ind,options)
   
-  d_base<-tidyr::crossing(df_rows,dplyr::distinct(unique(d_partners[,1:2]))) %>% 
+  d_base<-tidyr::crossing(df_rows,dplyr::distinct(unique(d_partners[,c("Partner","Agency")]))) %>% 
     dplyr::mutate(Value = 0) %>% 
     dplyr::rename("Indicator" = ind,
                   Age = options)
   
   d_totals<-dplyr::bind_rows(d_base,d_partners) %>% 
-    dplyr::group_by(`Funding Agency`,`Indicator`,`Age`) %>% 
+    dplyr::group_by(`Agency`,`Indicator`,`Age`) %>% 
     dplyr::summarise(`Value` = sum(`Value`)) %>% 
     dplyr::ungroup() %>% 
     dplyr::mutate(`Partner` = '')
-  
-  d_partners <- d_partners %>% 
-    dplyr::group_by(`Funding Agency`,`Partner`,`Indicator`,`Age`) %>% 
-    dplyr::summarise(`Value` = sum(`Value`)) %>% 
-    dplyr::ungroup()
   
   d_indicators<- indicatorOrder() %>% 
     dplyr::filter(in_partner_table) %>%
@@ -352,13 +340,14 @@ LdiiIrW3GAg&dimension=bw8KHXzxd9i:OO5qyDIwoMk;FPUgmtt8HRi;RGC9tURSc3W;cL6cHd6QJ5
     dplyr::mutate(indicator_name = paste(`Indicator`, `Age`)) %>% 
     dplyr::mutate(indicator_name = factor(indicator_name,levels=unique(d_indicators$indicator_name))) %>% 
     dplyr::mutate(`Label` = indicator_name) %>% 
+    dplyr::rename(`Funding Agency` = `Agency`) %>% 
   dplyr::arrange(`Funding Agency`,`Partner`,indicator_name) %>% 
     dplyr::select(`Funding Agency`,`Partner`,`Label`,`Value`) %>% 
     tidyr::pivot_wider(names_from = `Label`, values_from = `Value`, values_fill = 0) 
   
 }
  
- getOrgtunitNamefromUID<-function(uid, d2_session) {
+getOrgtunitNamefromUID<-function(uid, d2_session) {
     
     glue(d2_session$base_url,"api/organisationUnits/{uid}?fields=name") %>% 
       httr::GET(., handle = d2_session$handle) %>% 

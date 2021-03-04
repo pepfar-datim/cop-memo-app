@@ -179,7 +179,7 @@
     },
     "XML": {
       "Source": "CRAN",
-      "Repository":"http://www.omegahat.net/RSXML" ,
+      "Repository": "http://www.omegahat.net/RSXML",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -287,36 +287,6 @@
         "Repository": "CRAN",
         "Date/Publication": "2015-07-28 08:03:37",
         "Built": "R 3.6.0; x86_64-pc-linux-gnu; 2019-02-15 11:28:39 UTC; unix"
-      }
-    },
-    "cachem": {
-      "Source": "CRAN",
-      "Repository": "https://cran.rstudio.com",
-      "GithubRepo": null,
-      "GithubUsername": null,
-      "GithubRef": null,
-      "GithubSha1": null,
-      "description": {
-        "Package": "cachem",
-        "Version": "1.0.1",
-        "Title": "Cache R Objects with Automatic Pruning",
-        "Description": "Key-value stores with automatic pruning. Caches can limit\n    either their total size or the age of the oldest object (or both),\n    automatically pruning objects to maintain the constraints.",
-        "Authors@R": "c(\n    person(\"Winston\", \"Chang\", , \"winston@rstudio.com\", c(\"aut\", \"cre\")),\n    person(family = \"RStudio\", role = c(\"cph\", \"fnd\")))",
-        "License": "MIT + file LICENSE",
-        "Encoding": "UTF-8",
-        "LazyData": "true",
-        "ByteCompile": "true",
-        "URL": "https://cachem.r-lib.org/, https://github.com/r-lib/cachem",
-        "Imports": "rlang, fastmap",
-        "Suggests": "testthat",
-        "RoxygenNote": "7.1.1",
-        "NeedsCompilation": "yes",
-        "Packaged": "2021-01-19 15:09:27 UTC; winston",
-        "Author": "Winston Chang [aut, cre],\n  RStudio [cph, fnd]",
-        "Maintainer": "Winston Chang <winston@rstudio.com>",
-        "Repository": "CRAN",
-        "Date/Publication": "2021-01-21 17:20:17 UTC",
-        "Built": "R 3.6.3; x86_64-pc-linux-gnu; 2021-02-01 09:01:31 UTC; unix"
       }
     },
     "callr": {
@@ -698,17 +668,16 @@
       }
     },
     "datapackcommons": {
-      "Source": "github",
-      "Repository": null,
-      "GithubRepo": "data-pack-commons",
-      "GithubUsername": "pepfar-datim",
-      "GithubRef": "master",
-      "GithubSha1": "811a405f09793aa990a202085f942dd95f5e48a1",
+      "Source": "pepfar",
+      "Repository": "https://rstudio-package.ap.datim.org/prod/__linux__/bionic/latest",
+      "GithubRepo": null,
+      "GithubUsername": null,
+      "GithubRef": null,
+      "GithubSha1": null,
       "description": {
         "Package": "datapackcommons",
         "Type": "Package",
         "Title": "Common Utilities for with with the PEPFAR DataPack",
-        "Version": "0.2.2",
         "Author": "Who wrote it",
         "Maintainer": "The package maintainer <yourself@somewhere.net>",
         "Description": "More about what it does (maybe more than one line)\n    Use four spaces when indenting paragraphs within the Description.",
@@ -716,22 +685,17 @@
         "Encoding": "UTF-8",
         "LazyData": "true",
         "URL": "https://github.com/pepfar-datim/data-pack-commons",
-        "Imports": "assertthat,\ndatimvalidation,\ndplyr,\nglue,\nhttr,\njsonlite,\nlubridate,\nmagrittr,\nplyr,\npurrr,\nreadr,\nrlist,\nstringr,\ntibble,\ntidyr",
-        "Suggests": "doMC,\nhttptest,\ntestthat",
+        "Imports": "assertthat, datimvalidation, dplyr, glue, httr, jsonlite,\nlubridate, magrittr, plyr, purrr, readr, rlist, stringr,\ntibble, tidyr",
+        "Suggests": "doMC, httptest, testthat",
         "RoxygenNote": "7.1.1",
         "Depends": "R (>= 2.10)",
-        "Built": "R 3.6.3; ; 2021-01-29 07:23:51 UTC; unix",
-        "RemoteType": "github",
-        "RemoteHost": "api.github.com",
-        "RemoteUsername": "pepfar-datim",
-        "RemoteRepo": "data-pack-commons",
-        "RemoteRef": "master",
-        "RemoteSha": "811a405f09793aa990a202085f942dd95f5e48a1",
-        "GithubHost": "api.github.com",
-        "GithubRepo": "data-pack-commons",
-        "GithubUsername": "pepfar-datim",
-        "GithubRef": "master",
-        "GithubSHA1": "811a405f09793aa990a202085f942dd95f5e48a1"
+        "Repository": "RSPM",
+        "RemoteSha": "ff8b57047f28e52a0ea1dcb733382d9822ca55bc",
+        "Version": "0.2.2.0.0.0.1612206672",
+        "Date": "2021-02-01",
+        "NeedsCompilation": "no",
+        "Packaged": "2021-02-01 19:12:31 UTC; root",
+        "Built": "R 3.6.3; ; 2021-02-03 14:19:42 UTC; unix"
       }
     },
     "datapackr": {
@@ -758,14 +722,14 @@
         "LazyData": "true",
         "RoxygenNote": "7.1.1",
         "Repository": "RSPM",
-        "RemoteSha": "9dfa6906bd04029e6ddb77535e09198b88e6672d",
-        "Version": "4.1.4.0.0.0.1611934566",
-        "Date": "2021-1-29",
+        "RemoteSha": "fa5085a069bb55cb201ee9e900fa0ab3b8553cd1",
+        "Version": "4.2.4.0.0.0.1614800630",
+        "Date": "2021-3-01",
         "NeedsCompilation": "no",
-        "Packaged": "2021-01-29 15:39:40 UTC; root",
+        "Packaged": "2021-03-03 19:45:57 UTC; root",
         "Author": "Scott Jackson [aut, cre],\n  Jason Pickering [aut, rev],\n  Sam Garman [aut],\n  William Shiflett [ctb],\n  Chris Nemarich [ctb],\n  Christian Domaas [ctb],\n  Max Chandler [ctb]",
         "Maintainer": "Scott Jackson <sjackson@baosystems.com>",
-        "Built": "R 3.6.3; ; 2021-02-01 09:20:10 UTC; unix"
+        "Built": "R 3.6.3; ; 2021-03-04 12:01:35 UTC; unix"
       }
     },
     "datimutils": {
@@ -3522,13 +3486,13 @@
   },
   "files": {
     ".RData": {
-      "checksum": "fc26ddd40cee572322afdd95732585c3"
+      "checksum": "ff4b783222902a26e8f349da490f306d"
     },
     ".Rprofile": {
       "checksum": "57f9047cb06fdbef821b61f49e21406e"
     },
     "agencies_partners_mechs.rds": {
-      "checksum": "384e81f22e9ad27fa68b4ff674c00c7d"
+      "checksum": "4bc7b1d6356caadb1fb5fef7cc948f41"
     },
     "approval_memo_template_flextable.Rmd": {
       "checksum": "5fd56df780be043a8302d4436316c863"
@@ -3572,9 +3536,6 @@
     "packrat/desc/BH": {
       "checksum": "a6bb4b93baded25a1a8fbef5f75c1386"
     },
-    "packrat/desc/cachem": {
-      "checksum": "8dcb9d0d612a93475dc587f5a8edec8c"
-    },
     "packrat/desc/callr": {
       "checksum": "549e5b683d00bbe211c7451417963833"
     },
@@ -3612,10 +3573,10 @@
       "checksum": "af3d62746671376e9c0c68daf2e848a9"
     },
     "packrat/desc/datapackcommons": {
-      "checksum": "0742ad19eb4044cfaadbd440627b425c"
+      "checksum": "6d7d84b5128e67c16da8fa233c399004"
     },
     "packrat/desc/datapackr": {
-      "checksum": "758e33afba52f6ba5418b91975781564"
+      "checksum": "93a5881e8ed0e91da38114514df2a5ab"
     },
     "packrat/desc/datimutils": {
       "checksum": "17e2790b2f52ba81b7c5d76a6b6ddb39"
@@ -3900,19 +3861,19 @@
       "checksum": "c0e692997328fca72b0a258d351e8647"
     },
     "packrat/packrat.lock": {
-      "checksum": "2d6236a1258f8c792ca3ce3abc0e80c2"
+      "checksum": "f6a311b1f84e27b17b0508b486ad468d"
     },
     "pepfar.png": {
       "checksum": "cd04d9e778b00519de3e0e2afc97eb28"
     },
     "server.R": {
-      "checksum": "30449db23558fa6c110db322605c4e16"
+      "checksum": "db5ea7b7c0600b79b056ff86a8988550"
     },
     "ui.R": {
       "checksum": "112ea97d13f284c982d07294b31e4cdd"
     },
     "utils.R": {
-      "checksum": "bece9f71b2e81ec11da1972eff65b459"
+      "checksum": "93be51d8ebc1431cb15738ab5f1d6b36"
     },
     "vr_rules_annotated.csv": {
       "checksum": "09f74400369217ef095e9af343ddfbdd"
