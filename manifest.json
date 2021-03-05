@@ -179,7 +179,7 @@
     },
     "XML": {
       "Source": "CRAN",
-      "Repository": "http://www.omegahat.net/RSXML",
+      "Repository": null,
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -287,37 +287,6 @@
         "Repository": "CRAN",
         "Date/Publication": "2015-07-28 08:03:37",
         "Built": "R 3.6.0; x86_64-pc-linux-gnu; 2019-02-15 11:28:39 UTC; unix"
-      }
-    },
-    "callr": {
-      "Source": "CRAN",
-      "Repository": "https://cran.rstudio.com",
-      "GithubRepo": null,
-      "GithubUsername": null,
-      "GithubRef": null,
-      "GithubSha1": null,
-      "description": {
-        "Package": "callr",
-        "Title": "Call R from R",
-        "Version": "3.5.1",
-        "Authors@R": "c(\n    person(\"Gábor\", \"Csárdi\", role = c(\"aut\", \"cre\", \"cph\"),\n           email = \"csardi.gabor@gmail.com\",\n\t   comment = c(ORCID = \"0000-0001-7098-9676\")),\n    person(\"Winston\", \"Chang\", role = \"aut\"),\n    person(\"RStudio\", role = c(\"cph\", \"fnd\")),\n    person(\"Mango Solutions\", role  = c(\"cph\", \"fnd\")))",
-        "Description": "It is sometimes useful to perform a computation in a\n    separate R process, without affecting the current R process at all.\n    This packages does exactly that.",
-        "License": "MIT + file LICENSE",
-        "LazyData": "true",
-        "URL": "https://github.com/r-lib/callr#readme",
-        "BugReports": "https://github.com/r-lib/callr/issues",
-        "RoxygenNote": "7.1.1.9000",
-        "Imports": "processx (>= 3.4.4), R6, utils",
-        "Suggests": "cli, covr, crayon, fansi, pingr, ps, rprojroot, spelling,\ntestthat, tibble, withr (>= 2.3.0)",
-        "Encoding": "UTF-8",
-        "Language": "en-US",
-        "NeedsCompilation": "no",
-        "Packaged": "2020-10-13 12:15:24 UTC; gaborcsardi",
-        "Author": "Gábor Csárdi [aut, cre, cph] (<https://orcid.org/0000-0001-7098-9676>),\n  Winston Chang [aut],\n  RStudio [cph, fnd],\n  Mango Solutions [cph, fnd]",
-        "Maintainer": "Gábor Csárdi <csardi.gabor@gmail.com>",
-        "Repository": "CRAN",
-        "Date/Publication": "2020-10-13 13:10:02 UTC",
-        "Built": "R 3.6.3; ; 2020-10-14 09:24:24 UTC; unix"
       }
     },
     "cellranger": {
@@ -1081,94 +1050,6 @@
         "Built": "R 3.6.3; ; 2020-12-29 17:39:06 UTC; unix"
       }
     },
-    "formatR": {
-      "Source": "CRAN",
-      "Repository": "https://cran.rstudio.com",
-      "GithubRepo": null,
-      "GithubUsername": null,
-      "GithubRef": null,
-      "GithubSha1": null,
-      "description": {
-        "Package": "formatR",
-        "Type": "Package",
-        "Title": "Format R Code Automatically",
-        "Version": "1.7",
-        "Authors@R": "c(\n    person(\"Yihui\", \"Xie\", role = c(\"aut\", \"cre\"), email = \"xie@yihui.name\", comment = c(ORCID = \"0000-0003-0645-5666\")),\n    person(\"Eugene\", \"Ha\", role = \"ctb\"),\n    person(\"Kohske\", \"Takahashi\", role = \"ctb\"),\n    person(\"Ed\", \"Lee\", role = \"ctb\")\n    )",
-        "Description": "Provides a function tidy_source() to format R source code. Spaces\n    and indent will be added to the code automatically, and comments will be\n    preserved under certain conditions, so that R code will be more\n    human-readable and tidy. There is also a Shiny app as a user interface in\n    this package (see tidy_app()).",
-        "Depends": "R (>= 3.0.2)",
-        "Suggests": "codetools, shiny, testit, rmarkdown, knitr",
-        "License": "GPL",
-        "URL": "https://github.com/yihui/formatR",
-        "BugReports": "https://github.com/yihui/formatR/issues",
-        "VignetteBuilder": "knitr",
-        "RoxygenNote": "6.1.1",
-        "Encoding": "UTF-8",
-        "NeedsCompilation": "no",
-        "Packaged": "2019-06-11 19:35:45 UTC; yihui",
-        "Author": "Yihui Xie [aut, cre] (<https://orcid.org/0000-0003-0645-5666>),\n  Eugene Ha [ctb],\n  Kohske Takahashi [ctb],\n  Ed Lee [ctb]",
-        "Maintainer": "Yihui Xie <xie@yihui.name>",
-        "Repository": "CRAN",
-        "Date/Publication": "2019-06-11 20:00:03 UTC",
-        "Built": "R 3.6.0; ; 2019-07-19 13:11:59 UTC; unix"
-      }
-    },
-    "futile.logger": {
-      "Source": "CRAN",
-      "Repository": "https://cran.rstudio.com",
-      "GithubRepo": null,
-      "GithubUsername": null,
-      "GithubRef": null,
-      "GithubSha1": null,
-      "description": {
-        "Package": "futile.logger",
-        "Type": "Package",
-        "Title": "A Logging Utility for R",
-        "Version": "1.4.3",
-        "Date": "2016-07-10",
-        "Author": "Brian Lee Yung Rowe",
-        "Maintainer": "Brian Lee Yung Rowe <r@zatonovo.com>",
-        "Depends": "R (>= 3.0.0)",
-        "Imports": "utils, lambda.r (>= 1.1.0), futile.options",
-        "Suggests": "testthat, jsonlite",
-        "Description": "Provides a simple yet powerful logging utility. Based loosely on\n    log4j, futile.logger takes advantage of R idioms to make logging a\n    convenient and easy to use replacement for cat and print statements.",
-        "License": "LGPL-3",
-        "LazyLoad": "yes",
-        "NeedsCompilation": "no",
-        "ByteCompile": "yes",
-        "Collate": "'options.R' 'appender.R' 'constants.R' 'layout.R' 'logger.R'\n'scat.R' 'futile.logger-package.R'",
-        "RoxygenNote": "5.0.1",
-        "Packaged": "2016-07-10 13:44:30 UTC; brian",
-        "Repository": "CRAN",
-        "Date/Publication": "2016-07-10 16:57:47",
-        "Built": "R 3.6.3; ; 2020-09-30 14:16:46 UTC; unix"
-      }
-    },
-    "futile.options": {
-      "Source": "CRAN",
-      "Repository": "https://cran.rstudio.com",
-      "GithubRepo": null,
-      "GithubUsername": null,
-      "GithubRef": null,
-      "GithubSha1": null,
-      "description": {
-        "Package": "futile.options",
-        "Type": "Package",
-        "Title": "Futile Options Management",
-        "Version": "1.0.1",
-        "Date": "2018-04-20",
-        "Author": "Brian Lee Yung Rowe",
-        "Maintainer": "Brian Lee Yung Rowe <r@zatonovo.com>",
-        "Depends": "R (>= 2.8.0)",
-        "Description": "A scoped options management framework. Used in other packages.",
-        "License": "LGPL-3",
-        "LazyLoad": "yes",
-        "NeedsCompilation": "no",
-        "Packaged": "2018-04-20 16:08:58 UTC; brian",
-        "Repository": "CRAN",
-        "Date/Publication": "2018-04-20 22:04:12 UTC",
-        "Built": "R 3.6.0; ; 2019-04-07 04:45:35 UTC; unix"
-      }
-    },
     "gdtools": {
       "Source": "CRAN",
       "Repository": "https://cran.rstudio.com",
@@ -1515,39 +1396,6 @@
         "Built": "R 3.6.3; x86_64-pc-linux-gnu; 2020-12-29 17:35:11 UTC; unix"
       }
     },
-    "kableExtra": {
-      "Source": "CRAN",
-      "Repository": "https://cran.rstudio.com",
-      "GithubRepo": null,
-      "GithubUsername": null,
-      "GithubRef": null,
-      "GithubSha1": null,
-      "description": {
-        "Package": "kableExtra",
-        "Type": "Package",
-        "Title": "Construct Complex Table with 'kable' and Pipe Syntax",
-        "Version": "1.3.1",
-        "Authors@R": "c(\n    person('Hao', 'Zhu', email = 'haozhu233@gmail.com', role = c('aut', 'cre'),\n    comment = c(ORCID = '0000-0002-3386-6076')),\n    person('Thomas', 'Travison', role = 'ctb'),\n    person('Timothy', 'Tsai', role = 'ctb'),\n    person('Will', 'Beasley', email = 'wibeasley@hotmail.com', role = 'ctb'),\n    person('Yihui', 'Xie', email = 'xie@yihui.name', role = 'ctb'),\n    person('GuangChuang', 'Yu', email = 'guangchuangyu@gmail.com', role = 'ctb'),\n    person('Stéphane', 'Laurent', role = 'ctb'),\n    person('Rob', 'Shepherd', role = 'ctb'),\n    person('Yoni', 'Sidi', role = 'ctb'), \n    person('Brian', 'Salzer', role = 'ctb'),\n    person('George', 'Gui', role = 'ctb'),\n    person('Yeliang', 'Fan', role = 'ctb'),\n    person('Duncan', 'Murdoch', role = 'ctb'),\n    person('Bill', 'Evans',  role = 'ctb')\n    )",
-        "Description": "Build complex HTML or 'LaTeX' tables using 'kable()' from 'knitr' \n    and the piping syntax from 'magrittr'. Function 'kable()' is a light weight \n    table generator coming from 'knitr'. This package simplifies the way to \n    manipulate the HTML or 'LaTeX' codes generated by 'kable()' and allows \n    users to construct complex tables and customize styles using a readable \n    syntax. ",
-        "License": "MIT + file LICENSE",
-        "LazyData": "TRUE",
-        "URL": "http://haozhu233.github.io/kableExtra/,\nhttps://github.com/haozhu233/kableExtra",
-        "BugReports": "https://github.com/haozhu233/kableExtra/issues",
-        "Depends": "R (>= 3.1.0)",
-        "Imports": "knitr (>= 1.16), magrittr, stringr (>= 1.0), xml2 (>= 1.1.1),\nrvest, rmarkdown (>= 1.6.0), scales, viridisLite, stats,\ngrDevices, htmltools, rstudioapi, glue, tools, webshot, digest,\ngraphics",
-        "Suggests": "testthat, magick, formattable, sparkline",
-        "VignetteBuilder": "knitr",
-        "Encoding": "UTF-8",
-        "RoxygenNote": "7.1.1",
-        "NeedsCompilation": "no",
-        "Packaged": "2020-10-22 16:20:01 UTC; haozhu",
-        "Author": "Hao Zhu [aut, cre] (<https://orcid.org/0000-0002-3386-6076>),\n  Thomas Travison [ctb],\n  Timothy Tsai [ctb],\n  Will Beasley [ctb],\n  Yihui Xie [ctb],\n  GuangChuang Yu [ctb],\n  Stéphane Laurent [ctb],\n  Rob Shepherd [ctb],\n  Yoni Sidi [ctb],\n  Brian Salzer [ctb],\n  George Gui [ctb],\n  Yeliang Fan [ctb],\n  Duncan Murdoch [ctb],\n  Bill Evans [ctb]",
-        "Maintainer": "Hao Zhu <haozhu233@gmail.com>",
-        "Repository": "CRAN",
-        "Date/Publication": "2020-10-22 21:20:09 UTC",
-        "Built": "R 3.6.3; ; 2020-11-24 10:07:26 UTC; unix"
-      }
-    },
     "keyring": {
       "Source": "CRAN",
       "Repository": "https://cran.rstudio.com",
@@ -1638,34 +1486,6 @@
         "Repository": "CRAN",
         "Date/Publication": "2020-10-20 07:00:09 UTC",
         "Built": "R 3.6.3; ; 2020-11-24 10:01:28 UTC; unix"
-      }
-    },
-    "lambda.r": {
-      "Source": "CRAN",
-      "Repository": "https://cran.rstudio.com",
-      "GithubRepo": null,
-      "GithubUsername": null,
-      "GithubRef": null,
-      "GithubSha1": null,
-      "description": {
-        "Package": "lambda.r",
-        "Type": "Package",
-        "Title": "Modeling Data with Functional Programming",
-        "Version": "1.2.4",
-        "Date": "2019-09-15",
-        "Depends": "R (>= 3.0.0)",
-        "Imports": "formatR",
-        "Suggests": "testit",
-        "Author": "Brian Lee Yung Rowe",
-        "Maintainer": "Brian Lee Yung Rowe <r@zatonovo.com>",
-        "Description": "A language extension to efficiently write functional programs in R. Syntax extensions include multi-part function definitions, pattern matching, guard statements, built-in (optional) type safety.",
-        "License": "LGPL-3",
-        "LazyLoad": "yes",
-        "NeedsCompilation": "no",
-        "Packaged": "2019-09-15 08:08:15 UTC; brian",
-        "Repository": "CRAN",
-        "Date/Publication": "2019-09-18 14:30:02 UTC",
-        "Built": "R 3.6.1; ; 2019-10-08 13:04:34 UTC; unix"
       }
     },
     "later": {
@@ -2016,6 +1836,36 @@
         "Built": "R 3.6.3; x86_64-pc-linux-gnu; 2020-11-24 10:01:33 UTC; unix"
       }
     },
+    "pacman": {
+      "Source": "CRAN",
+      "Repository": "https://cran.rstudio.com",
+      "GithubRepo": null,
+      "GithubUsername": null,
+      "GithubRef": null,
+      "GithubSha1": null,
+      "description": {
+        "Package": "pacman",
+        "Type": "Package",
+        "Title": "Package Management Tool",
+        "Version": "0.5.1",
+        "Authors@R": "c(person(\"Tyler\", \"Rinker\", role = c(\"aut\", \"cre\", \"ctb\"),\n        email = \"tyler.rinker@gmail.com\"), person(\"Dason\",\n        \"Kurkiewicz\", role = c(\"aut\", \"ctb\"), email =\n        \"dasonk@gmail.com\"), person(\"Keith\", \"Hughitt\", role =\n        c(\"ctb\")), person(\"Albert\", \"Wang\", role = c(\"ctb\")),\n        person(\"Garrick\", \"Aden-Buie\", role = c(\"ctb\")),\n        person(\"Albert\", \"Wang\", role = c(\"ctb\")),\n        person(\"Lukas\", \"Burk\", role = c(\"ctb\")))",
+        "Depends": "R (>= 3.5.0)",
+        "Imports": "remotes, methods, stats, utils",
+        "Suggests": "BiocManager, knitr, lattice, testthat (>= 0.9.0), XML",
+        "BugReports": "https://github.com/trinker/pacman/issues?state=open",
+        "Description": "Tools to more conveniently perform tasks associated with\n        add-on packages. pacman conveniently wraps library and package\n        related functions and names them in an intuitive and consistent\n        fashion.  It seeks to combine functionality from lower level\n        functions which can speed up workflow.",
+        "License": "GPL-2",
+        "URL": "https://github.com/trinker/pacman",
+        "RoxygenNote": "6.1.1",
+        "NeedsCompilation": "no",
+        "Packaged": "2019-03-11 01:37:03 UTC; trinker",
+        "Author": "Tyler Rinker [aut, cre, ctb],\n  Dason Kurkiewicz [aut, ctb],\n  Keith Hughitt [ctb],\n  Albert Wang [ctb],\n  Garrick Aden-Buie [ctb],\n  Albert Wang [ctb],\n  Lukas Burk [ctb]",
+        "Maintainer": "Tyler Rinker <tyler.rinker@gmail.com>",
+        "Repository": "CRAN",
+        "Date/Publication": "2019-03-11 11:50:07 UTC",
+        "Built": "R 3.6.1; ; 2019-08-05 06:46:46 UTC; unix"
+      }
+    },
     "pillar": {
       "Source": "CRAN",
       "Repository": "https://cran.rstudio.com",
@@ -2167,36 +2017,6 @@
         "Built": "R 3.6.2; ; 2020-01-30 10:48:42 UTC; unix"
       }
     },
-    "processx": {
-      "Source": "CRAN",
-      "Repository": "https://cran.rstudio.com",
-      "GithubRepo": null,
-      "GithubUsername": null,
-      "GithubRef": null,
-      "GithubSha1": null,
-      "description": {
-        "Package": "processx",
-        "Title": "Execute and Control System Processes",
-        "Version": "3.4.5",
-        "Authors@R": "c(\n    person(\"Gábor\", \"Csárdi\", role = c(\"aut\", \"cre\", \"cph\"),\n           email = \"csardi.gabor@gmail.com\",\n\t   comment = c(ORCID = \"0000-0001-7098-9676\")),\n    person(\"Winston\", \"Chang\", role = \"aut\"),\n    person(\"RStudio\", role = c(\"cph\", \"fnd\")),\n    person(\"Mango Solutions\", role  = c(\"cph\", \"fnd\")))",
-        "Description": "Tools to run system processes in the background.\n    It can check if a background process is running; wait on a background\n    process to finish; get the exit status of finished processes; kill\n    background processes. It can read the standard output and error of\n    the processes, using non-blocking connections. 'processx' can poll\n    a process for standard output or error, with a timeout. It can also\n    poll several processes at once.",
-        "License": "MIT + file LICENSE",
-        "LazyData": "true",
-        "URL": "https://processx.r-lib.org,\nhttps://github.com/r-lib/processx#readme",
-        "BugReports": "https://github.com/r-lib/processx/issues",
-        "RoxygenNote": "7.1.1",
-        "Imports": "ps (>= 1.2.0), R6, utils",
-        "Suggests": "callr (>= 3.2.0), codetools, covr, crayon, curl, debugme,\nparallel, testthat, withr",
-        "Encoding": "UTF-8",
-        "NeedsCompilation": "yes",
-        "Packaged": "2020-11-30 11:08:13 UTC; gaborcsardi",
-        "Author": "Gábor Csárdi [aut, cre, cph] (<https://orcid.org/0000-0001-7098-9676>),\n  Winston Chang [aut],\n  RStudio [cph, fnd],\n  Mango Solutions [cph, fnd]",
-        "Maintainer": "Gábor Csárdi <csardi.gabor@gmail.com>",
-        "Repository": "CRAN",
-        "Date/Publication": "2020-11-30 11:40:02 UTC",
-        "Built": "R 3.6.3; x86_64-pc-linux-gnu; 2020-12-29 17:37:21 UTC; unix"
-      }
-    },
     "progress": {
       "Source": "CRAN",
       "Repository": "https://cran.rstudio.com",
@@ -2257,37 +2077,6 @@
         "Repository": "CRAN",
         "Date/Publication": "2020-06-09 21:50:02 UTC",
         "Built": "R 3.6.3; x86_64-pc-linux-gnu; 2020-08-12 13:03:19 UTC; unix"
-      }
-    },
-    "ps": {
-      "Source": "CRAN",
-      "Repository": "https://cran.rstudio.com",
-      "GithubRepo": null,
-      "GithubUsername": null,
-      "GithubRef": null,
-      "GithubSha1": null,
-      "description": {
-        "Package": "ps",
-        "Version": "1.5.0",
-        "Title": "List, Query, Manipulate System Processes",
-        "Description": "List, query and manipulate all system processes, on 'Windows',\n    'Linux' and 'macOS'.",
-        "Authors@R": "c(\n    person(\"Jay\", \"Loden\", role = \"aut\"),\n    person(\"Dave\", \"Daeschler\", role = \"aut\"),\n    person(\"Giampaolo\", \"Rodola'\", role = \"aut\"),\n    person(\"Gábor\", \"Csárdi\", , \"csardi.gabor@gmail.com\", c(\"aut\", \"cre\")),\n    person(\"RStudio\", role = \"cph\"))",
-        "License": "MIT + file LICENSE",
-        "URL": "https://github.com/r-lib/ps#readme",
-        "BugReports": "https://github.com/r-lib/ps/issues",
-        "Encoding": "UTF-8",
-        "Depends": "R (>= 3.1)",
-        "Imports": "utils",
-        "Suggests": "callr, covr, curl, pingr, processx (>= 3.1.0), R6, rlang,\ntestthat, tibble",
-        "RoxygenNote": "7.1.1",
-        "Biarch": "true",
-        "NeedsCompilation": "yes",
-        "Packaged": "2020-12-05 10:22:34 UTC; gaborcsardi",
-        "Author": "Jay Loden [aut],\n  Dave Daeschler [aut],\n  Giampaolo Rodola' [aut],\n  Gábor Csárdi [aut, cre],\n  RStudio [cph]",
-        "Maintainer": "Gábor Csárdi <csardi.gabor@gmail.com>",
-        "Repository": "CRAN",
-        "Date/Publication": "2020-12-05 16:40:02 UTC",
-        "Built": "R 3.6.3; x86_64-pc-linux-gnu; 2020-12-29 17:35:21 UTC; unix"
       }
     },
     "purrr": {
@@ -2453,6 +2242,38 @@
         "Built": "R 3.6.0; ; 2019-02-27 08:20:35 UTC; unix"
       }
     },
+    "remotes": {
+      "Source": "CRAN",
+      "Repository": "https://cran.rstudio.com",
+      "GithubRepo": null,
+      "GithubUsername": null,
+      "GithubRef": null,
+      "GithubSha1": null,
+      "description": {
+        "Package": "remotes",
+        "Title": "R Package Installation from Remote Repositories, Including\n'GitHub'",
+        "Version": "2.2.0",
+        "Authors@R": "c(\n    person(\"Jim\", \"Hester\", , \"jim.hester@rstudio.com\", role = c(\"aut\", \"cre\")),\n    person(\"Gábor\", \"Csárdi\", , \"csardi.gabor@gmail.com\", role = c(\"aut\")),\n    person(\"Hadley\", \"Wickham\", role = c(\"aut\")),\n    person(\"Winston\", \"Chang\", role = \"aut\"),\n    person(\"RStudio\", role = \"cph\"),\n    person(\"Martin\", \"Morgan\", role = \"aut\"),\n    person(\"Dan\", \"Tenenbaum\", role = \"aut\"),\n    person(\"Mango Solutions\", role = \"cph\")\n    )",
+        "Description": "Download and install R packages stored in 'GitHub', 'GitLab', \n    'Bitbucket', 'Bioconductor', or plain 'subversion' or 'git' repositories. \n    This package provides the 'install_*' functions in 'devtools'. Indeed most \n    of the code was copied over from 'devtools'.",
+        "License": "GPL (>= 2)",
+        "URL": "https://remotes.r-lib.org, https://github.com/r-lib/remotes#readme",
+        "BugReports": "https://github.com/r-lib/remotes/issues",
+        "Imports": "methods, stats, tools, utils",
+        "Suggests": "brew, callr, codetools, curl, covr, git2r (>= 0.23.0), knitr,\nmockery, pkgbuild (>= 1.0.1), pingr, rmarkdown, rprojroot,\ntestthat, withr",
+        "Depends": "R (>= 3.0.0)",
+        "VignetteBuilder": "knitr",
+        "RoxygenNote": "7.1.1",
+        "SystemRequirements": "Subversion for install_svn, git for install_git",
+        "Encoding": "UTF-8",
+        "NeedsCompilation": "no",
+        "Packaged": "2020-07-20 18:04:55 UTC; jhester",
+        "Author": "Jim Hester [aut, cre],\n  Gábor Csárdi [aut],\n  Hadley Wickham [aut],\n  Winston Chang [aut],\n  RStudio [cph],\n  Martin Morgan [aut],\n  Dan Tenenbaum [aut],\n  Mango Solutions [cph]",
+        "Maintainer": "Jim Hester <jim.hester@rstudio.com>",
+        "Repository": "CRAN",
+        "Date/Publication": "2020-07-21 08:40:07 UTC",
+        "Built": "R 3.6.3; ; 2020-08-12 12:53:49 UTC; unix"
+      }
+    },
     "reshape2": {
       "Source": "CRAN",
       "Repository": "https://cran.rstudio.com",
@@ -2613,39 +2434,6 @@
         "Built": "R 3.6.3; ; 2020-11-24 10:03:04 UTC; unix"
       }
     },
-    "rvest": {
-      "Source": "CRAN",
-      "Repository": "https://cran.rstudio.com",
-      "GithubRepo": null,
-      "GithubUsername": null,
-      "GithubRef": null,
-      "GithubSha1": null,
-      "description": {
-        "Package": "rvest",
-        "Title": "Easily Harvest (Scrape) Web Pages",
-        "Version": "0.3.6",
-        "Authors@R": "\n    c(person(given = \"Hadley\",\n             family = \"Wickham\",\n             role = c(\"aut\", \"cre\"),\n             email = \"hadley@rstudio.com\"),\n      person(given = \"RStudio\",\n             role = \"cph\"))",
-        "Description": "Wrappers around the 'xml2' and 'httr' packages to\n    make it easy to download, then manipulate, HTML and XML.",
-        "License": "GPL-3",
-        "URL": "http://rvest.tidyverse.org/, https://github.com/tidyverse/rvest",
-        "BugReports": "https://github.com/tidyverse/rvest/issues",
-        "Depends": "R (>= 3.2), xml2",
-        "Imports": "httr (>= 0.5), magrittr, selectr",
-        "Suggests": "covr, knitr, png, rmarkdown, spelling, stringi (>= 0.3.1),\ntestthat",
-        "VignetteBuilder": "knitr",
-        "Encoding": "UTF-8",
-        "Language": "en-US",
-        "LazyData": "true",
-        "RoxygenNote": "7.1.1",
-        "NeedsCompilation": "no",
-        "Packaged": "2020-07-20 14:06:08 UTC; hadley",
-        "Author": "Hadley Wickham [aut, cre],\n  RStudio [cph]",
-        "Maintainer": "Hadley Wickham <hadley@rstudio.com>",
-        "Repository": "CRAN",
-        "Date/Publication": "2020-07-25 21:50:02 UTC",
-        "Built": "R 3.6.3; ; 2020-08-12 13:03:41 UTC; unix"
-      }
-    },
     "scales": {
       "Source": "CRAN",
       "Repository": "https://cran.rstudio.com",
@@ -2675,36 +2463,6 @@
         "Repository": "CRAN",
         "Date/Publication": "2020-05-11 23:20:05 UTC",
         "Built": "R 3.6.3; ; 2020-08-12 13:03:42 UTC; unix"
-      }
-    },
-    "selectr": {
-      "Source": "CRAN",
-      "Repository": "https://cran.rstudio.com",
-      "GithubRepo": null,
-      "GithubUsername": null,
-      "GithubRef": null,
-      "GithubSha1": null,
-      "description": {
-        "Package": "selectr",
-        "Type": "Package",
-        "Title": "Translate CSS Selectors to XPath Expressions",
-        "Version": "0.4-2",
-        "Date": "2019-11-20",
-        "Authors@R": "c(person(\"Simon\", \"Potter\",\n                    role = c(\"aut\", \"trl\", \"cre\"),\n                    email = \"simon@sjp.co.nz\"),\n             person(\"Simon\", \"Sapin\", role = \"aut\"),\n             person(\"Ian\", \"Bicking\", role = \"aut\"))",
-        "License": "BSD_3_clause + file LICENCE",
-        "Depends": "R (>= 3.0)",
-        "Imports": "methods, stringr, R6",
-        "Suggests": "testthat, XML, xml2",
-        "URL": "https://sjp.co.nz/projects/selectr",
-        "BugReports": "https://github.com/sjp/selectr/issues",
-        "Description": "Translates a CSS3 selector into an equivalent XPath\n  expression. This allows us to use CSS selectors when working with\n  the XML package as it can only evaluate XPath expressions. Also\n  provided are convenience functions useful for using CSS selectors on\n  XML nodes. This package is a port of the Python package 'cssselect'\n  (<https://cssselect.readthedocs.io/>).",
-        "NeedsCompilation": "no",
-        "Packaged": "2019-11-20 06:04:49 UTC; simon",
-        "Author": "Simon Potter [aut, trl, cre],\n  Simon Sapin [aut],\n  Ian Bicking [aut]",
-        "Maintainer": "Simon Potter <simon@sjp.co.nz>",
-        "Repository": "CRAN",
-        "Date/Publication": "2019-11-20 07:30:03 UTC",
-        "Built": "R 3.6.2; ; 2020-01-16 08:39:07 UTC; unix"
       }
     },
     "shiny": {
@@ -2737,37 +2495,6 @@
         "Repository": "CRAN",
         "Date/Publication": "2020-06-23 13:30:03 UTC",
         "Built": "R 3.6.3; ; 2020-08-12 13:08:46 UTC; unix"
-      }
-    },
-    "shinyWidgets": {
-      "Source": "CRAN",
-      "Repository": "https://cran.rstudio.com",
-      "GithubRepo": null,
-      "GithubUsername": null,
-      "GithubRef": null,
-      "GithubSha1": null,
-      "description": {
-        "Package": "shinyWidgets",
-        "Title": "Custom Inputs Widgets for Shiny",
-        "Version": "0.5.4",
-        "Authors@R": "c(\n  person(\"Victor\", \"Perrier\", email = \"victor.perrier@dreamrs.fr\", role = c(\"aut\", \"cre\", \"cph\")),\n  person(\"Fanny\", \"Meyer\", role = \"aut\"),\n  person(\"David\", \"Granjon\", role = \"aut\"),\n  person(\"Ian\", \"Fellows\", role = \"ctb\", comment = \"Methods for mutating vertical tabs & updateMultiInput\"),\n  person(\"Wil\", \"Davis\", role = \"ctb\", comment = \"numericRangeInput function\"),\n  person(\"Spencer\", \"Matthews\", role = \"ctb\", comment = \"autoNumeric methods\")\n  )",
-        "Description": "Collection of custom input controls and user interface components for 'Shiny' applications. \n  Give your applications a unique and colorful style !",
-        "URL": "https://github.com/dreamRs/shinyWidgets",
-        "BugReports": "https://github.com/dreamRs/shinyWidgets/issues",
-        "License": "GPL-3",
-        "Encoding": "UTF-8",
-        "LazyData": "true",
-        "RoxygenNote": "7.1.1",
-        "Depends": "R (>= 3.1.0)",
-        "Imports": "shiny (>= 0.14), htmltools, jsonlite, grDevices",
-        "Suggests": "shinydashboard, testthat, covr, shinydashboardPlus, bs4Dash,\nargonR, argonDash, tablerDash, ggplot2, DT, scales",
-        "NeedsCompilation": "no",
-        "Packaged": "2020-10-06 08:30:09 UTC; perri",
-        "Author": "Victor Perrier [aut, cre, cph],\n  Fanny Meyer [aut],\n  David Granjon [aut],\n  Ian Fellows [ctb] (Methods for mutating vertical tabs &\n    updateMultiInput),\n  Wil Davis [ctb] (numericRangeInput function),\n  Spencer Matthews [ctb] (autoNumeric methods)",
-        "Maintainer": "Victor Perrier <victor.perrier@dreamrs.fr>",
-        "Repository": "CRAN",
-        "Date/Publication": "2020-10-06 09:10:03 UTC",
-        "Built": "R 3.6.3; ; 2020-10-14 09:27:07 UTC; unix"
       }
     },
     "shinyjs": {
@@ -3269,37 +2996,6 @@
         "Built": "R 3.6.0; ; 2019-02-18 16:15:52 UTC; unix"
       }
     },
-    "webshot": {
-      "Source": "CRAN",
-      "Repository": "https://cran.rstudio.com",
-      "GithubRepo": null,
-      "GithubUsername": null,
-      "GithubRef": null,
-      "GithubSha1": null,
-      "description": {
-        "Package": "webshot",
-        "Title": "Take Screenshots of Web Pages",
-        "Version": "0.5.2",
-        "Authors@R": "c(\n    person(\"Winston\", \"Chang\", email = \"winston@rstudio.com\", role = c(\"aut\", \"cre\")),\n    person(\"Yihui\", \"Xie\", role = \"ctb\"),\n    person(\"Francois\", \"Guillem\", role = \"ctb\"),\n    person(\"Barret\", \"Schloerke\", role = \"ctb\"),\n    person(\"Nicolas\", \"Perriault\", role = \"ctb\", comment = \"The CasperJS library\")\n    )",
-        "Description": "Takes screenshots of web pages, including Shiny applications and R\n    Markdown documents.",
-        "Depends": "R (>= 3.0)",
-        "Imports": "magrittr, jsonlite, callr",
-        "Suggests": "httpuv, knitr, rmarkdown, shiny",
-        "License": "GPL-2",
-        "SystemRequirements": "PhantomJS (http://phantomjs.org) for taking\nscreenshots, ImageMagick (http://www.imagemagick.org) or\nGraphicsMagick (http://www.graphicsmagick.org) and OptiPNG\n(http://optipng.sourceforge.net) for manipulating images.",
-        "RoxygenNote": "6.1.1",
-        "Encoding": "UTF-8",
-        "URL": "https://github.com/wch/webshot/",
-        "BugReports": "https://github.com/wch/webshot/issues",
-        "NeedsCompilation": "no",
-        "Packaged": "2019-11-21 16:15:05 UTC; winston",
-        "Author": "Winston Chang [aut, cre],\n  Yihui Xie [ctb],\n  Francois Guillem [ctb],\n  Barret Schloerke [ctb],\n  Nicolas Perriault [ctb] (The CasperJS library)",
-        "Maintainer": "Winston Chang <winston@rstudio.com>",
-        "Repository": "CRAN",
-        "Date/Publication": "2019-11-22 21:50:02 UTC",
-        "Built": "R 3.6.3; ; 2020-08-12 12:44:02 UTC; unix"
-      }
-    },
     "withr": {
       "Source": "CRAN",
       "Repository": "https://cran.rstudio.com",
@@ -3486,7 +3182,7 @@
   },
   "files": {
     ".RData": {
-      "checksum": "ff4b783222902a26e8f349da490f306d"
+      "checksum": "85762e8e32bc0376f0ca0d7402f34185"
     },
     ".Rprofile": {
       "checksum": "57f9047cb06fdbef821b61f49e21406e"
@@ -3535,9 +3231,6 @@
     },
     "packrat/desc/BH": {
       "checksum": "a6bb4b93baded25a1a8fbef5f75c1386"
-    },
-    "packrat/desc/callr": {
-      "checksum": "549e5b683d00bbe211c7451417963833"
     },
     "packrat/desc/cellranger": {
       "checksum": "d71b6fcf787d16e99cdbd7f655f4fb6c"
@@ -3614,15 +3307,6 @@
     "packrat/desc/flextable": {
       "checksum": "5f9c913043e0543d6921ba77495870d8"
     },
-    "packrat/desc/formatR": {
-      "checksum": "ab0b81048515702ea46afa106f471190"
-    },
-    "packrat/desc/futile.logger": {
-      "checksum": "81a932ea9f9e1ee4c51599f6471de295"
-    },
-    "packrat/desc/futile.options": {
-      "checksum": "d942d177dc9460a82f4ee27070084870"
-    },
     "packrat/desc/gdtools": {
       "checksum": "543a615487e0e3a067bdcf5473c9ab39"
     },
@@ -3659,9 +3343,6 @@
     "packrat/desc/jsonlite": {
       "checksum": "fca96b99a6b034143af33a9acdcd1936"
     },
-    "packrat/desc/kableExtra": {
-      "checksum": "844047f6555c9ad51141d68f0511fbae"
-    },
     "packrat/desc/keyring": {
       "checksum": "d5f600589a1f65a822c42467963f8873"
     },
@@ -3670,9 +3351,6 @@
     },
     "packrat/desc/labeling": {
       "checksum": "641f8409fcc9ec1713a572cb3364882d"
-    },
-    "packrat/desc/lambda.r": {
-      "checksum": "f5a6c15c72a5c65eadcaa2d8bb772ea6"
     },
     "packrat/desc/later": {
       "checksum": "b38bf686587e91ea7738175a411de777"
@@ -3707,6 +3385,9 @@
     "packrat/desc/openxlsx": {
       "checksum": "75c9f7f0ad214205709b973bbf2a8700"
     },
+    "packrat/desc/pacman": {
+      "checksum": "d12dbf8bd661feb8692e2b36382e5613"
+    },
     "packrat/desc/pillar": {
       "checksum": "07560cb7651c0ba56c6a6c904038244b"
     },
@@ -3722,17 +3403,11 @@
     "packrat/desc/prettyunits": {
       "checksum": "44be27d45b0aff3e928847b0a69ca027"
     },
-    "packrat/desc/processx": {
-      "checksum": "8f9aa0cfa30b589dc20a292801932b85"
-    },
     "packrat/desc/progress": {
       "checksum": "e2083fd29ade1fa5f588948456d3859c"
     },
     "packrat/desc/promises": {
       "checksum": "5c752f93b8e4a8ba023974f24bfa4a3e"
-    },
-    "packrat/desc/ps": {
-      "checksum": "a0a460111e06c28cae421c06788b7aab"
     },
     "packrat/desc/purrr": {
       "checksum": "214b9325e0280f38b9d9a44224ca8f27"
@@ -3758,6 +3433,9 @@
     "packrat/desc/rematch": {
       "checksum": "b5b106227eece22bc6ba6883d36be04e"
     },
+    "packrat/desc/remotes": {
+      "checksum": "e2c664612b0d59c37582840560c28b7a"
+    },
     "packrat/desc/reshape2": {
       "checksum": "fe522b871cb5a1bd72310848623b8e42"
     },
@@ -3773,23 +3451,14 @@
     "packrat/desc/rstudioapi": {
       "checksum": "9e431158e06fc5904583758082329477"
     },
-    "packrat/desc/rvest": {
-      "checksum": "f3ef6beecadacd1f9e85b45a6a752644"
-    },
     "packrat/desc/scales": {
       "checksum": "c19fe0b4ebf9ca2a9f3ce23949b557bd"
-    },
-    "packrat/desc/selectr": {
-      "checksum": "1989b8063bece001d90b3162100f09f9"
     },
     "packrat/desc/shiny": {
       "checksum": "22639e018d8df70cfbd5122602c97d09"
     },
     "packrat/desc/shinyjs": {
       "checksum": "47f3e0c57651868af9985a32c4780c29"
-    },
-    "packrat/desc/shinyWidgets": {
-      "checksum": "26a3f5ebf18b6042523bb2beda58e5d0"
     },
     "packrat/desc/sodium": {
       "checksum": "d71db593891b890b6b144044713bfd0b"
@@ -3836,9 +3505,6 @@
     "packrat/desc/viridisLite": {
       "checksum": "ed2ff7959cf9a0afb9aa697767636d34"
     },
-    "packrat/desc/webshot": {
-      "checksum": "4aea127470e4256c7164852312fe12c2"
-    },
     "packrat/desc/withr": {
       "checksum": "533600b7230c8e07d9449ceb8b72d072"
     },
@@ -3861,19 +3527,19 @@
       "checksum": "c0e692997328fca72b0a258d351e8647"
     },
     "packrat/packrat.lock": {
-      "checksum": "f6a311b1f84e27b17b0508b486ad468d"
+      "checksum": "643c66f0d0765d67329fdf02589b23b1"
     },
     "pepfar.png": {
       "checksum": "cd04d9e778b00519de3e0e2afc97eb28"
     },
+    "R/utils.R": {
+      "checksum": "e0587041b721de19d80ddf5ccc295938"
+    },
     "server.R": {
-      "checksum": "db5ea7b7c0600b79b056ff86a8988550"
+      "checksum": "8160cbd96c20352b4b50fd624c81de6f"
     },
     "ui.R": {
       "checksum": "112ea97d13f284c982d07294b31e4cdd"
-    },
-    "utils.R": {
-      "checksum": "93be51d8ebc1431cb15738ab5f1d6b36"
     },
     "vr_rules_annotated.csv": {
       "checksum": "09f74400369217ef095e9af343ddfbdd"
