@@ -1,25 +1,4 @@
-require(config)
-require(futile.logger)
-require(glue)
-require(dplyr)
-require(tibble)
-require(jsonlite)
-require(httr)
-require(tidyr)
-require(stringr)
-require(DT)
-require(datapackr)
-require(datimutils)
 
-
-config <- config::get()
-
-
-if ( file.access(config$log_path,2) == 1 ) {
-  flog.appender(appender.file(config$log_path), name="cop_memo")
-} else {
-  flog.appender(appender.console(), name = "cop_memo")
-}
 
 getUserOperatingUnits<-function(uid) {
   
