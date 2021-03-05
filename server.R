@@ -1,11 +1,17 @@
-library(shiny)
-library(shinyjs)
-require(shinyWidgets)
-require(magrittr)
-require(knitr)
-require(kableExtra)
-require(gdtools)
-source("./utils.R")
+
+
+pacman::p_load(shiny,shinyjs,shinyWidgets,magrittr,knitr,kableExtra,gdtools,
+               config,futile.logger,glue,dplyr,tibble,jsonlite,httr,tidyr,stringr,DT,
+               datapackr,datimutils)
+              
+config <- config::get()
+
+if ( file.access(config$log_path,2) == 1 ) {
+  flog.appender(appender.file(config$log_path), name="cop_memo")
+} else {
+  flog.appender(appender.console(), name = "cop_memo")
+}
+
 
 shinyServer(function(input, output, session) {
   
