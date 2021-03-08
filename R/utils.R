@@ -108,8 +108,7 @@ getIndicatorGroups<-function(cop_year = "2020") {
     "wWi08ToZ2gR"
   } else if (cop_year == "2021") {
     #TODO: Fix this once the COP21 indicator group has been finalized
-    "wWi08ToZ2gR"
-
+    "gAE0KTEBb9P"
   }
 }
 
