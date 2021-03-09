@@ -206,7 +206,7 @@ memo_getPrioritizationTable <- function(ou_uid="cDGPF739ZZr", d2_session, cop_ye
     mutate("Total" = rowSums(across(where(is.numeric)))) %>% 
     dplyr::select("Indicator","Age",3:dim(.)[2])
     
-    if (!include_no_prio) {
+    if (!include_no_prio & any("No Prioritization" %in% names(df_final))) {
       df_final  %<>% dplyr::select(-`No Prioritization`)
     }
   
