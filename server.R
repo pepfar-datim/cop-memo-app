@@ -1,16 +1,16 @@
 
 
 pacman::p_load(shiny,shinyjs,shinyWidgets,magrittr,knitr,kableExtra,gdtools,
-               config,futile.logger,glue,dplyr,tibble,jsonlite,httr,tidyr,stringr,DT,
+              futile.logger,glue,dplyr,tibble,jsonlite,httr,tidyr,stringr,DT,
                datapackr,datimutils)
               
-config <- config::get()
+logger <- flog.logger()
 
-if ( file.access(config$log_path,2) == 1 ) {
-  flog.appender(appender.file(config$log_path), name="cop_memo")
-} else {
-  flog.appender(appender.console(), name = "cop_memo")
+if (!file.exists(Sys.getenv("LOG_PATH"))) {
+  file.create(Sys.getenv("LOG_PATH"))
 }
+
+flog.appender(appender.console(), name="cop-memo")
 
 
 shinyServer(function(input, output, session) {
@@ -31,7 +31,7 @@ shinyServer(function(input, output, session) {
         btn_labels= NA
       )
       
-      prio<-memo_getPrioritizationTable(input$ou, d2_session = user_input$d2_session, cop_year= user_input$cop_year)
+      prio<-memo_getPrioritizationTable(input$ou, d2_session = user_input$d2_session, cop_year= user_input$cop_year, include_no_prio = input$include_no_prio)
       partners<-memo_getPartnersTable(input$ou, d2_session = user_input$d2_session)
       shinyjs::enable("fetch")
       shinyjs::enable("downloadXLSX")
@@ -212,6 +212,8 @@ shinyServer(function(input, output, session) {
           selectInput("ou", "Operating Unit",getUserOperatingUnits(user_input$d2_session$user_orgunit)),
           tags$hr(),
           selectInput("cop_year","COP Year",c(2020,2021)),
+          tags$hr(),
+          checkboxInput("include_no_prio","Include No Prioritization",value=TRUE),
           tags$hr(),
           actionButton("fetch","Get data"),
           tags$hr(),

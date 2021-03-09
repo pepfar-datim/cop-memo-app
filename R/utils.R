@@ -112,7 +112,7 @@ getIndicatorGroups<-function(cop_year = "2020") {
   }
 }
 
-memo_getPrioritizationTable <- function(ou_uid="cDGPF739ZZr", d2_session, cop_year = "2020") {
+memo_getPrioritizationTable <- function(ou_uid="cDGPF739ZZr", d2_session, cop_year = "2020", include_no_prio = TRUE) {
   
   base_url<-d2_session$base_url
   
@@ -202,10 +202,15 @@ memo_getPrioritizationTable <- function(ou_uid="cDGPF739ZZr", d2_session, cop_ye
     } 
     
     
-    df_final %>% 
+    df_final %<>% 
     mutate("Total" = rowSums(across(where(is.numeric)))) %>% 
     dplyr::select("Indicator","Age",3:dim(.)[2])
+    
+    if (!include_no_prio) {
+      df_final  %<>% dplyr::select(-`No Prioritization`)
+    }
   
+    df_final
 }
 
 getAgencyPartnersMechsView<-function(d2_session) {
