@@ -213,7 +213,7 @@ shinyServer(function(input, output, session) {
           tags$hr(),
           selectInput("cop_year","COP Year",c(2020,2021)),
           tags$hr(),
-          checkboxInput("include_no_prio","Include No Prioritization",value=TRUE),
+          checkboxInput("include_no_prio","Show No Prioritization",value=TRUE),
           tags$hr(),
           actionButton("fetch","Get data"),
           tags$hr(),
@@ -299,13 +299,13 @@ shinyServer(function(input, output, session) {
       
       
       header_old<-names(d$prio)
-      header_new<-c(ou_name,ou_name,header_old[3:9])
+      header_new<-c(ou_name,ou_name,header_old[3:dim(d$prio)[2]])
       
       prio_table<-flextable(d$prio) %>% 
         merge_v(.,j="Indicator") %>% 
         delete_part(.,part = "header") %>% 
         add_header_row(.,values = header_new) %>% 
-        add_header_row(., values = c(ou_name, ou_name,rep("SNU Prioritizations",7))) %>% 
+        add_header_row(., values = c(ou_name, ou_name,rep("SNU Prioritizations", ( dim(d$prio)[2] - 2 )))) %>% 
         merge_h(., part = "header") %>% 
         merge_v(.,part="header") %>% 
         bg(.,bg = "#CCC0D9", part = "header") %>% 
