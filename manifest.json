@@ -445,38 +445,6 @@
         "Built": "R 3.6.0; x86_64-pc-linux-gnu; 2019-02-15 12:16:59 UTC; unix"
       }
     },
-    "config": {
-      "Source": "CRAN",
-      "Repository": "https://cran.rstudio.com",
-      "GithubRepo": null,
-      "GithubUsername": null,
-      "GithubRef": null,
-      "GithubSha1": null,
-      "description": {
-        "Package": "config",
-        "Type": "Package",
-        "Title": "Manage Environment Specific Configuration Values",
-        "Version": "0.3.1",
-        "Authors@R": "c(\n  person(\"JJ\", \"Allaire\", role = c(\"aut\"), email = \"jj@rstudio.com\"),\n  person(\"Andrie\", \"de Vries\", role = \"cre\", email = \"apdevries@gmail.com\"),\n  person(\"RStudio\", role = c(\"cph\", \"fnd\")))",
-        "Imports": "yaml (>= 2.1.19)",
-        "Suggests": "testthat, knitr, rmarkdown, covr, spelling",
-        "Description": "Manage configuration values across multiple environments (e.g.\n  development, test, production). Read values using a function that determines\n  the current environment and returns the appropriate value.",
-        "License": "GPL-3",
-        "URL": "https://github.com/rstudio/config",
-        "BugReports": "https://github.com/rstudio/config/issues",
-        "RoxygenNote": "7.1.1",
-        "VignetteBuilder": "knitr",
-        "Encoding": "UTF-8",
-        "Language": "en-US",
-        "NeedsCompilation": "no",
-        "Packaged": "2020-12-15 13:05:30 UTC; apdev",
-        "Author": "JJ Allaire [aut],\n  Andrie de Vries [cre],\n  RStudio [cph, fnd]",
-        "Maintainer": "Andrie de Vries <apdevries@gmail.com>",
-        "Repository": "CRAN",
-        "Date/Publication": "2020-12-17 11:00:06 UTC",
-        "Built": "R 3.6.3; ; 2020-12-29 17:33:27 UTC; unix"
-      }
-    },
     "cpp11": {
       "Source": "CRAN",
       "Repository": "https://cran.rstudio.com",
@@ -3185,7 +3153,7 @@
       "checksum": "85762e8e32bc0376f0ca0d7402f34185"
     },
     ".Rprofile": {
-      "checksum": "57f9047cb06fdbef821b61f49e21406e"
+      "checksum": "90fbb3124e6ec977e0e53031c0eaebb8"
     },
     "agencies_partners_mechs.rds": {
       "checksum": "4bc7b1d6356caadb1fb5fef7cc948f41"
@@ -3210,6 +3178,9 @@
     },
     "config.yml.sample": {
       "checksum": "a05d9fc3b917f36238bc778302fae4bf"
+    },
+    "cop-memo.log": {
+      "checksum": "d41d8cd98f00b204e9800998ecf8427e"
     },
     "LICENSE": {
       "checksum": "9b62b5c75bb467271d2729f6639a8259"
@@ -3246,9 +3217,6 @@
     },
     "packrat/desc/commonmark": {
       "checksum": "dc9444fafb1a31e3947b7c292920c248"
-    },
-    "packrat/desc/config": {
-      "checksum": "a73571fbad5c819d95b71a4992bf024e"
     },
     "packrat/desc/cpp11": {
       "checksum": "4f92c1db5de1f04c3c9978ab7c11ce74"
@@ -3527,16 +3495,16 @@
       "checksum": "c0e692997328fca72b0a258d351e8647"
     },
     "packrat/packrat.lock": {
-      "checksum": "643c66f0d0765d67329fdf02589b23b1"
+      "checksum": "3f01c2e91d3b2796a7ba00c560b59058"
     },
     "pepfar.png": {
       "checksum": "cd04d9e778b00519de3e0e2afc97eb28"
     },
     "R/utils.R": {
-      "checksum": "625a1befd7ab5e5396cf481b5e90087a"
+      "checksum": "6a272426ba9efa7ad31db9ab5b4d0388"
     },
     "server.R": {
-      "checksum": "8160cbd96c20352b4b50fd624c81de6f"
+      "checksum": "159b464e0da889e70e5b6ad30993507a"
     },
     "ui.R": {
       "checksum": "112ea97d13f284c982d07294b31e4cdd"

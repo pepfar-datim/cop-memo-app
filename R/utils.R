@@ -112,10 +112,31 @@ getIndicatorGroups<-function(cop_year = "2020") {
   }
 }
 
+
+getExistingPrioritization<-function(psnus,cop_year,d2_session) {
+    
+    period<- paste0( cop_year,"Oct") 
+     dx <-"r4zbW3owX9n"
+      ous<-paste(psnus,sep="",collapse=";")
+      
+        prios<-datimutils::getAnalytics(dx="r4zbW3owX9n",pe_f =period, ou = ous,d2_session = d2_session ) 
+        
+          if (is.null(prios)) {
+              return(data.frame("psnu_uid" = psnus,"prioritization" = "No Prioritization"))
+          }
+        
+         prios %>% 
+              dplyr::select(-Data) %>% 
+              dplyr::rename("psnu_uid" = "Organisation unit",
+                            "value" = "Value") %>% 
+              dplyr::left_join(datapackr::prioritization_dict()) %>% 
+              dplyr::select(psnu_uid,"prioritization" = "name")
+         
+}
+
 memo_getPrioritizationTable <- function(ou_uid="cDGPF739ZZr", d2_session, cop_year = "2020", include_no_prio = TRUE) {
   
-  base_url<-d2_session$base_url
-  
+
   ind_group<-getIndicatorGroups(cop_year)
   
   inds <-
@@ -123,7 +144,7 @@ memo_getPrioritizationTable <- function(ou_uid="cDGPF739ZZr", d2_session, cop_ye
                                    d2_session = d2_session, 
                                    fields = "indicators[id,shortName]") %>% 
     dplyr::rename(indicator_name = shortName) %>% 
-    dplyr::mutate(indicator_name = stringr::str_replace_all(indicator_name,"COP20 Targets ","")) %>%
+    dplyr::mutate(indicator_name = stringr::str_replace_all(indicator_name,"COP2[01] Targets ","")) %>%
     dplyr::mutate(indicator_name = stringr::str_trim(indicator_name)) %>% 
     tidyr::separate("indicator_name",into=c("Indicator","Numerator","Age"),sep=" ") %>% 
     dplyr::mutate(Age = case_when(Age == "15-" ~ "<15",
@@ -159,22 +180,35 @@ memo_getPrioritizationTable <- function(ou_uid="cDGPF739ZZr", d2_session, cop_ye
     dplyr::rename("Indicator" = ind,
                   Age = options)
   
-   df<-datimutils::getAnalytics( "riR005xJPsS" %.d% df_cols$id,
+  
+    psnus<-dplyr::bind_rows(datapackr::valid_PSNUs) %>% 
+        dplyr::filter(ou_id == ou_uid) %>% 
+        dplyr::pull(psnu_uid) %>%  
+        unique() 
+
+   df<-datimutils::getAnalytics( ou = paste(psnus,sep="",collapse=";"),
                             dx=inds$id,
-                            ou_f = ou_uid,
                             pe_f = paste0(cop_year,"Oct"),
                             d2_session = d2_session
   ) 
    
    if (is.null(df)) {return(NULL)}
    
+   prios<-getExistingPrioritization(psnus,cop_year,d2_session)
+   
    df <- df %>%  
+     dplyr::rename("psnu_uid" = `Organisation unit` ) %>% 
+     dplyr::mutate(Value = as.numeric(Value))  %>%
     dplyr::inner_join(inds,by=c(`Data` = "id")) %>% 
-    dplyr::select(-Data) %>% 
-    dplyr::left_join(., ( dplyr::select(df_cols,id,col_name) ),
-                     by=c(`Planning Prioritization Set` = "id")) %>% 
-    dplyr::select(-`Planning Prioritization Set`) %>% 
-    dplyr::mutate(Value = as.numeric(Value)) 
+          dplyr::select(-Data) %>% 
+          dplyr::left_join(.,prios,by="psnu_uid") %>% 
+          dplyr::mutate(prioritization = dplyr::case_when(is.na(prioritization) ~ "No Prioritization",
+                                                          TRUE ~ prioritization)) %>% 
+         dplyr::group_by(`Indicator`,`Age`,`prioritization`) %>% 
+         dplyr::summarise(Value = sum(Value)) %>% 
+         dplyr::ungroup() %>% 
+         dplyr::rename("col_name" = "prioritization") %>% 
+         dplyr::mutate(col_name = stringr::str_replace(col_name,"Scale-up","Scale-Up")) 
 
   df_totals<-df %>%
     dplyr::filter(Age != 'Total') %>% 
@@ -193,7 +227,6 @@ memo_getPrioritizationTable <- function(ou_uid="cDGPF739ZZr", d2_session, cop_ye
     dplyr::mutate(Indicator = factor(Indicator,levels = unique(df_rows$ind))) %>% 
     dplyr::arrange(Indicator,col_name) %>% 
     tidyr::pivot_wider(names_from = col_name ,values_from = "Value") %>% 
-    dplyr::select(-one_of("NA")) %>%  #Drop weird NA columns if these exist
     suppressWarnings()
     
     #Remove NOT pepfar supported if its only zeros, otherwise, show this, since its potentially problematic
