@@ -163,7 +163,7 @@ shinyServer(function(input, output, session) {
     ),
     fluidRow(
       selectInput(inputId = "base_url", label = "Server", 
-      choices = c("https://www.datim.org/","https://cop-test.datim.org/"), 
+      choices = c("https://www.datim.org/","https://cop-test2.datim.org/"), 
       multiple = FALSE), 
       textInput("user_name", "Username: ", width = "600px"),
       passwordInput("password", "Password:", width = "600px"),
