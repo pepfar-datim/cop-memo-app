@@ -156,7 +156,7 @@ shinyServer(function(input, output, session) {
     wellPanel(fluidRow(
       img(src = 'pepfar.png', align = "center"),
       h4(
-        "Welcome to the COP20 Memo App. Please login with your DATIM credentials:"
+        "Welcome to the COP Memo App. Please login with your DATIM credentials:"
       )
     ),
     fluidRow(
@@ -188,10 +188,7 @@ shinyServer(function(input, output, session) {
         )
       ))
     } else {
-      wiki_url <- a("Datapack Wiki",
-                    href = "https://github.com/pepfar-datim/Data-Pack-Feedback/wiki",
-                    target = "_blank")
-      
+
       fluidPage(tags$head(
         tags$style(
           ".shiny-notification {
@@ -238,7 +235,7 @@ shinyServer(function(input, output, session) {
   output$downloadPDF <- downloadHandler(
     filename = function() {
       
-      prefix <-"cop_20_approval_memo_"
+      prefix <-"cop_approval_memo_"
       date<-format(Sys.time(),"%Y%m%d_%H%M%S")
       paste0(paste(prefix,date,sep="_"),".pdf")
     },
@@ -264,7 +261,7 @@ shinyServer(function(input, output, session) {
   output$downloadDOCX <- downloadHandler(
     filename = function() {
       
-      prefix <-"cop_20_approval_memo_"
+      prefix <-"cop_approval_memo_"
       date<-format(Sys.time(),"%Y%m%d_%H%M%S")
       paste0(paste(prefix,date,sep="_"),".docx")
     },
@@ -381,7 +378,7 @@ shinyServer(function(input, output, session) {
     filename = function() {
       
       
-      prefix <-"cop_20_approval_memo_"
+      prefix <-"cop_approval_memo_"
       date<-format(Sys.time(),"%Y%m%d_%H%M%S")
       paste0(paste(prefix,date,sep="_"),".xlsx")
       
