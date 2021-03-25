@@ -1,6 +1,4 @@
-pacman::p_load(shiny,shinyjs,shinyWidgets,magrittr,knitr,kableExtra,gdtools,
-              futile.logger,glue,dplyr,tibble,jsonlite,httr,tidyr,stringr,DT,
-               datapackr,datimutils)
+pacman::p_load(shiny,shinyjs,shinyWidgets,magrittr,knitr,kableExtra,gdtools,futile.logger,glue,dplyr,tibble,jsonlite,httr,tidyr,stringr,DT,datapackr,datimutils)
               
 logger <- flog.logger()
 
