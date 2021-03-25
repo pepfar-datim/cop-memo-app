@@ -101,6 +101,69 @@ indicatorOrder<-function(cop_year="2020") {
       "GEND_GBV","Total",TRUE)  
   }
   
+  if (cop_year == "2021") {
+    tibble::tribble(
+      ~ind,~options, ~in_partner_table,
+      "HTS_INDEX","<15",TRUE,
+      "HTS_INDEX","15+",TRUE,
+      "HTS_INDEX","Total",FALSE,
+      "HTS_TST","<15",TRUE,
+      "HTS_TST","15+",TRUE,
+      "HTS_TST","Total",FALSE,
+      "HTS_TST_POS","<15",TRUE,
+      "HTS_TST_POS","15+",TRUE,
+      "HTS_TST_POS","Total",FALSE,
+      "TX_NEW","<15",TRUE,
+      "TX_NEW","15+",TRUE,
+      "TX_NEW","Total",FALSE,
+      "TX_CURR","<15",TRUE,
+      "TX_CURR","15+",TRUE,
+      "TX_CURR","Total",FALSE,
+      "TX_PVLS","<15",TRUE,
+      "TX_PVLS","15+",TRUE,
+      "TX_PVLS","Total",FALSE,
+      "CXCA_SCRN","Total",TRUE,
+      "OVC_SERV","<18",TRUE,
+      "OVC_SERV","18+",TRUE,
+      "OVC_SERV","Total",FALSE,
+      "OVC_HIVSTAT", "Total",TRUE,
+      "PMTCT_STAT","<15",TRUE,
+      "PMTCT_STAT","15+",TRUE,
+      "PMTCT_STAT","Total",FALSE,
+      "PMTCT_STAT_POS","<15",TRUE,
+      "PMTCT_STAT_POS","15+",TRUE,
+      "PMTCT_STAT_POS","Total",FALSE,
+      "PMTCT_ART","<15",TRUE,
+      "PMTCT_ART","15+",TRUE,
+      "PMTCT_ART","Total",FALSE,
+      "PMTCT_EID","Total",TRUE,
+      "PP_PREV","<15",TRUE,
+      "PP_PREV","15+",TRUE,
+      "PP_PREV","Total",FALSE,
+      "KP_PREV","Total",TRUE,
+      "KP_MAT","Total",TRUE,
+      "VMMC_CIRC","Total",TRUE,
+      "HTS_SELF","<15",TRUE,
+      "HTS_SELF","15+",TRUE,
+      "HTS_SELF","Total",FALSE,
+      "PrEP_NEW","Total",TRUE,
+      "PrEP_CURR","Total",TRUE,
+      "TB_STAT","<15",TRUE,
+      "TB_STAT","15+",TRUE,
+      "TB_STAT","Total",FALSE,
+      "TB_ART","<15",TRUE,
+      "TB_ART","15+",TRUE,
+      "TB_ART","Total",FALSE,
+      "TB_PREV","<15",TRUE,
+      "TB_PREV","15+",TRUE,
+      "TB_PREV","Total",FALSE,
+      "TX_TB","<15",TRUE,
+      "TX_TB","15+",TRUE,
+      "TX_TB","Total",FALSE,
+      "GEND_GBV","Total",TRUE,
+      "AGYW_PREV","Total",FALSE)  
+  }
+  
 }
 
 getIndicatorGroups<-function(cop_year = "2020") {
@@ -137,6 +200,8 @@ getExistingPrioritization<-function(psnus,cop_year,d2_session) {
 memo_getPrioritizationTable <- function(ou_uid="cDGPF739ZZr", d2_session, cop_year = "2020", include_no_prio = TRUE) {
   
 
+  
+  
   ind_group<-getIndicatorGroups(cop_year)
   
   inds <-
@@ -170,9 +235,7 @@ memo_getPrioritizationTable <- function(ou_uid="cDGPF739ZZr", d2_session, cop_ye
     "p0JrTY2hLii","PPG Not PEPFAR Supported","Not PEPFAR Supported"
   )
   
-
-  
-  df_rows<-indicatorOrder() %>% dplyr::select(ind,options)
+  df_rows<-indicatorOrder(cop_year) %>% dplyr::select(ind,options)
   
   df_base<-tidyr::crossing(df_rows,dplyr::select(df_cols,col_name)) %>% 
     dplyr::arrange(ind,options,col_name) %>% 
@@ -202,6 +265,7 @@ memo_getPrioritizationTable <- function(ou_uid="cDGPF739ZZr", d2_session, cop_ye
     dplyr::inner_join(inds,by=c(`Data` = "id")) %>% 
           dplyr::select(-Data) %>% 
           dplyr::left_join(.,prios,by="psnu_uid") %>% 
+          dplyr::mutate(prioritization = as.character(prioritization)) %>% 
           dplyr::mutate(prioritization = dplyr::case_when(is.na(prioritization) ~ "No Prioritization",
                                                           TRUE ~ prioritization)) %>% 
          dplyr::group_by(`Indicator`,`Age`,`prioritization`) %>% 
@@ -230,7 +294,7 @@ memo_getPrioritizationTable <- function(ou_uid="cDGPF739ZZr", d2_session, cop_ye
     suppressWarnings()
     
     #Remove NOT pepfar supported if its only zeros, otherwise, show this, since its potentially problematic
-    if (df_final %>%  dplyr::select("Not PEPFAR Supported") %>% sum(.) == 0) {
+    if (df_final %>%  dplyr::select("Not PEPFAR Supported") %>% sum(.,na.rm = TRUE) == 0) {
       df_final<-df_final %>%  select(-`Not PEPFAR Supported`)
     } 
     
@@ -299,7 +363,7 @@ memo_getPartnersTable<-function(ou_uid="cDGPF739ZZr", d2_session, cop_year = "20
                                    d2_session = d2_session, 
                                    fields = "indicators[id,shortName]") %>% 
     dplyr::rename(indicator_name = shortName) %>% 
-    dplyr::mutate(indicator_name = stringr::str_replace_all(indicator_name,"COP20 Targets ","")) %>%
+    dplyr::mutate(indicator_name = stringr::str_replace_all(indicator_name,"COP2[01] Targets ","")) %>%
     dplyr::mutate(indicator_name = stringr::str_trim(indicator_name)) %>% 
     tidyr::separate("indicator_name",into=c("Indicator","Numerator","Age"),sep=" ") %>% 
     dplyr::mutate(Age = case_when(Age == "15-" ~ "<15",
@@ -331,7 +395,7 @@ memo_getPartnersTable<-function(ou_uid="cDGPF739ZZr", d2_session, cop_year = "20
     dplyr::ungroup()
 
   #We need to pad for zeros
-  df_rows<-indicatorOrder() %>% 
+  df_rows<-indicatorOrder(cop_year) %>% 
     dplyr::filter(in_partner_table) %>% 
     dplyr::select(ind,options)
   
@@ -346,7 +410,7 @@ memo_getPartnersTable<-function(ou_uid="cDGPF739ZZr", d2_session, cop_year = "20
     dplyr::ungroup() %>% 
     dplyr::mutate(`Partner` = '')
   
-  d_indicators<- indicatorOrder() %>% 
+  d_indicators<- indicatorOrder(cop_year) %>% 
     dplyr::filter(in_partner_table) %>%
     dplyr::select(ind,options) %>% 
     dplyr::mutate(indicator_name = factor(paste(ind, options)))
