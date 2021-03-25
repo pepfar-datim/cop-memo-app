@@ -179,7 +179,7 @@
     },
     "XML": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "http://www.omegahat.net/RSXML",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -638,7 +638,7 @@
     },
     "datapackcommons": {
       "Source": "RSPM",
-      "Repository": null,
+      "Repository": "https://github.com/pepfar-datim/data-pack-commons",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
