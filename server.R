@@ -30,7 +30,7 @@ shinyServer(function(input, output, session) {
       )
       
       prio<-memo_getPrioritizationTable(input$ou, d2_session = user_input$d2_session, cop_year= user_input$cop_year, include_no_prio = input$include_no_prio)
-      partners<-memo_getPartnersTable(input$ou, d2_session = user_input$d2_session)
+      partners<-memo_getPartnersTable(input$ou, d2_session = user_input$d2_session, cop_year = user_input$cop_year)
       shinyjs::enable("fetch")
       shinyjs::enable("downloadXLSX")
       shinyjs::enable("downloadPDF")
