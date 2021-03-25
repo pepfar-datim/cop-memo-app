@@ -39,8 +39,13 @@ d2_analyticsResponse <- function(url,remapCols=TRUE,d2_session) {
 
 indicatorOrder<-function(cop_year="2020") {
   
+  if ( !(cop_year %in% c("2020","2021")) ) {
+    stop("Unsupported COP year!")
+  }
+  
   if (cop_year == "2020") {
-    tibble::tribble(
+    
+    inds<-tibble::tribble(
       ~ind,~options, ~in_partner_table,
       "HTS_INDEX","<15",TRUE,
       "HTS_INDEX","15+",TRUE,
@@ -102,7 +107,7 @@ indicatorOrder<-function(cop_year="2020") {
   }
   
   if (cop_year == "2021") {
-    tibble::tribble(
+    inds<-tibble::tribble(
       ~ind,~options, ~in_partner_table,
       "HTS_INDEX","<15",TRUE,
       "HTS_INDEX","15+",TRUE,
@@ -164,6 +169,7 @@ indicatorOrder<-function(cop_year="2020") {
       "AGYW_PREV","Total",FALSE)  
   }
   
+  inds
 }
 
 getIndicatorGroups<-function(cop_year = "2020") {
@@ -198,10 +204,7 @@ getExistingPrioritization<-function(psnus,cop_year,d2_session) {
 }
 
 memo_getPrioritizationTable <- function(ou_uid="cDGPF739ZZr", d2_session, cop_year = "2020", include_no_prio = TRUE) {
-  
 
-  
-  
   ind_group<-getIndicatorGroups(cop_year)
   
   inds <-
