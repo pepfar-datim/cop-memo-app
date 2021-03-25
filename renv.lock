@@ -4,11 +4,7 @@
     "Repositories": [
       {
         "Name": "CRAN",
-        "URL": "https://cran.rstudio.com"
-      },
-      {
-        "Name": "pepfar",
-        "URL": "https://rstudio-package.ap.datim.org/prod/latest"
+        "URL": "https://cloud.r-project.org"
       }
     ]
   },
@@ -50,10 +46,10 @@
     },
     "Rcpp": {
       "Package": "Rcpp",
-      "Version": "1.0.5",
+      "Version": "1.0.6",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "125dc7a0ed375eb68c0ce533b48d291f"
+      "Hash": "dbb5e436998a7eba5a9d682060533338"
     },
     "XML": {
       "Package": "XML",
@@ -82,6 +78,13 @@
       "Source": "Repository",
       "Repository": "CRAN",
       "Hash": "543776ae6848fde2f48ff3816d0628bc"
+    },
+    "bslib": {
+      "Package": "bslib",
+      "Version": "0.2.4",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "4830a372b241d78ed6f53731ee3023ac"
     },
     "callr": {
       "Package": "callr",
@@ -134,10 +137,10 @@
     },
     "crayon": {
       "Package": "crayon",
-      "Version": "1.3.4",
+      "Version": "1.4.1",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "0d57bc8e27b7ba9e45dba825ebc0de6b"
+      "Hash": "e75525c55c70e5f4f78c9960a4b402e9"
     },
     "crosstalk": {
       "Package": "crosstalk",
@@ -162,40 +165,47 @@
     },
     "datapackcommons": {
       "Package": "datapackcommons",
-      "Version": "0.2.2.0.0.0.1612206672",
+      "Version": "0.2.3.0.0.0.1616664637",
       "Source": "Repository",
       "Repository": "RSPM",
-      "RemoteSha": "ff8b57047f28e52a0ea1dcb733382d9822ca55bc",
-      "Hash": "fbcc2990e075700a89e31232642aa605"
+      "RemoteSha": "165555f79ab1dfe59c76f964a00d0db13fd4b535",
+      "Hash": "61956555d4cd9a64788d651d4e4830e4"
     },
     "datapackr": {
       "Package": "datapackr",
-      "Version": "4.2.4.0.0.0.1614800630",
-      "Source": "Repository",
-      "Repository": "RSPM",
-      "Remotes": "jason-p-pickering/datim-validation,\npepfar-datim/data-pack-commons",
+      "Version": "4.2.4",
+      "Source": "GitHub",
+      "RemoteType": "github",
+      "RemoteHost": "api.github.com",
+      "RemoteUsername": "pepfar-datim",
+      "RemoteRepo": "datapackr",
+      "RemoteRef": "master",
       "RemoteSha": "fa5085a069bb55cb201ee9e900fa0ab3b8553cd1",
-      "Hash": "11ac0abb953d5c0cca550d9f00bc9b35"
+      "Hash": "ab7c1c6ffb3b8911596d0e686612ef98"
     },
     "datimutils": {
       "Package": "datimutils",
-      "Version": "0.1.1.0.0.0.1609918855",
-      "Source": "Repository",
-      "Repository": "RSPM",
+      "Version": "0.1.1",
+      "Source": "GitHub",
+      "RemoteType": "github",
+      "RemoteHost": "api.github.com",
+      "RemoteUsername": "pepfar-datim",
+      "RemoteRepo": "datimutils",
+      "RemoteRef": "master",
       "RemoteSha": "85195e3386904d8ca37ec9538554549051ea7e7d",
-      "Hash": "1f1f04a724bc41ce7df9ec42de54850d"
+      "Hash": "9724b1f17093e9ec571eda22a195a7d6"
     },
     "datimvalidation": {
       "Package": "datimvalidation",
-      "Version": "1.0.112",
+      "Version": "1.0.118",
       "Source": "GitHub",
       "RemoteType": "github",
       "RemoteHost": "api.github.com",
       "RemoteUsername": "jason-p-pickering",
       "RemoteRepo": "datim-validation",
       "RemoteRef": "master",
-      "RemoteSha": "1c3f196288984c4330a998d673376623a20e1401",
-      "Hash": "f0171b6b12769178ca1a0feb456ee239"
+      "RemoteSha": "588b19569b96a3c033acf653377373f08c3a32e0",
+      "Hash": "60743b9c14da692391585d3a2fda5613"
     },
     "digest": {
       "Package": "digest",
@@ -267,6 +277,13 @@
       "Repository": "CRAN",
       "Hash": "ad36e26eeeb7393886d8a0e19bc6ee42"
     },
+    "fs": {
+      "Package": "fs",
+      "Version": "1.5.0",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "44594a07a42e5f91fac9f93fda6d0109"
+    },
     "futile.logger": {
       "Package": "futile.logger",
       "Version": "1.4.3",
@@ -325,10 +342,10 @@
     },
     "htmltools": {
       "Package": "htmltools",
-      "Version": "0.5.0",
+      "Version": "0.5.1.1",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "7d651b7131794fe007b1ad6f21aaa401"
+      "Hash": "af2c2531e55df5cf230c4b5444fc973c"
     },
     "htmlwidgets": {
       "Package": "htmlwidgets",
@@ -350,6 +367,13 @@
       "Source": "Repository",
       "Repository": "CRAN",
       "Hash": "a525aba14184fec243f9eaec62fbed43"
+    },
+    "jquerylib": {
+      "Package": "jquerylib",
+      "Version": "0.1.3",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "5ff50b36f7f0832f8421745af333e73c"
     },
     "jsonlite": {
       "Package": "jsonlite",
@@ -645,6 +669,13 @@
       "Repository": "CRAN",
       "Hash": "a9795ccb2d608330e841998b67156764"
     },
+    "sass": {
+      "Package": "sass",
+      "Version": "0.3.1",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "3ef1adfe46b7b144b970d74ce33ab0d6"
+    },
     "scales": {
       "Package": "scales",
       "Version": "1.1.1",
@@ -668,10 +699,10 @@
     },
     "shinyWidgets": {
       "Package": "shinyWidgets",
-      "Version": "0.5.4",
+      "Version": "0.6.0",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "2d537ac92c7ad118263cbd797c07f180"
+      "Hash": "7dd5f3ee96c64a47fdbc6e437ff1c7e1"
     },
     "shinyjs": {
       "Package": "shinyjs",
