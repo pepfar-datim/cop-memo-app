@@ -638,7 +638,7 @@
     },
     "datapackcommons": {
       "Source": "RSPM",
-      "Repository": "https://github.com/pepfar-datim/data-pack-commons",
+      "Repository": "https://rstudio-package.ap.datim.org/prod/__linux__/bionic/latest",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
