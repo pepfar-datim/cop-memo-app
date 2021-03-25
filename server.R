@@ -1,4 +1,5 @@
-pacman::p_load(shiny,shinyjs,shinyWidgets,magrittr,knitr,kableExtra,gdtools,futile.logger,glue,dplyr,tibble,jsonlite,httr,tidyr,stringr,DT,datapackr,datimutils)
+pacman::p_load(shiny,shinyjs,shinyWidgets,magrittr,knitr,kableExtra,gdtools,futile.logger,glue,dplyr,tibble,jsonlite,httr,tidyr,stringr,DT,
+datapackr,datimutils)
               
 logger <- flog.logger()
 
@@ -20,7 +21,7 @@ shinyServer(function(input, output, session) {
       return(NULL)
     } else {
       
-      sendSweetAlert(
+      shinyWidgets::sendSweetAlert(
         session,
         title = "Retreiving data.",
         text = "This process may take a few minutes. Please wait.",
