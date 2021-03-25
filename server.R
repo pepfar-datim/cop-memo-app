@@ -202,8 +202,6 @@ shinyServer(function(input, output, session) {
         sidebarPanel(
           shinyjs::useShinyjs(),
           id = "side-panel",
-          tagList(wiki_url),
-          tags$hr(),
           selectInput("ou", "Operating Unit",getUserOperatingUnits(user_input$d2_session$user_orgunit)),
           tags$hr(),
           selectInput("cop_year","COP Year",c(2020,2021)),
