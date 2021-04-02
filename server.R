@@ -201,9 +201,9 @@ shinyServer(function(input, output, session) {
         sidebarPanel(
           shinyjs::useShinyjs(),
           id = "side-panel",
-          selectInput("ou", "Operating Unit",getUserOperatingUnits(user_input$d2_session$user_orgunit)),
-          tags$hr(),
           selectInput("cop_year","COP Year",c(2020,2021)),
+          tags$hr(),
+          selectInput("ou", "Operating Unit",datapack_config()$datapack_name ),
           tags$hr(),
           checkboxInput("include_no_prio","Show No Prioritization",value=TRUE),
           tags$hr(),
@@ -270,7 +270,7 @@ shinyServer(function(input, output, session) {
       
       d <- memo_data()
       
-      ou_name<-getOrgtunitNamefromUID(input$ou,user_input$d2_session)
+      ou_name<-input$ou
 
       #Transform all zeros to dashes
       d$prio %<>% 
