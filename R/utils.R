@@ -222,6 +222,37 @@ getIndicatorGroups<-function(cop_year = "2020") {
   }
 }
 
+getMemoIndicators<-function(cop_year,d2_session) {
+  
+  ind_group<-getIndicatorGroups(cop_year)
+  
+  inds <- 
+    datimutils::getIndicatorGroups(ind_group, 
+                                   d2_session = d2_session, 
+                                   fields = "indicators[id,shortName]") %>% 
+    dplyr::rename(indicator_name = shortName) %>% 
+    dplyr::mutate(indicator_name = stringr::str_replace_all(indicator_name,"COP2[01] ","")) %>%
+    dplyr::mutate(indicator_name = stringr::str_replace_all(indicator_name,"Targets ","")) %>%
+    dplyr::mutate(indicator_name = stringr::str_trim(indicator_name)) %>% 
+    tidyr::separate("indicator_name",into=c("Indicator","Numerator","Age"),sep=" ") %>% 
+    dplyr::mutate(Age = case_when(Age == "15-" ~ "<15",
+                                  Age == "15+" ~ "15+",
+                                  Age == "18-" ~"<18",
+                                  Age == "18+" ~ "18+",
+                                  TRUE ~ "Total")) %>% 
+    dplyr::mutate( Age = case_when( Indicator %in% c("CXCA_SCRN","OVC_HIVSTAT","KP_PREV","PMTCT_EID","KP_MAT","VMMC_CIRC","PrEP_NEW","PrEP_CURR","GEND_GBV")  ~ "Total",
+                                    TRUE ~ Age)) %>% 
+    dplyr::select(-Numerator) %>% 
+    suppressWarnings()
+  
+  if (class(inds) != "data.frame") { stop("No indicator metadata  was returned from DATIM")}
+  
+  if ( !all(unique(inds$Indicator) %in%  ( indicatorOrder(cop_year) %>% dplyr::pull(ind) %>% unique(.) ) ) ) {
+    stop("Unknown indicators found in metadata response.")
+  }
+  
+  inds
+}
 
 getExistingPrioritization<-function(psnus,cop_year,d2_session) {
     
@@ -248,25 +279,7 @@ memo_getPrioritizationTable <- function(datapack_name_input, d2_session, cop_yea
 
   ind_group<-getIndicatorGroups(cop_year)
   
-  inds <-
-    datimutils::getIndicatorGroups(ind_group, 
-                                   d2_session = d2_session, 
-                                   fields = "indicators[id,shortName]") %>% 
-    dplyr::rename(indicator_name = shortName) %>% 
-    dplyr::mutate(indicator_name = stringr::str_replace_all(indicator_name,"COP2[01] Targets ","")) %>%
-    dplyr::mutate(indicator_name = stringr::str_trim(indicator_name)) %>% 
-    tidyr::separate("indicator_name",into=c("Indicator","Numerator","Age"),sep=" ") %>% 
-    dplyr::mutate(Age = case_when(Age == "15-" ~ "<15",
-                                  Age == "15+" ~ "15+",
-                                  Age == "18-" ~"<18",
-                                  Age == "18+" ~ "18+",
-                                  TRUE ~ "Total")) %>% 
-    dplyr::mutate( Age = case_when( Indicator %in% c("CXCA_SCRN","OVC_HIVSTAT","KP_PREV","PMTCT_EID","KP_MAT","VMMC_CIRC","PrEP_NEW","PrEP_CURR","GEND_GBV")  ~ "Total",
-                                    TRUE ~ Age)) %>% 
-    dplyr::select(-Numerator)
-  
-  if (class(inds) != "data.frame") { stop("No indicator metadata  was returned from DATIM")}
-
+  inds <-getMemoIndicators(cop_year = cop_year,d2_session = d2_session)
   
   df_cols<-tibble::tribble(
     ~id,~shortName,~col_name,
@@ -296,7 +309,7 @@ memo_getPrioritizationTable <- function(datapack_name_input, d2_session, cop_yea
         dplyr::filter(country_uid %in% country_uids) %>% 
         dplyr::pull(psnu_uid) %>%  
         unique() 
- print(psnus)
+
    df<-datimutils::getAnalytics( ou = psnus,
                             dx=inds$id,
                             pe_f = paste0(cop_year,"Oct"),
@@ -406,29 +419,12 @@ memo_getPartnersTable<-function(datapack_name_input, d2_session, cop_year = "202
   
   ind_group<-getIndicatorGroups(cop_year)
   
-  inds <-
-    datimutils::getIndicatorGroups(ind_group, 
-                                   d2_session = d2_session, 
-                                   fields = "indicators[id,shortName]") %>% 
-    dplyr::rename(indicator_name = shortName) %>% 
-    dplyr::mutate(indicator_name = stringr::str_replace_all(indicator_name,"COP2[01] Targets ","")) %>%
-    dplyr::mutate(indicator_name = stringr::str_trim(indicator_name)) %>% 
-    tidyr::separate("indicator_name",into=c("Indicator","Numerator","Age"),sep=" ") %>% 
-    dplyr::mutate(Age = case_when(Age == "15-" ~ "<15",
-                                  Age == "15+" ~ "15+",
-                                  Age == "18-" ~"<18",
-                                  Age == "18+" ~ "18+",
-                                  TRUE ~ "Total")) %>% 
-    dplyr::mutate( Age = case_when( Indicator %in% c("CXCA_SCRN","OVC_HIVSTAT","KP_PREV","PMTCT_EID","KP_MAT","VMMC_CIRC","PrEP_NEW","PrEP_CURR","GEND_GBV")  ~ "Total",
-                                    TRUE ~ Age)) %>% 
-    dplyr::select(-Numerator)
+  inds <-getMemoIndicators(cop_year = cop_year,d2_session = d2_session)
   
   country_uids<-datapack_config() %>% 
     dplyr::filter( `datapack_name` == datapack_name_input) %>% 
     dplyr::pull(country_uids) %>% 
     unlist()
-  
-
   
   df<-datimutils::getAnalytics( "dimension=SH885jaRe0o",
                                 dx=inds$id,
@@ -440,6 +436,7 @@ memo_getPartnersTable<-function(datapack_name_input, d2_session, cop_year = "202
   if (is.null(df)) {return(NULL)}
   
   partners_agencies<-getAgencyPartnersMechsView(d2_session)
+  
   d_partners <- df   %>% 
     dplyr::mutate(Value = as.numeric(Value)) %>% 
     dplyr::inner_join(inds,by=c(`Data` = "id")) %>% 
@@ -469,16 +466,17 @@ memo_getPartnersTable<-function(datapack_name_input, d2_session, cop_year = "202
     dplyr::filter(in_partner_table) %>%
     dplyr::select(ind,options) %>% 
     dplyr::mutate(indicator_name = factor(paste(ind, options)))
-  
+
   #Return the final data frame 
   dplyr::bind_rows(d_totals,d_partners) %>% 
     dplyr::mutate(indicator_name = paste(`Indicator`, `Age`)) %>% 
-    dplyr::mutate(indicator_name = factor(indicator_name,levels=unique(d_indicators$indicator_name))) %>% 
+    #dplyr::mutate(indicator_name = factor(indicator_name,levels=unique(d_indicators$indicator_name))) %>% 
     dplyr::mutate(`Label` = indicator_name) %>% 
     dplyr::rename(`Funding Agency` = `Agency`) %>% 
   dplyr::arrange(`Funding Agency`,`Partner`,indicator_name) %>% 
     dplyr::select(`Funding Agency`,`Partner`,`Label`,`Value`) %>% 
-    tidyr::pivot_wider(names_from = `Label`, values_from = `Value`, values_fill = 0) 
+    tidyr::pivot_wider(names_from = `Label`, values_from = `Value`, values_fill = 0) %>% 
+    dplyr::select(`Funding Agency`,`Partner`,d_indicators$indicator_name)
   
 }
  
