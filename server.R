@@ -1,6 +1,8 @@
 pacman::p_load(shiny,shinyjs,shinyWidgets,magrittr,knitr,kableExtra,gdtools,futile.logger,glue,dplyr,tibble,jsonlite,httr,tidyr,stringr,DT,
 datapackr,datimutils)
               
+options(scipen = 999)
+
 logger <- flog.logger()
 
 if (!file.exists(Sys.getenv("LOG_PATH"))) {
