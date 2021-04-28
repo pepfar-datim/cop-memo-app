@@ -86,6 +86,13 @@
       "Repository": "CRAN",
       "Hash": "4830a372b241d78ed6f53731ee3023ac"
     },
+    "cachem": {
+      "Package": "cachem",
+      "Version": "1.0.4",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "2703a46dcabfb902f10060b2bca9f708"
+    },
     "callr": {
       "Package": "callr",
       "Version": "3.5.1",
@@ -165,23 +172,27 @@
     },
     "datapackcommons": {
       "Package": "datapackcommons",
-      "Version": "0.2.3.0.0.0.1616664637",
-      "Source": "Repository",
-      "Repository": "RSPM",
-      "RemoteSha": "165555f79ab1dfe59c76f964a00d0db13fd4b535",
-      "Hash": "61956555d4cd9a64788d651d4e4830e4"
+      "Version": "0.2.3",
+      "Source": "GitHub",
+      "RemoteType": "github",
+      "RemoteHost": "api.github.com",
+      "RemoteUsername": "pepfar-datim",
+      "RemoteRepo": "data-pack-commons",
+      "RemoteRef": "master",
+      "RemoteSha": "0a37ed3e242db9a240a7e5708f869ba3508cb5d1",
+      "Hash": "787f6d132b1bfa2e1f775e179fc5cdf4"
     },
     "datapackr": {
       "Package": "datapackr",
-      "Version": "4.2.4",
+      "Version": "4.4.0",
       "Source": "GitHub",
       "RemoteType": "github",
       "RemoteHost": "api.github.com",
       "RemoteUsername": "pepfar-datim",
       "RemoteRepo": "datapackr",
-      "RemoteRef": "master",
-      "RemoteSha": "fa5085a069bb55cb201ee9e900fa0ab3b8553cd1",
-      "Hash": "ab7c1c6ffb3b8911596d0e686612ef98"
+      "RemoteRef": "testing",
+      "RemoteSha": "06e15ec5bf549e8ad95ed94d2de1b041b8e84267",
+      "Hash": "c0e30c4cf875f3b99b6f8f08eeb598d5"
     },
     "datimutils": {
       "Package": "datimutils",
@@ -204,8 +215,8 @@
       "RemoteUsername": "jason-p-pickering",
       "RemoteRepo": "datim-validation",
       "RemoteRef": "master",
-      "RemoteSha": "588b19569b96a3c033acf653377373f08c3a32e0",
-      "Hash": "60743b9c14da692391585d3a2fda5613"
+      "RemoteSha": "61e5ff51d8f31f786c765915c5b0b8d28a52109e",
+      "Hash": "a1e2ae327d60506dcc752e8d95ccdbef"
     },
     "digest": {
       "Package": "digest",
@@ -692,10 +703,10 @@
     },
     "shiny": {
       "Package": "shiny",
-      "Version": "1.5.0",
+      "Version": "1.6.0",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "ee4ed72d7a5047d9e73cf922ad66e9c9"
+      "Hash": "6e3b6ae7fe02b5859e4bb277f218b8ae"
     },
     "shinyWidgets": {
       "Package": "shinyWidgets",

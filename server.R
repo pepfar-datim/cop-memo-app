@@ -322,6 +322,11 @@ shinyServer(function(input, output, session) {
       doc<-body_add_break(doc,pos="after")
       
       #Partners tables
+      
+      d$partners %<>% 
+        dplyr::mutate_if(is.numeric, 
+                         function(x) ifelse(x == 0 ,"-",formatC(x, format="f", big.mark=",",digits = 0))) 
+      
       sub_heading<-names(d$partners)[3:length(d$partners)] %>% 
         stringr::str_split(.," ") %>% 
         purrr::map(purrr::pluck(2)) %>%
