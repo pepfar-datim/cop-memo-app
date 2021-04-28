@@ -179,7 +179,7 @@
     },
     "XML": {
       "Source": "CRAN",
-      "Repository": "http://www.omegahat.net/RSXML",
+      "Repository": null,
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -708,20 +708,20 @@
       "Repository": null,
       "GithubRepo": "datapackr",
       "GithubUsername": "pepfar-datim",
-      "GithubRef": "testing",
-      "GithubSha1": "06e15ec5bf549e8ad95ed94d2de1b041b8e84267",
+      "GithubRef": "master",
+      "GithubSha1": "32456e75604c21837496ff72fb02cd59c05fd563",
       "description": {
         "Package": "datapackr",
         "Type": "Package",
         "Title": "A Package that Packs and Unpacks all Data Packs",
-        "Version": "4.4.0",
-        "Date": "2021-4-15",
+        "Version": "4.4.1",
+        "Date": "2021-4-23",
         "Authors@R": "c(\n    person(\"Scott\", \"Jackson\", email = \"sjackson@baosystems.com\",\n        role = c(\"aut\", \"cre\")),\n    person(\"Jason\", \"Pickering\", email = \"jason.p.pickering@gmail.com\",\n        role = c(\"aut\", \"rev\")),\n    person(\"Sam\", \"Garman\", email = \"sgarman@baosystems.com\",\n        role = c(\"aut\")),\n    person(\"William\", \"Shiflett\", email = \"wshiflett@guidehouse.com\",\n        role = c(\"ctb\")),\n    person(\"Chris\", \"Nemarich\", email = \"cnemarich@guidehouse.com\",\n        role = c(\"ctb\")),\n    person(\"Christian\", \"Domaas\", email = \"cdomaas@baosystems.com\",\n        role = c(\"ctb\")),\n    person(\"Max\", \"Chandler\", email = \"mchandler@baosystems.com\",\n        role = c(\"ctb\"))\n  )",
         "Description": "Generates and processes PEPFAR Data Packs and Site Tools.",
         "URL": "https://github.com/pepfar-datim/datapackr",
         "BugReports": "https://github.com/pepfar-datim/datapackr",
         "Depends": "R (>= 3.6.0)",
-        "Imports": "dplyr (>= 0.8.3),\ntidyr (>= 1.0.0),\ntidyxl (>= 1.0.4),\nreadxl (>= 1.3.1),\nreadr (>= 1.3.1),\njsonlite (>= 1.6),\npurrr (>= 0.3.3),\ntibble (>= 2.1.3),\nstringr (>= 1.4.0),\nstringi,\nhttr (>= 1.4.0),\nrlist (>= 0.4.6.1),\nmagrittr (>= 1.5),\ncrayon (>= 1.3.4),\ngetPass (>= 0.2-2),\nopenxlsx,\nlazyeval,\nstats,\nlubridate (>= 1.7.4),\ndata.table (>= 1.12.8),\nscales (>= 1.0.0),\ndatimvalidation,\ndatapackcommons (>= 0.2.0),\ntidyselect (>= 0.2.5),\nglue (>= 1.3.1),\nrlang (>= 0.4.2),\nassertthat,\nplyr",
+        "Imports": "dplyr (>= 0.8.3),\ntidyr (>= 1.0.0),\ntidyxl (>= 1.0.4),\nreadxl (>= 1.3.1),\nreadr (>= 1.3.1),\njsonlite (>= 1.6),\npurrr (>= 0.3.3),\ntibble (>= 2.1.3),\nstringr (>= 1.4.0),\nstringi,\nhttr (>= 1.4.0),\nrlist (>= 0.4.6.1),\nmagrittr (>= 1.5),\ncrayon (>= 1.3.4),\ngetPass (>= 0.2-2),\nopenxlsx,\nlazyeval,\nstats,\nlubridate (>= 1.7.4),\ndata.table (>= 1.12.8),\nscales (>= 1.0.0),\ndatimvalidation,\ndatapackcommons (>= 0.2.0),\ntidyselect (>= 0.2.5),\nglue (>= 1.3.1),\nrlang (>= 0.4.2),\nassertthat,\nplyr,\nfuzzyjoin(>= 0.1.6)",
         "Suggests": "devtools (>= 2.0.1),\nhttptest,\ntestthat",
         "License": "GPL-2",
         "Encoding": "UTF-8",
@@ -729,18 +729,18 @@
         "RoxygenNote": "7.1.1",
         "Author": "Scott Jackson [aut, cre],\n  Jason Pickering [aut, rev],\n  Sam Garman [aut],\n  William Shiflett [ctb],\n  Chris Nemarich [ctb],\n  Christian Domaas [ctb],\n  Max Chandler [ctb]",
         "Maintainer": "Scott Jackson <sjackson@baosystems.com>",
-        "Built": "R 3.6.3; ; 2021-04-20 04:56:33 UTC; unix",
+        "Built": "R 3.6.3; ; 2021-04-28 14:07:24 UTC; unix",
         "RemoteType": "github",
         "RemoteHost": "api.github.com",
         "RemoteUsername": "pepfar-datim",
         "RemoteRepo": "datapackr",
-        "RemoteRef": "testing",
-        "RemoteSha": "06e15ec5bf549e8ad95ed94d2de1b041b8e84267",
+        "RemoteRef": "master",
+        "RemoteSha": "32456e75604c21837496ff72fb02cd59c05fd563",
         "GithubHost": "api.github.com",
         "GithubRepo": "datapackr",
         "GithubUsername": "pepfar-datim",
-        "GithubRef": "testing",
-        "GithubSHA1": "06e15ec5bf549e8ad95ed94d2de1b041b8e84267"
+        "GithubRef": "master",
+        "GithubSHA1": "32456e75604c21837496ff72fb02cd59c05fd563"
       }
     },
     "datimutils": {
@@ -790,13 +790,13 @@
       "GithubRepo": "datim-validation",
       "GithubUsername": "jason-p-pickering",
       "GithubRef": "master",
-      "GithubSha1": "61e5ff51d8f31f786c765915c5b0b8d28a52109e",
+      "GithubSha1": "bc550850e5f767c23e9cc72938438ff7207dba54",
       "description": {
         "Package": "datimvalidation",
         "Type": "Package",
         "Title": "External Validation Routines for Data Payloads in DATIM",
-        "Version": "1.0.118",
-        "Date": "2021-03-22",
+        "Version": "1.1.2",
+        "Date": "2021-04-27",
         "Author": "Jason P. Pickering",
         "Maintainer": "Jason P. Pickering <jason.p.pickering@gmail.com>",
         "Description": "A comprehensive set of tools to validate data payloads\n        intended for import into 'DATIM' <https://www.datim.org/>.\n        DATIM is the 'PEPFAR' <https://www.state.gov/pepfar/> specific\n        instance of 'DHIS2' <https://www.dhis2.org/>. These scripts are\n        provided for the 'PEPFAR' data exchange community in order to\n        validate their prospective data payloads prior to submission\n        for import.",
@@ -810,18 +810,18 @@
         "Suggests": "doMC (>= 1.3.5), foreach (>= 1.4.4), httptest (>= 3.2.2),\nknitr (>= 1.21), methods, rmarkdown (>= 1.11), roxygen2 (>=\n6.1.1), tcltk, testthat (>= 2.0.1), covr (>= 3.2.1), stringi\n(>= 1.3.1), rprojroot (>= 1.3-2)",
         "VignetteBuilder": "knitr",
         "RoxygenNote": "7.1.1",
-        "Built": "R 3.6.3; ; 2021-03-30 08:40:19 UTC; unix",
+        "Built": "R 3.6.3; ; 2021-04-28 14:05:16 UTC; unix",
         "RemoteType": "github",
         "RemoteHost": "api.github.com",
         "RemoteUsername": "jason-p-pickering",
         "RemoteRepo": "datim-validation",
         "RemoteRef": "master",
-        "RemoteSha": "61e5ff51d8f31f786c765915c5b0b8d28a52109e",
+        "RemoteSha": "bc550850e5f767c23e9cc72938438ff7207dba54",
         "GithubHost": "api.github.com",
         "GithubRepo": "datim-validation",
         "GithubUsername": "jason-p-pickering",
         "GithubRef": "master",
-        "GithubSHA1": "61e5ff51d8f31f786c765915c5b0b8d28a52109e"
+        "GithubSHA1": "bc550850e5f767c23e9cc72938438ff7207dba54"
       }
     },
     "digest": {
@@ -1135,6 +1135,39 @@
         "Built": "R 3.6.3; x86_64-pc-linux-gnu; 2020-08-12 12:50:21 UTC; unix"
       }
     },
+    "fuzzyjoin": {
+      "Source": "CRAN",
+      "Repository": "https://cloud.r-project.org",
+      "GithubRepo": null,
+      "GithubUsername": null,
+      "GithubRef": null,
+      "GithubSha1": null,
+      "description": {
+        "Package": "fuzzyjoin",
+        "Type": "Package",
+        "Title": "Join Tables Together on Inexact Matching",
+        "Version": "0.1.6",
+        "Authors@R": "c(person(\"David\", \"Robinson\", email = \"admiral.david@gmail.com\",\n    role = c(\"aut\", \"cre\")),\n          person(\"Jennifer\", \"Bryan\", email = \"jenny@rstudio.com\", role = \"ctb\"),\n          person(\"Joran\", \"Elias\", email = \"statisticalskier@gmail.com\", role = \"ctb\"))",
+        "Maintainer": "David Robinson <admiral.david@gmail.com>",
+        "Description": "Join tables together based not on whether columns\n  match exactly, but whether they are similar by some comparison.\n  Implementations include string distance and regular expression\n  matching.",
+        "License": "MIT + file LICENSE",
+        "Encoding": "UTF-8",
+        "LazyData": "TRUE",
+        "VignetteBuilder": "knitr",
+        "Depends": "R (>= 2.10)",
+        "Imports": "stringdist, stringr, dplyr (>= 0.8.1), tidyr (>= 0.4.0),\npurrr, geosphere, tibble",
+        "Suggests": "testthat, knitr, ggplot2, qdapDictionaries, readr, rvest,\nrmarkdown, maps, IRanges, covr",
+        "RoxygenNote": "7.1.0",
+        "URL": "https://github.com/dgrtwo/fuzzyjoin",
+        "BugReports": "https://github.com/dgrtwo/fuzzyjoin/issues",
+        "NeedsCompilation": "no",
+        "Packaged": "2020-05-15 03:30:53 UTC; drobinson",
+        "Author": "David Robinson [aut, cre],\n  Jennifer Bryan [ctb],\n  Joran Elias [ctb]",
+        "Repository": "CRAN",
+        "Date/Publication": "2020-05-15 05:50:21 UTC",
+        "Built": "R 3.6.3; ; 2021-04-21 10:01:23 UTC; unix"
+      }
+    },
     "gdtools": {
       "Source": "CRAN",
       "Repository": "https://cloud.r-project.org",
@@ -1195,6 +1228,35 @@
         "Repository": "CRAN",
         "Date/Publication": "2020-10-31 06:10:15 UTC",
         "Built": "R 3.6.3; ; 2020-11-24 10:01:24 UTC; unix"
+      }
+    },
+    "geosphere": {
+      "Source": "CRAN",
+      "Repository": "https://cloud.r-project.org",
+      "GithubRepo": null,
+      "GithubUsername": null,
+      "GithubRef": null,
+      "GithubSha1": null,
+      "description": {
+        "Package": "geosphere",
+        "Type": "Package",
+        "Title": "Spherical Trigonometry",
+        "Version": "1.5-10",
+        "Date": "2019-05-25",
+        "Imports": "sp",
+        "Depends": "R (>= 3.0.0)",
+        "Suggests": "methods, raster",
+        "Authors@R": "c(\n\tperson(\"Robert J.\", \"Hijmans\", role = c(\"cre\", \"aut\"),  email = \"r.hijmans@gmail.com\"),\n\tperson(\"Ed\", \"Williams\", role = \"ctb\"),\n\tperson(\"Chris\", \"Vennes\", role = \"ctb\"))",
+        "Description": "Spherical trigonometry for geographic applications. That is, compute distances and related measures for angular (longitude/latitude) locations. ",
+        "License": "GPL (>= 3)",
+        "LazyLoad": "yes",
+        "NeedsCompilation": "yes",
+        "Packaged": "2019-05-26 01:10:19 UTC; rhijm",
+        "Author": "Robert J. Hijmans [cre, aut],\n  Ed Williams [ctb],\n  Chris Vennes [ctb]",
+        "Maintainer": "Robert J. Hijmans <r.hijmans@gmail.com>",
+        "Repository": "CRAN",
+        "Date/Publication": "2019-05-26 04:50:14 UTC",
+        "Built": "R 3.6.3; x86_64-pc-linux-gnu; 2021-04-21 10:01:19 UTC; unix"
       }
     },
     "getPass": {
@@ -1630,6 +1692,39 @@
         "Repository": "CRAN",
         "Date/Publication": "2020-06-05 10:10:13 UTC",
         "Built": "R 3.6.3; x86_64-pc-linux-gnu; 2020-08-12 12:56:33 UTC; unix"
+      }
+    },
+    "lattice": {
+      "Source": "CRAN",
+      "Repository": "https://cloud.r-project.org",
+      "GithubRepo": null,
+      "GithubUsername": null,
+      "GithubRef": null,
+      "GithubSha1": null,
+      "description": {
+        "Package": "lattice",
+        "Version": "0.20-41",
+        "Date": "2020-04-01",
+        "Priority": "recommended",
+        "Title": "Trellis Graphics for R",
+        "Authors@R": "c(person(\"Deepayan\", \"Sarkar\", role = c(\"aut\", \"cre\"),\n\t            email = \"deepayan.sarkar@r-project.org\",\n\t\t    comment = c(ORCID = \"0000-0003-4107-1553\")),\n              person(\"Felix\", \"Andrews\", role = \"ctb\"),\n\t      person(\"Kevin\", \"Wright\", role = \"ctb\", comment = \"documentation\"),\n\t      person(\"Neil\", \"Klepeis\", role = \"ctb\"),\n              person(\"Paul\", \"Murrell\", role = \"ctb\", email = \"paul@stat.auckland.ac.nz\"))",
+        "Description": "A powerful and elegant high-level data visualization\n  system inspired by Trellis graphics, with an emphasis on\n  multivariate data. Lattice is sufficient for typical graphics needs,\n  and is also flexible enough to handle most nonstandard requirements.\n  See ?Lattice for an introduction.",
+        "Depends": "R (>= 3.0.0)",
+        "Suggests": "KernSmooth, MASS, latticeExtra",
+        "Imports": "grid, grDevices, graphics, stats, utils",
+        "Enhances": "chron",
+        "LazyLoad": "yes",
+        "LazyData": "yes",
+        "License": "GPL (>= 2)",
+        "URL": "http://lattice.r-forge.r-project.org/",
+        "BugReports": "https://github.com/deepayan/lattice/issues",
+        "NeedsCompilation": "yes",
+        "Packaged": "2020-04-02 10:52:37 UTC; deepayan",
+        "Author": "Deepayan Sarkar [aut, cre] (<https://orcid.org/0000-0003-4107-1553>),\n  Felix Andrews [ctb],\n  Kevin Wright [ctb] (documentation),\n  Neil Klepeis [ctb],\n  Paul Murrell [ctb]",
+        "Maintainer": "Deepayan Sarkar <deepayan.sarkar@r-project.org>",
+        "Repository": "CRAN",
+        "Date/Publication": "2020-04-02 12:00:06 UTC",
+        "Built": "R 3.6.3; x86_64-pc-linux-gnu; \"Thu, 09 Apr 2020 14:19:52 +0000\"; unix"
       }
     },
     "lazyeval": {
@@ -2765,6 +2860,68 @@
         "Built": "R 3.6.0; x86_64-pc-linux-gnu; 2019-02-18 11:36:34 UTC; unix"
       }
     },
+    "sp": {
+      "Source": "CRAN",
+      "Repository": "https://cloud.r-project.org",
+      "GithubRepo": null,
+      "GithubUsername": null,
+      "GithubRef": null,
+      "GithubSha1": null,
+      "description": {
+        "Package": "sp",
+        "Version": "1.4-5",
+        "Title": "Classes and Methods for Spatial Data",
+        "Authors@R": "c(person(\"Edzer\", \"Pebesma\", role = c(\"aut\", \"cre\"),\n\t\t\t\temail = \"edzer.pebesma@uni-muenster.de\"),\n\t\t\tperson(\"Roger\", \"Bivand\", role = \"aut\",\n            \temail = \"Roger.Bivand@nhh.no\"),\n\t\t\tperson(\"Barry\", \"Rowlingson\", role = \"ctb\"),\n\t\t\tperson(\"Virgilio\", \"Gomez-Rubio\", role = \"ctb\"),\n\t\t\tperson(\"Robert\", \"Hijmans\", role = \"ctb\"),\n\t\t\tperson(\"Michael\", \"Sumner\", role = \"ctb\"),\n\t\t\tperson(\"Don\", \"MacQueen\", role = \"ctb\"),\n\t\t\tperson(\"Jim\", \"Lemon\", role = \"ctb\"),\n                        person(\"Finn\", \"Lindgren\", role = \"ctb\"),\n\t\t\tperson(\"Josh\", \"O'Brien\", role = \"ctb\"),\n\t\t\tperson(\"Joseph\", \"O'Rourke\", role = \"ctb\"))",
+        "Depends": "R (>= 3.0.0), methods",
+        "Imports": "utils, stats, graphics, grDevices, lattice, grid",
+        "Suggests": "RColorBrewer, rgdal (>= 1.2-3), rgeos (>= 0.3-13), gstat,\nmaptools, deldir",
+        "Description": "Classes and methods for spatial\n  data; the classes document where the spatial location information\n  resides, for 2D or 3D data. Utility functions are provided, e.g. for\n  plotting data as maps, spatial selection, as well as methods for\n  retrieving coordinates, for subsetting, print, summary, etc.",
+        "License": "GPL (>= 2)",
+        "URL": "https://github.com/edzer/sp/ https://edzer.github.io/sp/",
+        "BugReports": "https://github.com/edzer/sp/issues",
+        "Collate": "bpy.colors.R AAA.R Class-CRS.R CRS-methods.R Class-Spatial.R\nSpatial-methods.R projected.R Class-SpatialPoints.R\nSpatialPoints-methods.R Class-SpatialPointsDataFrame.R\nSpatialPointsDataFrame-methods.R Class-SpatialMultiPoints.R\nSpatialMultiPoints-methods.R\nClass-SpatialMultiPointsDataFrame.R\nSpatialMultiPointsDataFrame-methods.R Class-GridTopology.R\nClass-SpatialGrid.R Class-SpatialGridDataFrame.R\nClass-SpatialLines.R SpatialLines-methods.R\nClass-SpatialLinesDataFrame.R SpatialLinesDataFrame-methods.R\nClass-SpatialPolygons.R Class-SpatialPolygonsDataFrame.R\nSpatialPolygons-methods.R SpatialPolygonsDataFrame-methods.R\nGridTopology-methods.R SpatialGrid-methods.R\nSpatialGridDataFrame-methods.R SpatialPolygons-internals.R\npoint.in.polygon.R SpatialPolygons-displayMethods.R zerodist.R\nimage.R stack.R bubble.R mapasp.R select.spatial.R gridded.R\nasciigrid.R spplot.R over.R spsample.R recenter.R dms.R\ngridlines.R spdists.R rbind.R flipSGDF.R chfids.R loadmeuse.R\ncompassRose.R surfaceArea.R spOptions.R subset.R disaggregate.R\nsp_spat1.R merge.R aggregate.R",
+        "NeedsCompilation": "yes",
+        "Packaged": "2021-01-10 11:49:13 UTC; edzer",
+        "Author": "Edzer Pebesma [aut, cre],\n  Roger Bivand [aut],\n  Barry Rowlingson [ctb],\n  Virgilio Gomez-Rubio [ctb],\n  Robert Hijmans [ctb],\n  Michael Sumner [ctb],\n  Don MacQueen [ctb],\n  Jim Lemon [ctb],\n  Finn Lindgren [ctb],\n  Josh O'Brien [ctb],\n  Joseph O'Rourke [ctb]",
+        "Maintainer": "Edzer Pebesma <edzer.pebesma@uni-muenster.de>",
+        "Repository": "CRAN",
+        "Date/Publication": "2021-01-10 13:10:02 UTC",
+        "Built": "R 3.6.3; x86_64-pc-linux-gnu; 2021-04-21 10:01:10 UTC; unix"
+      }
+    },
+    "stringdist": {
+      "Source": "CRAN",
+      "Repository": "https://cloud.r-project.org",
+      "GithubRepo": null,
+      "GithubUsername": null,
+      "GithubRef": null,
+      "GithubSha1": null,
+      "description": {
+        "Package": "stringdist",
+        "Maintainer": "Mark van der Loo <mark.vanderloo@gmail.com>",
+        "License": "GPL-3",
+        "Title": "Approximate String Matching, Fuzzy Text Search, and String\nDistance Functions",
+        "LazyData": "no",
+        "Type": "Package",
+        "LazyLoad": "yes",
+        "Authors@R": "c( person(\"Mark\", \"van der Loo\", role=c(\"aut\",\"cre\")\n             , email=\"mark.vanderloo@gmail.com\"\n             , comment= c(ORCID=\"0000-0002-9807-4686\"))\n            , person(\"Jan\", \"van der Laan\", role=\"ctb\")\n            , person(\"R Core Team\",\"\"     , role=\"ctb\")\n            , person(\"Nick\",\"Logan\"       , role=\"ctb\")\n            , person(\"Chris\",\"Muir\"       , role=\"ctb\")\n            , person(\"Johannes\", \"Gruber\" , role=\"ctb\"))",
+        "Description": "Implements an approximate string matching version of R's native\n    'match' function. Also offers fuzzy text search based on various string\n     distance measures. Can calculate various string distances based on edits\n    (Damerau-Levenshtein, Hamming, Levenshtein, optimal sting alignment), qgrams (q-\n    gram, cosine, jaccard distance) or heuristic metrics (Jaro, Jaro-Winkler). An\n    implementation of soundex is provided as well. Distances can be computed between\n    character vectors while taking proper care of encoding or between integer\n    vectors representing generic sequences. This package is built for speed and\n    runs in parallel by using 'openMP'. An API for C or C++ is exposed as well.\n    Reference: MPJ van der Loo (2014) <doi:10.32614/RJ-2014-011>.",
+        "Version": "0.9.6.3",
+        "Depends": "R (>= 2.15.3)",
+        "URL": "https://github.com/markvanderloo/stringdist",
+        "BugReports": "https://github.com/markvanderloo/stringdist/issues",
+        "Suggests": "tinytest",
+        "Imports": "parallel",
+        "Encoding": "UTF-8",
+        "RoxygenNote": "7.1.1",
+        "NeedsCompilation": "yes",
+        "Packaged": "2020-10-09 07:55:56 UTC; mark",
+        "Author": "Mark van der Loo [aut, cre] (<https://orcid.org/0000-0002-9807-4686>),\n  Jan van der Laan [ctb],\n  R Core Team [ctb],\n  Nick Logan [ctb],\n  Chris Muir [ctb],\n  Johannes Gruber [ctb]",
+        "Repository": "CRAN",
+        "Date/Publication": "2020-10-09 10:30:03 UTC",
+        "Built": "R 3.6.3; x86_64-pc-linux-gnu; 2020-10-14 09:27:21 UTC; unix"
+      }
+    },
     "stringi": {
       "Source": "CRAN",
       "Repository": "https://cloud.r-project.org",
@@ -3453,13 +3610,13 @@
       "checksum": "bbea794010c5f11c7889b588dcfaff8c"
     },
     "packrat/desc/datapackr": {
-      "checksum": "afee2a4a6272b2ed284c1441dba77a67"
+      "checksum": "c96790354b739ab0cec690f1d844144a"
     },
     "packrat/desc/datimutils": {
       "checksum": "af4b5435e1d5d442e9f4becd9569f239"
     },
     "packrat/desc/datimvalidation": {
-      "checksum": "be24b8f3b0e80faf032a91f41abdc6a4"
+      "checksum": "4bfbdb1caf30dfeff2fa58641c8f91d1"
     },
     "packrat/desc/digest": {
       "checksum": "13343abd600e2f9e725416d7ec9ab489"
@@ -3494,11 +3651,17 @@
     "packrat/desc/fs": {
       "checksum": "44eed12670b4da71261793f3ab1dddb0"
     },
+    "packrat/desc/fuzzyjoin": {
+      "checksum": "64fc643008e50d3cbc59161550337290"
+    },
     "packrat/desc/gdtools": {
       "checksum": "543a615487e0e3a067bdcf5473c9ab39"
     },
     "packrat/desc/generics": {
       "checksum": "872c9b89fc4ff6b1e522a25a150cd738"
+    },
+    "packrat/desc/geosphere": {
+      "checksum": "2fb977d4b21453ffac8bb3dac449cd30"
     },
     "packrat/desc/getPass": {
       "checksum": "68645557807b2681977391e8a6e315aa"
@@ -3544,6 +3707,9 @@
     },
     "packrat/desc/later": {
       "checksum": "b38bf686587e91ea7738175a411de777"
+    },
+    "packrat/desc/lattice": {
+      "checksum": "a0413837c7fad52c6c0e15222ee70ad5"
     },
     "packrat/desc/lazyeval": {
       "checksum": "5fb8b9e5f98b2c57c8432617f6db6039"
@@ -3662,6 +3828,12 @@
     "packrat/desc/sourcetools": {
       "checksum": "507765f0e40d0810774be848455a2cf6"
     },
+    "packrat/desc/sp": {
+      "checksum": "27525c4411c9cf43d1103fbbd76ddf6a"
+    },
+    "packrat/desc/stringdist": {
+      "checksum": "16493276667c09d3410f1abac3d8201b"
+    },
     "packrat/desc/stringi": {
       "checksum": "a3f2c1706616758266feec3fb877caef"
     },
@@ -3723,7 +3895,7 @@
       "checksum": "c0e692997328fca72b0a258d351e8647"
     },
     "packrat/packrat.lock": {
-      "checksum": "5e563e3e3300c629ff968c500b85a6c4"
+      "checksum": "1a77c65460dc1e3d12ad6918c94af598"
     },
     "pepfar.png": {
       "checksum": "cd04d9e778b00519de3e0e2afc97eb28"

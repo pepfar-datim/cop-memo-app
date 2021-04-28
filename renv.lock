@@ -184,15 +184,15 @@
     },
     "datapackr": {
       "Package": "datapackr",
-      "Version": "4.4.0",
+      "Version": "4.4.1",
       "Source": "GitHub",
       "RemoteType": "github",
       "RemoteHost": "api.github.com",
       "RemoteUsername": "pepfar-datim",
       "RemoteRepo": "datapackr",
-      "RemoteRef": "testing",
-      "RemoteSha": "06e15ec5bf549e8ad95ed94d2de1b041b8e84267",
-      "Hash": "c0e30c4cf875f3b99b6f8f08eeb598d5"
+      "RemoteRef": "master",
+      "RemoteSha": "32456e75604c21837496ff72fb02cd59c05fd563",
+      "Hash": "822878d5ee75bc5d2a4744460646495f"
     },
     "datimutils": {
       "Package": "datimutils",
@@ -208,15 +208,15 @@
     },
     "datimvalidation": {
       "Package": "datimvalidation",
-      "Version": "1.0.118",
+      "Version": "1.1.2",
       "Source": "GitHub",
       "RemoteType": "github",
       "RemoteHost": "api.github.com",
       "RemoteUsername": "jason-p-pickering",
       "RemoteRepo": "datim-validation",
       "RemoteRef": "master",
-      "RemoteSha": "61e5ff51d8f31f786c765915c5b0b8d28a52109e",
-      "Hash": "a1e2ae327d60506dcc752e8d95ccdbef"
+      "RemoteSha": "bc550850e5f767c23e9cc72938438ff7207dba54",
+      "Hash": "949e926690723023b86ea93bf7161d22"
     },
     "digest": {
       "Package": "digest",
@@ -309,6 +309,13 @@
       "Repository": "CRAN",
       "Hash": "0d9bf02413ddc2bbe8da9ce369dcdd2b"
     },
+    "fuzzyjoin": {
+      "Package": "fuzzyjoin",
+      "Version": "0.1.6",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "24af5fc67dbeaac6d776a8e6630aacd9"
+    },
     "gdtools": {
       "Package": "gdtools",
       "Version": "0.2.3",
@@ -322,6 +329,13 @@
       "Source": "Repository",
       "Repository": "CRAN",
       "Hash": "4d243a9c10b00589889fe32314ffd902"
+    },
+    "geosphere": {
+      "Package": "geosphere",
+      "Version": "1.5-10",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "eee36211f74e4dbc80eae9d504b58f0b"
     },
     "getPass": {
       "Package": "getPass",
@@ -434,6 +448,13 @@
       "Source": "Repository",
       "Repository": "CRAN",
       "Hash": "d0a62b247165aabf397fded504660d8a"
+    },
+    "lattice": {
+      "Package": "lattice",
+      "Version": "0.20-41",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "fbd9285028b0263d76d18c95ae51a53d"
     },
     "lazyeval": {
       "Package": "lazyeval",
@@ -735,6 +756,20 @@
       "Source": "Repository",
       "Repository": "CRAN",
       "Hash": "947e4e02a79effa5d512473e10f41797"
+    },
+    "sp": {
+      "Package": "sp",
+      "Version": "1.4-5",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "dfd843ee98246cf932823acf613b05dd"
+    },
+    "stringdist": {
+      "Package": "stringdist",
+      "Version": "0.9.6.3",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "1ab14e88df14b856dd4d2e34a80c0ba6"
     },
     "stringi": {
       "Package": "stringi",
