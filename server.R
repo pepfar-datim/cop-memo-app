@@ -167,7 +167,9 @@ shinyServer(function(input, output, session) {
       textInput("user_name", "Username: ", width = "600px"),
       passwordInput("password", "Password:", width = "600px"),
       actionButton("login_button", "Log in!")
-    ))
+    ),
+    tags$hr(),
+    fluidRow(HTML(getVersionInfo())))
   })
   
 
