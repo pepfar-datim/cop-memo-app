@@ -258,16 +258,24 @@ memo_getPrioritizationTable <- function(datapack_name_input, d2_session, cop_yea
         dplyr::filter(country_uid %in% country_uids) %>% 
         dplyr::pull(psnu_uid) %>%  
         unique() 
+    
+   #Break up into 2048 character URLS (approximately)
+    n_requests<-ceiling(nchar(paste(psnus,sep="",collapse=";"))/2048)
+    n_groups<-split(sample(psnus),1:n_requests)
+    
+    getPrioTable<-function(x) {
+      datimutils::getAnalytics( ou = x,
+                                dx=inds$id,
+                                pe_f = paste0(cop_year,"Oct"),
+                                d2_session = d2_session)
+    }  
+    
+   df<-n_groups %>% purrr::map_dfr(getPrioTable)
 
-   df<-datimutils::getAnalytics( ou = psnus,
-                            dx=inds$id,
-                            pe_f = paste0(cop_year,"Oct"),
-                            d2_session = d2_session
-  ) 
-   
    if (is.null(df)) {return(NULL)}
    
-   prios<-getExistingPrioritization(psnus,cop_year,d2_session)
+   prios<-n_groups %>% map_dfr(function(x) getExistingPrioritization(x,cop_year,d2_session))
+
    
    df <- df %>%  
      dplyr::rename("psnu_uid" = `Organisation unit` ) %>% 
