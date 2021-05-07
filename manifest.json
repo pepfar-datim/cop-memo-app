@@ -179,7 +179,7 @@
     },
     "XML": {
       "Source": "CRAN",
-      "Repository": "http://www.omegahat.net/RSXML",
+      "Repository": null,
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -3552,6 +3552,9 @@
     "LICENSE": {
       "checksum": "9b62b5c75bb467271d2729f6639a8259"
     },
+    "mechs.rds": {
+      "checksum": "0bb1d768fa4c70948db24297cef1c7a7"
+    },
     "my_work_space.RData": {
       "checksum": "5e8f2b4e6274fafe9bf01d5782d04352"
     },
@@ -3901,10 +3904,10 @@
       "checksum": "cd04d9e778b00519de3e0e2afc97eb28"
     },
     "R/utils.R": {
-      "checksum": "ab88e98a62d0544c4e0cca91fc4b2857"
+      "checksum": "5e2470bdbf1b54658a6e384f55c38596"
     },
     "server.R": {
-      "checksum": "9fc0517bd06e80e6db09e7d6b9d9d946"
+      "checksum": "159427839873a9abcd3c9b11e048a1ca"
     },
     "ui.R": {
       "checksum": "112ea97d13f284c982d07294b31e4cdd"

@@ -1,5 +1,5 @@
 pacman::p_load(shiny,shinyjs,shinyWidgets,magrittr,knitr,kableExtra,gdtools,futile.logger,glue,dplyr,tibble,jsonlite,httr,tidyr,stringr,DT,
-datapackr,datimutils)
+datapackr,datimutils,purrr)
               
 options(scipen = 999)
 
