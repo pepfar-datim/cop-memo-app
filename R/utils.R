@@ -267,6 +267,7 @@ memo_getPrioritizationTable <- function(datapack_name_input, d2_session, cop_yea
   
     psnus<-dplyr::bind_rows(datapackr::valid_PSNUs) %>% 
         dplyr::filter(country_uid %in% country_uids) %>% 
+       dplyr::filter(!is.na(psnu_type)) %>% 
         dplyr::pull(psnu_uid) %>%  
         unique() 
     
@@ -285,7 +286,7 @@ memo_getPrioritizationTable <- function(datapack_name_input, d2_session, cop_yea
 
    if (is.null(df)) {return(NULL)}
    
-   prios<-n_groups %>% map_dfr(function(x) getExistingPrioritization(x,cop_year,d2_session))
+   prios<-n_groups %>% purrr::map_dfr(function(x) getExistingPrioritization(x,cop_year,d2_session))
 
    
    df <- df %>%  
