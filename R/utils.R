@@ -284,7 +284,7 @@ memo_getPrioritizationTable <- function(datapack_name_input, d2_session, cop_yea
     
    df<-n_groups %>% purrr::map_dfr(getPrioTable)
 
-   if (is.null(df)) {return(NULL)}
+   if ( is.null(df) | NROW(df) == 0) {return(NULL)}
    
    prios<-n_groups %>% purrr::map_dfr(function(x) getExistingPrioritization(x,cop_year,d2_session))
 
@@ -402,7 +402,7 @@ memo_getPartnersTable<-function(datapack_name_input, d2_session, cop_year = "202
                                 d2_session = d2_session
   ) 
   
-  if (is.null(df)) {return(NULL)}
+  if (is.null(df) | NROW(df) == 0) {return(NULL)}
   
   partners_agencies<-getAgencyPartnersMechsView(d2_session)
   
