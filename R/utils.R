@@ -1,3 +1,12 @@
+getBaseURL<-function() {
+  if ( Sys.getenv("BASE_URL") !=  "" )  {
+    return(Sys.getenv("BASE_URL")) } else {
+      flog.warn("No BASE_URL environment variable found. Using www.datim.org")
+      "https://www.datim.org/"
+    }
+  
+}
+
 getVersionInfo<-function() {
   
   

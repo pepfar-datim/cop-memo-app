@@ -56,13 +56,13 @@ shinyServer(function(input, output, session) {
   
   user_input <- reactiveValues(authenticated = FALSE, 
                                status = "",
-                               base_url = "https://www.datim.org/",
+                               base_url = getBaseURL(),
                                d2_session = NULL)
   
   observeEvent(input$login_button, {
     
     is_authorized<-FALSE
-    tryCatch(  {  datimutils::loginToDATIM(base_url = input$base_url,
+    tryCatch(  {  datimutils::loginToDATIM(base_url = user_input$base_url,
                                            username = input$user_name,
                                            password = input$password)
       
@@ -84,7 +84,6 @@ shinyServer(function(input, output, session) {
        
        flog.info(paste0("User ", d2_default_session$me$userCredentials$username, " logged in to ", d2_default_session$base_url), name = "cop_memo")
        user_input$authenticated<-TRUE
-       user_input$baseurl<- input$base_url
        user_input$d2_session<-d2_default_session$clone()
 
          } else {
@@ -161,9 +160,6 @@ shinyServer(function(input, output, session) {
       )
     ),
     fluidRow(
-      selectInput(inputId = "base_url", label = "Server", 
-      choices = c("https://www.datim.org/","https://cop-test2.datim.org/"), 
-      multiple = FALSE), 
       textInput("user_name", "Username: ", width = "600px"),
       passwordInput("password", "Password:", width = "600px"),
       actionButton("login_button", "Log in!")
