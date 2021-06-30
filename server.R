@@ -34,7 +34,6 @@ shinyServer(function(input, output, session) {
       partners<-memo_getPartnersTable(input$ou, d2_session = user_input$d2_session, cop_year = user_input$cop_year)
       shinyjs::enable("fetch")
       shinyjs::enable("downloadXLSX")
-      shinyjs::enable("downloadPDF")
       shinyjs::enable("downloadDOCX")
       closeSweetAlert(session)
       my_data<-list(prio=prio,partners=partners)
@@ -211,7 +210,6 @@ shinyServer(function(input, output, session) {
           tags$hr(),
           h4("Download report:"),
           div(style = "display: inline-block; vertical-align:top; width: 60 px; font-size:80%'",disabled(downloadButton("downloadXLSX", "XLSX"))),
-          div(style = "display: inline-block; vertical-align:top; width: 60 px;font-size:80%'",disabled(downloadButton("downloadPDF", "PDF"))),
           div(style = "display: inline-block; vertical-align:top; width: 60 px;font-size:80%'",disabled(downloadButton("downloadDOCX", "DOCX"))),
           tags$hr(),
           actionButton("logout","Log out"),
@@ -227,32 +225,6 @@ shinyServer(function(input, output, session) {
     }
     
   })
-  
-  
-  output$downloadPDF <- downloadHandler(
-    filename = function() {
-      
-      prefix <-"cop_approval_memo_"
-      date<-format(Sys.time(),"%Y%m%d_%H%M%S")
-      paste0(paste(prefix,date,sep="_"),".pdf")
-    },
-    
-    content = function(file) {
-      
-      src <- normalizePath('approval_memo_template.Rmd')
-      img <- normalizePath('pepfar.png')
-      # temporarily switch to the temp dir, in case you do not have write
-      # permission to the current working directory
-      owd <- setwd(tempdir())
-      on.exit(setwd(owd))
-      file.copy(src, 'report.Rmd', overwrite = TRUE)
-      file.copy(img, 'pepfar.png', overwrite = TRUE)
-      
-      library(rmarkdown)
-      out <- rmarkdown::render('report.Rmd', pdf_document(latex_engine = "xelatex"))
-      file.rename(out, file)
-    }
-  )
   
   
   output$downloadDOCX <- downloadHandler(
