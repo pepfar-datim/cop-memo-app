@@ -30,21 +30,32 @@ shinyServer(function(input, output, session) {
         btn_labels= NA
       )
       
-      prio<-memo_getPrioritizationTable(input$ou, d2_session = user_input$d2_session, cop_year= user_input$cop_year, include_no_prio = input$include_no_prio)
-      partners<-memo_getPartnersTable(input$ou, d2_session = user_input$d2_session, cop_year = user_input$cop_year)
+      d<-list()
+      d$ou<-input$ou
+      d$cop_year<-user_input$cop_year
+      
+      d$inds<- getMemoIndicators(cop_year =  d$cop_year,d2_session = user_input$d2_session)
+      d$partners_agencies<-getAgencyPartnersMechsView(user_input$d2_session)
+      
+      d <- getPrioritizationTable(d, d2_session = user_input$d2_session, include_no_prio = input$include_no_prio)
+      d <-getDataByMechanism(d ,d2_session = user_input$d2_session)
+      d <-getPartnersTable(d,d2_session = user_input$d2_session)
+      d <-getAgencyTable(d,d2_session = user_input$d2_session)
+      
       shinyjs::enable("fetch")
       shinyjs::enable("downloadXLSX")
       shinyjs::enable("downloadDOCX")
       closeSweetAlert(session)
-      my_data<-list(prio=prio,partners=partners)
-      if (is.null(my_data$prio) & is.null(my_data$partners)) {
+      
+      
+      if (is.null(d$prio) & is.null(d$d_mechs)) {
         sendSweetAlert(
           session,
           title = "Oops!",
           text = "Sorry, I could not find any data for you!"
         )
       }
-      return(my_data)
+      return(d)
     }
     
   }
@@ -115,7 +126,7 @@ shinyServer(function(input, output, session) {
   
   output$partners_table <- DT::renderDataTable({
     
-    d <- memo_data() %>% purrr::pluck("partners")
+    d <- memo_data() %>% purrr::pluck("partner_table")
     
     if (!inherits(d, "error") & !is.null(d)) {
       
@@ -134,6 +145,29 @@ shinyServer(function(input, output, session) {
     shinyjs::disable("fetch")
     ready$ok <- TRUE
 
+  })
+  
+  output$agency_table <- DT::renderDataTable({
+    
+    d <- memo_data() %>% purrr::pluck("agency_table")
+    
+    if (!inherits(d, "error") & !is.null(d)) {
+      
+      DT::datatable(d,options = list(pageLength = 50, 
+                                     columnDefs = list(list(className = 'dt-right', 
+                                                            targets = 3:dim(d)[2])))) %>% 
+        formatCurrency(3:dim(d)[2], '',digits =0)
+      
+    } else
+    {
+      NULL
+    }
+  })
+  
+  observeEvent(input$fetch, {
+    shinyjs::disable("fetch")
+    ready$ok <- TRUE
+    
   })
   
   observeEvent(input$logout,{
@@ -166,8 +200,6 @@ shinyServer(function(input, output, session) {
     tags$hr(),
     fluidRow(HTML(getVersionInfo())))
   })
-  
-
   
   output$ui <- renderUI({
     if (user_input$authenticated == FALSE) {
@@ -218,8 +250,9 @@ shinyServer(function(input, output, session) {
         mainPanel(tabsetPanel(
           id = "main-panel",
           type = "tabs",
-          tabPanel("Prioritization", DT::dataTableOutput("prio_table")),
-          tabPanel("Partners/Agencies", DT::dataTableOutput("partners_table"))
+          tabPanel("By Prioritization", DT::dataTableOutput("prio_table")),
+          tabPanel("By Partners/Mechanism", DT::dataTableOutput("partners_table")),
+          tabPanel("By Agency", DT::dataTableOutput("agency_table"))
         ))
       ))
     }
@@ -242,7 +275,7 @@ shinyServer(function(input, output, session) {
       
       d <- memo_data()
       
-      ou_name<-input$ou
+      ou_name<-d$ou
 
       #Transform all zeros to dashes
       d$prio %<>% 
@@ -294,28 +327,27 @@ shinyServer(function(input, output, session) {
       doc<-body_add_break(doc,pos="after")
       
       #Partners tables
-      
-      d$partners %<>% 
+      d$partner_table %<>% 
         dplyr::mutate_if(is.numeric, 
                          function(x) ifelse(x == 0 ,"-",formatC(x, format="f", big.mark=",",digits = 0))) 
       
-      sub_heading<-names(d$partners)[3:length(d$partners)] %>% 
+      sub_heading<-names(d$partner_table)[3:length(d$partner_table)] %>% 
         stringr::str_split(.," ") %>% 
         purrr::map(purrr::pluck(2)) %>%
         unlist() %>% 
-        c("Funding Agency","Partner",.)
+        c("Partner","Mechanism",.)
       
-      group_heading<-names(d$partners)[3:length(d$partners)] %>% 
+      group_heading<-names(d$partner_table)[3:length(d$partner_table)] %>% 
         stringr::str_split(.," ") %>% 
         purrr::map(purrr::pluck(1)) %>% 
         unlist() %>% 
-        c("Funding Agency","Partner",.)
+        c("Partner","Mechanism",.)
       
       chunks<-list(c(1:14),c(1:2,15:25),c(1:2,26:34),c(1:2,35:43))
       
-      renderPartnerTable<-function(chunk) {
+      renderPartnerTable<-function(chunk,d_table,group_heading) {
         
-       partner_table<- flextable(d$partners[,chunk]) %>% 
+       partner_table<- flextable(d_table[,chunk]) %>% 
           bg(., i = ~ Partner == "", bg = "#D3D3D3", part = "body") %>% 
           bold(.,i = ~ Partner == "", bold=TRUE) %>% 
           delete_part(.,part = "header") %>% 
@@ -338,8 +370,57 @@ shinyServer(function(input, output, session) {
 
       for (i in 1:length(chunks)) {
         chunk<-chunks[[i]]
-        partner_table_ft<-renderPartnerTable(chunk = chunk)
+        partner_table_ft<-renderPartnerTable(chunk = chunk,d_table = d$partner_table,group_heading = group_heading)
         doc<-body_add_flextable(doc,partner_table_ft)
+        doc<-body_add_break(doc,pos="after")
+      }
+      
+      ##Agency tables
+      d$agency_table %<>% 
+        dplyr::mutate_if(is.numeric, 
+                         function(x) ifelse(x == 0 ,"-",formatC(x, format="f", big.mark=",",digits = 0))) 
+      
+      sub_heading<-names(d$agency_table)[3:length(d$agency_table)] %>% 
+        stringr::str_split(.," ") %>% 
+        purrr::map(purrr::pluck(2)) %>%
+        unlist() %>% 
+        c("Agency",.)
+      
+      group_heading<-names(d$agency_table)[3:length(d$agency_table)] %>% 
+        stringr::str_split(.," ") %>% 
+        purrr::map(purrr::pluck(1)) %>% 
+        unlist() %>% 
+        c("Agency",.)
+      
+      renderAgencyTable<-function(chunk,d_table,group_heading) {
+        
+        agency_table<- flextable(d_table[,chunk]) %>% 
+          bg(., i = ~ Agency == "", bg = "#D3D3D3", part = "body") %>% 
+          bold(.,i = ~ Agency == "", bold=TRUE) %>% 
+          delete_part(.,part = "header") %>% 
+          add_header_row(.,values=sub_heading[chunk]) %>% 
+          add_header_row(.,top = TRUE,values = group_heading[chunk] ) %>% 
+          merge_h(.,part="header") %>% 
+          merge_v(.,part = "header")  %>% 
+          fontsize(., size = 7, part = "all") %>% 
+          style(.,pr_p = style_para_prio,part = "body") %>% 
+          width(.,j=1:2,0.75) %>% 
+          width(.,j=3:(length(chunk)-2),0.4)
+        
+        fontname<-"Arial"
+        if ( gdtools::font_family_exists(fontname) ) {
+          agency_table <- font(agency_table,fontname = fontname, part = "all") 
+        } 
+        
+        agency_table
+      }
+      
+      chunks<-list(c(1:15),c(1,16:26),c(1,27:35),c(1,36:42))
+      
+      for (i in 1:length(chunks)) {
+        chunk<-chunks[[i]]
+        agency_table_ft<-renderAgencyTable(chunk = chunk,d_table = d$agency,group_heading = group_heading)
+        doc<-body_add_flextable(doc,agency_table_ft)
         doc<-body_add_break(doc,pos="after")
       }
       
@@ -366,10 +447,19 @@ shinyServer(function(input, output, session) {
                                sheet = "Prioritization",x = d$prio)
       
       
-      openxlsx::addWorksheet(wb,"Partners_Agencies")
+      openxlsx::addWorksheet(wb,"By Partner")
       openxlsx::writeDataTable(wb = wb,
-                               sheet = "Partners_Agencies",x = d$partners)
+                               sheet = "By Partner",x = d$partner_table)
       openxlsx::saveWorkbook(wb,file=file,overwrite = TRUE)
+      
+      
+      openxlsx::addWorksheet(wb,"By Agency")
+      openxlsx::writeDataTable(wb = wb,
+                               sheet = "By Agency",x = d$agency_table)
+      openxlsx::saveWorkbook(wb,file=file,overwrite = TRUE)
+      
+      
+      
     }
   )
   

@@ -251,11 +251,10 @@ getExistingPrioritization<-function(psnus,cop_year,d2_session) {
          
 }
 
-memo_getPrioritizationTable <- function(datapack_name_input, d2_session, cop_year = "2020", include_no_prio = TRUE) {
+getPrioritizationTable <- function(d,d2_session, include_no_prio = TRUE) {
 
-  ind_group<-getIndicatorGroups(cop_year)
-  
-  inds <-getMemoIndicators(cop_year = cop_year,d2_session = d2_session)
+
+  inds <- d$inds
   
   df_cols<-tibble::tribble(
     ~id,~shortName,~col_name,
@@ -268,7 +267,7 @@ memo_getPrioritizationTable <- function(datapack_name_input, d2_session, cop_yea
     "p0JrTY2hLii","PPG Not PEPFAR Supported","Not PEPFAR Supported"
   )
   
-  df_rows<-indicatorOrder(cop_year) %>% dplyr::select(ind,options)
+  df_rows<-indicatorOrder(d$cop_year) %>% dplyr::select(ind,options)
   
   df_base<-tidyr::crossing(df_rows,dplyr::select(df_cols,col_name)) %>% 
     dplyr::arrange(ind,options,col_name) %>% 
@@ -277,7 +276,7 @@ memo_getPrioritizationTable <- function(datapack_name_input, d2_session, cop_yea
                   Age = options)
   
   country_uids<-datapack_config() %>% 
-    dplyr::filter( `datapack_name` == datapack_name_input) %>% 
+    dplyr::filter( `datapack_name` == d$ou) %>% 
     dplyr::pull(country_uids) %>% 
     unlist()
   
@@ -294,7 +293,7 @@ memo_getPrioritizationTable <- function(datapack_name_input, d2_session, cop_yea
     getPrioTable<-function(x) {
       datimutils::getAnalytics( ou = x,
                                 dx=inds$id,
-                                pe_f = paste0(cop_year,"Oct"),
+                                pe_f = paste0(d$cop_year,"Oct"),
                                 d2_session = d2_session)
     }  
     
@@ -302,7 +301,7 @@ memo_getPrioritizationTable <- function(datapack_name_input, d2_session, cop_yea
 
    if ( is.null(df) | NROW(df) == 0) {return(NULL)}
    
-   prios<-n_groups %>% purrr::map_dfr(function(x) getExistingPrioritization(x,cop_year,d2_session))
+   prios<-n_groups %>% purrr::map_dfr(function(x) getExistingPrioritization(x,d$cop_year,d2_session))
 
    
    df <- df %>%  
@@ -339,22 +338,25 @@ memo_getPrioritizationTable <- function(datapack_name_input, d2_session, cop_yea
     tidyr::pivot_wider(names_from = col_name ,values_from = "Value") %>% 
     suppressWarnings()
     
-    #Remove NOT pepfar supported if its only zeros, otherwise, show this, since its potentially problematic
+    #Remove Not PEPFAR supported if its only zeros, otherwise, show this, since its potentially problematic
     if (df_final %>%  dplyr::select("Not PEPFAR Supported") %>% sum(.,na.rm = TRUE) == 0) {
       df_final<-df_final %>%  select(-`Not PEPFAR Supported`)
-    } 
+    }
     
     
-    df_final %<>% 
-    mutate("Total" = rowSums(across(where(is.numeric)))) %>% 
+    df_final %>% 
+    dplyr::mutate("Total" = rowSums(dplyr::across(where(is.numeric)))) %>% 
     dplyr::select("Indicator","Age",3:dim(.)[2])
     
     if (!include_no_prio & any("No Prioritization" %in% names(df_final))) {
       df_final  %<>% dplyr::select(-`No Prioritization`)
     }
   
-    df_final
-}
+   d$prio <- df_final
+   
+   return(d)
+   
+ }
 
 getAgencyPartnersMechsView<-function(d2_session) {
   
@@ -400,71 +402,166 @@ getAgencyPartnersMechsView<-function(d2_session) {
 
 }
 
-memo_getPartnersTable<-function(datapack_name_input, d2_session, cop_year = "2020") {
-  
-  ind_group<-getIndicatorGroups(cop_year)
-  
-  inds <-getMemoIndicators(cop_year = cop_year,d2_session = d2_session)
+getDataByMechanism<-function(d,d2_session) {
+
+  inds <- d$inds
   
   country_uids<-datapack_config() %>% 
-    dplyr::filter( `datapack_name` == datapack_name_input) %>% 
+    dplyr::filter( `datapack_name` == d$ou) %>% 
     dplyr::pull(country_uids) %>% 
     unlist()
   
   df<-datimutils::getAnalytics( "dimension=SH885jaRe0o",
                                 dx=inds$id,
                                 ou = country_uids,
-                                pe_f = paste0(cop_year,"Oct"),
+                                pe_f = paste0(d$cop_year,"Oct"),
                                 d2_session = d2_session
   ) 
   
-  if (is.null(df) | NROW(df) == 0) {return(NULL)}
+  if (is.null(df) | NROW(df) == 0) {return(d)}
   
-  partners_agencies<-getAgencyPartnersMechsView(d2_session)
   
+ df   %>% 
+    dplyr::mutate(Value = as.numeric(Value)) %>% 
+    dplyr::inner_join(inds,by=c(`Data` = "id")) %>% 
+    dplyr::select(-Data) %>% 
+    dplyr::inner_join(d$partners_agencies,by=c(`Funding Mechanism` = "mechuid")) %>% 
+    dplyr::rename("Mechanism" = mech_code) %>% 
+    dplyr::select("Indicator","Age","Mechanism","Partner","Agency","Value")
+  
+ d$d_mechs<-df
+ 
+ return(d)
+}
+
+getPartnersTable<-function(d,d2_session) {
+  
+
+  inds <- d$inds
+  
+  country_uids<-datapack_config() %>% 
+    dplyr::filter( `datapack_name` == d$ou) %>% 
+    dplyr::pull(country_uids) %>% 
+    unlist()
+  
+  df<-d$d_mechs
+  
+  if (is.null(df) | NROW(df) == 0) {return(d)}
+  
+
   d_partners <- df   %>% 
     dplyr::mutate(Value = as.numeric(Value)) %>% 
     dplyr::inner_join(inds,by=c(`Data` = "id")) %>% 
     dplyr::select(-Data) %>% 
-    dplyr::inner_join(partners_agencies,by=c(`Funding Mechanism` = "mechuid")) %>% 
-    dplyr::group_by(Indicator,Age,Agency,Partner) %>% 
+    dplyr::inner_join(d$partners_agencies,by=c(`Funding Mechanism` = "mechuid")) %>% 
+    dplyr::rename("Mechanism" = mech_code) %>% 
+    dplyr::group_by(Indicator,Age,Partner,Mechanism) %>% 
     dplyr::summarise(Value = sum(Value)) %>% 
     dplyr::ungroup()
 
   #We need to pad for zeros
-  df_rows<-indicatorOrder(cop_year) %>% 
+  df_rows<-indicatorOrder(d$cop_year) %>% 
     dplyr::filter(in_partner_table) %>% 
     dplyr::select(ind,options)
   
-  d_base<-tidyr::crossing(df_rows,dplyr::distinct(unique(d_partners[,c("Partner","Agency")]))) %>% 
+  d_base<-tidyr::crossing(df_rows,dplyr::distinct(unique(d_partners[,c("Partner","Mechanism")]))) %>% 
     dplyr::mutate(Value = 0) %>% 
     dplyr::rename("Indicator" = ind,
                   Age = options)
   
   d_totals<-dplyr::bind_rows(d_base,d_partners) %>% 
-    dplyr::group_by(`Agency`,`Indicator`,`Age`) %>% 
+    dplyr::group_by(`Indicator`,`Age`) %>% 
     dplyr::summarise(`Value` = sum(`Value`)) %>% 
     dplyr::ungroup() %>% 
-    dplyr::mutate(`Partner` = '')
+    dplyr::mutate(`Partner` = 'Total',`Mechanism` = 'Total')
   
-  d_indicators<- indicatorOrder(cop_year) %>% 
+  d_indicators<- indicatorOrder(d$cop_year) %>% 
     dplyr::filter(in_partner_table) %>%
     dplyr::select(ind,options) %>% 
     dplyr::mutate(indicator_name = factor(paste(ind, options)))
 
+  #Put totals at the bottom of the table
+  partner_levels <- c(sort(unique(d_partners$Partner)),"Total")
+  
   #Return the final data frame 
-  dplyr::bind_rows(d_totals,d_partners) %>% 
+  d$partner_table<-dplyr::bind_rows(d_totals,d_partners) %>% 
     dplyr::mutate(indicator_name = paste(`Indicator`, `Age`)) %>% 
     #dplyr::mutate(indicator_name = factor(indicator_name,levels=unique(d_indicators$indicator_name))) %>% 
     dplyr::mutate(`Label` = indicator_name) %>% 
-    dplyr::rename(`Funding Agency` = `Agency`) %>% 
-  dplyr::arrange(`Funding Agency`,`Partner`,indicator_name) %>% 
-    dplyr::select(`Funding Agency`,`Partner`,`Label`,`Value`) %>% 
+    dplyr::select(`Partner`,`Mechanism`,`Label`,`Value`) %>% 
     tidyr::pivot_wider(names_from = `Label`, values_from = `Value`, values_fill = 0) %>% 
-    dplyr::select(`Funding Agency`,`Partner`,d_indicators$indicator_name)
+    dplyr::select(`Partner`,`Mechanism`,d_indicators$indicator_name) %>% 
+    dplyr::mutate(`Partner` = factor(Partner,levels = partner_levels)) %>% 
+    dplyr::arrange(`Partner`,`Mechanism`)
+   
+  
+  return(d)
+ 
+}
+
+getAgencyTable<-function(d,d2_session) {
+  
+  
+  inds <- d$inds
+  
+  country_uids<-datapack_config() %>% 
+    dplyr::filter( `datapack_name` == d$ou) %>% 
+    dplyr::pull(country_uids) %>% 
+    unlist()
+  
+  df<-d$d_mechs
+  
+  if (is.null(df) | NROW(df) == 0) {return(d)}
+  
+  
+  d_agency <- df   %>% 
+    dplyr::mutate(Value = as.numeric(Value)) %>% 
+    dplyr::inner_join(inds,by=c(`Data` = "id")) %>% 
+    dplyr::select(-Data) %>% 
+    dplyr::inner_join(d$partners_agencies,by=c(`Funding Mechanism` = "mechuid")) %>% 
+    dplyr::group_by(Indicator,Age,Agency) %>% 
+    dplyr::summarise(Value = sum(Value)) %>% 
+    dplyr::ungroup()
+  
+  #We need to pad for zeros
+  df_rows<-indicatorOrder(d$cop_year) %>% 
+    dplyr::filter(in_partner_table) %>% 
+    dplyr::select(ind,options)
+  
+  d_base<-tidyr::crossing(df_rows,dplyr::distinct(unique(d_agency[,c("Agency")]))) %>% 
+    dplyr::mutate(Value = 0) %>% 
+    dplyr::rename("Indicator" = ind,
+                  Age = options)
+  
+  d_totals<-dplyr::bind_rows(d_base,d_agency) %>% 
+    dplyr::group_by(`Indicator`,`Age`) %>% 
+    dplyr::summarise(`Value` = sum(`Value`)) %>% 
+    dplyr::ungroup() %>% 
+    dplyr::mutate(`Agency` = 'Total')
+  
+  d_indicators<- indicatorOrder(d$cop_year) %>% 
+    dplyr::filter(in_partner_table) %>%
+    dplyr::select(ind,options) %>% 
+    dplyr::mutate(indicator_name = factor(paste(ind, options)))
+  
+  agency_levels <- c(sort(unique(d_agency$Agency)),"Total")
+  
+  #Return the final data frame 
+  d$agency_table<-dplyr::bind_rows(d_totals,d_agency) %>% 
+    dplyr::mutate(indicator_name = paste(`Indicator`, `Age`)) %>% 
+    #dplyr::mutate(indicator_name = factor(indicator_name,levels=unique(d_indicators$indicator_name))) %>% 
+    dplyr::mutate(`Label` = indicator_name) %>% 
+    dplyr::arrange(`Agency`,indicator_name) %>% 
+    dplyr::select(`Agency`,`Label`,`Value`) %>% 
+    tidyr::pivot_wider(names_from = `Label`, values_from = `Value`, values_fill = 0) %>% 
+    dplyr::select(`Agency`,d_indicators$indicator_name) %>% 
+    dplyr::mutate(`Agency` = factor(Agency,levels = agency_levels)) %>% 
+    dplyr::arrange(`Agency`)
+  
+  return(d)
   
 }
- 
+
 getOrgtunitNamefromUID<-function(uid, d2_session) {
     
     glue(d2_session$base_url,"api/organisationUnits/{uid}?fields=name") %>% 
