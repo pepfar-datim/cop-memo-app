@@ -193,27 +193,20 @@
     },
     "datimutils": {
       "Package": "datimutils",
-      "Version": "0.1.1",
-      "Source": "GitHub",
-      "RemoteType": "github",
-      "RemoteHost": "api.github.com",
-      "RemoteUsername": "pepfar-datim",
-      "RemoteRepo": "datimutils",
-      "RemoteRef": "master",
+      "Version": "0.1.1.0.0.0.1609918855",
+      "Source": "Repository",
+      "Repository": "RSPM",
       "RemoteSha": "85195e3386904d8ca37ec9538554549051ea7e7d",
-      "Hash": "9724b1f17093e9ec571eda22a195a7d6"
+      "Hash": "1f1f04a724bc41ce7df9ec42de54850d"
     },
     "datimvalidation": {
       "Package": "datimvalidation",
-      "Version": "1.1.2",
-      "Source": "GitHub",
-      "RemoteType": "github",
-      "RemoteHost": "api.github.com",
-      "RemoteUsername": "jason-p-pickering",
-      "RemoteRepo": "datim-validation",
-      "RemoteRef": "master",
+      "Version": "1.1.2.0.0.0.1619515373",
+      "Source": "Repository",
+      "Repository": "RSPM",
+      "Remotes": "pepfar-datim/datimutils",
       "RemoteSha": "bc550850e5f767c23e9cc72938438ff7207dba54",
-      "Hash": "949e926690723023b86ea93bf7161d22"
+      "Hash": "fa13527cdc265da63e5d1770f0650905"
     },
     "digest": {
       "Package": "digest",
