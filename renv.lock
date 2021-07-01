@@ -3,8 +3,8 @@
     "Version": "3.6.3",
     "Repositories": [
       {
-        "Name": "CRAN",
-        "URL": "https://cloud.r-project.org"
+        "Name": "PEPFAR",
+        "URL": "https://rstudio-package.ap.datim.org/prod/latest"
       }
     ]
   },
@@ -201,12 +201,15 @@
     },
     "datimvalidation": {
       "Package": "datimvalidation",
-      "Version": "1.1.2.0.0.0.1619515373",
-      "Source": "Repository",
-      "Repository": "RSPM",
-      "Remotes": "pepfar-datim/datimutils",
+      "Version": "1.1.2",
+      "Source": "GitHub",
+      "RemoteType": "github",
+      "RemoteHost": "api.github.com",
+      "RemoteUsername": "jason-p-pickering",
+      "RemoteRepo": "datim-validation",
+      "RemoteRef": "master",
       "RemoteSha": "bc550850e5f767c23e9cc72938438ff7207dba54",
-      "Hash": "fa13527cdc265da63e5d1770f0650905"
+      "Hash": "949e926690723023b86ea93bf7161d22"
     },
     "digest": {
       "Package": "digest",
