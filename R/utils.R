@@ -513,6 +513,7 @@ getAgencyTable<-function(d,d2_session) {
   
   if (is.null(df) | NROW(df) == 0) {return(d)}
   
+  df_rows<-indicatorOrder(d$cop_year) %>% dplyr::select(ind,options) 
   
   d_agency <- df   %>% 
     dplyr::mutate(Value = as.numeric(Value)) %>% 
@@ -523,40 +524,31 @@ getAgencyTable<-function(d,d2_session) {
     dplyr::summarise(Value = sum(Value)) %>% 
     dplyr::ungroup()
   
-  #We need to pad for zeros
-  df_rows<-indicatorOrder(d$cop_year) %>% 
-    dplyr::filter(in_partner_table) %>% 
-    dplyr::select(ind,options)
-  
-  d_base<-tidyr::crossing(df_rows,dplyr::distinct(unique(d_agency[,c("Agency")]))) %>% 
-    dplyr::mutate(Value = 0) %>% 
-    dplyr::rename("Indicator" = ind,
-                  Age = options)
-  
-  d_totals<-dplyr::bind_rows(d_base,d_agency) %>% 
-    dplyr::group_by(`Indicator`,`Age`) %>% 
-    dplyr::summarise(`Value` = sum(`Value`)) %>% 
+  agency_totals<-d_agency %>%
+    group_by(Indicator,Age) %>% 
+    dplyr::summarise(Value = sum(Value)) %>% 
     dplyr::ungroup() %>% 
-    dplyr::mutate(`Agency` = 'Total')
+    dplyr::mutate("Agency" = "Total") %>% 
+    dplyr::select(names(d_agency))
   
-  d_indicators<- indicatorOrder(d$cop_year) %>% 
-    dplyr::filter(in_partner_table) %>%
-    dplyr::select(ind,options) %>% 
-    dplyr::mutate(indicator_name = factor(paste(ind, options)))
+  age_totals<-dplyr::bind_rows(d_agency,agency_totals) %>%
+    dplyr::filter(Age != 'Total') %>% 
+    group_by(Indicator,Agency) %>% 
+    dplyr::summarise(Value = sum(Value)) %>% 
+    dplyr::mutate(Age = "Total") %>% 
+    dplyr::ungroup() %>% 
+    dplyr::select(names(d_agency))
   
   agency_levels <- c(sort(unique(d_agency$Agency)),"Total")
   
   #Return the final data frame 
-  d$agency_table<-dplyr::bind_rows(d_totals,d_agency) %>% 
-    dplyr::mutate(indicator_name = paste(`Indicator`, `Age`)) %>% 
-    #dplyr::mutate(indicator_name = factor(indicator_name,levels=unique(d_indicators$indicator_name))) %>% 
-    dplyr::mutate(`Label` = indicator_name) %>% 
-    dplyr::arrange(`Agency`,indicator_name) %>% 
-    dplyr::select(`Agency`,`Label`,`Value`) %>% 
-    tidyr::pivot_wider(names_from = `Label`, values_from = `Value`, values_fill = 0) %>% 
-    dplyr::select(`Agency`,d_indicators$indicator_name) %>% 
-    dplyr::mutate(`Agency` = factor(Agency,levels = agency_levels)) %>% 
-    dplyr::arrange(`Agency`)
+  d$agency_table<-dplyr::bind_rows(d_agency, agency_totals,age_totals) %>%
+    dplyr::mutate(Indicator = factor(Indicator,levels = unique(df_rows$ind))) %>% 
+    dplyr::arrange(Indicator,Age) %>% 
+    tidyr::pivot_wider(names_from = `Agency`, values_from = `Value`, values_fill = 0) %>% 
+    dplyr::select(`Indicator`,Age,agency_levels) %>% 
+    dplyr::mutate(Indicator = factor(Indicator,levels = unique(df_rows$ind))) %>% 
+    dplyr::arrange(`Indicator`,Age)
   
   return(d)
   

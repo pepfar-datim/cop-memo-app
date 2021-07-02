@@ -380,49 +380,20 @@ shinyServer(function(input, output, session) {
         dplyr::mutate_if(is.numeric, 
                          function(x) ifelse(x == 0 ,"-",formatC(x, format="f", big.mark=",",digits = 0))) 
       
-      sub_heading<-names(d$agency_table)[3:length(d$agency_table)] %>% 
-        stringr::str_split(.," ") %>% 
-        purrr::map(purrr::pluck(2)) %>%
-        unlist() %>% 
-        c("Agency",.)
+      agency_table<-flextable(d$agency_table) %>% 
+        merge_v(.,j="Indicator") %>% 
+        bg(.,bg = "#CCC0D9", part = "header") %>% 
+        bg(., i = ~ Age == "Total", bg = "#E4DFEC", part = "body") %>% #Highlight total rows
+        bold(., i = ~ Age == "Total", bold = TRUE, part = "body")  %>% 
+        bg(.,j= "Indicator", bg = "#FFFFFF" , part="body") %>% 
+        bold(., j = "Indicator", bold = FALSE) %>% 
+        bold(.,bold = TRUE,part = "header") %>% 
+        fontsize(., size = 7, part = "all") %>%
+        style(.,pr_p = style_header_prio,part="header") %>% 
+        style(.,pr_p = style_para_prio,part = "body") %>%
+        align(.,j=1:2,align = "center")
       
-      group_heading<-names(d$agency_table)[3:length(d$agency_table)] %>% 
-        stringr::str_split(.," ") %>% 
-        purrr::map(purrr::pluck(1)) %>% 
-        unlist() %>% 
-        c("Agency",.)
-      
-      renderAgencyTable<-function(chunk,d_table,group_heading) {
-        
-        agency_table<- flextable(d_table[,chunk]) %>% 
-          bg(., i = ~ Agency == "", bg = "#D3D3D3", part = "body") %>% 
-          bold(.,i = ~ Agency == "", bold=TRUE) %>% 
-          delete_part(.,part = "header") %>% 
-          add_header_row(.,values=sub_heading[chunk]) %>% 
-          add_header_row(.,top = TRUE,values = group_heading[chunk] ) %>% 
-          merge_h(.,part="header") %>% 
-          merge_v(.,part = "header")  %>% 
-          fontsize(., size = 7, part = "all") %>% 
-          style(.,pr_p = style_para_prio,part = "body") %>% 
-          width(.,j=1:2,0.75) %>% 
-          width(.,j=3:(length(chunk)-2),0.4)
-        
-        fontname<-"Arial"
-        if ( gdtools::font_family_exists(fontname) ) {
-          agency_table <- font(agency_table,fontname = fontname, part = "all") 
-        } 
-        
-        agency_table
-      }
-      
-      chunks<-list(c(1:15),c(1,16:26),c(1,27:35),c(1,36:42))
-      
-      for (i in 1:length(chunks)) {
-        chunk<-chunks[[i]]
-        agency_table_ft<-renderAgencyTable(chunk = chunk,d_table = d$agency,group_heading = group_heading)
-        doc<-body_add_flextable(doc,agency_table_ft)
-        doc<-body_add_break(doc,pos="after")
-      }
+      doc<-body_add_flextable(doc,value=agency_table)
       
       print(doc,target=file)
     }
