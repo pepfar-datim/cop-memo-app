@@ -327,7 +327,7 @@ getPrioritizationTable <- function(d,d2_session, include_no_prio = TRUE) {
     dplyr::ungroup() %>% 
     dplyr::select(names(df))
   
-    df_final<-dplyr::bind_rows(df,df_totals,df_base) %>% 
+    df_final<-dplyr::bind_rows(df,df_totals) %>% 
     dplyr::group_by(Indicator,Age,col_name) %>% 
     dplyr::summarise(Value = sum(Value)) %>% 
     dplyr::distinct() %>% 
@@ -335,17 +335,17 @@ getPrioritizationTable <- function(d,d2_session, include_no_prio = TRUE) {
     dplyr::mutate(col_name = factor(col_name,levels = df_cols$col_name)) %>% 
     dplyr::mutate(Indicator = factor(Indicator,levels = unique(df_rows$ind))) %>% 
     dplyr::arrange(Indicator,col_name) %>% 
-    tidyr::pivot_wider(names_from = col_name ,values_from = "Value") %>% 
+    tidyr::pivot_wider(names_from = col_name ,values_from = "Value", values_fill = 0) %>% 
     suppressWarnings()
     
-    #Remove Not PEPFAR supported if its only zeros, otherwise, show this, since its potentially problematic
-    if (df_final %>%  dplyr::select("Not PEPFAR Supported") %>% sum(.,na.rm = TRUE) == 0) {
-      df_final<-df_final %>%  select(-`Not PEPFAR Supported`)
-    }
+    # #Remove Not PEPFAR supported if its only zeros, otherwise, show this, since its potentially problematic
+    # if (df_final %>%  dplyr::select("Not PEPFAR Supported") %>% sum(.,na.rm = TRUE) == 0) {
+    #   df_final<-df_final %>%  select(-`Not PEPFAR Supported`)
+    # }
     
     
-    df_final %>% 
-    dplyr::mutate("Total" = rowSums(dplyr::across(where(is.numeric)))) %>% 
+    df_final %<>% 
+    dplyr::mutate("Total" = rowSums(dplyr::across(where(is.numeric)),na.rm = TRUE)) %>% 
     dplyr::select("Indicator","Age",3:dim(.)[2])
     
     if (!include_no_prio & any("No Prioritization" %in% names(df_final))) {
