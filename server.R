@@ -32,13 +32,13 @@ shinyServer(function(input, output, session) {
       
       d<-list()
       d$ou<-input$ou
-      d$cop_year<-user_input$cop_year
+      d$cop_year<-as.numeric(user_input$cop_year)
       
       d$inds<- getMemoIndicators(cop_year =  d$cop_year,d2_session = user_input$d2_session)
       d$partners_agencies<-getAgencyPartnersMechsView(user_input$d2_session)
-      
-      d <- getPrioritizationTable(d, d2_session = user_input$d2_session, include_no_prio = input$include_no_prio)
-      d <-getDataByMechanism(d ,d2_session = user_input$d2_session)
+    
+      d <-getPSUxIMData(d ,d2_session = user_input$d2_session)
+      d <-getPrioritizationTable(d, d2_session = user_input$d2_session, include_no_prio = input$include_no_prio)
       d <-getPartnersTable(d,d2_session = user_input$d2_session)
       d <-getAgencyTable(d,d2_session = user_input$d2_session)
       
@@ -133,7 +133,7 @@ shinyServer(function(input, output, session) {
       DT::datatable(d,options = list(pageLength = 50, 
                                      columnDefs = list(list(className = 'dt-right', 
                                                             targets = 3:dim(d)[2])))) %>% 
-        formatCurrency(3:dim(d)[2], '',digits =0)
+        formatCurrency(4:dim(d)[2], '',digits =0)
       
     } else
     {
@@ -331,19 +331,19 @@ shinyServer(function(input, output, session) {
         dplyr::mutate_if(is.numeric, 
                          function(x) ifelse(x == 0 ,"-",formatC(x, format="f", big.mark=",",digits = 0))) 
       
-      sub_heading<-names(d$partner_table)[3:length(d$partner_table)] %>% 
+      sub_heading<-names(d$partner_table)[4:length(d$partner_table)] %>% 
         stringr::str_split(.," ") %>% 
         purrr::map(purrr::pluck(2)) %>%
         unlist() %>% 
-        c("Partner","Mechanism",.)
+        c("Agency","Partner","Mechanism",.)
       
-      group_heading<-names(d$partner_table)[3:length(d$partner_table)] %>% 
+      group_heading<-names(d$partner_table)[4:length(d$partner_table)] %>% 
         stringr::str_split(.," ") %>% 
         purrr::map(purrr::pluck(1)) %>% 
         unlist() %>% 
-        c("Partner","Mechanism",.)
+        c("Agency","Partner","Mechanism",.)
       
-      chunks<-list(c(1:14),c(1:2,15:25),c(1:2,26:34),c(1:2,35:43))
+      chunks<-list(c(1:14),c(1:3,15:25),c(1:3,26:34),c(1:3,35:43))
       
       renderPartnerTable<-function(chunk,d_table,group_heading) {
         
@@ -377,10 +377,15 @@ shinyServer(function(input, output, session) {
       
       ##Agency tables
       d$agency_table %<>% 
+        dplyr::rename("Deduplicated Total" = "Total") %>% 
         dplyr::mutate_if(is.numeric, 
                          function(x) ifelse(x == 0 ,"-",formatC(x, format="f", big.mark=",",digits = 0))) 
+      new_header<-c("Indicator","Age", rep("Duplicated Agency Totals",dim(d$agency_table)[2]-3),"Deduplicated Total")
       
       agency_table<-flextable(d$agency_table) %>% 
+        add_header_row(.,top = TRUE,values = new_header ) %>% 
+        merge_h(.,part="header") %>% 
+        merge_v(.,part = "header")  %>% 
         merge_v(.,j="Indicator") %>% 
         bg(.,bg = "#CCC0D9", part = "header") %>% 
         bg(., i = ~ Age == "Total", bg = "#E4DFEC", part = "body") %>% #Highlight total rows
@@ -391,14 +396,14 @@ shinyServer(function(input, output, session) {
         fontsize(., size = 7, part = "all") %>%
         style(.,pr_p = style_header_prio,part="header") %>% 
         style(.,pr_p = style_para_prio,part = "body") %>%
-        align(.,j=1:2,align = "center")
+        align(.,j=1:2,align = "center") %>% 
+        flextable::add_footer_lines(.,values="* Agency totals cannot be presented as deduplicated totals. The deduplicated total may not be equal to the sum of the rows of the data presented due to deduplication adjustments.")
       
       doc<-body_add_flextable(doc,value=agency_table)
       
       print(doc,target=file)
     }
   )
-  
   
   output$downloadXLSX <- downloadHandler(
     filename = function() {
