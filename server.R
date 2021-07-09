@@ -1,5 +1,5 @@
 pacman::p_load(shiny,shinyjs,shinyWidgets,magrittr,knitr,kableExtra,gdtools,futile.logger,glue,dplyr,tibble,jsonlite,httr,tidyr,stringr,DT,
-datapackr,datimutils,purrr)
+datapackr,datimutils,purrr,rpivotTable)
               
 options(scipen = 999)
 
@@ -38,6 +38,7 @@ shinyServer(function(input, output, session) {
       d$partners_agencies<-getAgencyPartnersMechsView(user_input$d2_session)
     
       d <-getPSUxIMData(d ,d2_session = user_input$d2_session)
+      d <- getMechanismTable(d,d2_session = user_input$d2_session)
       d <-getPrioritizationTable(d, d2_session = user_input$d2_session, include_no_prio = input$include_no_prio)
       d <-getPartnersTable(d,d2_session = user_input$d2_session)
       d <-getAgencyTable(d,d2_session = user_input$d2_session)
@@ -252,7 +253,8 @@ shinyServer(function(input, output, session) {
           type = "tabs",
           tabPanel("By Prioritization", DT::dataTableOutput("prio_table")),
           tabPanel("By Partners/Mechanism", DT::dataTableOutput("partners_table")),
-          tabPanel("By Agency", DT::dataTableOutput("agency_table"))
+          tabPanel("By Agency", DT::dataTableOutput("agency_table")),
+          tabPanel("Pivot",rpivotTable::rpivotTableOutput({"pivot"}) )
         ))
       ))
     }
@@ -438,6 +440,19 @@ shinyServer(function(input, output, session) {
       
     }
   )
+  
+  output$pivot <- renderRpivotTable({
+    vr<-memo_data()
+    
+    if (!inherits(vr,"error") & !is.null(vr)){
+      
+      if ( is.null(d$data$by_psnuim) ) {return(NULL)}
+      PSNUxIM_pivot(vr)
+      
+    } else {
+      NULL
+    }
+  })
   
 })
 

@@ -503,15 +503,27 @@ getPSUxIMData<-function(d,d2_session) {
   
   d$country_uids<-country_uids
   
-  psnus<-dplyr::bind_rows(datapackr::valid_PSNUs) %>% 
-    dplyr::filter(country_uid %in% country_uids) %>% 
-    dplyr::filter(!is.na(psnu_type)) %>% 
-    dplyr::pull(psnu_uid) %>%  
-    unique() 
-  
-  d$psnus<-psnus
+
+  d$data$datim_export<-datapackr::getCOPDataFromDATIM(country_uids,
+                                 d$cop_year,
+                                 streams="mer_targets",
+                                 d2_session = d2_session) 
+
+  return(d)
+}
+
+
+#Prepares an memo indicator table from raw data elements/catcombos
+getMechanismTable<-function(d,d2_session) {
   
   inds<-getIndicatorMetadata(d$cop_year,d2_session )
+  
+  psnus_df<-dplyr::bind_rows(datapackr::valid_PSNUs) %>% 
+    dplyr::filter(country_uid %in% d$country_uids) %>% 
+    dplyr::filter(!is.na(psnu_type)) %>% 
+    dplyr::select(ou,country_name,snu1,psnu, psnu_uid)
+  
+  d$psnus<-psnus_df$psnu
   
   #Break up into 2048 character URLS (approximately)
   n_requests<-ceiling(nchar(paste(psnus,sep="",collapse=";"))/2048)
@@ -520,22 +532,21 @@ getPSUxIMData<-function(d,d2_session) {
   prios<-n_groups %>% 
     purrr::map_dfr(function(x) getExistingPrioritization(x,d$cop_year,d2_session))
   
-  d$data$by_psnuim<-datapackr::getCOPDataFromDATIM(country_uids,
-                                 d$cop_year,
-                                 streams="mer_targets",
-                                 d2_session = d2_session) %>%
+  
+  d$data$by_psnuim <- d$data$datim_export %>%
     dplyr::select(dataElement,period,orgUnit,categoryOptionCombo,attributeOptionCombo,value) %>% 
-   dplyr::mutate(combi =paste0("#{",dataElement,".", categoryOptionCombo,"}")) %>% 
-  plyr::ddply(., plyr::.(orgUnit,attributeOptionCombo),
-              function(x)
-                evaluateIndicators(x$combi, x$value,inds)) %>% 
+    dplyr::mutate(combi =paste0("#{",dataElement,".", categoryOptionCombo,"}")) %>% 
+    plyr::ddply(., plyr::.(orgUnit,attributeOptionCombo),
+                function(x)
+                  evaluateIndicators(x$combi, x$value,inds)) %>% 
     adornIndicators(.) %>% 
     dplyr::left_join(prios,by =c("orgUnit" = "psnu_uid" )) %>% 
     dplyr::mutate(prioritization = dplyr::case_when(is.na(prioritization) ~ "No Prioritization",
                                                     TRUE ~ prioritization)) %>% 
     dplyr::rename("Mechanism" = attributeOptionCombo) %>% 
-    dplyr::inner_join(d$partners_agencies,by=c("Mechanism" = "mech_code"))
-
+    dplyr::inner_join(d$partners_agencies,by=c("Mechanism" = "mech_code")) %>% 
+    dplyr::inner_join(psnus_df,by=c("orgUnit" = "psnu_uid" ))
+  
   return(d)
 }
 
@@ -670,4 +681,17 @@ getOrgtunitNamefromUID<-function(uid, d2_session) {
       httr::content(.,"text") %>% 
       jsonlite::fromJSON(.) %>% 
       purrr::pluck("name")
-  }
+}
+
+
+PSNUxIM_pivot<-function(d){
+  
+  pivot<- d  %>%
+    purrr::pluck("data") %>%
+    purrr::pluck("by_psnuim") %>% 
+    dplyr::select("Agency","Partner","Mechanism","ou","country_name","snu1","psnu","Indicator","Age","numerator","denominator","value")
+  
+  rpivotTable(data =   d$data$by_psnuim  ,  rows = c( "Indicator", "Age"),
+              vals = "value", aggregatorName = "Integer Sum", rendererName = "Table"
+              , width="70%", height="700px")
+}
