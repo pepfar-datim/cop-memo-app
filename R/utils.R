@@ -450,6 +450,13 @@ getAgencyPartnersMechsView<-function(d2_session) {
   }
 
  if (!exists("partners_agencies")) {
+   
+   dedupe_mechs<-tibble::tribble(
+     ~mechuid,~mech_code,~Partner,~Agency,
+     "xEzelmtHWPn","00000","Dedupe","Dedupe",
+     "OM58NubPbx1","00001","Crosswalk dedupe","Crosswalk dedupe"
+   )
+   
    partners_agencies<-glue::glue("{d2_session$base_url}api/sqlViews/IMg2pQJRHCr/data.csv") %>% 
      httr::GET(., handle = d2_session$handle )  %>% 
      httr::content(.,"text") %>% 
@@ -462,7 +469,8 @@ getAgencyPartnersMechsView<-function(d2_session) {
                                  %>% purrr::map(.,purrr::pluck(1)) 
                                  %>% unlist() 
                                  %>%  stringr::str_trim())) %>% 
-     dplyr::select(mechuid,mech_code,`Partner`,'Agency')
+     dplyr::select(mechuid,mech_code,`Partner`,'Agency') %>% 
+     dplyr::bind_rows(.,dedupe_mechs)
    flog.info(paste0("Overwriting stale mechanisms view to ", agencies_partners_cached_file))
    saveRDS(partners_agencies, file = agencies_partners_cached_file)
  }
