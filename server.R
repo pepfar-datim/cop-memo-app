@@ -442,12 +442,12 @@ shinyServer(function(input, output, session) {
   )
   
   output$pivot <- renderRpivotTable({
-    vr<-memo_data()
+    d<-memo_data()
     
-    if (!inherits(vr,"error") & !is.null(vr)){
+    if (!inherits(d,"error") & !is.null(d)){
       
       if ( is.null(d$data$by_psnuim) ) {return(NULL)}
-      PSNUxIM_pivot(vr)
+      PSNUxIM_pivot(d)
       
     } else {
       NULL

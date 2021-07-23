@@ -1,3 +1,11 @@
+#' Title getBaseURL()
+#'
+#' @return A base URL to be used throughout the application. If the BASE_URL 
+#' environment variable is not set, this function will return https://www.datim.org, 
+#' otherwise, the value of the environment variable. 
+#' @export
+#'
+#' @examples
 getBaseURL<-function() {
   if ( Sys.getenv("BASE_URL") !=  "" )  {
     return(Sys.getenv("BASE_URL")) } else {
@@ -518,16 +526,14 @@ getMechanismTable<-function(d,d2_session) {
   
   inds<-getIndicatorMetadata(d$cop_year,d2_session )
   
-  psnus_df<-dplyr::bind_rows(datapackr::valid_PSNUs) %>% 
+  d$psnus<-dplyr::bind_rows(datapackr::valid_PSNUs) %>% 
     dplyr::filter(country_uid %in% d$country_uids) %>% 
     dplyr::filter(!is.na(psnu_type)) %>% 
     dplyr::select(ou,country_name,snu1,psnu, psnu_uid)
   
-  d$psnus<-psnus_df$psnu
-  
   #Break up into 2048 character URLS (approximately)
-  n_requests<-ceiling(nchar(paste(psnus,sep="",collapse=";"))/2048)
-  n_groups<-split(sample(psnus),1:n_requests)
+  n_requests<-ceiling(nchar(paste(d$psnus$psnu_uid,sep="",collapse=";"))/2048)
+  n_groups<-split(sample(d$psnus$psnu_uid),1:n_requests)
   
   prios<-n_groups %>% 
     purrr::map_dfr(function(x) getExistingPrioritization(x,d$cop_year,d2_session))
@@ -545,7 +551,7 @@ getMechanismTable<-function(d,d2_session) {
                                                     TRUE ~ prioritization)) %>% 
     dplyr::rename("Mechanism" = attributeOptionCombo) %>% 
     dplyr::inner_join(d$partners_agencies,by=c("Mechanism" = "mech_code")) %>% 
-    dplyr::inner_join(psnus_df,by=c("orgUnit" = "psnu_uid" ))
+    dplyr::inner_join(d$psnus,by=c("orgUnit" = "psnu_uid" ))
   
   return(d)
 }
@@ -683,15 +689,21 @@ getOrgtunitNamefromUID<-function(uid, d2_session) {
       purrr::pluck("name")
 }
 
-
 PSNUxIM_pivot<-function(d){
   
   pivot<- d  %>%
     purrr::pluck("data") %>%
     purrr::pluck("by_psnuim") %>% 
-    dplyr::select("Agency","Partner","Mechanism","ou","country_name","snu1","psnu","Indicator","Age","numerator","denominator","value")
+    dplyr::select("Agency","Partner","Mechanism",
+                  "Organisation unit"= "ou",
+                  "Country"= "country_name",
+                  "SNU1" ="snu1",
+                  "PSNU" = "psnu",
+                  "Indicator",
+                  "Age",
+                  "value")
   
-  rpivotTable(data =   d$data$by_psnuim  ,  rows = c( "Indicator", "Age"),
+  rpivotTable(data =  pivot  ,  rows = c( "Indicator", "Age"),
               vals = "value", aggregatorName = "Integer Sum", rendererName = "Table"
               , width="70%", height="700px")
 }
