@@ -608,11 +608,16 @@ getPartnersTable<-function(d,d2_session) {
      dplyr::rename("Indicator" = ind,
                    Age = options)
   
+   #Calculate totals
+   
   d_totals<-dplyr::bind_rows(d_base,d_partners) %>% 
     dplyr::group_by(`Indicator`,`Age`) %>% 
     dplyr::summarise(`Value` = sum(`Value`)) %>% 
     dplyr::ungroup() %>% 
     dplyr::mutate(`Partner` = 'Total',`Mechanism` = 'Total', Agency="Total")
+  
+  #Remove dedupe 
+  d_partners %<>% dplyr::filter(!(`Mechanism` %in% c("00001","00000")))
   
   d_indicators<- indicatorOrder(d$cop_year) %>% 
     dplyr::filter(in_partner_table) %>%
@@ -672,6 +677,9 @@ getAgencyTable<-function(d,d2_session) {
     dplyr::mutate(Age = "Total") %>% 
     dplyr::ungroup() %>% 
     dplyr::select(names(d_agency))
+  
+  #Remove dedupe
+  d_agency %<>% dplyr::filter(stringr::str_detect(`Agency`,"[Dd]edupe",negate=TRUE))
   
   agency_levels <- c(sort(unique(d_agency$Agency)),"Total")
   
