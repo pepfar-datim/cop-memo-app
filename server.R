@@ -345,7 +345,7 @@ shinyServer(function(input, output, session) {
         unlist() %>% 
         c("Agency","Partner","Mechanism",.)
       
-      chunks<-list(c(1:14),c(1:3,15:25),c(1:3,26:34),c(1:3,35:43))
+      chunks<-list(c(1:15),c(1:3,16:26),c(1:3,27:35),c(1:3,36:44))
       
       renderPartnerTable<-function(chunk,d_table,group_heading) {
         
@@ -359,8 +359,9 @@ shinyServer(function(input, output, session) {
           merge_v(.,part = "header")  %>% 
           fontsize(., size = 7, part = "all") %>% 
           style(.,pr_p = style_para_prio,part = "body") %>% 
-          width(.,j=1:2,0.75) %>% 
-          width(.,j=3:(length(chunk)-2),0.4)
+          style(.,pr_p = style_header_prio,part="header") %>% 
+          width(.,j=1:3,0.75) %>% 
+          width(.,j=4:(length(chunk)),0.4)
         
         fontname<-"Arial"
         if ( gdtools::font_family_exists(fontname) ) {
