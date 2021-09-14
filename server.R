@@ -32,6 +32,19 @@ shinyServer(function(input, output, session) {
       d$inds <- getMemoIndicators(cop_year =  d$cop_year, d2_session = user_input$d2_session)
       d$partners_agencies <- getAgencyPartnersMechsView(user_input$d2_session)
       d <- getPSUxIMData(d, d2_session = user_input$d2_session)
+
+      if (NROW(d$data$datim_export) == 0) {
+        shinyjs::disable("downloadXLSX")
+        shinyjs::disable("downloadDOCX")
+        closeSweetAlert(session)
+        sendSweetAlert(
+          session,
+          title = "Oops!",
+          text = "Sorry, I could not find any data for you!"
+        )
+        return(d)
+      }
+
       d <- getMechanismTable(d, d2_session = user_input$d2_session)
       d <- getPrioritizationTable(d, d2_session = user_input$d2_session, include_no_prio = input$include_no_prio)
       d <- getPartnersTable(d, d2_session = user_input$d2_session)
@@ -40,13 +53,7 @@ shinyServer(function(input, output, session) {
       shinyjs::enable("downloadXLSX")
       shinyjs::enable("downloadDOCX")
       closeSweetAlert(session)
-      if (is.null(d$prio) & is.null(d$d_mechs)) {
-        sendSweetAlert(
-          session,
-          title = "Oops!",
-          text = "Sorry, I could not find any data for you!"
-        )
-      }
+
       return(d)
     }
   }
