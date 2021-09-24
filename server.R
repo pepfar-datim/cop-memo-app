@@ -276,7 +276,7 @@ shinyServer(function(input, output, session) {
       #Transform all zeros to dashes
       d$prio %<>%
         dplyr::mutate_if(is.numeric,
-                         function(x) ifelse(x == 0, "-", formatC(x, format = "f", big.mark = ", ", digits = 0)))
+                         function(x) ifelse(x == 0, "-", formatC(x, format = "f", big.mark = ",", digits = 0)))
 
       style_para_prio <- fp_par(text.align = "right",
                               padding.right = 0.04,
@@ -326,7 +326,7 @@ shinyServer(function(input, output, session) {
       #Partners tables
       d$partner_table %<>%
         dplyr::mutate_if(is.numeric,
-                         function(x) ifelse(x == 0, "-", formatC(x, format = "f", big.mark = ", ", digits = 0)))
+                         function(x) ifelse(x == 0, "-", formatC(x, format = "f", big.mark = ",", digits = 0)))
 
       sub_heading <- names(d$partner_table)[4:length(d$partner_table)] %>%
         stringr::str_split(., " ") %>%
@@ -378,7 +378,7 @@ shinyServer(function(input, output, session) {
         dplyr::rename("Deduplicated Total" = "Total") %>%
         dplyr::mutate_if(
           is.numeric,
-          function(x) ifelse(x == 0, "-", formatC(x, format = "f", big.mark = ", ", digits = 0))
+          function(x) ifelse(x == 0, "-", formatC(x, format = "f", big.mark = ",", digits = 0))
         )
       new_header <- c("Indicator", "Age",
       rep("Duplicated Agency Totals", dim(d$agency_table)[2] - 3),
