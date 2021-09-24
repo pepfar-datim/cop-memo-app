@@ -34,8 +34,31 @@ getVersionInfo <- function() {
 
 datapack_config <- function() {
 
-  datapackr::COP21_datapacks_countries %>%
-    dplyr::arrange(datapack_name)
+    dp_regions <- datapackr::valid_PSNUs %>% 
+      dplyr::filter(stringr::str_detect(ou,"Region")) %>% 
+      dplyr::select(ou,country_uid) %>% 
+      dplyr::distinct() %>%
+      tidyr::nest(country_uids = country_uid) %>% 
+      dplyr::rename(datapack_name = ou)
+    
+    countries_in_regions <- datapackr::valid_PSNUs %>% 
+      dplyr::filter(stringr::str_detect(ou,"Region")) %>% 
+      dplyr::select(country_name,country_uid) %>% 
+      dplyr::distinct() %>%
+      tidyr::nest(country_uids = country_uid) %>% 
+      dplyr::rename(datapack_name = country_name)
+    
+    countries_no_regions <- datapackr::valid_PSNUs %>% 
+      dplyr::filter(!stringr::str_detect(ou,"Region")) %>% 
+      dplyr::select(country_name,country_uid) %>% 
+      dplyr::distinct() %>%
+      tidyr::nest(country_uids = country_uid) %>% 
+      dplyr::rename(datapack_name = country_name)
+    
+    
+    dplyr::bind_rows(dp_regions,countries_in_regions,countries_no_regions) %>% 
+      dplyr::arrange(datapack_name)
+    
 }
 
 
