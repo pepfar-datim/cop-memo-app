@@ -104,7 +104,7 @@ shinyServer(function(input, output, session) {
          } else { #Need to update logic here
 
            if(exists("d2_default_session") & !(is_authorized)){# Display custom
-             # message to the user in regards to not being a member of the
+             # message to the user in regards to NOT being a member of the
              # PRIME Data Systems Group, COP Memo group, or a super user
 
             # Might be a better way to trigger this if statement
