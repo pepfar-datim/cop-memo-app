@@ -77,8 +77,9 @@ shinyServer(function(input, output, session) {
       loginToDATIM(base_url = user_input$base_url,
                                            username = input$user_name,
                                            password = input$password)
-          # Need to check the user is a member of the PRIME Data Systems Group, COP Memo group, or a super user
-          is_authorized <- grepl("VDEqY8YeCEk|ezh8nmc4JbX", # "M9Uer9SioL7" #CHANGED SOLELY FOR TESTING
+          # Need to check the user is a member of the PRIME Data Systems Group,
+            # COP Memo group, or a super user
+          is_authorized <- grepl("VDEqY8YeCEk|ezh8nmc4JbX",
           d2_default_session$me$userGroups) | grepl("jtzbVV4ZmdP",
           d2_default_session$me$userCredentials$userRoles)
       },
@@ -105,7 +106,8 @@ shinyServer(function(input, output, session) {
            if(exists("d2_default_session") & !(is_authorized)){# Display custom
              # message to the user in regards to not being a member of the
              # PRIME Data Systems Group, COP Memo group, or a super user
-            #Might be a better way to trigger this if statement
+
+            # Might be a better way to trigger this if statement
             sendSweetAlert(
                session,
                title = "Not authorized",
