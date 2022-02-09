@@ -1,4 +1,3 @@
-require(magrittr)
 
 #' Title getBaseURL()
 #'
@@ -91,11 +90,10 @@ d2_analyticsResponse <- function(url, remapCols = TRUE, d2_session) {
 
 indicatorOrder <- function(cop_year="2020") {
 
-  if (!(cop_year %in% c("2020", "2021"))) {
+  if (!(cop_year %in% c("2020", "2021","2022"))) {
     stop("Unsupported COP year!")
   }
 
-  if (cop_year == "2020") {
 
     inds <- tibble::tribble(
       ~ind, ~options, ~in_partner_table,
@@ -156,217 +154,26 @@ indicatorOrder <- function(cop_year="2020") {
       "TX_TB", "15+", TRUE,
       "TX_TB", "Total", FALSE,
       "GEND_GBV", "Total", TRUE)
-  }
 
   if (cop_year == "2021") {
-    inds <- tibble::tribble(
+    inds <- 
+      dplyr::bind_rows(inds,
+      tibble::tribble(
       ~ind, ~options, ~in_partner_table,
-      "HTS_INDEX", "<15", TRUE,
-      "HTS_INDEX", "15+", TRUE,
-      "HTS_INDEX", "Total", FALSE,
-      "HTS_TST", "<15", TRUE,
-      "HTS_TST", "15+", TRUE,
-      "HTS_TST", "Total", FALSE,
-      "HTS_TST_POS", "<15", TRUE,
-      "HTS_TST_POS", "15+", TRUE,
-      "HTS_TST_POS", "Total", FALSE,
-      "TX_NEW", "<15", TRUE,
-      "TX_NEW", "15+", TRUE,
-      "TX_NEW", "Total", FALSE,
-      "TX_CURR", "<15", TRUE,
-      "TX_CURR", "15+", TRUE,
-      "TX_CURR", "Total", FALSE,
-      "TX_PVLS", "<15", TRUE,
-      "TX_PVLS", "15+", TRUE,
-      "TX_PVLS", "Total", FALSE,
-      "CXCA_SCRN", "Total", TRUE,
-      "OVC_SERV", "<18", TRUE,
-      "OVC_SERV", "18+", TRUE,
-      "OVC_SERV", "Total", FALSE,
-      "OVC_HIVSTAT", "Total", TRUE,
-      "PMTCT_STAT", "<15", TRUE,
-      "PMTCT_STAT", "15+", TRUE,
-      "PMTCT_STAT", "Total", FALSE,
-      "PMTCT_STAT_POS", "<15", TRUE,
-      "PMTCT_STAT_POS", "15+", TRUE,
-      "PMTCT_STAT_POS", "Total", FALSE,
-      "PMTCT_ART", "<15", TRUE,
-      "PMTCT_ART", "15+", TRUE,
-      "PMTCT_ART", "Total", FALSE,
-      "PMTCT_EID", "Total", TRUE,
-      "PP_PREV", "<15", TRUE,
-      "PP_PREV", "15+", TRUE,
-      "PP_PREV", "Total", FALSE,
-      "KP_PREV", "Total", TRUE,
-      "KP_MAT", "Total", TRUE,
-      "VMMC_CIRC", "Total", TRUE,
-      "HTS_SELF", "<15", TRUE,
-      "HTS_SELF", "15+", TRUE,
-      "HTS_SELF", "Total", FALSE,
-      "PrEP_NEW", "Total", TRUE,
-      "PrEP_CURR", "Total", TRUE,
-      "TB_STAT", "<15", TRUE,
-      "TB_STAT", "15+", TRUE,
-      "TB_STAT", "Total", FALSE,
-      "TB_ART", "<15", TRUE,
-      "TB_ART", "15+", TRUE,
-      "TB_ART", "Total", FALSE,
-      "TB_PREV", "<15", TRUE,
-      "TB_PREV", "15+", TRUE,
-      "TB_PREV", "Total", FALSE,
-      "TX_TB", "<15", TRUE,
-      "TX_TB", "15+", TRUE,
-      "TX_TB", "Total", FALSE,
-      "GEND_GBV", "Total", TRUE,
-      "AGYW_PREV", "Total", FALSE)
+      "AGYW_PREV", "Total", FALSE))
   }
 
-  inds
+if (cop_year == "2021") {
+  inds <- 
+    dplyr::bind_rows(inds,
+                     tibble::tribble(
+                       ~ind, ~options, ~in_partner_table,
+                       "HTS_RECENT", "<15", TRUE,
+                       "HTS_RECENT", "15+", TRUE,
+                       "HTS_RECENT", "Total", TRUE,
+                       "AGYW_PREV", "Total", FALSE))
 }
 
-getIndicatorGroups <- function(cop_year = "2020") {
-  if (cop_year == "2020") {
-    "wWi08ToZ2gR"
-  } else if (cop_year == "2021") {
-    #TODO: Fix this once the COP21 indicator group has been finalized
-    "TslxbFe3VUZ"
-  }
-}
-
-getIndicatorMetadata <- function(cop_year, d2_session) {
-  #Fetch indicators from the COP21 memo group
-  #TODO: Make this work for both COP years.!
-
-  if (cop_year == 2020) {
-    ind_group <- "wWi08ToZ2gR"
-  } else if (cop_year == 2021) {
-    #TODO: Fix this with the real indicator group once it has been deployed to prod
-    ind_group <- "TslxbFe3VUZ"
-  } else {
-    futile.logger::flog.info("Indicator group was not found")
-    return(NULL)
-  }
-  inds <-
-    datimutils::getIndicatorGroups(ind_group,
-                                   d2_session = d2_session,
-                                   fields = "indicators[id, name, numerator, denominator]")
-
-  if (class(inds) != "data.frame") {
-    stop("No indicator metadata  was returned from DATIM")
-  }
-
-  inds
-}
-
-evaluateIndicators <- function(combis, values, inds) {
-
-  indicators_empty <- data.frame("Indicator" = character(),
-                               "N_OR_D" = character(),
-                               "Age" = character(),
-                               id = character(),
-                               numerator = numeric(),
-                               denominator = numeric(),
-                               value  = numeric())
-
-  this.des <-
-    vapply(combis, function(x) {
-      unlist(strsplit(x, "\\."))[[1]]
-    }, FUN.VALUE = character(1))
-
-  totals_df <- data.frame(exp = this.des, values = values, stringsAsFactors = FALSE) %>%
-    dplyr::group_by(exp) %>%
-    dplyr::summarise(values = sum(values)) %>%
-    dplyr::ungroup() %>%
-    dplyr::mutate(exp = paste0(exp, "}"))
-
-  matches_indicator <- function(x) {
-    agrepl(x, inds$numerator) |
-      agrepl(x, inds$denominator)
-  }
-
-
-  matches <- this.des %>%
-    unique(.) %>%
-    purrr::map(., matches_indicator) %>%
-    Reduce("|", .) %>%
-    dplyr::filter(inds, .)
-
-  #Return something empty here if we have no indicator matches
-
-  if (nrow(matches) == 0) {
-    return(indicators_empty)
-  }
-
-  replaceCombisWithValues <- function(x, combis.this=combis, values.this=values) {
-    stringi::stri_replace_all_fixed(x,
-                                    combis.this, values.this, vectorize_all =
-                                      FALSE)
-  }
-
-  replaceTotalsWithValues <- function(x) replaceCombisWithValues(x, combis = totals_df$exp, values = totals_df$values)
-
-  replaceExpressionsWithZeros <- function(x) {
-    expression.pattern <- "#\\{[a-zA-Z][a-zA-Z0-9]{10}(\\.[a-zA-Z][a-zA-Z0-9]{10})?\\}"
-    gsub(expression.pattern, "0", x)
-  }
-
-  evaluateExpression <- function(exp) {
-    vapply(exp, function(x) {
-      eval(parse(text = x))
-    }, FUN.VALUE = double(1))
-  }
-
-
-  matches %>%
-    purrr::modify_at(., c("numerator", "denominator"), replaceCombisWithValues) %>%
-    purrr::modify_at(., c("numerator", "denominator"), replaceTotalsWithValues) %>%
-    purrr::modify_at(., c("numerator", "denominator"), replaceExpressionsWithZeros) %>%
-    purrr::modify_at(., c("numerator", "denominator"), evaluateExpression) %>%
-    dplyr::mutate(value = numerator / denominator)
-
-}
-getMemoIndicators <- function(cop_year, d2_session) {
-
-  ind_group <- getIndicatorGroups(cop_year)
-
-  inds <-
-    datimutils::getIndicatorGroups(ind_group,
-                                   d2_session = d2_session,
-                                   fields = "indicators[id, shortName]") %>%
-    dplyr::rename(indicator_name = shortName) %>%
-    dplyr::mutate(indicator_name = stringr::str_replace_all(indicator_name, "COP2[01] ", "")) %>%
-    dplyr::mutate(indicator_name = stringr::str_replace_all(indicator_name, "Targets ", "")) %>%
-    dplyr::mutate(indicator_name = stringr::str_trim(indicator_name)) %>%
-    tidyr::separate("indicator_name", into = c("Indicator", "Numerator", "Age"), sep = " ") %>%
-    dplyr::mutate(Age = case_when(Age == "15-" ~ "<15",
-                                  Age == "15+" ~ "15+",
-                                  Age == "18-" ~"<18",
-                                  Age == "18+" ~ "18+",
-                                  TRUE ~ "Total")) %>%
-    dplyr::mutate(Age = dplyr::case_when(
-      Indicator %in% c(
-        "CXCA_SCRN",
-        "OVC_HIVSTAT",
-        "KP_PREV",
-        "PMTCT_EID",
-        "KP_MAT",
-        "VMMC_CIRC",
-        "PrEP_NEW",
-        "PrEP_CURR",
-        "GEND_GBV"
-      )  ~ "Total",
-      TRUE ~ Age
-    )) %>%
-    dplyr::select(-Numerator) %>%
-    suppressWarnings()
-
-  if (class(inds) != "data.frame") {
-    stop("No indicator metadata  was returned from DATIM")
-  }
-
-  if (!all(unique(inds$Indicator) %in%  (indicatorOrder(cop_year) %>% dplyr::pull(ind) %>% unique(.)))) {
-    stop("Unknown indicators found in metadata response.")
-  }
 
   inds
 }
@@ -482,8 +289,8 @@ getAgencyPartnersMechsView <- function(d2_session) {
     }
 
     is_fresh <-
-      lubridate::as.duration(lubridate::interval(Sys.time(),
-      file.info(agencies_partners_cached_file)$mtime)) < lubridate::duration(max_cache_age)
+      lubridate::as.duration(lubridate::interval(file.info(agencies_partners_cached_file)$mtime,
+                             Sys.time())) < lubridate::duration(max_cache_age)
     if (is_fresh) {
       futile.logger::flog.info(paste0("Using cached support file at ", agencies_partners_cached_file))
       partners_agencies <- readRDS(agencies_partners_cached_file)
@@ -492,10 +299,11 @@ getAgencyPartnersMechsView <- function(d2_session) {
 
  if (!exists("partners_agencies")) {
 
-   dedupe_mechs <- tibble::tribble(
+   special_mechs <- tibble::tribble(
      ~mechuid, ~mech_code, ~Partner, ~Agency,
      "xEzelmtHWPn", "00000", "Dedupe", "Dedupe",
-     "OM58NubPbx1", "00001", "Crosswalk dedupe", "Crosswalk dedupe"
+     "OM58NubPbx1", "00001", "Crosswalk dedupe", "Crosswalk dedupe",
+     datapackr::default_catOptCombo(),"default","No Partner","No Agency"
    )
 
    partners_agencies <- glue::glue("{d2_session$base_url}api/sqlViews/IMg2pQJRHCr/data.csv") %>%
@@ -511,7 +319,7 @@ getAgencyPartnersMechsView <- function(d2_session) {
                                    unlist() %>%
                                  stringr::str_trim())) %>%
      dplyr::select(mechuid, mech_code, Partner, Agency) %>%
-     dplyr::bind_rows(., dedupe_mechs)
+     dplyr::bind_rows(., special_mechs)
 
    futile.logger::flog.info(paste0("Overwriting stale mechanisms view to ", agencies_partners_cached_file))
 
@@ -572,11 +380,9 @@ getPSUxIMData <- function(d, d2_session) {
   return(d)
 }
 
-
 #Prepares an memo indicator table from raw data elements/catcombos
 getMechanismTable <- function(d, d2_session) {
 
-  inds <- getIndicatorMetadata(d$cop_year, d2_session)
 
   d$psnus <- dplyr::bind_rows(datapackr::valid_PSNUs) %>%
     dplyr::filter(country_uid %in% d$country_uids) %>%
@@ -590,14 +396,30 @@ getMechanismTable <- function(d, d2_session) {
   prios <- n_groups %>%
     purrr::map_dfr(function(x) getExistingPrioritization(x, d$cop_year, d2_session))
 
-
-  d$data$by_psnuim <- d$data$datim_export %>%
+  df <- d$data$datim_export %>%
     dplyr::select(dataElement, period, orgUnit, categoryOptionCombo, attributeOptionCombo, value) %>%
     dplyr::mutate(combi = paste0("#{", dataElement, ".", categoryOptionCombo, "}")) %>%
-    plyr::ddply(., plyr::.(orgUnit, attributeOptionCombo),
-                function(x)
-                  evaluateIndicators(x$combi, x$value, inds)) %>%
-    adornIndicators(.) %>%
+    dplyr::select(-dataElement,-categoryOptionCombo,-period) %>%
+    dplyr::group_by(orgUnit,attributeOptionCombo) %>%
+    tidyr::nest()
+  
+  #Evaluate the indicators in parallel if possible
+  if ("parallel" %in% rownames(installed.packages()) == TRUE) {
+    df$indicator_results <-
+      parallel::mclapply(df$data, function(x)
+        datapackr::evaluateIndicators(x$combi, x$value, inds = d$inds), mc.cores = parallel::detectCores())
+  } else {
+    df$indicator_results <-
+      lapply(df$data, function(x)
+        datapackr::evaluateIndicators(x$combi, x$value, inds = d$inds))
+  }
+  
+
+  d$data$by_psnuim <- df %>% 
+    dplyr::select(-data) %>% 
+    tidyr::unnest(indicator_results) %>% 
+    datapackr::seperateIndicatorMetadata(.) %>%
+    dplyr::select(-id,numerator,denominator) %>% 
     dplyr::left_join(prios, by = c("orgUnit" = "psnu_uid")) %>%
     dplyr::mutate(prioritization = dplyr::case_when(is.na(prioritization) ~ "No Prioritization",
                                                     TRUE ~ prioritization)) %>%
@@ -605,32 +427,10 @@ getMechanismTable <- function(d, d2_session) {
     dplyr::inner_join(d$partners_agencies, by = c("Mechanism" = "mech_code")) %>%
     dplyr::inner_join(d$psnus, by = c("orgUnit" = "psnu_uid"))
 
-  return(d)
+  d
 }
 
-adornIndicators <- function(x) {
-    x %>%
-    dplyr::mutate(name =  stringr::str_replace_all(name, "^COP2[01] Targets ", "")) %>%
-    dplyr::mutate(name = stringr::str_trim(name)) %>%
-    tidyr::separate("name", into = c("Indicator", "N_OR_D", "Age"), sep = " ") %>%
-    dplyr::mutate(Indicator = dplyr::case_when(Indicator == "GEND_GBV" &
-    N_OR_D == "Physical" ~ "GEND_GBV Physical and Emotional Violence",
-                                        Indicator == "GEND_GBV" & N_OR_D == "Sexual" ~ "GEND_GBV Sexual Violence",
-                                        TRUE ~ Indicator)) %>%
-    dplyr::select(-"N_OR_D") %>%
-    dplyr::mutate(Age = dplyr::case_when(Age == "15-" ~ "<15",
-                                  Age == "15+" ~ "15+",
-                                  Age == "18-" ~"<18",
-                                  Age == "18+" ~ "18+",
-                                  TRUE ~ "Total")) %>%
-    dplyr::mutate(Age = dplyr::case_when(
-      Indicator %in% c("CXCA_SCRN", "OVC_HIVSTAT", "KP_PREV", "PMTCT_EID", "KP_MAT", "VMMC_CIRC",
-      "PrEP_NEW", "PrEP_CURR", "GEND_GBV") ~ "Total",
-      TRUE ~ Age
-    ))
-}
-
-getPartnersTable <- function(d, d2_session) {
+getPartnersTable <- function(d) {
 
   df <- d$data$by_psnuim
 
@@ -690,7 +490,7 @@ getPartnersTable <- function(d, d2_session) {
 
 }
 
-getAgencyTable <- function(d, d2_session) {
+getAgencyTable <- function(d) {
 
   df <- d$data$by_psnuim
 

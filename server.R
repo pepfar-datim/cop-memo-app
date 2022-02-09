@@ -1,6 +1,6 @@
 pacman::p_load(shiny, shinyjs, shinyWidgets, magrittr, knitr,
 kableExtra, gdtools, futile.logger, glue, dplyr, tibble, jsonlite, httr, tidyr, stringr, DT,
-datapackr, datimutils, purrr, rpivotTable)
+datapackr, datimutils, purrr, rpivotTable,parallel,magrittr)
 
 options(scipen = 999)
 
@@ -29,7 +29,7 @@ shinyServer(function(input, output, session) {
       d <- list()
       d$ou <- input$ou
       d$cop_year <- as.numeric(user_input$cop_year)
-      d$inds <- getMemoIndicators(cop_year =  d$cop_year, d2_session = user_input$d2_session)
+      d$inds <- datapackr::getMemoIndicators(cop_year =  d$cop_year, d2_session = user_input$d2_session)
       d$partners_agencies <- getAgencyPartnersMechsView(user_input$d2_session)
       d <- getPSUxIMData(d, d2_session = user_input$d2_session)
 
@@ -47,8 +47,8 @@ shinyServer(function(input, output, session) {
 
       d <- getMechanismTable(d, d2_session = user_input$d2_session)
       d <- getPrioritizationTable(d, d2_session = user_input$d2_session, include_no_prio = input$include_no_prio)
-      d <- getPartnersTable(d, d2_session = user_input$d2_session)
-      d <- getAgencyTable(d, d2_session = user_input$d2_session)
+      d <- getPartnersTable(d)
+      d <- getAgencyTable(d)
       shinyjs::enable("fetch")
       shinyjs::enable("downloadXLSX")
       shinyjs::enable("downloadDOCX")
@@ -226,7 +226,7 @@ shinyServer(function(input, output, session) {
         sidebarPanel(
           shinyjs::useShinyjs(),
           id = "side-panel",
-          selectInput("cop_year", "COP Year", c(2020, 2021), selected = 2021),
+          selectInput("cop_year", "COP Year", c(2020, 2021,2022), selected = 2022),
           tags$hr(),
           selectInput("ou", "Operating Unit", datapack_config()$datapack_name),
           tags$hr(),
