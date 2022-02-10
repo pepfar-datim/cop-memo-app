@@ -797,7 +797,7 @@
       "GithubRepo": "datapackr",
       "GithubUsername": "pepfar-datim",
       "GithubRef": "DP-504",
-      "GithubSha1": "1ab2c23ddbad8b23e51edfbc1a24748d15769eb1",
+      "GithubSha1": "ea5205f964310d46e64fae7d69fc68c126850577",
       "description": {
         "Package": "datapackr",
         "Type": "Package",
@@ -810,25 +810,25 @@
         "BugReports": "https://github.com/pepfar-datim/datapackr",
         "Depends": "R (>= 4.1.0)",
         "Imports": "dplyr (>= 0.8.3),\ntidyr (>= 1.0.0),\ntidyxl (>= 1.0.4),\nreadxl (>= 1.3.1),\nreadr (>= 1.3.1),\njsonlite (>= 1.6),\npurrr (>= 0.3.3),\ntibble (>= 2.1.3),\nstringr (>= 1.4.0),\nstringi,\nhttr (>= 1.4.0),\nrlist (>= 0.4.6.1),\nmagrittr (>= 1.5),\ncrayon (>= 1.3.4),\nopenxlsx,\nlazyeval,\nstats,\nlubridate (>= 1.7.4),\ndata.table (>= 1.12.8),\ndatimutils,\ndatimvalidation,\ndatapackcommons (>= 0.2.0),\ntidyselect (>= 0.2.5),\nglue (>= 1.3.1),\nrlang (>= 0.4.2),\nassertthat,\nplyr,\nfuzzyjoin (>= 0.1.6),\nR6",
-        "Suggests": "devtools (>= 2.0.1),\nhttptest,\ntestthat,\ncellranger,\nrprojroot,\nwaldo,\ndoMC",
+        "Suggests": "devtools (>= 2.0.1),\nhttptest,\ntestthat,\ncellranger,\nrprojroot,\nwaldo,\nparallel,\ngdtools,\nflextable",
         "License": "file LICENSE",
         "Encoding": "UTF-8",
         "LazyData": "true",
         "RoxygenNote": "7.1.2",
         "Author": "Scott Jackson [aut, cre],\n  Jason Pickering [aut, rev],\n  Sam Garman [aut],\n  Chris Nemarich [ctb],\n  Christian Domaas [ctb],\n  Fausto Lopez [ctb],\n  Jordan Bales [ctb]",
         "Maintainer": "Scott Jackson <sjackson@baosystems.com>",
-        "Built": "R 4.1.2; ; 2022-02-08 13:52:42 UTC; unix",
+        "Built": "R 4.1.2; ; 2022-02-10 11:01:31 UTC; unix",
         "RemoteType": "github",
         "RemoteHost": "api.github.com",
         "RemoteUsername": "pepfar-datim",
         "RemoteRepo": "datapackr",
         "RemoteRef": "DP-504",
-        "RemoteSha": "1ab2c23ddbad8b23e51edfbc1a24748d15769eb1",
+        "RemoteSha": "ea5205f964310d46e64fae7d69fc68c126850577",
         "GithubHost": "api.github.com",
         "GithubRepo": "datapackr",
         "GithubUsername": "pepfar-datim",
         "GithubRef": "DP-504",
-        "GithubSHA1": "1ab2c23ddbad8b23e51edfbc1a24748d15769eb1",
+        "GithubSHA1": "ea5205f964310d46e64fae7d69fc68c126850577",
         "Remotes": "pepfar-datim/datimutils,\npepfar-datim/datim-validation,\npepfar-datim/data-pack-commons"
       }
     },
@@ -917,27 +917,27 @@
       "description": {
         "Package": "desc",
         "Title": "Manipulate DESCRIPTION Files",
-        "Version": "1.3.0",
+        "Version": "1.4.0",
         "Authors@R": "\n    c(person(given = \"Gábor\",\n             family = \"Csárdi\",\n             role = c(\"aut\", \"cre\"),\n             email = \"csardi.gabor@gmail.com\"),\n      person(given = \"Kirill\",\n             family = \"Müller\",\n             role = \"aut\"),\n      person(given = \"Jim\",\n             family = \"Hester\",\n             role = \"aut\",\n             email = \"james.f.hester@gmail.com\"),\n      person(given = \"Maëlle\",\n             family = \"Salmon\",\n             role = \"ctb\",\n             comment = c(ORCID = \"0000-0002-2815-0399\")))",
         "Maintainer": "Gábor Csárdi <csardi.gabor@gmail.com>",
         "Description": "Tools to read, write, create, and manipulate DESCRIPTION files.\n    It is intended for packages that create or manipulate other packages.",
         "License": "MIT + file LICENSE",
-        "LazyData": "true",
         "URL": "https://github.com/r-lib/desc#readme",
         "BugReports": "https://github.com/r-lib/desc/issues",
         "Depends": "R (>= 3.1.0)",
         "Suggests": "covr, testthat, whoami, withr, spelling, gh",
         "Imports": "utils, R6, crayon, rprojroot",
         "Encoding": "UTF-8",
-        "RoxygenNote": "7.1.1.9000",
+        "RoxygenNote": "7.1.2",
         "Collate": "'assertions.R' 'authors-at-r.R' 'built.R' 'classes.R'\n'collate.R' 'constants.R' 'deps.R' 'description.R' 'encoding.R'\n'latex.R' 'non-oo-api.R' 'package-archives.R' 'read.R'\n'remotes.R' 'str.R' 'syntax_checks.R' 'urls.R' 'utils.R'\n'validate.R' 'version.R'",
         "Language": "en-US",
+        "Config/testthat/edition": "3",
         "NeedsCompilation": "no",
-        "Packaged": "2021-03-05 18:50:38 UTC; gaborcsardi",
+        "Packaged": "2021-09-27 17:26:10 UTC; gaborcsardi",
         "Author": "Gábor Csárdi [aut, cre],\n  Kirill Müller [aut],\n  Jim Hester [aut],\n  Maëlle Salmon [ctb] (<https://orcid.org/0000-0002-2815-0399>)",
         "Repository": "CRAN",
-        "Date/Publication": "2021-03-05 19:30:02 UTC",
-        "Built": "R 4.1.2; ; 2022-01-21 11:53:53 UTC; unix"
+        "Date/Publication": "2021-09-28 07:30:02 UTC",
+        "Built": "R 4.1.1; ; 2021-10-19 05:57:23 UTC; unix"
       }
     },
     "diffobj": {
@@ -4087,13 +4087,13 @@
       "checksum": "dffe72e057c1a02bfded40b94ea4fc72"
     },
     ".Rprofile": {
-      "checksum": "7f7b217cdee56f625ba08ddc4b51bed2"
+      "checksum": "a52e8aeadb076a4d27054cb1062e56a6"
     },
     ".Rprofile.swp": {
       "checksum": "cd6123a53f2c778d41cb97ec0d7c7c8a"
     },
     "agencies_partners_mechs.rds": {
-      "checksum": "49f215333290d71c02bb0eb9afd4a601"
+      "checksum": "b09e924c39579cfc907a1c7a8c57a731"
     },
     "approval_memo_template_flextable.Rmd": {
       "checksum": "5fd56df780be043a8302d4436316c863"
@@ -4125,6 +4125,9 @@
     "lintr-config.R": {
       "checksum": "8f858896c6181be9e1f8616cb4f8a2f2"
     },
+    "mechs.rds": {
+      "checksum": "11b3adf93675288923526cf20c68cf68"
+    },
     "my_work_space.RData": {
       "checksum": "5e8f2b4e6274fafe9bf01d5782d04352"
     },
@@ -4132,10 +4135,10 @@
       "checksum": "cd04d9e778b00519de3e0e2afc97eb28"
     },
     "R/utils.R": {
-      "checksum": "c4e04546d559d015a5973cc002826939"
+      "checksum": "5a24f0a8ed39b05e812d7c0508096c24"
     },
     "server.R": {
-      "checksum": "16b4787e0487b8cd95f6c89d6c644555"
+      "checksum": "ad019bc208fc0a2cf7e1ada64a1af223"
     },
     "support_files/cop_data.rds": {
       "checksum": "37d14efb4e51c31bb75a300c786f1892"

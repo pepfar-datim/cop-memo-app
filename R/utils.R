@@ -30,7 +30,6 @@ getVersionInfo <- function() {
     paste(., "</p></div>")
 }
 
-
 datapack_config <- function() {
 
     dp_regions <- datapackr::valid_PSNUs %>% 
@@ -58,124 +57,6 @@ datapack_config <- function() {
     dplyr::bind_rows(dp_regions,countries_in_regions,countries_no_regions) %>% 
       dplyr::arrange(datapack_name)
     
-}
-
-
-d2_analyticsResponse <- function(url, remapCols = TRUE, d2_session) {
-  d <-
-    jsonlite::fromJSON(content(GET(url, handle = d2_session$handle), "text"))
-  if (NROW(d$rows) > 0) {
-    metadata <- do.call(rbind,
-                        lapply(d$metaData$items,
-                               data.frame, stringsAsFactors = FALSE)) %>%
-      mutate(., from = row.names(.))
-
-    remapMeta <-
-      function(x) {
-        plyr::mapvalues(x, metadata$from, metadata$name, warn_missing = FALSE)
-      }
-
-    d <-
-      tibble::as_tibble(d$rows) %>% `names<-`(., d$headers$column)
-
-    if (remapCols == TRUE) {
-      d <- plyr::colwise(remapMeta)(d)
-    }
-
-    return(d)
-  } else {
-    return(NULL)
-  }
-}
-
-indicatorOrder <- function(cop_year="2020") {
-
-  if (!(cop_year %in% c("2020", "2021","2022"))) {
-    stop("Unsupported COP year!")
-  }
-
-
-    inds <- tibble::tribble(
-      ~ind, ~options, ~in_partner_table,
-      "HTS_INDEX", "<15", TRUE,
-      "HTS_INDEX", "15+", TRUE,
-      "HTS_INDEX", "Total", FALSE,
-      "HTS_TST", "<15", TRUE,
-      "HTS_TST", "15+", TRUE,
-      "HTS_TST", "Total", FALSE,
-      "HTS_TST_POS", "<15", TRUE,
-      "HTS_TST_POS", "15+", TRUE,
-      "HTS_TST_POS", "Total", FALSE,
-      "TX_NEW", "<15", TRUE,
-      "TX_NEW", "15+", TRUE,
-      "TX_NEW", "Total", FALSE,
-      "TX_CURR", "<15", TRUE,
-      "TX_CURR", "15+", TRUE,
-      "TX_CURR", "Total", FALSE,
-      "TX_PVLS", "<15", TRUE,
-      "TX_PVLS", "15+", TRUE,
-      "TX_PVLS", "Total", FALSE,
-      "CXCA_SCRN", "Total", TRUE,
-      "OVC_SERV", "<18", TRUE,
-      "OVC_SERV", "18+", TRUE,
-      "OVC_SERV", "Total", FALSE,
-      "OVC_HIVSTAT", "Total", TRUE,
-      "PMTCT_STAT", "<15", TRUE,
-      "PMTCT_STAT", "15+", TRUE,
-      "PMTCT_STAT", "Total", FALSE,
-      "PMTCT_STAT_POS", "<15", TRUE,
-      "PMTCT_STAT_POS", "15+", TRUE,
-      "PMTCT_STAT_POS", "Total", FALSE,
-      "PMTCT_ART", "<15", TRUE,
-      "PMTCT_ART", "15+", TRUE,
-      "PMTCT_ART", "Total", FALSE,
-      "PMTCT_EID", "Total", TRUE,
-      "PP_PREV", "<15", TRUE,
-      "PP_PREV", "15+", TRUE,
-      "PP_PREV", "Total", FALSE,
-      "KP_PREV", "Total", TRUE,
-      "KP_MAT", "Total", TRUE,
-      "VMMC_CIRC", "Total", TRUE,
-      "HTS_SELF", "<15", TRUE,
-      "HTS_SELF", "15+", TRUE,
-      "HTS_SELF", "Total", FALSE,
-      "PrEP_NEW", "Total", TRUE,
-      "PrEP_CURR", "Total", TRUE,
-      "TB_STAT", "<15", TRUE,
-      "TB_STAT", "15+", TRUE,
-      "TB_STAT", "Total", FALSE,
-      "TB_ART", "<15", TRUE,
-      "TB_ART", "15+", TRUE,
-      "TB_ART", "Total", FALSE,
-      "TB_PREV", "<15", TRUE,
-      "TB_PREV", "15+", TRUE,
-      "TB_PREV", "Total", FALSE,
-      "TX_TB", "<15", TRUE,
-      "TX_TB", "15+", TRUE,
-      "TX_TB", "Total", FALSE,
-      "GEND_GBV", "Total", TRUE)
-
-  if (cop_year == "2021") {
-    inds <- 
-      dplyr::bind_rows(inds,
-      tibble::tribble(
-      ~ind, ~options, ~in_partner_table,
-      "AGYW_PREV", "Total", FALSE))
-  }
-
-if (cop_year == "2021") {
-  inds <- 
-    dplyr::bind_rows(inds,
-                     tibble::tribble(
-                       ~ind, ~options, ~in_partner_table,
-                       "HTS_RECENT", "<15", TRUE,
-                       "HTS_RECENT", "15+", TRUE,
-                       "HTS_RECENT", "Total", TRUE,
-                       "AGYW_PREV", "Total", FALSE))
-}
-
-
-  inds
 }
 
 getExistingPrioritization <- function(psnus, cop_year, d2_session) {
@@ -220,7 +101,8 @@ getPrioritizationTable <- function(d, d2_session, include_no_prio = TRUE) {
     "p0JrTY2hLii", "PPG Not PEPFAR Supported", "Not PEPFAR Supported"
   )
 
-  df_rows <- indicatorOrder(d$cop_year) %>%
+  df_rows <- d$memo$structure %>%
+  purrr::pluck("row_order") %>% 
   dplyr::select(ind, options)
 
   df_base <- tidyr::crossing(df_rows, dplyr::select(df_cols, col_name)) %>%
@@ -229,10 +111,6 @@ getPrioritizationTable <- function(d, d2_session, include_no_prio = TRUE) {
     dplyr::rename("Indicator" = ind,
                   Age = options)
 
-  country_uids <- datapack_config() %>%
-    dplyr::filter(`datapack_name` == d$ou) %>%
-    dplyr::pull(country_uids) %>%
-    unlist()
 
    df <- d$data$by_psnuim %>%
          dplyr::group_by(`Indicator`, `Age`, `prioritization`) %>%
@@ -268,7 +146,7 @@ getPrioritizationTable <- function(d, d2_session, include_no_prio = TRUE) {
       df_final <- dplyr::select(df_final, -`No Prioritization`) # nolint
     }
 
-   d$prio <- df_final
+   d$data$prio_table <- df_final
 
    return(d)
 
@@ -342,7 +220,7 @@ getDataByMechanism <- function(d, d2_session) {
   df <- datimutils::getAnalytics("dimension=SH885jaRe0o",
                                 dx = inds$id,
                                 ou = country_uids,
-                                pe_f = paste0(d$cop_year, "Oct"),
+                                pe_f = paste0(d$info$cop_year, "Oct"),
                                 d2_session = d2_session
   )
 
@@ -364,37 +242,27 @@ getDataByMechanism <- function(d, d2_session) {
 }
 
 getPSUxIMData <- function(d, d2_session) {
-  country_uids <- datapack_config() %>%
-    dplyr::filter(`datapack_name` == d$ou) %>%
-    dplyr::pull(country_uids) %>%
-    unlist()
-
-  d$country_uids <- country_uids
-
-
-  d$data$datim_export <- datapackr::getCOPDataFromDATIM(country_uids,
-                                 d$cop_year,
+  
+  #This seems to throw a parsing warning
+  d$data$datim_export <- datapackr::getCOPDataFromDATIM( d$info$country_uids,
+                                 d$info$cop_year,
                                  streams = "mer_targets",
                                  d2_session = d2_session)
 
-  return(d)
+  d
 }
 
 #Prepares an memo indicator table from raw data elements/catcombos
 getMechanismTable <- function(d, d2_session) {
 
 
-  d$psnus <- dplyr::bind_rows(datapackr::valid_PSNUs) %>%
-    dplyr::filter(country_uid %in% d$country_uids) %>%
-    dplyr::filter(!is.na(psnu_type)) %>%
-    dplyr::select(ou, country_name, snu1, psnu, psnu_uid)
-
   #Break up into 2048 character URLS (approximately)
-  n_requests <- ceiling(nchar(paste(d$psnus$psnu_uid, sep = "", collapse = ";")) / 2048)
-  n_groups <- split(sample(d$psnus$psnu_uid), 1:n_requests)
+  psnus <- d$info$psnus$psnu_uid
+  n_requests <- ceiling(nchar(paste(psnus, sep = "", collapse = ";")) / 2048)
+  n_groups <- split(psnus, ceiling(seq_along(psnus)/(length(psnus)/n_requests)))
 
   prios <- n_groups %>%
-    purrr::map_dfr(function(x) getExistingPrioritization(x, d$cop_year, d2_session))
+    purrr::map_dfr(function(x) getExistingPrioritization(x, d$info$cop_year, d2_session))
 
   df <- d$data$datim_export %>%
     dplyr::select(dataElement, period, orgUnit, categoryOptionCombo, attributeOptionCombo, value) %>%
@@ -407,11 +275,11 @@ getMechanismTable <- function(d, d2_session) {
   if ("parallel" %in% rownames(installed.packages()) == TRUE) {
     df$indicator_results <-
       parallel::mclapply(df$data, function(x)
-        datapackr::evaluateIndicators(x$combi, x$value, inds = d$inds), mc.cores = parallel::detectCores())
+        datapackr::evaluateIndicators(x$combi, x$value, inds = d$memo$inds), mc.cores = parallel::detectCores())
   } else {
     df$indicator_results <-
       lapply(df$data, function(x)
-        datapackr::evaluateIndicators(x$combi, x$value, inds = d$inds))
+        datapackr::evaluateIndicators(x$combi, x$value, inds = d$memo$inds))
   }
   
 
@@ -425,7 +293,7 @@ getMechanismTable <- function(d, d2_session) {
                                                     TRUE ~ prioritization)) %>%
     dplyr::rename("Mechanism" = attributeOptionCombo) %>%
     dplyr::inner_join(d$partners_agencies, by = c("Mechanism" = "mech_code")) %>%
-    dplyr::inner_join(d$psnus, by = c("orgUnit" = "psnu_uid"))
+    dplyr::inner_join(d$info$psnus, by = c("orgUnit" = "psnu_uid"))
 
   d
 }
@@ -440,11 +308,11 @@ getPartnersTable <- function(d) {
 
   d_partners <- df   %>%
     dplyr::group_by(Indicator, Age, Agency, Partner, Mechanism) %>%
-    dplyr::summarise(Value = sum(value)) %>%
-    dplyr::ungroup()
+    dplyr::summarise(Value = sum(value), .groups = "drop")
 
   #We need to pad for zeros
-  df_rows <- indicatorOrder(d$cop_year) %>%
+  df_rows <- d$memo$structure %>%
+    purrr::pluck("row_order") %>% 
     dplyr::filter(in_partner_table) %>%
     dplyr::select(ind, options)
 
@@ -457,14 +325,14 @@ getPartnersTable <- function(d) {
 
   d_totals <- dplyr::bind_rows(d_base, d_partners) %>%
     dplyr::group_by(`Indicator`, `Age`) %>%
-    dplyr::summarise(`Value` = sum(`Value`)) %>%
-    dplyr::ungroup() %>%
+    dplyr::summarise(`Value` = sum(`Value`),.groups="drop") %>%
     dplyr::mutate(`Partner` = "Total", `Mechanism` = "Total", Agency = "Total")
 
   #Remove dedupe
   d_partners <- dplyr::filter(d_partners, !(`Mechanism` %in% c("00001", "00000"))) #nolint
 
-  d_indicators <- indicatorOrder(d$cop_year) %>%
+  d_indicators <- d$memo$structure %>%
+    purrr::pluck("row_order") %>% 
     dplyr::filter(in_partner_table) %>%
     dplyr::select(ind, options) %>%
     dplyr::mutate(indicator_name = factor(paste(ind, options)))
@@ -474,7 +342,7 @@ getPartnersTable <- function(d) {
   agency_levels <- c(sort(unique(d_partners$Agency)), "Total")
 
   #Return the final data frame
-  d$partner_table <- dplyr::bind_rows(d_totals, d_partners) %>%
+  d$data$partners_table <- dplyr::bind_rows(d_totals, d_partners) %>%
     dplyr::mutate(indicator_name = paste(`Indicator`, `Age`)) %>%
     #dplyr::mutate(indicator_name = factor(indicator_name, levels=unique(d_indicators$indicator_name))) %>%
     dplyr::mutate(`Label` = indicator_name) %>%
@@ -498,27 +366,25 @@ getAgencyTable <- function(d) {
     return(d)
   }
 
-  df_rows <- indicatorOrder(d$cop_year) %>%
+  df_rows <- d$memo$structure %>%
+    purrr::pluck("row_order") %>% 
   dplyr::select(ind, options)
 
   d_agency <- df  %>%
     dplyr::group_by(Indicator, Age, Agency) %>%
-    dplyr::summarise(Value = sum(value)) %>%
-    dplyr::ungroup()
+    dplyr::summarise(Value = sum(value),.groups="drop") 
 
   agency_totals <- d_agency %>%
     group_by(Indicator, Age) %>%
-    dplyr::summarise(Value = sum(Value)) %>%
-    dplyr::ungroup() %>%
+    dplyr::summarise(Value = sum(Value),.groups="drop") %>%
     dplyr::mutate("Agency" = "Total") %>%
     dplyr::select(names(d_agency))
 
   age_totals <- dplyr::bind_rows(d_agency, agency_totals) %>%
     dplyr::filter(Age != "Total") %>%
     group_by(Indicator, Agency) %>%
-    dplyr::summarise(Value = sum(Value)) %>%
+    dplyr::summarise(Value = sum(Value),.groups="drop") %>%
     dplyr::mutate(Age = "Total") %>%
-    dplyr::ungroup() %>%
     dplyr::select(names(d_agency))
 
   #Remove dedupe
@@ -527,7 +393,7 @@ getAgencyTable <- function(d) {
   agency_levels <- c(sort(unique(d_agency$Agency)), "Total")
 
   #Return the final data frame
-  d$agency_table <- dplyr::bind_rows(d_agency, agency_totals, age_totals) %>%
+  d$data$agency_table <- dplyr::bind_rows(d_agency, agency_totals, age_totals) %>%
     dplyr::mutate(Indicator = factor(Indicator, levels = unique(df_rows$ind))) %>%
     dplyr::arrange(Indicator, Age) %>%
     tidyr::pivot_wider(names_from = `Agency`, values_from = `Value`, values_fill = 0) %>%
