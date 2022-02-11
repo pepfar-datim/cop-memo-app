@@ -286,7 +286,7 @@ getMechanismTable <- function(d, d2_session) {
   d$data$by_psnuim <- df %>% 
     dplyr::select(-data) %>% 
     tidyr::unnest(indicator_results) %>% 
-    datapackr::seperateIndicatorMetadata(.) %>%
+    datapackr::separateIndicatorMetadata(.) %>%
     dplyr::select(-id,numerator,denominator) %>% 
     dplyr::left_join(prios, by = c("orgUnit" = "psnu_uid")) %>%
     dplyr::mutate(prioritization = dplyr::case_when(is.na(prioritization) ~ "No Prioritization",
