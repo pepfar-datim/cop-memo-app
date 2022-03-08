@@ -43,12 +43,12 @@ shinyServer(function(input, output, session) {
       
       
       d$info$cop_year <- as.numeric(user_input$cop_year)
-      d$memo$inds <- datapackr::getMemoIndicators(cop_year =  d$info$cop_year, d2_session = user_input$d2_session)
-      d$partners_agencies <- getAgencyPartnersMechsView(user_input$d2_session)
-      d <- datapackr::memoStructure(d)
-      d <- getPSUxIMData(d, d2_session = user_input$d2_session)
+      d <- datapackr::prepareMemoData(d,memo_type ="datim",
+                                      include_no_prio = input$include_no_prio,
+                                      d2_session = user_input$d2_session)
+
       
-      if (NROW(d$data$datim_export) == 0) {
+      if (NROW(d$memo$datim$analytics) == 0) {
         shinyjs::disable("downloadXLSX")
         shinyjs::disable("downloadDOCX")
         closeSweetAlert(session)
@@ -60,10 +60,6 @@ shinyServer(function(input, output, session) {
         return(d)
       }
       
-      d <- getMechanismTable(d, d2_session = user_input$d2_session)
-      d <- getPrioritizationTable(d, d2_session = user_input$d2_session, include_no_prio = input$include_no_prio)
-      d <- getPartnersTable(d)
-      d <- getAgencyTable(d)
       shinyjs::enable("fetch")
       shinyjs::enable("downloadXLSX")
       shinyjs::enable("downloadDOCX")
@@ -123,8 +119,9 @@ shinyServer(function(input, output, session) {
   output$prio_table <- DT::renderDataTable({
     
     d <- memo_data() %>% 
-      purrr::pluck("data") %>% 
-      purrr::pluck("prio_table")
+      purrr::pluck("memo") %>% 
+      purrr::pluck("datim") %>% 
+      purrr::pluck("by_prio")
     
     if (!inherits(d, "error") & !is.null(d)) {
       DT::datatable(d, options = list(pageLength = 50,
@@ -140,8 +137,9 @@ shinyServer(function(input, output, session) {
   output$partners_table <- DT::renderDataTable({
     
     d <- memo_data() %>% 
-      purrr::pluck("data") %>% 
-      purrr::pluck("partners_table")
+      purrr::pluck("memo") %>% 
+      purrr::pluck("datim") %>% 
+      purrr::pluck("by_partner")
     
     if (!inherits(d, "error") & !is.null(d)) {
       
@@ -164,8 +162,9 @@ shinyServer(function(input, output, session) {
   output$agency_table <- DT::renderDataTable({
     
     d <- memo_data() %>% 
-      purrr::pluck("data") %>% 
-      purrr::pluck("agency_table")
+      purrr::pluck("memo") %>% 
+      purrr::pluck("datim") %>% 
+      purrr::pluck("by_agency")
     
     if (!inherits(d, "error") & !is.null(d)) {
       
@@ -289,7 +288,10 @@ shinyServer(function(input, output, session) {
       
       d <- memo_data()
       
-      doc <- datapackr::generateApprovalMemo(d,draft=FALSE)
+      doc <- datapackr::generateApprovalMemo(d,
+                                             memo_type = "datim",
+                                             draft_memo = FALSE,
+                                             d2_session = user_input$d2_session)
       
       print(doc, target = file, draft=FALSE)
     }
@@ -308,16 +310,20 @@ shinyServer(function(input, output, session) {
       
       d <- memo_data()
       wb <- openxlsx::createWorkbook()
-      openxlsx::addWorksheet(wb, "Prioritization")
+      openxlsx::addWorksheet(wb, "By Prioritization")
       openxlsx::writeDataTable(wb = wb,
-                               sheet = "Prioritization", x = d$data$prio_table)
+                               sheet = "By Prioritization", x = d$memo$datim$by_prio)
       openxlsx::addWorksheet(wb, "By Partner")
       openxlsx::writeDataTable(wb = wb,
-                               sheet = "By Partner", x = d$data$partners_table)
+                               sheet = "By Partner", x = d$memo$datim$by_partner)
       openxlsx::saveWorkbook(wb, file = file, overwrite = TRUE)
       openxlsx::addWorksheet(wb, "By Agency")
       openxlsx::writeDataTable(wb = wb,
-                               sheet = "By Agency", x = d$data$agency_table)
+                               sheet = "By Agency", x = d$memo$datim$by_agency)
+      
+      openxlsx::addWorksheet(wb, "By PSNUxIM")
+      openxlsx::writeDataTable(wb = wb,
+                               sheet = "By PSNUxIM", x = d$memo$datim$by_psnu)
       openxlsx::saveWorkbook(wb, file = file, overwrite = TRUE)
     }
   )
@@ -327,7 +333,7 @@ shinyServer(function(input, output, session) {
     
     if (!inherits(d, "error") & !is.null(d)) {
       
-      if (is.null(d$data$by_psnuim)) {
+      if (is.null(d$memo$datim$by_psnu)) {
         return(NULL)
       }
       
