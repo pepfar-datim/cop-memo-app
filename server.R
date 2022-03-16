@@ -2,6 +2,7 @@ pacman::p_load(shiny, shinyjs, shinyWidgets, magrittr, knitr, flextable,officer,
                kableExtra, gdtools, futile.logger, glue, dplyr, tibble, jsonlite, httr, tidyr, stringr, DT,
                datapackr, datimutils, purrr, rpivotTable,parallel,magrittr)
 
+#Prevents scientific notation
 options(scipen = 999)
 
 logger <- flog.logger()
@@ -12,10 +13,10 @@ if (!file.exists(Sys.getenv("LOG_PATH"))) {
 
 flog.appender(appender.console(), name = "cop-memo")
 
-
 shinyServer(function(input, output, session) {
+  # Trigger variable to allow download. Changes with authentication
   ready <- reactiveValues(ok = FALSE)
-  
+  # Function to retrieve the memo data and check if the user is authenticated
   fetchMemoData <- function() {
     shinyjs::disable("downloadReport")
     if (!user_input$authenticated | !ready$ok)  {
@@ -68,54 +69,78 @@ shinyServer(function(input, output, session) {
       return(d)
     }
   }
+  # Reactive variable that captures the retun of the above function.
   memo_data <- reactive({
     fetchMemoData()
   })
+
+  # Reactive variable list that assists with authentication
   user_input <- reactiveValues(authenticated = FALSE,
                                status = "",
                                base_url = getBaseURL(),
                                d2_session = NULL)
+  # Actions to take place when "Login" is pressed on the front end.
   observeEvent(input$login_button, {
-    is_authorized <- FALSE
-    tryCatch({
-      datimutils::loginToDATIM(base_url = user_input$base_url,
-                               username = input$user_name,
-                               password = input$password)
-      # Need to check the user is a member of the PRIME Data Systems Group, COP Memo group, or a super user
-      is_authorized <- grepl("VDEqY8YeCEk|ezh8nmc4JbX",
-                             d2_default_session$me$userGroups) | grepl("jtzbVV4ZmdP",
-                                                                       d2_default_session$me$userCredentials$userRoles)
-    },
-    #This function throws an error if the login is not successful
-    error = function(e) {
-      sendSweetAlert(
-        session,
-        title = "Login failed",
-        text = "Please check your username/password!",
-        type = "error")
-      flog.info(paste0("User ", input$user_name, " login failed."), name = "cop_memo")
-    })
-    
-    if (exists("d2_default_session") & is_authorized) {
-      
-      futile.logger::flog.info(paste0("User ",
-                                      d2_default_session$me$userCredentials$username,
-                                      " logged in to ", d2_default_session$base_url), name = "cop_memo")
-      user_input$authenticated <- TRUE
-      user_input$d2_session <- d2_default_session$clone()
-      
-    } else {
-      sendSweetAlert(
-        session,
-        title = "Not authorized",
-        text = "This app is for specific DATIM users. Please contact DATIM support for more information.",
-        type = "error")
-      user_authenticated <- FALSE
-      rm(d2_default_session)
-    }
-    
+    is_authorized <- FALSE # Trigger variable defaults to false.
+
+    loginAttempt <- tryCatch({
+      loginToDATIM(base_url = user_input$base_url,
+                                           username = input$user_name,
+                                           password = input$password)
+          # Need to check the user is a member of the PRIME Data Systems Group,
+            # COP Memo group, or a super user
+          is_authorized <- grepl("VDEqY8YeCEk|ezh8nmc4JbX",
+          d2_default_session$me$userGroups) | grepl("jtzbVV4ZmdP",
+          d2_default_session$me$userCredentials$userRoles)
+      },
+
+      # This function prints an error in the console if the log in is not successful.
+      error = function(e) {
+        flog.info(paste0("User ",input$user_name," login failed. ",e$message),
+                  name = "cop_memo")
+      })
+
+       if (exists("d2_default_session") & is_authorized) {
+
+      # Succesful log in
+       futile.logger::flog.info(paste0("User ",
+       d2_default_session$me$userCredentials$username,
+       " logged in to ", d2_default_session$base_url), name = "cop_memo")
+       #Trigger Variable switches to true.
+       user_input$authenticated <- TRUE
+       user_input$d2_session <- d2_default_session$clone()
+
+       # Unsuccessful log in
+         } else { #Need to update logic here
+
+           if(exists("d2_default_session") & !(is_authorized)){# Display custom
+             # message to the user in regards to NOT being a member of the
+             # PRIME Data Systems Group, COP Memo group, or a super user
+
+            # Might be a better way to trigger this if statement
+            sendSweetAlert(
+               session,
+               title = "Not authorized",
+               text = "This app is for specific DATIM users. Please contact DATIM support for more information.",
+               type = "error")
+
+           } else { #Display datimutils errors message to the user
+
+            sendSweetAlert(
+              session,
+              title = "Login failed",
+              text = substr(loginAttempt,# full error message printed to console
+                            regexpr("User",loginAttempt)[1],# Where to start extract
+                            nchar(loginAttempt)),# Where to end extract
+              type = "error"
+           )
+           }
+           user_authenticated <- FALSE
+           rm(d2_default_session)
+       }
   })
-  
+
+  # DataTable 1 Controls
   output$prio_table <- DT::renderDataTable({
     
     d <- memo_data() %>% 
@@ -133,7 +158,8 @@ shinyServer(function(input, output, session) {
       NULL
     }
   })
-  
+
+  # DataTable 2 Controls
   output$partners_table <- DT::renderDataTable({
     
     d <- memo_data() %>% 
@@ -201,7 +227,8 @@ shinyServer(function(input, output, session) {
   
   output$uiLogin <- renderUI({
     wellPanel(fluidRow(
-      img(src = "pepfar.png", align = "center"),
+      #img(src = "pepfar.png", align = "center"),
+      tags$div(HTML('<center><img src="pepfar.png"></center>')),
       h4(
         "Welcome to the COP Memo App. Please login with your DATIM credentials:"
       )

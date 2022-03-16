@@ -225,11 +225,14 @@
     },
     "datimutils": {
       "Package": "datimutils",
-      "Version": "0.1.2.0.0.0.1632829200",
-      "Source": "Repository",
-      "Repository": "RSPM",
-      "RemoteSha": "bba00c371ba345865725def8b3b4830943963c5c",
-      "Hash": "a05c028766fea2eaa93b0485b5c4dbe9"
+      "Version": "0.2.0",
+      "Source": "GitHub",
+      "RemoteType": "github",
+      "RemoteHost": "api.github.com",
+      "RemoteUsername": "pepfar-datim",
+      "RemoteRepo": "datimutils",
+      "RemoteRef": "master",
+      "RemoteSha": "17819c99e325122d4e805fccb9772f82ec4613d2"
     },
     "datimvalidation": {
       "Package": "datimvalidation",
@@ -1044,3 +1047,4 @@
     }
   }
 }
+
