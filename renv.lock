@@ -1,6 +1,6 @@
 {
   "R": {
-    "Version": "4.1.1",
+    "Version": "4.1.2",
     "Repositories": [
       {
         "Name": "PEPFAR",
@@ -212,12 +212,16 @@
     },
     "datapackr": {
       "Package": "datapackr",
-      "Version": "5.0.0.0.0.0.1633551207",
-      "Source": "Repository",
-      "Repository": "RSPM",
-      "Remotes": "pepfar-datim/datim-validation, pepfar-datim/data-pack-commons",
-      "RemoteSha": "beb8ff3044c8a0a254875cfee035db74ffd21bf1",
-      "Hash": "2ee296f06b64b885fb4ef33e2d462613"
+      "Version": "5.1.6",
+      "Source": "GitHub",
+      "RemoteType": "github",
+      "RemoteHost": "api.github.com",
+      "RemoteUsername": "pepfar-datim",
+      "RemoteRepo": "datapackr",
+      "RemoteRef": "master",
+      "RemoteSha": "a6884ded14993fb6977c60eea9a595d5386d6bdd",
+      "Remotes": "pepfar-datim/datimutils, pepfar-datim/datim-validation,\npepfar-datim/data-pack-commons",
+      "Hash": "bca5f4f3e01a941a8141f93b9488dca7"
     },
     "datimutils": {
       "Package": "datimutils",
@@ -242,10 +246,10 @@
     },
     "desc": {
       "Package": "desc",
-      "Version": "1.3.0",
+      "Version": "1.4.0",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "b6963166f7f10b970af1006c462ce6cd"
+      "Hash": "28763d08fadd0b733e3cee9dab4e12fe"
     },
     "diffobj": {
       "Package": "diffobj",
