@@ -41,7 +41,7 @@ shinyServer(function(input, output, session) {
         dplyr::filter(country_uid %in% d$info$country_uids) %>%
         dplyr::filter(!is.na(psnu_type)) %>%
         dplyr::select(ou, country_name, snu1, psnu, psnu_uid)
-      
+      d$info$tool <- "memo"
       
       d$info$cop_year <- as.numeric(user_input$cop_year)
       d <- datapackr::prepareMemoData(d,memo_type ="datim",
