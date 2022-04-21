@@ -42,13 +42,13 @@ shinyServer(function(input, output, session) {
         dplyr::filter(!is.na(psnu_type)) %>%
         dplyr::select(ou, country_name, snu1, psnu, psnu_uid)
       d$info$tool <- "memo"
-      
+
       d$info$cop_year <- as.numeric(user_input$cop_year)
       d <- datapackr::prepareMemoData(d,memo_type ="datim",
                                       include_no_prio = input$include_no_prio,
                                       d2_session = user_input$d2_session)
 
-      
+
       if (NROW(d$memo$datim$analytics) == 0) {
         shinyjs::disable("downloadXLSX")
         shinyjs::disable("downloadDOCX")
@@ -60,12 +60,12 @@ shinyServer(function(input, output, session) {
         )
         return(d)
       }
-      
+
       shinyjs::enable("fetch")
       shinyjs::enable("downloadXLSX")
       shinyjs::enable("downloadDOCX")
       closeSweetAlert(session)
-      
+
       return(d)
     }
   }
@@ -142,18 +142,18 @@ shinyServer(function(input, output, session) {
 
   # DataTable 1 Controls
   output$prio_table <- DT::renderDataTable({
-    
-    d <- memo_data() %>% 
-      purrr::pluck("memo") %>% 
-      purrr::pluck("datim") %>% 
+
+    d <- memo_data() %>%
+      purrr::pluck("memo") %>%
+      purrr::pluck("datim") %>%
       purrr::pluck("by_prio")
-    
+
     if (!inherits(d, "error") & !is.null(d)) {
       DT::datatable(d, options = list(pageLength = 50,
                                       columnDefs = list(list(className = "dt-right",
                                                              targets = 3:dim(d)[2])))) %>%
         formatCurrency(3:dim(d)[2], "", digits = 0)
-      
+
     } else {
       NULL
     }
@@ -161,70 +161,70 @@ shinyServer(function(input, output, session) {
 
   # DataTable 2 Controls
   output$partners_table <- DT::renderDataTable({
-    
-    d <- memo_data() %>% 
-      purrr::pluck("memo") %>% 
-      purrr::pluck("datim") %>% 
+
+    d <- memo_data() %>%
+      purrr::pluck("memo") %>%
+      purrr::pluck("datim") %>%
       purrr::pluck("by_partner")
-    
+
     if (!inherits(d, "error") & !is.null(d)) {
-      
+
       DT::datatable(d, options = list(pageLength = 50,
                                       columnDefs = list(list(className = "dt-right",
                                                              targets = 3:dim(d)[2])))) %>%
         formatCurrency(4:dim(d)[2], "", digits = 0)
-      
+
     } else {
       NULL
     }
   })
-  
+
   observeEvent(input$fetch, {
     shinyjs::disable("fetch")
     ready$ok <- TRUE
-    
+
   })
-  
+
   output$agency_table <- DT::renderDataTable({
-    
-    d <- memo_data() %>% 
-      purrr::pluck("memo") %>% 
-      purrr::pluck("datim") %>% 
+
+    d <- memo_data() %>%
+      purrr::pluck("memo") %>%
+      purrr::pluck("datim") %>%
       purrr::pluck("by_agency")
-    
+
     if (!inherits(d, "error") & !is.null(d)) {
-      
+
       DT::datatable(d, options = list(pageLength = 50,
                                       columnDefs = list(list(className = "dt-right",
                                                              targets = 3:dim(d)[2])))) %>%
         formatCurrency(3:dim(d)[2], "", digits = 0)
-      
+
     } else {
       NULL
     }
   })
-  
+
   observeEvent(input$fetch, {
     shinyjs::disable("fetch")
     ready$ok <- TRUE
-    
+
   })
-  
+
   observeEvent(input$logout, {
     flog.info(paste0("User ", user_input$d2_session$me$userCredentials$username, " logged out."))
     ready$ok <- FALSE
     user_input$authenticated <- FALSE
     user_input$d2_session <- NULL
     gc()
-    
+
   })
-  
+
   observeEvent(input$cop_year, {
-    
+
     user_input$cop_year <- input$cop_year
-    
+
   })
-  
+
   output$uiLogin <- renderUI({
     wellPanel(fluidRow(
       #img(src = "pepfar.png", align = "center"),
@@ -241,7 +241,7 @@ shinyServer(function(input, output, session) {
     tags$hr(),
     fluidRow(HTML(getVersionInfo())))
   })
-  
+
   output$ui <- renderUI({
     if (user_input$authenticated == FALSE) {
       ##### UI code for login page
@@ -259,7 +259,7 @@ shinyServer(function(input, output, session) {
         )
       ))
     } else {
-      
+
       fluidPage(tags$head(
         tags$style(
           ".shiny-notification {
@@ -301,40 +301,40 @@ shinyServer(function(input, output, session) {
       ))
     }
   })
-  
-  
+
+
   output$downloadDOCX <- downloadHandler(
     filename = function() {
-      
-      prefix <- "cop_approval_memo_"
+
+      prefix <- "cop_approval_memo"
       date <- format(Sys.time(), "%Y%m%d_%H%M%S")
-      paste0(paste(prefix, date, sep = "_"), ".docx")
+      paste0(paste(memo_data()$info$datapack_name,prefix, date, sep = "_"), ".docx")
     },
-    
+
     content = function(file) {
-      
+
       d <- memo_data()
-      
+
       doc <- datapackr::generateApprovalMemo(d,
                                              memo_type = "datim",
                                              draft_memo = FALSE,
                                              d2_session = user_input$d2_session)
-      
+
       print(doc, target = file, draft=FALSE)
     }
   )
-  
+
   output$downloadXLSX <- downloadHandler(
     filename = function() {
-      
-      
-      prefix <- "cop_approval_memo_"
+
+
+      prefix <- "cop_approval_memo"
       date <- format(Sys.time(), "%Y%m%d_%H%M%S")
-      paste0(paste(prefix, date, sep = "_"), ".xlsx")
-      
+      paste0(paste(memo_data()$info$datapack_name,prefix, date, sep = "_"), ".xlsx")
+
     },
     content = function(file) {
-      
+
       d <- memo_data()
       wb <- openxlsx::createWorkbook()
       openxlsx::addWorksheet(wb, "By Prioritization")
@@ -347,28 +347,28 @@ shinyServer(function(input, output, session) {
       openxlsx::addWorksheet(wb, "By Agency")
       openxlsx::writeDataTable(wb = wb,
                                sheet = "By Agency", x = d$memo$datim$by_agency)
-      
+
       openxlsx::addWorksheet(wb, "By PSNUxIM")
       openxlsx::writeDataTable(wb = wb,
                                sheet = "By PSNUxIM", x = d$memo$datim$by_psnu)
       openxlsx::saveWorkbook(wb, file = file, overwrite = TRUE)
     }
   )
-  
+
   output$pivot <- renderRpivotTable({
     d <- memo_data()
-    
+
     if (!inherits(d, "error") & !is.null(d)) {
-      
+
       if (is.null(d$memo$datim$by_psnu)) {
         return(NULL)
       }
-      
+
       PSNUxIM_pivot(d)
-      
+
     } else {
       NULL
     }
   })
-  
+
 })
