@@ -2834,14 +2834,14 @@
       "description": {
         "Package": "tibble",
         "Title": "Simple Data Frames",
-        "Version": "3.1.7",
-        "Authors@R": "\n    c(person(given = \"Kirill\",\n             family = \"M\\u00fcller\",\n             role = c(\"aut\", \"cre\"),\n             email = \"krlmlr+r@mailbox.org\"),\n      person(given = \"Hadley\",\n             family = \"Wickham\",\n             role = \"aut\",\n             email = \"hadley@rstudio.com\"),\n      person(given = \"Romain\",\n             family = \"Francois\",\n             role = \"ctb\",\n             email = \"romain@r-enthusiasts.com\"),\n      person(given = \"Jennifer\",\n             family = \"Bryan\",\n             role = \"ctb\",\n             email = \"jenny@rstudio.com\"),\n      person(given = \"RStudio\",\n             role = c(\"cph\", \"fnd\")))",
+        "Version": "3.1.6",
+        "Authors@R": "\n    c(person(given = \"Kirill\",\n             family = \"M\\u00fcller\",\n             role = c(\"aut\", \"cre\"),\n             email = \"krlmlr+r@mailbox.org\"),\n      person(given = \"Hadley\",\n             family = \"Wickham\",\n             role = \"aut\",\n             email = \"hadley@rstudio.com\"),\n      person(given = \"Romain\",\n             family = \"Francois\",\n             role = \"ctb\",\n             email = \"romain@r-enthusiasts.com\"),\n      person(given = \"Jennifer\",\n             family = \"Bryan\",\n             role = \"ctb\",\n             email = \"jenny@rstudio.com\"),\n      person(given = \"RStudio\",\n             role = \"cph\"))",
         "Description": "Provides a 'tbl_df' class (the 'tibble') with stricter checking and better formatting than the traditional\n    data frame.",
         "License": "MIT + file LICENSE",
         "URL": "https://tibble.tidyverse.org/, https://github.com/tidyverse/tibble",
         "BugReports": "https://github.com/tidyverse/tibble/issues",
         "Depends": "R (>= 3.1.0)",
-        "Imports": "ellipsis (>= 0.3.2), fansi (>= 0.4.0), lifecycle (>= 1.0.0),\nmagrittr, methods, pillar (>= 1.7.0), pkgconfig, rlang (>=\n1.0.1), utils, vctrs (>= 0.3.8)",
+        "Imports": "ellipsis (>= 0.3.2), fansi (>= 0.4.0), lifecycle (>= 1.0.0),\nmagrittr, methods, pillar (>= 1.6.2), pkgconfig, rlang (>=\n0.4.3), utils, vctrs (>= 0.3.8)",
         "Suggests": "bench, bit64, blob, brio, callr, cli, covr, crayon (>=\n1.3.4), DiagrammeR, dplyr, evaluate, formattable, ggplot2, hms,\nhtmltools, knitr, lubridate, mockr, nycflights13, pkgbuild,\npkgload, purrr, rmarkdown, stringi, testthat (>= 3.0.2), tidyr,\nwithr",
         "VignetteBuilder": "knitr",
         "Encoding": "UTF-8",
@@ -2849,16 +2849,13 @@
         "Config/testthat/edition": "3",
         "Config/testthat/parallel": "true",
         "Config/testthat/start-first": "subsetting, as_tibble, add, invariants",
-        "Config/autostyle/scope": "line_breaks",
-        "Config/autostyle/strict": "true",
-        "Config/Needs/website": "tidyverse/tidytemplate",
         "NeedsCompilation": "yes",
-        "Packaged": "2022-04-26 14:15:54 UTC; kirill",
-        "Author": "Kirill Müller [aut, cre],\n  Hadley Wickham [aut],\n  Romain Francois [ctb],\n  Jennifer Bryan [ctb],\n  RStudio [cph, fnd]",
+        "Packaged": "2021-10-25 10:17:47 UTC; kirill",
+        "Author": "Kirill Müller [aut, cre],\n  Hadley Wickham [aut],\n  Romain Francois [ctb],\n  Jennifer Bryan [ctb],\n  RStudio [cph]",
         "Maintainer": "Kirill Müller <krlmlr+r@mailbox.org>",
         "Repository": "CRAN",
-        "Date/Publication": "2022-05-03 07:00:06 UTC",
-        "Built": "R 4.1.2; x86_64-pc-linux-gnu; 2022-05-04 07:16:30 UTC; unix"
+        "Date/Publication": "2021-11-07 17:30:02 UTC",
+        "Built": "R 4.1.2; x86_64-pc-linux-gnu; 2022-04-27 09:24:57 UTC; unix"
       }
     },
     "tidyr": {
@@ -3260,7 +3257,7 @@
       "checksum": "0405ce82c41cf3c014cab4cfd71559ab"
     },
     ".Rprofile": {
-      "checksum": "aba7134cb34d6518eeaa68184b5239f0"
+      "checksum": "23ed9b57b8698fdc9fb13ad685f577db"
     },
     "DESCRIPTION": {
       "checksum": "b36020e52095647d5cc64d857feed972"
