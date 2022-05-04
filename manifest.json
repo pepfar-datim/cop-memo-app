@@ -1441,9 +1441,9 @@
       "description": {
         "Package": "httr",
         "Title": "Tools for Working with URLs and HTTP",
-        "Version": "1.4.3",
-        "Authors@R": "c(\n    person(\"Hadley\", \"Wickham\", , \"hadley@rstudio.com\", role = c(\"aut\", \"cre\")),\n    person(\"RStudio\", role = c(\"cph\", \"fnd\"))\n  )",
-        "Description": "Useful tools for working with HTTP organised by HTTP verbs\n    (GET(), POST(), etc). Configuration functions make it easy to control\n    additional request components (authenticate(), add_headers() and so\n    on).",
+        "Version": "1.4.2",
+        "Authors@R": "\n    c(person(given = \"Hadley\",\n             family = \"Wickham\",\n             role = c(\"aut\", \"cre\"),\n             email = \"hadley@rstudio.com\"),\n      person(given = \"RStudio\",\n             role = \"cph\"))",
+        "Description": "Useful tools for working with HTTP organised by\n    HTTP verbs (GET(), POST(), etc). Configuration functions make it easy\n    to control additional request components (authenticate(),\n    add_headers() and so on).",
         "License": "MIT + file LICENSE",
         "URL": "https://httr.r-lib.org/, https://github.com/r-lib/httr",
         "BugReports": "https://github.com/r-lib/httr/issues",
@@ -1451,16 +1451,15 @@
         "Imports": "curl (>= 3.0.0), jsonlite, mime, openssl (>= 0.8), R6",
         "Suggests": "covr, httpuv, jpeg, knitr, png, readr, rmarkdown, testthat\n(>= 0.8.0), xml2",
         "VignetteBuilder": "knitr",
-        "Config/Needs/website": "tidyverse/tidytemplate",
         "Encoding": "UTF-8",
-        "RoxygenNote": "7.1.2",
+        "RoxygenNote": "7.1.1",
         "NeedsCompilation": "no",
-        "Packaged": "2022-05-03 20:41:18 UTC; hadleywickham",
-        "Author": "Hadley Wickham [aut, cre],\n  RStudio [cph, fnd]",
+        "Packaged": "2020-07-20 14:19:08 UTC; hadley",
+        "Author": "Hadley Wickham [aut, cre],\n  RStudio [cph]",
         "Maintainer": "Hadley Wickham <hadley@rstudio.com>",
         "Repository": "CRAN",
-        "Date/Publication": "2022-05-04 00:20:02 UTC",
-        "Built": "R 4.1.2; ; 2022-05-04 07:16:37 UTC; unix"
+        "Date/Publication": "2020-07-20 23:40:04 UTC",
+        "Built": "R 4.1.2; ; 2022-04-28 06:06:22 UTC; unix"
       }
     },
     "jquerylib": {
@@ -3261,7 +3260,7 @@
       "checksum": "0405ce82c41cf3c014cab4cfd71559ab"
     },
     ".Rprofile": {
-      "checksum": "786a78501e712318f465ea68780b7f54"
+      "checksum": "aba7134cb34d6518eeaa68184b5239f0"
     },
     "DESCRIPTION": {
       "checksum": "b36020e52095647d5cc64d857feed972"
