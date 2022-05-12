@@ -32,31 +32,41 @@ getVersionInfo <- function() {
 
 datapack_config <- function() {
 
-    dp_regions <- datapackr::valid_PSNUs %>% 
-      dplyr::filter(stringr::str_detect(ou,"Region")) %>% 
-      dplyr::select(ou,country_uid) %>% 
+    dp_regions <- datapackr::valid_PSNUs %>%
+      dplyr::filter(stringr::str_detect(ou, "Region")) %>%
+      dplyr::select(ou, country_uid) %>%
       dplyr::distinct() %>%
-      tidyr::nest(country_uids = country_uid) %>% 
+      tidyr::nest(country_uids = country_uid) %>%
       dplyr::rename(datapack_name = ou)
-    
-    countries_in_regions <- datapackr::valid_PSNUs %>% 
-      dplyr::filter(stringr::str_detect(ou,"Region")) %>% 
-      dplyr::select(country_name,country_uid) %>% 
+
+    nested_regions <- datapackr::valid_PSNUs %>%
+      dplyr::filter(stringr::str_detect(snu1, "Region"),
+                    !stringr::str_detect(snu1, "Program"),
+                    !ou %in% c("Malawi", "Dominican Republic")) %>%
+      dplyr::select(snu1, country_uid = snu1_id) %>%
+      tidyr::nest(country_uids = country_uid) %>%
+      dplyr::rename(datapack_name = snu1)
+
+    countries_in_regions <- datapackr::valid_PSNUs %>%
+      dplyr::filter(stringr::str_detect(ou, "Region")) %>%
+      dplyr::select(country_name, country_uid) %>%
       dplyr::distinct() %>%
-      tidyr::nest(country_uids = country_uid) %>% 
+      tidyr::nest(country_uids = country_uid) %>%
       dplyr::rename(datapack_name = country_name)
-    
-    countries_no_regions <- datapackr::valid_PSNUs %>% 
-      dplyr::filter(!stringr::str_detect(ou,"Region")) %>% 
-      dplyr::select(country_name,country_uid) %>% 
+
+    countries_no_regions <- datapackr::valid_PSNUs %>%
+      dplyr::filter(!stringr::str_detect(ou, "Region")) %>%
+      dplyr::select(country_name, country_uid) %>%
       dplyr::distinct() %>%
-      tidyr::nest(country_uids = country_uid) %>% 
+      tidyr::nest(country_uids = country_uid) %>%
       dplyr::rename(datapack_name = country_name)
-    
-    
-    dplyr::bind_rows(dp_regions,countries_in_regions,countries_no_regions) %>% 
+
+    dplyr::bind_rows(dp_regions,
+                     nested_regions,
+                     countries_in_regions,
+                     countries_no_regions) %>%
       dplyr::arrange(datapack_name)
-    
+
 }
 
 getOrgtunitNamefromUID <- function(uid, d2_session) {
@@ -72,7 +82,7 @@ PSNUxIM_pivot <- function(d) {
 
   pivot <- d  %>%
     purrr::pluck("memo") %>%
-    purrr::pluck("datim") %>% 
+    purrr::pluck("datim") %>%
     purrr::pluck("by_psnu") %>%
     dplyr::select("Agency", "Partner", "Mechanism",
                   "Organisation unit" = "ou",
