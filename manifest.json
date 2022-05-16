@@ -491,7 +491,7 @@
     },
     "cpp11": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://github.com/r-lib/cpp11",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
