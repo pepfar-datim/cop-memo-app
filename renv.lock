@@ -3,6 +3,10 @@
     "Version": "4.1.2",
     "Repositories": [
       {
+        "Name": "CRAN",
+        "URL": "https://cloud.r-project.org"
+      },
+      {
         "Name": "PEPFAR",
         "URL": "https://rstudio-package.ap.datim.org/prod/latest"
       }
@@ -11,10 +15,10 @@
   "Packages": {
     "DT": {
       "Package": "DT",
-      "Version": "0.22",
+      "Version": "0.23",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "fc53164de9ee32692eef6fdd14115381"
+      "Hash": "d8f1498dc47763ce4647c8d03214d30b"
     },
     "ISOweek": {
       "Package": "ISOweek",
