@@ -32,31 +32,50 @@ getVersionInfo <- function() {
 
 datapack_config <- function() {
 
-    dp_regions <- datapackr::valid_PSNUs %>% 
-      dplyr::filter(stringr::str_detect(ou,"Region")) %>% 
-      dplyr::select(ou,country_uid) %>% 
+    dp_regions <- datapackr::valid_PSNUs %>%
+      dplyr::filter(stringr::str_detect(ou, "Region")) %>%
+      dplyr::select(ou, country_uid) %>%
       dplyr::distinct() %>%
-      tidyr::nest(country_uids = country_uid) %>% 
+      tidyr::nest(country_uids = country_uid) %>%
       dplyr::rename(datapack_name = ou)
-    
-    countries_in_regions <- datapackr::valid_PSNUs %>% 
-      dplyr::filter(stringr::str_detect(ou,"Region")) %>% 
-      dplyr::select(country_name,country_uid) %>% 
+
+    nested_regions <- tibble::tribble(
+      ~datapack_name, ~country_uid,
+      "Caribbean Region", "RKoVudgb05Y", # Barbados
+      "Caribbean Region", "PeOHqAwdtez", # Guyana
+      "Caribbean Region", "WuxG6jzaypt", # Jamaica
+      "Caribbean Region", "zhJINyURZ5Y", # Suriname
+      "Caribbean Region", "WSl5y9jxCpC", # Trinidad and Tobago
+      "Central America and Brazil", "joGQFpKiHl9", # Brazil
+      "Central America and Brazil", "QKD4CzBG2GM", # Costa Rica
+      "Central America and Brazil", "N7QAPGSaODP", # El Salvador
+      "Central America and Brazil", "EXVC4bNtv84", # Guatemala
+      "Central America and Brazil", "w5NMe34EjPN", # Honduras
+      "Central America and Brazil", "aUTsSmqqu9O", # Nicaragua
+      "Central America and Brazil", "oK0gC85xx2f" # Panama
+    ) %>%
+      tidyr::nest(country_uids = country_uid)
+
+    countries_in_regions <- datapackr::valid_PSNUs %>%
+      dplyr::filter(stringr::str_detect(ou, "Region")) %>%
+      dplyr::select(country_name, country_uid) %>%
       dplyr::distinct() %>%
-      tidyr::nest(country_uids = country_uid) %>% 
+      tidyr::nest(country_uids = country_uid) %>%
       dplyr::rename(datapack_name = country_name)
-    
-    countries_no_regions <- datapackr::valid_PSNUs %>% 
-      dplyr::filter(!stringr::str_detect(ou,"Region")) %>% 
-      dplyr::select(country_name,country_uid) %>% 
+
+    countries_no_regions <- datapackr::valid_PSNUs %>%
+      dplyr::filter(!stringr::str_detect(ou, "Region")) %>%
+      dplyr::select(country_name, country_uid) %>%
       dplyr::distinct() %>%
-      tidyr::nest(country_uids = country_uid) %>% 
+      tidyr::nest(country_uids = country_uid) %>%
       dplyr::rename(datapack_name = country_name)
-    
-    
-    dplyr::bind_rows(dp_regions,countries_in_regions,countries_no_regions) %>% 
+
+    dplyr::bind_rows(dp_regions,
+                     nested_regions,
+                     countries_in_regions,
+                     countries_no_regions) %>%
       dplyr::arrange(datapack_name)
-    
+
 }
 
 getOrgtunitNamefromUID <- function(uid, d2_session) {
@@ -72,7 +91,7 @@ PSNUxIM_pivot <- function(d) {
 
   pivot <- d  %>%
     purrr::pluck("memo") %>%
-    purrr::pluck("datim") %>% 
+    purrr::pluck("datim") %>%
     purrr::pluck("by_psnu") %>%
     dplyr::select("Agency", "Partner", "Mechanism",
                   "Organisation unit" = "ou",
