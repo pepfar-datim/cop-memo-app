@@ -642,7 +642,7 @@
         "Maintainer": "Matt Dowle <mattjdowle@gmail.com>",
         "Repository": "CRAN",
         "Date/Publication": "2021-09-27 16:30:02 UTC",
-        "Built": "R 4.1.2; x86_64-pc-linux-gnu; 2022-04-28 06:03:50 UTC; unix"
+        "Built": "R 4.1.2; x86_64-w64-mingw32; 2022-02-03 17:46:19 UTC; windows"
       }
     },
     "datapackr": {
@@ -650,8 +650,8 @@
       "Repository": null,
       "GithubRepo": "datapackr",
       "GithubUsername": "pepfar-datim",
-      "GithubRef": "dp-698",
-      "GithubSha1": "ab6555d0d132f96ef6615c71c7fea18e6b5e5a80",
+      "GithubRef": "master",
+      "GithubSha1": "fd4ed39a02007384b49194ea355ee8d9a388fa6e",
       "description": {
         "Package": "datapackr",
         "Type": "Package",
@@ -671,18 +671,18 @@
         "RoxygenNote": "7.1.2",
         "Author": "Scott Jackson [aut, cre],\n  Jason Pickering [aut, rev],\n  Sam Garman [aut],\n  Chris Nemarich [ctb],\n  Christian Domaas [ctb],\n  Fausto Lopez [ctb],\n  Jordan Bales [ctb]",
         "Maintainer": "Scott Jackson <sjackson@baosystems.com>",
-        "Built": "R 4.1.2; ; 2022-05-16 13:07:56 UTC; unix",
+        "Built": "R 4.1.2; ; 2022-05-13 15:03:24 UTC; windows",
         "RemoteType": "github",
         "RemoteHost": "api.github.com",
         "RemoteUsername": "pepfar-datim",
         "RemoteRepo": "datapackr",
-        "RemoteRef": "dp-698",
-        "RemoteSha": "ab6555d0d132f96ef6615c71c7fea18e6b5e5a80",
+        "RemoteRef": "master",
+        "RemoteSha": "fd4ed39a02007384b49194ea355ee8d9a388fa6e",
         "GithubHost": "api.github.com",
         "GithubRepo": "datapackr",
         "GithubUsername": "pepfar-datim",
-        "GithubRef": "dp-698",
-        "GithubSHA1": "ab6555d0d132f96ef6615c71c7fea18e6b5e5a80",
+        "GithubRef": "master",
+        "GithubSHA1": "fd4ed39a02007384b49194ea355ee8d9a388fa6e",
         "Remotes": "pepfar-datim/datimutils,\npepfar-datim/datim-validation"
       }
     },
