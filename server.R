@@ -13,6 +13,35 @@ if (!file.exists(Sys.getenv("LOG_PATH"))) {
 
 flog.appender(appender.console(), name = "cop-memo")
 
+################ OAuth Client information #####################################
+if (interactive()) {
+  # testing url
+  options(shiny.port = 3123)
+  APP_URL <- "http://127.0.0.1:3123/"# This will be your local host path
+} else {
+  # deployed URL
+  APP_URL <- Sys.getenv("APP_URL") #This will be your shiny server path
+}
+
+oauth_app <- httr::oauth_app(Sys.getenv("OAUTH_APPNAME"),
+                             key = Sys.getenv("OAUTH_KEYNAME"),        # dhis2 = Client ID
+                             secret = Sys.getenv("OAUTH_SECRET"), #dhis2 = Client Secret
+                             redirect_uri = APP_URL)
+
+oauth_api <- httr::oauth_endpoint(base_url = paste0(Sys.getenv("BASE_URL"), "uaa/oauth"),
+                                  request = NULL, # Documentation says to leave this NULL for OAuth2
+                                  authorize = "authorize",
+                                  access = "token")
+
+oauth_scope <- "ALL"
+
+
+has_auth_code <- function(params) {
+
+  return(!is.null(params$code))
+}
+
+
 shinyServer(function(input, output, session) {
   # Trigger variable to allow download. Changes with authentication
   ready <- reactiveValues(ok = FALSE)
@@ -79,66 +108,120 @@ shinyServer(function(input, output, session) {
                                status = "",
                                base_url = getBaseURL(),
                                d2_session = NULL)
-  # Actions to take place when "Login" is pressed on the front end.
-  observeEvent(input$login_button, {
-    is_authorized <- FALSE # Trigger variable defaults to false.
+
+  output$ui_redirect <- renderUI({
+    #print(input$login_button_oauth) useful for debugging
+    if (!is.null(input$login_button_oauth)) {
+      if (input$login_button_oauth > 0) {
+        url <-
+          httr::oauth2.0_authorize_url(oauth_api, oauth_app, scope = oauth_scope)
+        redirect <- sprintf("location.replace(\"%s\");", url)
+        tags$script(HTML(redirect))
+      } else  {
+        NULL
+      }
+    } else  {
+      NULL
+    }
+  })
+
+  ### Login Button oauth Checks
+  observeEvent(input$login_button_oauth > 0, {
+
+    #Grabs the code from the url
+    params <- parseQueryString(session$clientData$url_search)
+    #Wait until the auth code actually exists
+    req(has_auth_code(params))
+
+    #Manually create a token
+    token <- httr::oauth2.0_token(
+      app = oauth_app,
+      endpoint = oauth_api,
+      scope = oauth_scope,
+      use_basic_auth = TRUE,
+      oob_value = APP_URL,
+      cache = FALSE,
+      credentials = httr::oauth2.0_access_token(endpoint = oauth_api,
+                                                app = oauth_app,
+                                                code = params$code,
+                                                use_basic_auth = TRUE)
+    )
 
     loginAttempt <- tryCatch({
-      loginToDATIM(base_url = user_input$base_url,
-                                           username = input$user_name,
-                                           password = input$password)
-          # Need to check the user is a member of the PRIME Data Systems Group,
-            # COP Memo group, or a super user
-          is_authorized <- grepl("VDEqY8YeCEk|ezh8nmc4JbX",
-          d2_default_session$me$userGroups) | grepl("jtzbVV4ZmdP",
-          d2_default_session$me$userCredentials$userRoles)
-      },
 
-      # This function prints an error in the console if the log in is not successful.
+
+      datimutils::loginToDATIMOAuth(base_url =  Sys.getenv("BASE_URL"),
+                                    token = token,
+                                    app = oauth_app,
+                                    api = oauth_api,
+                                    redirect_uri = APP_URL,
+                                    scope = oauth_scope,
+                                    d2_session_envir = parent.env(environment()))
+
+       },
+      # This function throws an error if the login is not successful
       error = function(e) {
-        flog.info(paste0("User ",input$user_name," login failed. ",e$message),
-                  name = "cop_memo")
-      })
+        flog.info(paste0("User ", input$user_name, " login failed. ", e$message), name = "datapack")
+      }
+    )
 
-       if (exists("d2_default_session") & is_authorized) {
+    # Need to check the user is a member of the PRIME Data Systems Group,
+    # COP Memo group, or a super user
+    is_authorized <- grepl("VDEqY8YeCEk|ezh8nmc4JbX", d2_default_session$me$userGroups) |
+      grepl("jtzbVV4ZmdP",d2_default_session$me$userCredentials$userRoles)
 
-      # Succesful log in
-       futile.logger::flog.info(paste0("User ",
-       d2_default_session$me$userCredentials$username,
-       " logged in to ", d2_default_session$base_url), name = "cop_memo")
-       #Trigger Variable switches to true.
-       user_input$authenticated <- TRUE
-       user_input$d2_session <- d2_default_session$clone()
+    print(is_authorized)
+    if (exists("d2_default_session") && is_authorized) {
 
-       # Unsuccessful log in
-         } else { #Need to update logic here
+      user_input$authenticated  <-  TRUE
+      user_input$d2_session  <-  d2_default_session$clone()
+      d2_default_session <- NULL
 
-           if(exists("d2_default_session") & !(is_authorized)){# Display custom
-             # message to the user in regards to NOT being a member of the
-             # PRIME Data Systems Group, COP Memo group, or a super user
+      # Need to check the user is a member of the
+      # PRIME Data Systems Group, COP Memo group, or a super user
+      user_input$memo_authorized  <-
+        grepl("VDEqY8YeCEk|ezh8nmc4JbX",
+              user_input$d2_session$me$userGroups) |
+        grepl(
+          "jtzbVV4ZmdP",
+          user_input$d2_session$me$userCredentials$userRoles
+        )
+      flog.info(
+        paste0(
+          "User ",
+          user_input$d2_session$me$userCredentials$username,
+          " logged in."
+        ),
+        name = "datapack"
+      )
+    } else {
+      if(exists("d2_default_session") & !(is_authorized)){# Display custom
+        # message to the user in regards to NOT being a member of the
+        # PRIME Data Systems Group, COP Memo group, or a super user
 
-            # Might be a better way to trigger this if statement
-            sendSweetAlert(
-               session,
-               title = "Not authorized",
-               text = "This app is for specific DATIM users. Please contact DATIM support for more information.",
-               type = "error")
+        # Might be a better way to trigger this if statement
+        sendSweetAlert(
+          session,
+          title = "Not authorized",
+          text = "This app is for specific DATIM users. Please contact DATIM support for more information.",
+          type = "error")
 
-           } else { #Display datimutils errors message to the user
+      } else { #Display datimutils errors message to the user
 
-            sendSweetAlert(
-              session,
-              title = "Login failed",
-              text = substr(loginAttempt,# full error message printed to console
-                            regexpr("User",loginAttempt)[1],# Where to start extract
-                            nchar(loginAttempt)),# Where to end extract
-              type = "error"
-           )
-           }
-           user_authenticated <- FALSE
-           rm(d2_default_session)
-       }
+        sendSweetAlert(
+          session,
+          title = "Login failed",
+          text = substr(loginAttempt,# full error message printed to console
+                        regexpr("User",loginAttempt)[1],# Where to start extract
+                        nchar(loginAttempt)),# Where to end extract
+          type = "error"
+        )
+      }
+      user_authenticated <- FALSE
+      rm(d2_default_session)
+    }
   })
+
 
   # DataTable 1 Controls
   output$prio_table <- DT::renderDataTable({
@@ -211,12 +294,18 @@ shinyServer(function(input, output, session) {
   })
 
   observeEvent(input$logout, {
+    req(input$logout)
+    # Gets you back to the login without the authorization code at top
+    updateQueryString("?", mode = "replace", session = session)
     flog.info(paste0("User ", user_input$d2_session$me$userCredentials$username, " logged out."))
     ready$ok <- FALSE
     user_input$authenticated <- FALSE
+    user_input$user_name <- ""
+    user_input$authorized <- FALSE
     user_input$d2_session <- NULL
+    d2_default_session <- NULL
     gc()
-
+    session$reload()
   })
 
   observeEvent(input$cop_year, {
@@ -230,13 +319,13 @@ shinyServer(function(input, output, session) {
       #img(src = "pepfar.png", align = "center"),
       tags$div(HTML('<center><img src="pepfar.png"></center>')),
       h4(
-        "Welcome to the COP Memo App. Please login with your DATIM credentials:"
+        "Welcome to the COP Memo App. You will be redirected to DATIM to authenticate."
       )
     ),
     fluidRow(
-      textInput("user_name", "Username: ", width = "600px"),
-      passwordInput("password", "Password:", width = "600px"),
-      actionButton("login_button", "Log in!")
+      actionButton("login_button_oauth", "Log in with DATIM"),
+      uiOutput("ui_hasauth"),
+      uiOutput("ui_redirect")
     ),
     tags$hr(),
     fluidRow(HTML(getVersionInfo())))

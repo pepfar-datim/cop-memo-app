@@ -1,6 +1,6 @@
 {
   "R": {
-    "Version": "4.1.2",
+    "Version": "4.2.1",
     "Repositories": [
       {
         "Name": "CRAN",
@@ -196,15 +196,15 @@
     },
     "datimutils": {
       "Package": "datimutils",
-      "Version": "0.3.0",
+      "Version": "0.5.3",
       "Source": "GitHub",
       "RemoteType": "github",
       "RemoteHost": "api.github.com",
       "RemoteUsername": "pepfar-datim",
       "RemoteRepo": "datimutils",
-      "RemoteRef": "master",
-      "RemoteSha": "f0d5fdb15220b9deaef85bae4886966e13715ea8",
-      "Hash": "131b6860dd858d6c464805c951986689"
+      "RemoteRef": "oauth-redux",
+      "RemoteSha": "60987e94d93c4a196a1d5a5a31a3fba7229d1a63",
+      "Hash": "80451b5eeaa3c8d2207d39c11ea04553"
     },
     "datimvalidation": {
       "Package": "datimvalidation",
@@ -718,10 +718,10 @@
     },
     "shiny": {
       "Package": "shiny",
-      "Version": "1.7.1",
+      "Version": "1.7.2",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "00344c227c7bd0ab5d78052c5d736c44"
+      "Hash": "4f7970a3edb0a153ac6b376785a1944a"
     },
     "shinyWidgets": {
       "Package": "shinyWidgets",
