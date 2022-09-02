@@ -4019,7 +4019,7 @@
       "checksum": "154003235b1148327d9b19e141b5da97"
     },
     ".Rprofile": {
-      "checksum": "8a79328f691bc7a7634f0eae0bd6ddc0"
+      "checksum": "da04d2342f77e11e1e26796988c71500"
     },
     "DESCRIPTION": {
       "checksum": "b36020e52095647d5cc64d857feed972"
@@ -4034,7 +4034,7 @@
       "checksum": "cd04d9e778b00519de3e0e2afc97eb28"
     },
     "R/utils.R": {
-      "checksum": "58a0334513b9e8f9b3cd9aa3290c6765"
+      "checksum": "3574f22ca9f71960e686307781631ac7"
     },
     "server.R": {
       "checksum": "f998dc5ba8d3de9ec596c36eaad29be5"
