@@ -5,3 +5,4 @@
 .Rprofile
 agencies_partners_mechs.rds
 renv/
+mechs.rds
