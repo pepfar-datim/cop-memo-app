@@ -28,7 +28,7 @@ oauth_app <- httr::oauth_app(Sys.getenv("OAUTH_APPNAME"),
                              secret = Sys.getenv("OAUTH_SECRET"), #dhis2 = Client Secret
                              redirect_uri = APP_URL)
 
-oauth_api <- httr::oauth_endpoint(base_url = paste0(Sys.getenv("BASE_URL"), "uaa/oauth"),
+oauth_api <- httr::oauth_endpoint(base_url = paste0(getBaseURL(), "uaa/oauth"),
                                   request = NULL, # Documentation says to leave this NULL for OAuth2
                                   authorize = "authorize",
                                   access = "token")
@@ -150,7 +150,7 @@ shinyServer(function(input, output, session) {
     loginAttempt <- tryCatch({
 
 
-      datimutils::loginToDATIMOAuth(base_url =  Sys.getenv("BASE_URL"),
+      datimutils::loginToDATIMOAuth(base_url =  getBaseURL(),
                                     token = token,
                                     app = oauth_app,
                                     api = oauth_api,
