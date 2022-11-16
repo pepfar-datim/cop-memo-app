@@ -162,16 +162,16 @@
     },
     "datapackr": {
       "Package": "datapackr",
-      "Version": "5.3.0",
+      "Version": "5.4.0",
       "Source": "GitHub",
+      "Remotes": "pepfar-datim/datimutils, pepfar-datim/datim-validation",
       "RemoteType": "github",
       "RemoteHost": "api.github.com",
-      "RemoteUsername": "pepfar-datim",
       "RemoteRepo": "datapackr",
+      "RemoteUsername": "pepfar-datim",
       "RemoteRef": "master",
-      "RemoteSha": "e296f3be6edee884afa409b6ceaa1522367aa651",
-      "Remotes": "pepfar-datim/datimutils, pepfar-datim/datim-validation",
-      "Hash": "6d67768f6795570aef1e45554fe06084"
+      "RemoteSha": "7ef5cee8efc8a6bca64c970d0cad2990c9f8a3bd",
+      "Hash": "4ffa4b24dda60855079bed1a73289c75"
     },
     "datimutils": {
       "Package": "datimutils",
@@ -296,13 +296,6 @@
       "Repository": "CRAN",
       "Hash": "0d9bf02413ddc2bbe8da9ce369dcdd2b"
     },
-    "fuzzyjoin": {
-      "Package": "fuzzyjoin",
-      "Version": "0.1.6",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Hash": "24af5fc67dbeaac6d776a8e6630aacd9"
-    },
     "gdtools": {
       "Package": "gdtools",
       "Version": "0.2.4",
@@ -316,13 +309,6 @@
       "Source": "Repository",
       "Repository": "CRAN",
       "Hash": "177475892cf4a55865868527654a7741"
-    },
-    "geosphere": {
-      "Package": "geosphere",
-      "Version": "1.5-14",
-      "Source": "Repository",
-      "Repository": "RSPM",
-      "Hash": "1ce6e028f3d056dad1ea9c3c0a5444bf"
     },
     "getPass": {
       "Package": "getPass",
@@ -435,13 +421,6 @@
       "Source": "Repository",
       "Repository": "CRAN",
       "Hash": "7e7b457d7766bc47f2a5f21cc2984f8e"
-    },
-    "lattice": {
-      "Package": "lattice",
-      "Version": "0.20-45",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Hash": "b64cdbb2b340437c4ee047a1f4c4377b"
     },
     "lazyeval": {
       "Package": "lazyeval",
@@ -627,10 +606,10 @@
     },
     "rlang": {
       "Package": "rlang",
-      "Version": "1.0.2",
+      "Version": "1.0.6",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "04884d9a75d778aca22c7154b8333ec9"
+      "Hash": "4ed1f8336c8d52c3e750adcdc57228a7"
     },
     "rlist": {
       "Package": "rlist",
@@ -722,20 +701,6 @@
       "Source": "Repository",
       "Repository": "CRAN",
       "Hash": "947e4e02a79effa5d512473e10f41797"
-    },
-    "sp": {
-      "Package": "sp",
-      "Version": "1.4-7",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Hash": "c5dad1d43440f0c426a6d29b30b333fa"
-    },
-    "stringdist": {
-      "Package": "stringdist",
-      "Version": "0.9.8",
-      "Source": "Repository",
-      "Repository": "RSPM",
-      "Hash": "c8b6c79c3b2d7d8475f3ab35cd99737b"
     },
     "stringi": {
       "Package": "stringi",
