@@ -151,35 +151,6 @@
         "Archs": "Rcpp.so.dSYM"
       }
     },
-    "XML": {
-      "Source": "CRAN",
-      "Repository": "https://cloud.r-project.org",
-      "GithubRepo": null,
-      "GithubUsername": null,
-      "GithubRef": null,
-      "GithubSha1": null,
-      "description": {
-        "Package": "XML",
-        "Version": "3.99-0.9",
-        "Authors@R": "c(person(\"CRAN Team\", role = c('ctb', 'cre'),\n                    email = \"CRAN@r-project.org\",\n                    comment = \"de facto maintainer since 2013\"),\n             person(\"Duncan\", \"Temple Lang\", role = c(\"aut\"),\n                    email = \"duncan@r-project.org\",\n                    comment = c(ORCID = \"0000-0003-0159-1546\")),\n\t    person(\"Tomas\", \"Kalibera\", role = \"ctb\"))",
-        "Title": "Tools for Parsing and Generating XML Within R and S-Plus",
-        "Depends": "R (>= 4.0.0), methods, utils",
-        "Suggests": "bitops, RCurl",
-        "SystemRequirements": "libxml2 (>= 2.6.3)",
-        "Description": "Many approaches for both reading and\n        creating XML (and HTML) documents (including DTDs), both local\n        and accessible via HTTP or FTP.  Also offers access to an\n        'XPath' \"interpreter\".",
-        "URL": "http://www.omegahat.net/RSXML/",
-        "License": "BSD_3_clause + file LICENSE",
-        "Collate": "AAA.R DTD.R DTDClasses.R DTDRef.R SAXMethods.R XMLClasses.R\napplyDOM.R assignChild.R catalog.R createNode.R dynSupports.R\nerror.R flatTree.R nodeAccessors.R parseDTD.R schema.R\nsummary.R tangle.R toString.R tree.R version.R xmlErrorEnums.R\nxmlEventHandler.R xmlEventParse.R xmlHandler.R\nxmlInternalSource.R xmlOutputDOM.R xmlNodes.R xmlOutputBuffer.R\nxmlTree.R xmlTreeParse.R htmlParse.R hashTree.R zzz.R\nsupports.R parser.R libxmlFeatures.R xmlString.R saveXML.R\nnamespaces.R readHTMLTable.R reflection.R xmlToDataFrame.R\nbitList.R compare.R encoding.R fixNS.R xmlRoot.R serialize.R\nxmlMemoryMgmt.R keyValueDB.R solrDocs.R XMLRErrorInfo.R\nxincludes.R namespaceHandlers.R tangle1.R htmlLinks.R\nhtmlLists.R getDependencies.R getRelativeURL.R xmlIncludes.R\nsimplifyPath.R",
-        "NeedsCompilation": "yes",
-        "Packaged": "2022-02-23 17:21:18 UTC; ripley",
-        "Author": "CRAN Team [ctb, cre] (de facto maintainer since 2013),\n  Duncan Temple Lang [aut] (<https://orcid.org/0000-0003-0159-1546>),\n  Tomas Kalibera [ctb]",
-        "Maintainer": "CRAN Team <CRAN@r-project.org>",
-        "Repository": "CRAN",
-        "Date/Publication": "2022-02-24 06:40:57 UTC",
-        "Built": "R 4.2.0; x86_64-apple-darwin17.0; 2022-04-25 03:24:48 UTC; unix",
-        "Archs": "XML.so.dSYM"
-      }
-    },
     "askpass": {
       "Source": "CRAN",
       "Repository": "https://cloud.r-project.org",
@@ -733,39 +704,40 @@
       "GithubRepo": "datim-validation",
       "GithubUsername": "pepfar-datim",
       "GithubRef": "master",
-      "GithubSha1": "ba276b072d6e74e86037506ce3ce1ff671922ce9",
+      "GithubSha1": "0bc5c0285931e95741d63eb13e0d28c4e0069f46",
       "description": {
         "Package": "datimvalidation",
         "Type": "Package",
         "Title": "External Validation Routines for Data Payloads in DATIM",
-        "Version": "1.1.2",
-        "Date": "2021-04-27",
-        "Author": "Jason P. Pickering",
+        "Version": "1.3.5",
+        "Date": "2022-11-01",
+        "Authors@R": "c(\n    person(\"Jason\", \"Pickering\", email = \"jason.p.pickering@gmail.com\",\n        role = c(\"aut\", \"cre\")),\n    person(\"Chris\", \"Nemarich\", email = \"cnemarich@guidehouse.com\",\n        role = c(\"ctb\")),\n    person(\"Vlad\", \"Shioshvili\", email = \"Vladimer.Shioshvili@icf.com\",\n        role = c(\"ctb\")),\n    person(\"Dennis\", \"Banga\", email = \"Dennis.Banga@icf.com\",\n        role = c(\"ctb\")),\n    person(\"Hiwot\", \"Chichaybelu\", email = \"Hiwot.Chichaybelu@icf.com\",\n        role = c(\"ctb\"))\n  )",
         "Maintainer": "Jason P. Pickering <jason.p.pickering@gmail.com>",
         "Description": "A comprehensive set of tools to validate data payloads\n        intended for import into 'DATIM' <https://www.datim.org/>.\n        DATIM is the 'PEPFAR' <https://www.state.gov/pepfar/> specific\n        instance of 'DHIS2' <https://www.dhis2.org/>. These scripts are\n        provided for the 'PEPFAR' data exchange community in order to\n        validate their prospective data payloads prior to submission\n        for import.",
         "License": "BSD_3_clause + file LICENSE",
         "SystemRequirements": "Active user account on 'DATIM'\n<https://www.datim.org/>",
-        "URL": "https://github.com/jason-p-pickering/datim-validation",
-        "BugReports": "https://github.com/jason-p-pickering/datim-validation/issues",
+        "URL": "https://github.com/pepfar-datim/datim-validation",
+        "BugReports": "https://github.com/pepfar-datim/datim-validation/issues",
         "Encoding": "UTF-8",
-        "Depends": "R (>= 3.6)",
-        "Imports": "xml2 (>= 1.3.2), plyr (>= 1.8.4), jsonlite (>= 1.6), stringr\n(>= 1.4.0), httr (>= 1.4.0), digest (>= 0.6.18), reshape2 (>=\n1.4.3), assertthat (>= 0.2.0), rlist (>= 0.4.6.1), ISOweek (>=\n0.6-2), lubridate (>= 1.7.4), getPass (>= 0.2-2), purrr (>=\n0.3.2), dplyr (>= 0.8.3), R6 (>= 2.4.1), datimutils (>= 0.1.0)",
-        "Suggests": "doMC (>= 1.3.5), foreach (>= 1.4.4), httptest (>= 3.2.2),\nknitr (>= 1.21), methods, rmarkdown (>= 1.11), roxygen2 (>=\n6.1.1), tcltk, testthat (>= 2.0.1), covr (>= 3.2.1), stringi\n(>= 1.3.1), rprojroot (>= 1.3-2)",
+        "Depends": "R (>= 4.1),\ndatimutils (>= 0.6.0)",
+        "Imports": "assertthat (>= 0.2.0),\ndplyr (>= 0.8.3),\nhttr (>= 1.4.0),\nISOweek (>= 0.6-2),\njsonlite (>= 1.6),\nlubridate (>= 1.7.4),\nplyr (>= 1.8.4),\npurrr (>= 0.3.2),\nreshape2 (>= 1.4.3),\nstringr (>= 1.4.0),\nxml2 (>= 1.3.2),\nhttpcache (>= 1.2.0),\ncrayon (>= 1.5.1),\nstringi (>= 1.7.8)",
+        "Suggests": "covr (>= 3.2.1),\ndoMC (>= 1.3.5),\nforeach (>= 1.4.4),\nhttptest (>= 3.2.2),\nknitr (>= 1.21),\nmethods,\nrmarkdown (>= 1.11),\nroxygen2 (>= 6.1.1),\ntcltk,\ntestthat (>= 2.0.1),\nstringi (>= 1.3.1),\nrprojroot (>= 1.3-2),\nlintr (>= 3.0.0),\ntibble (>= 3.1.8)",
         "VignetteBuilder": "knitr",
-        "RoxygenNote": "7.1.1",
-        "Built": "R 4.2.1; ; 2022-12-19 16:31:02 UTC; unix",
+        "RoxygenNote": "7.2.1",
+        "Author": "Jason Pickering [aut, cre],\n  Chris Nemarich [ctb],\n  Vlad Shioshvili [ctb],\n  Dennis Banga [ctb],\n  Hiwot Chichaybelu [ctb]",
+        "Built": "R 4.2.1; ; 2022-12-19 19:14:19 UTC; unix",
         "RemoteType": "github",
         "RemoteHost": "api.github.com",
         "RemoteUsername": "pepfar-datim",
         "RemoteRepo": "datim-validation",
         "RemoteRef": "master",
-        "RemoteSha": "ba276b072d6e74e86037506ce3ce1ff671922ce9",
-        "Remotes": "pepfar-datim/datimutils",
+        "RemoteSha": "0bc5c0285931e95741d63eb13e0d28c4e0069f46",
         "GithubHost": "api.github.com",
         "GithubRepo": "datim-validation",
         "GithubUsername": "pepfar-datim",
         "GithubRef": "master",
-        "GithubSHA1": "ba276b072d6e74e86037506ce3ce1ff671922ce9"
+        "GithubSHA1": "0bc5c0285931e95741d63eb13e0d28c4e0069f46",
+        "Remotes": "pepfar-datim/datimutils"
       }
     },
     "digest": {
@@ -1268,38 +1240,6 @@
         "Built": "R 4.2.0; ; 2022-04-25 03:17:36 UTC; unix"
       }
     },
-    "getPass": {
-      "Source": "CRAN",
-      "Repository": "https://cloud.r-project.org",
-      "GithubRepo": null,
-      "GithubUsername": null,
-      "GithubRef": null,
-      "GithubSha1": null,
-      "description": {
-        "Package": "getPass",
-        "Type": "Package",
-        "Title": "Masked User Input",
-        "Version": "0.2-2",
-        "Description": "A micro-package for reading \"passwords\", i.e.  reading\n    user input with masking, so that the input is not displayed as it \n    is typed.  Currently we have support for 'RStudio', the command line\n    (every OS), and any platform where 'tcltk' is present.  ",
-        "License": "BSD 2-clause License + file LICENSE",
-        "Depends": "R (>= 3.0.0)",
-        "Imports": "utils, rstudioapi (>= 0.5)",
-        "Suggests": "argon2",
-        "NeedsCompilation": "yes",
-        "ByteCompile": "yes",
-        "Authors@R": "c(\n    person(\"Drew\", \"Schmidt\", role=c(\"aut\", \"cre\"), email=\"wrathematics@gmail.com\"),\n    person(\"Wei-Chen\", \"Chen\", role=\"aut\"),\n    person(\"Gabor\", \"Csardi\", role=\"ctb\", comment=\"Improved terminal detection\"),\n    person(\"Rich\", \"FitzJohn\", role=\"ctb\")\n    )",
-        "URL": "https://github.com/wrathematics/getPass",
-        "BugReports": "https://github.com/wrathematics/getPass/issues",
-        "Maintainer": "Drew Schmidt <wrathematics@gmail.com>",
-        "RoxygenNote": "6.0.1",
-        "Packaged": "2017-07-20 02:04:32 UTC; mschmid3",
-        "Author": "Drew Schmidt [aut, cre],\n  Wei-Chen Chen [aut],\n  Gabor Csardi [ctb] (Improved terminal detection),\n  Rich FitzJohn [ctb]",
-        "Repository": "CRAN",
-        "Date/Publication": "2017-07-21 09:20:34 UTC",
-        "Built": "R 4.2.0; x86_64-apple-darwin17.0; 2022-04-25 09:02:32 UTC; unix",
-        "Archs": "getPass.so.dSYM"
-      }
-    },
     "glue": {
       "Source": "CRAN",
       "Repository": "https://cloud.r-project.org",
@@ -1460,6 +1400,39 @@
         "Repository": "CRAN",
         "Date/Publication": "2021-09-08 14:00:02 UTC",
         "Built": "R 4.2.0; ; 2022-04-26 22:34:07 UTC; unix"
+      }
+    },
+    "httpcache": {
+      "Source": "CRAN",
+      "Repository": "https://cloud.r-project.org",
+      "GithubRepo": null,
+      "GithubUsername": null,
+      "GithubRef": null,
+      "GithubSha1": null,
+      "description": {
+        "Package": "httpcache",
+        "Type": "Package",
+        "Title": "Query Cache for HTTP Clients",
+        "Description": "In order to improve performance for HTTP API clients, 'httpcache'\n    provides simple tools for caching and invalidating cache. It includes the\n    HTTP verb functions GET, PUT, PATCH, POST, and DELETE, which are drop-in\n    replacements for those in the 'httr' package. These functions are cache-aware\n    and provide default settings for cache invalidation suitable for RESTful\n    APIs; the package also enables custom cache-management strategies.\n    Finally, 'httpcache' includes a basic logging framework to facilitate the\n    measurement of HTTP request time and cache performance.",
+        "Version": "1.2.0",
+        "Authors@R": "c(person(\"Neal\", \"Richardson\", role = c(\"aut\", \"cre\"),\n    email = \"neal.p.richardson@gmail.com\"))",
+        "URL": "https://enpiar.com/r/httpcache/,\nhttps://github.com/nealrichardson/httpcache/",
+        "BugReports": "https://github.com/nealrichardson/httpcache/issues",
+        "License": "MIT + file LICENSE",
+        "Depends": "R (>= 3.0.0)",
+        "Imports": "digest, httr (>= 1.0.0), utils",
+        "Suggests": "httptest (>= 3.0.0), knitr, rmarkdown, spelling",
+        "RoxygenNote": "7.1.1",
+        "VignetteBuilder": "knitr",
+        "Language": "en-US",
+        "Encoding": "UTF-8",
+        "NeedsCompilation": "no",
+        "Packaged": "2021-01-10 21:17:00 UTC; enpiar",
+        "Author": "Neal Richardson [aut, cre]",
+        "Maintainer": "Neal Richardson <neal.p.richardson@gmail.com>",
+        "Repository": "CRAN",
+        "Date/Publication": "2021-01-10 23:10:02 UTC",
+        "Built": "R 4.2.0; ; 2022-04-27 16:26:41 UTC; unix"
       }
     },
     "httpuv": {
@@ -2613,39 +2586,6 @@
         "Archs": "rlang.so.dSYM"
       }
     },
-    "rlist": {
-      "Source": "CRAN",
-      "Repository": "https://cloud.r-project.org",
-      "GithubRepo": null,
-      "GithubUsername": null,
-      "GithubRef": null,
-      "GithubSha1": null,
-      "description": {
-        "Package": "rlist",
-        "Type": "Package",
-        "Title": "A Toolbox for Non-Tabular Data Manipulation",
-        "Version": "0.4.6.2",
-        "Author": "Kun Ren <ken@renkun.me>",
-        "Maintainer": "Kun Ren <ken@renkun.me>",
-        "Description": "Provides a set of functions for data manipulation with\n    list objects, including mapping, filtering, grouping, sorting,\n    updating, searching, and other useful functions. Most functions\n    are designed to be pipeline friendly so that data processing with\n    lists can be chained.",
-        "Depends": "R (>= 2.15)",
-        "Date": "2021-09-02",
-        "Suggests": "testthat, stringdist",
-        "Imports": "yaml, jsonlite, XML, data.table",
-        "License": "MIT + file LICENSE",
-        "URL": "https://renkun-ken.github.io/rlist/,\nhttps://github.com/renkun-ken/rlist,\nhttps://renkun-ken.github.io/rlist-tutorial/",
-        "BugReports": "https://github.com/renkun-ken/rlist/issues",
-        "ByteCompile": "TRUE",
-        "LazyData": "true",
-        "RoxygenNote": "7.1.1",
-        "Encoding": "UTF-8",
-        "NeedsCompilation": "no",
-        "Packaged": "2021-09-02 23:36:14 UTC; ken",
-        "Repository": "CRAN",
-        "Date/Publication": "2021-09-03 12:20:02 UTC",
-        "Built": "R 4.2.0; ; 2022-04-25 06:02:01 UTC; unix"
-      }
-    },
     "rmarkdown": {
       "Source": "CRAN",
       "Repository": "https://cloud.r-project.org",
@@ -3036,11 +2976,11 @@
       "GithubSha1": null,
       "description": {
         "Package": "stringi",
-        "Version": "1.7.6",
-        "Date": "2021-11-29",
-        "Title": "Character String Processing Facilities",
-        "Description": "A collection of character string/text/natural language\n    processing tools for pattern searching (e.g., with 'Java'-like regular\n    expressions or the 'Unicode' collation algorithm), random string generation,\n    case mapping, string transliteration, concatenation, sorting, padding,\n    wrapping, Unicode normalisation, date-time formatting and parsing,\n    and many more. They are fast, consistent, convenient, and -\n    thanks to 'ICU' (International Components for Unicode) -\n    portable across all locales and platforms.",
-        "URL": "https://stringi.gagolewski.com/ https://icu.unicode.org/",
+        "Version": "1.7.8",
+        "Date": "2022-07-11",
+        "Title": "Fast and Portable Character String Processing Facilities",
+        "Description": "A collection of character string/text/natural language\n    processing tools for pattern searching (e.g., with 'Java'-like regular\n    expressions or the 'Unicode' collation algorithm), random string generation,\n    case mapping, string transliteration, concatenation, sorting, padding,\n    wrapping, Unicode normalisation, date-time formatting and parsing,\n    and many more. They are fast, consistent, convenient, and -\n    thanks to 'ICU' (International Components for Unicode) -\n    portable across all locales and platforms.\n    Documentation about 'stringi' is provided\n    via its website at <https://stringi.gagolewski.com/> and\n    the paper by Gagolewski (2022, <doi:10.18637/jss.v103.i02>).",
+        "URL": "https://stringi.gagolewski.com/,\nhttps://github.com/gagolews/stringi, https://icu.unicode.org/",
         "BugReports": "https://github.com/gagolews/stringi/issues",
         "SystemRequirements": "C++11, ICU4C (>= 55, optional)",
         "Type": "Package",
@@ -3053,11 +2993,10 @@
         "RoxygenNote": "7.1.2",
         "Encoding": "UTF-8",
         "NeedsCompilation": "yes",
-        "Packaged": "2021-11-28 23:34:08 UTC; gagolews",
-        "License_is_FOSS": "yes",
+        "Packaged": "2022-07-11 01:59:34 UTC; gagolews",
         "Repository": "CRAN",
-        "Date/Publication": "2021-11-29 09:00:02 UTC",
-        "Built": "R 4.2.0; x86_64-apple-darwin17.0; 2022-04-25 03:23:21 UTC; unix"
+        "Date/Publication": "2022-07-11 08:10:02 UTC",
+        "Built": "R 4.2.0; x86_64-apple-darwin17.0; 2022-07-12 11:38:55 UTC; unix"
       }
     },
     "stringr": {
@@ -3704,7 +3643,7 @@
       "checksum": "9e2a41641fbec85ec6d8f83edd1f97e1"
     },
     ".Rprofile": {
-      "checksum": "b7f8d3e90c9d7dfc3bd26c5ff2eaf1f3"
+      "checksum": "e0cd755cf6b34a88e41bb43aa5b95884"
     },
     "datapack.log": {
       "checksum": "d41d8cd98f00b204e9800998ecf8427e"
