@@ -68,19 +68,12 @@ shinyServer(function(input, output, session) {
         dplyr::filter(`datapack_name` == d$info$operating_unit) %>%
         dplyr::pull(country_uids) %>%
         unlist()
-      #Get a list of PSNUs
-      # d$info$psnus <- datapackr::getValidOrgUnits(d$info$cop_year) %>%
-      #   dplyr::filter(country_uid %in% d$info$country_uids) %>%
-      #   dplyr::filter(is.na(`DREAMS`)) %>%
-      #   dplyr::select(ou, country_name, snu1, psnu = name, psnu_uid = uid)
 
       d$info$tool <- "memo"
-
 
       d <- datapackr::prepareMemoData(d,memo_type ="datim",
                                       include_no_prio = input$include_no_prio,
                                       d2_session = user_input$d2_session)
-
 
       if (NROW(d$memo$datim$analytics) == 0) {
         shinyjs::disable("downloadXLSX")
@@ -224,7 +217,6 @@ shinyServer(function(input, output, session) {
       rm(d2_default_session)
     }
   })
-
 
   # DataTable 1 Controls
   output$prio_table <- DT::renderDataTable({
