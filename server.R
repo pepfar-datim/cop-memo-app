@@ -61,19 +61,16 @@ shinyServer(function(input, output, session) {
       d <- list()
       d$info$operating_unit <- input$ou
       d$info$datapack_name <- input$ou
+      d$info$cop_year <- as.numeric(user_input$cop_year)
+
       #Get a list of country UIDSs
       d$info$country_uids <- datapack_config() %>%
         dplyr::filter(`datapack_name` == d$info$operating_unit) %>%
         dplyr::pull(country_uids) %>%
         unlist()
-      #Get a list of PSNUs
-      d$info$psnus <- datapackr::valid_PSNUs %>%
-        dplyr::filter(country_uid %in% d$info$country_uids) %>%
-        dplyr::filter(!is.na(psnu_type)) %>%
-        dplyr::select(ou, country_name, snu1, psnu, psnu_uid)
+
       d$info$tool <- "memo"
 
-      d$info$cop_year <- as.numeric(user_input$cop_year)
       d <- datapackr::prepareMemoData(d,memo_type ="datim",
                                       include_no_prio = input$include_no_prio,
                                       d2_session = user_input$d2_session)
