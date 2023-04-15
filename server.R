@@ -357,7 +357,7 @@ shinyServer(function(input, output, session) {
         sidebarPanel(
           shinyjs::useShinyjs(),
           id = "side-panel",
-          selectInput("cop_year", "COP Year", c(2020, 2021,2022), selected = 2022),
+          selectInput("cop_year", "COP Year", c(2021,2022, 2023), selected = 2023),
           tags$hr(),
           selectInput("ou", "Operating Unit", datapack_config()$datapack_name),
           tags$hr(),

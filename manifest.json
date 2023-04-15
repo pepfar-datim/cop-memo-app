@@ -1,7 +1,7 @@
 {
   "version": 1,
   "locale": "en_US",
-  "platform": "4.2.2",
+  "platform": "4.2.3",
   "metadata": {
     "appmode": "shiny",
     "primary_rmd": null,
@@ -613,38 +613,38 @@
       "GithubRepo": "datapackr",
       "GithubUsername": "pepfar-datim",
       "GithubRef": "master",
-      "GithubSha1": "4772f32e141fec9174ca7e1563ca3a19b6f6bba9",
+      "GithubSha1": "6cf0e19cbae7e960b213579c3deafcb720ec5811",
       "description": {
         "Package": "datapackr",
         "Type": "Package",
         "Title": "A Package that Packs and Unpacks all Data Packs and Target Setting Tools",
-        "Version": "6.1.0",
-        "Date": "2023-02-08",
+        "Version": "6.2.3",
+        "Date": "2023-04-12",
         "Authors@R": "c(\n    person(\"Scott\", \"Jackson\", email = \"sjackson@baosystems.com\",\n        role = c(\"aut\", \"cre\")),\n    person(\"Jason\", \"Pickering\", email = \"jason.p.pickering@gmail.com\",\n        role = c(\"aut\", \"rev\")),\n    person(\"Sam\", \"Garman\", email = \"sgarman@baosystems.com\",\n        role = c(\"aut\")),\n    person(\"Chris\", \"Nemarich\", email = \"cnemarich@guidehouse.com\",\n        role = c(\"ctb\")),\n    person(\"Christian\", \"Domaas\", email = \"cdomaas@baosystems.com\",\n        role = c(\"ctb\")),\n    person(\"Fausto\", \"Lopez\", email = \"flopez@baosystems.com\",\n        role = c(\"ctb\")),\n    person(\"Jordan\", \"Bales\", email = \"jbales@baosystems.com\",\n        role = c(\"ctb\"))\n  )",
         "Description": "Generates and processes PEPFAR Data Packs and Site Tools.",
         "URL": "https://github.com/pepfar-datim/datapackr",
         "BugReports": "https://github.com/pepfar-datim/datapackr",
         "Depends": "R (>= 4.1.0),\ndatimutils (>= 0.5.1)",
         "Imports": "assertthat,\ncrayon (>= 1.3.4),\ndatimvalidation,\ndplyr (>= 0.8.3),\nhttr (>= 1.4.0),\njsonlite (>= 1.6),\nlubridate,\nmagrittr (>= 1.5),\nmethods,\nopenxlsx,\npurrr (>= 0.3.3),\nreadxl (>= 1.3.1),\nrlang (>= 0.4.2),\nstringr (>= 1.4.0),\ntibble (>= 2.1.3),\ntidyr (>= 1.0.0),\ntidyselect (>= 0.2.5),\ntidyxl (>= 1.0.4)",
-        "Suggests": "devtools (>= 2.0.1),\nhttptest,\ntestthat,\nreadr (>= 1.3.1),\ncellranger,\nrprojroot,\nwaldo,\nparallel,\ngdtools,\nflextable,\nofficer,\nlintr (>= 3.0.0)",
+        "Suggests": "devtools (>= 2.0.1),\nhttptest,\ntestthat,\nreadr (>= 1.3.1),\ncellranger,\nrprojroot,\nwaldo,\nparallel,\ngdtools,\nflextable,\nofficer,\nlintr (>= 3.0.0),\nstringi",
         "License": "file LICENSE",
         "Encoding": "UTF-8",
         "LazyData": "true",
         "RoxygenNote": "7.2.1",
         "Author": "Scott Jackson [aut, cre],\n  Jason Pickering [aut, rev],\n  Sam Garman [aut],\n  Chris Nemarich [ctb],\n  Christian Domaas [ctb],\n  Fausto Lopez [ctb],\n  Jordan Bales [ctb]",
         "Maintainer": "Scott Jackson <sjackson@baosystems.com>",
-        "Built": "R 4.2.2; ; 2023-02-09 06:39:43 UTC; unix",
+        "Built": "R 4.2.3; ; 2023-04-15 04:51:58 UTC; unix",
         "RemoteType": "github",
         "RemoteHost": "api.github.com",
         "RemoteUsername": "pepfar-datim",
         "RemoteRepo": "datapackr",
         "RemoteRef": "master",
-        "RemoteSha": "4772f32e141fec9174ca7e1563ca3a19b6f6bba9",
+        "RemoteSha": "6cf0e19cbae7e960b213579c3deafcb720ec5811",
         "GithubHost": "api.github.com",
         "GithubRepo": "datapackr",
         "GithubUsername": "pepfar-datim",
         "GithubRef": "master",
-        "GithubSHA1": "4772f32e141fec9174ca7e1563ca3a19b6f6bba9",
+        "GithubSHA1": "6cf0e19cbae7e960b213579c3deafcb720ec5811",
         "Remotes": "pepfar-datim/datimutils,\npepfar-datim/datim-validation"
       }
     },
@@ -3597,16 +3597,16 @@
       "checksum": "154003235b1148327d9b19e141b5da97"
     },
     ".Rprofile": {
-      "checksum": "e66f7a411daf77c60d803521ef3fdf95"
+      "checksum": "a0d02266f27985871896a03de5c9b095"
     },
     "DESCRIPTION": {
-      "checksum": "99056798f6f72ee514bff7ea287386f9"
+      "checksum": "cc343ca41792d0916ce896052d0d038a"
     },
     "LICENSE": {
       "checksum": "9b62b5c75bb467271d2729f6639a8259"
     },
     "mechs.rds": {
-      "checksum": "30de6be98689a26ae871b206906dc184"
+      "checksum": "0ca7c39e2e1bf6477202e71a47002bff"
     },
     "pepfar.png": {
       "checksum": "cd04d9e778b00519de3e0e2afc97eb28"
@@ -3615,7 +3615,7 @@
       "checksum": "3574f22ca9f71960e686307781631ac7"
     },
     "server.R": {
-      "checksum": "ffdb46237a8caa4f8d72209de67e6eff"
+      "checksum": "75f0e1ed4e09f672d2117da7358ee73f"
     },
     "ui.R": {
       "checksum": "112ea97d13f284c982d07294b31e4cdd"
