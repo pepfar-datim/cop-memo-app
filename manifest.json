@@ -653,8 +653,8 @@
       "Repository": null,
       "GithubRepo": "datimutils",
       "GithubUsername": "pepfar-datim",
-      "GithubRef": "master",
-      "GithubSha1": "3346faec3d1c0a6d180a1b60cab4176c2b27fa95",
+      "GithubRef": "oauth-headers",
+      "GithubSha1": "5fc8e4627887e50c5a74cb4f0062109015b9522a",
       "description": {
         "Package": "datimutils",
         "Type": "Package",
@@ -675,18 +675,18 @@
         "VignetteBuilder": "knitr",
         "Author": "Scott Jackson [aut, cre],\n  Jason Pickering [aut],\n  Sam Garman [aut],\n  Jordan Bales [aut],\n  Fausto Lopez [aut],\n  Chris Nemarich [ctb]",
         "Maintainer": "Scott Jackson <sjackson@baosystems.com>",
-        "Built": "R 4.2.1; ; 2022-09-19 14:25:05 UTC; unix",
+        "Built": "R 4.2.3; ; 2023-04-19 15:11:56 UTC; unix",
         "RemoteType": "github",
         "RemoteHost": "api.github.com",
         "RemoteUsername": "pepfar-datim",
         "RemoteRepo": "datimutils",
-        "RemoteRef": "master",
-        "RemoteSha": "3346faec3d1c0a6d180a1b60cab4176c2b27fa95",
+        "RemoteRef": "oauth-headers",
+        "RemoteSha": "5fc8e4627887e50c5a74cb4f0062109015b9522a",
         "GithubHost": "api.github.com",
         "GithubRepo": "datimutils",
         "GithubUsername": "pepfar-datim",
-        "GithubRef": "master",
-        "GithubSHA1": "3346faec3d1c0a6d180a1b60cab4176c2b27fa95"
+        "GithubRef": "oauth-headers",
+        "GithubSHA1": "5fc8e4627887e50c5a74cb4f0062109015b9522a"
       }
     },
     "datimvalidation": {
@@ -3594,19 +3594,19 @@
       "checksum": "9e2a41641fbec85ec6d8f83edd1f97e1"
     },
     ".RData": {
-      "checksum": "154003235b1148327d9b19e141b5da97"
+      "checksum": "93322152a07ab0f9be6144539998c2b0"
     },
     ".Rprofile": {
-      "checksum": "965404bb4a1103f18e9ef1edd35b00b3"
+      "checksum": "c9e4402f121adf4af2c4ee37c155f0a2"
     },
     "DESCRIPTION": {
-      "checksum": "4799f9792d501c45576a76e531ed255e"
+      "checksum": "abe1b82149a032f429ab8fc983e365b1"
     },
     "LICENSE": {
       "checksum": "9b62b5c75bb467271d2729f6639a8259"
     },
     "mechs.rds": {
-      "checksum": "0ca7c39e2e1bf6477202e71a47002bff"
+      "checksum": "b89d1d5929d92f9c1544960efe870aac"
     },
     "pepfar.png": {
       "checksum": "cd04d9e778b00519de3e0e2afc97eb28"
