@@ -1,6 +1,6 @@
 {
   "R": {
-    "Version": "4.2.2",
+    "Version": "4.2.3",
     "Repositories": [
       {
         "Name": "CRAN",
@@ -155,16 +155,16 @@
     },
     "datapackr": {
       "Package": "datapackr",
-      "Version": "6.3.1",
+      "Version": "6.3.2",
       "Source": "GitHub",
+      "Remotes": "pepfar-datim/datimutils, pepfar-datim/datim-validation",
       "RemoteType": "github",
       "RemoteHost": "api.github.com",
-      "RemoteUsername": "pepfar-datim",
       "RemoteRepo": "datapackr",
-      "RemoteRef": "master",
-      "RemoteSha": "e63f00b31f19a18e7e94ce50cecef55004915707",
-      "Remotes": "pepfar-datim/datimutils, pepfar-datim/datim-validation",
-      "Hash": "c161336de9d788959b413ca9539e34b7"
+      "RemoteUsername": "pepfar-datim",
+      "RemoteRef": "HEAD",
+      "RemoteSha": "f4e98ee40a97fb733da20e19541716e441a5967e",
+      "Hash": "ce78abf85b549ee69fbe39d7705d138e"
     },
     "datimutils": {
       "Package": "datimutils",

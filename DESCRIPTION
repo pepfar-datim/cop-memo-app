@@ -1,7 +1,7 @@
 Package: cop-memo-app
 Type: Shiny App
 Title: Self-service app for creation of COP Approval memo tables
-Date: 2023-04-27
+Date: 2023-06-27
 Author: Jason P. Pickering
 Maintainer: Jason P. Pickering <jason@dhis2.org>
-Version: 1.4.4
+Version: 1.4.5
