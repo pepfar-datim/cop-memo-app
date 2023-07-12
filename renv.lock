@@ -162,9 +162,9 @@
       "RemoteHost": "api.github.com",
       "RemoteRepo": "datapackr",
       "RemoteUsername": "pepfar-datim",
-      "RemoteRef": "HEAD",
-      "RemoteSha": "f4e98ee40a97fb733da20e19541716e441a5967e",
-      "Hash": "ce78abf85b549ee69fbe39d7705d138e"
+      "RemoteRef": "dev",
+      "RemoteSha": "6a6ab1fe5ca03b09f42e30c9bc70c0771760d316",
+      "Hash": "de0f044ba1a767128df5c0ae1587bc62"
     },
     "datimutils": {
       "Package": "datimutils",
