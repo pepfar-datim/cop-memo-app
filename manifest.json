@@ -622,13 +622,13 @@
       "GithubRepo": "datapackr",
       "GithubUsername": "pepfar-datim",
       "GithubRef": "HEAD",
-      "GithubSha1": "f4e98ee40a97fb733da20e19541716e441a5967e",
+      "GithubSha1": "504ecbb85d63bd6edcb3e2b830cfb5fefc4a5973",
       "description": {
         "Package": "datapackr",
         "Type": "Package",
         "Title": "A Package that Packs and Unpacks all Data Packs and Target\nSetting Tools",
-        "Version": "6.3.2",
-        "Date": "2023-06-22",
+        "Version": "7.0.0",
+        "Date": "2023-07-14",
         "Authors@R": "c(\n    person(\"Scott\", \"Jackson\", email = \"sjackson@baosystems.com\",\n        role = c(\"aut\", \"cre\")),\n    person(\"Jason\", \"Pickering\", email = \"jason.p.pickering@gmail.com\",\n        role = c(\"aut\", \"rev\")),\n    person(\"Sam\", \"Garman\", email = \"sgarman@baosystems.com\",\n        role = c(\"aut\")),\n    person(\"Chris\", \"Nemarich\", email = \"cnemarich@guidehouse.com\",\n        role = c(\"ctb\")),\n    person(\"Christian\", \"Domaas\", email = \"cdomaas@baosystems.com\",\n        role = c(\"ctb\")),\n    person(\"Fausto\", \"Lopez\", email = \"flopez@baosystems.com\",\n        role = c(\"ctb\")),\n    person(\"Jordan\", \"Bales\", email = \"jbales@baosystems.com\",\n        role = c(\"ctb\"))\n  )",
         "Description": "Generates and processes PEPFAR Data Packs and Site Tools.",
         "URL": "https://github.com/pepfar-datim/datapackr",
@@ -646,16 +646,16 @@
         "RemoteRepo": "datapackr",
         "RemoteUsername": "pepfar-datim",
         "RemoteRef": "HEAD",
-        "RemoteSha": "f4e98ee40a97fb733da20e19541716e441a5967e",
+        "RemoteSha": "504ecbb85d63bd6edcb3e2b830cfb5fefc4a5973",
         "GithubRepo": "datapackr",
         "GithubUsername": "pepfar-datim",
         "GithubRef": "HEAD",
-        "GithubSHA1": "f4e98ee40a97fb733da20e19541716e441a5967e",
+        "GithubSHA1": "504ecbb85d63bd6edcb3e2b830cfb5fefc4a5973",
         "NeedsCompilation": "no",
-        "Packaged": "2023-06-27 23:31:08 UTC; jordanbales",
+        "Packaged": "2023-07-17 19:03:43 UTC; jordanbales",
         "Author": "Scott Jackson [aut, cre],\n  Jason Pickering [aut, rev],\n  Sam Garman [aut],\n  Chris Nemarich [ctb],\n  Christian Domaas [ctb],\n  Fausto Lopez [ctb],\n  Jordan Bales [ctb]",
         "Maintainer": "Scott Jackson <sjackson@baosystems.com>",
-        "Built": "R 4.2.3; ; 2023-06-27 23:31:12 UTC; unix"
+        "Built": "R 4.2.3; ; 2023-07-17 19:03:47 UTC; unix"
       }
     },
     "datimutils": {
@@ -3644,13 +3644,13 @@
       "checksum": "9e2a41641fbec85ec6d8f83edd1f97e1"
     },
     ".Rprofile": {
-      "checksum": "afd2277a0da34e491f75b21c0baf8f6a"
+      "checksum": "e18b4ff8475f75f8a7fd87d2fddf9fff"
     },
     "datapack.log": {
       "checksum": "d41d8cd98f00b204e9800998ecf8427e"
     },
     "DESCRIPTION": {
-      "checksum": "145958f32f2934ca0746fde5913a5a81"
+      "checksum": "8ac851b6062072e50edf16a8724467e4"
     },
     "LICENSE": {
       "checksum": "9b62b5c75bb467271d2729f6639a8259"
