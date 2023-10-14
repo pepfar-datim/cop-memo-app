@@ -550,7 +550,11 @@
         "Encoding": "UTF-8",
         "LazyData": "true",
         "RoxygenNote": "7.2.3",
+        "Author": "Scott Jackson [aut, cre],\n  Jason Pickering [aut, rev],\n  Sam Garman [aut],\n  Chris Nemarich [ctb],\n  Christian Domaas [ctb],\n  Fausto Lopez [ctb],\n  Jordan Bales [ctb]",
+        "Maintainer": "Scott Jackson <sjackson@baosystems.com>",
+        "Built": "R 4.2.2; ; 2023-08-11 13:37:45 UTC; unix",
         "RemoteType": "github",
+        "Remotes": "pepfar-datim/datimutils,\npepfar-datim/datim-validation",
         "RemoteHost": "api.github.com",
         "RemoteRepo": "datapackr",
         "RemoteUsername": "pepfar-datim",
@@ -3192,7 +3196,7 @@
       "checksum": "9b62b5c75bb467271d2729f6639a8259"
     },
     "mechs.rds": {
-      "checksum": "d3ed5bb26bc47bff31a63f0707e08eae"
+      "checksum": "08fad38233fca832ece6f26c66c155c8"
     },
     "pepfar.png": {
       "checksum": "cd04d9e778b00519de3e0e2afc97eb28"
