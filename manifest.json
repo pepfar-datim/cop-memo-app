@@ -536,8 +536,8 @@
         "Type": "Package",
         "Package": "datapackr",
         "Title": "A Package that Packs and Unpacks all Data Packs and Target\nSetting Tools",
-        "Version": "7.0.2",
-        "Date": "2023-10-03",
+        "Version": "7.0.3",
+        "Date": "2023-11-07",
         "Authors@R": "c(\n    person(\"Scott\", \"Jackson\", , \"sjackson@baosystems.com\", role = c(\"aut\", \"cre\")),\n    person(\"Jason\", \"Pickering\", , \"jason.p.pickering@gmail.com\", role = c(\"aut\", \"rev\")),\n    person(\"Sam\", \"Garman\", , \"sgarman@baosystems.com\", role = \"aut\"),\n    person(\"Chris\", \"Nemarich\", , \"cnemarich@guidehouse.com\", role = \"ctb\"),\n    person(\"Christian\", \"Domaas\", , \"cdomaas@baosystems.com\", role = \"ctb\"),\n    person(\"Fausto\", \"Lopez\", , \"flopez@baosystems.com\", role = \"ctb\"),\n    person(\"Jordan\", \"Bales\", , \"jbales@baosystems.com\", role = \"ctb\")\n  )",
         "Description": "Generates and processes PEPFAR Data Packs and Site Tools.",
         "License": "file LICENSE",
@@ -550,25 +550,21 @@
         "Encoding": "UTF-8",
         "LazyData": "true",
         "RoxygenNote": "7.2.3",
-        "Author": "Scott Jackson [aut, cre],\n  Jason Pickering [aut, rev],\n  Sam Garman [aut],\n  Chris Nemarich [ctb],\n  Christian Domaas [ctb],\n  Fausto Lopez [ctb],\n  Jordan Bales [ctb]",
-        "Maintainer": "Scott Jackson <sjackson@baosystems.com>",
-        "Built": "R 4.2.2; ; 2023-08-11 13:37:45 UTC; unix",
         "RemoteType": "github",
-        "Remotes": "pepfar-datim/datimutils,\npepfar-datim/datim-validation",
         "RemoteHost": "api.github.com",
         "RemoteRepo": "datapackr",
         "RemoteUsername": "pepfar-datim",
         "RemoteRef": "HEAD",
-        "RemoteSha": "dc42354af05338571a2bb45decac0811a8c1e7b9",
+        "RemoteSha": "fdf8281ecd65fad1f0d4afdac2a149897baf4938",
         "GithubRepo": "datapackr",
         "GithubUsername": "pepfar-datim",
         "GithubRef": "HEAD",
-        "GithubSHA1": "dc42354af05338571a2bb45decac0811a8c1e7b9",
+        "GithubSHA1": "fdf8281ecd65fad1f0d4afdac2a149897baf4938",
         "NeedsCompilation": "no",
-        "Packaged": "2023-10-13 20:38:17 UTC; jordanbales",
+        "Packaged": "2023-11-08 17:18:52 UTC; jordanbales",
         "Author": "Scott Jackson [aut, cre],\n  Jason Pickering [aut, rev],\n  Sam Garman [aut],\n  Chris Nemarich [ctb],\n  Christian Domaas [ctb],\n  Fausto Lopez [ctb],\n  Jordan Bales [ctb]",
         "Maintainer": "Scott Jackson <sjackson@baosystems.com>",
-        "Built": "R 4.3.1; ; 2023-10-13 20:38:22 UTC; unix"
+        "Built": "R 4.3.1; ; 2023-11-08 17:18:56 UTC; unix"
       }
     },
     "datimutils": {
@@ -3184,19 +3180,19 @@
       "checksum": "9e2a41641fbec85ec6d8f83edd1f97e1"
     },
     ".Rprofile": {
-      "checksum": "1486e13ab40758bb50bfa16fc939e57a"
+      "checksum": "de995525aee32891d1c06255eaa7bb69"
     },
     "datapack.log": {
       "checksum": "d41d8cd98f00b204e9800998ecf8427e"
     },
     "DESCRIPTION": {
-      "checksum": "c87313278ff7d607a3c486a63a702f94"
+      "checksum": "ef17a5c9eb6ae6f2699eb490e4bac794"
     },
     "LICENSE": {
       "checksum": "9b62b5c75bb467271d2729f6639a8259"
     },
     "mechs.rds": {
-      "checksum": "08fad38233fca832ece6f26c66c155c8"
+      "checksum": "d3ed5bb26bc47bff31a63f0707e08eae"
     },
     "pepfar.png": {
       "checksum": "cd04d9e778b00519de3e0e2afc97eb28"
@@ -3205,7 +3201,7 @@
       "checksum": "3574f22ca9f71960e686307781631ac7"
     },
     "renv.lock": {
-      "checksum": "def80df4d44c05839baab91c40e07c23"
+      "checksum": "62593612e1207a91579750d7142d96a2"
     },
     "server.R": {
       "checksum": "f682920d9f553470a8e10e1c41a51b63"
