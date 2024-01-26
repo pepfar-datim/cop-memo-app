@@ -536,8 +536,8 @@
         "Type": "Package",
         "Package": "datapackr",
         "Title": "A Package that Packs and Unpacks all Data Packs and Target\nSetting Tools",
-        "Version": "7.2.1",
-        "Date": "2023-12-18",
+        "Version": "7.3.1",
+        "Date": "2024-01-25",
         "Authors@R": "c(\n    person(\"Scott\", \"Jackson\", , \"sjackson@baosystems.com\", role = c(\"aut\", \"cre\")),\n    person(\"Jason\", \"Pickering\", , \"jason.p.pickering@gmail.com\", role = c(\"aut\", \"rev\")),\n    person(\"Sam\", \"Garman\", , \"sgarman@baosystems.com\", role = \"aut\"),\n    person(\"Chris\", \"Nemarich\", , \"cnemarich@guidehouse.com\", role = \"ctb\"),\n    person(\"Christian\", \"Domaas\", , \"cdomaas@baosystems.com\", role = \"ctb\"),\n    person(\"Fausto\", \"Lopez\", , \"flopez@baosystems.com\", role = \"ctb\"),\n    person(\"Jordan\", \"Bales\", , \"jbales@baosystems.com\", role = \"ctb\")\n  )",
         "Description": "Generates and processes PEPFAR Data Packs and Site Tools.",
         "License": "file LICENSE",
@@ -554,17 +554,17 @@
         "RemoteHost": "api.github.com",
         "RemoteRepo": "datapackr",
         "RemoteUsername": "pepfar-datim",
-        "RemoteRef": "master",
-        "RemoteSha": "71bc328ab4bfa2962aad1a566f8bc0339095a8f2",
+        "RemoteRef": "HEAD",
+        "RemoteSha": "d420d9532e83c3bc9cb4c69c022c339eeb7871d3",
         "GithubRepo": "datapackr",
         "GithubUsername": "pepfar-datim",
-        "GithubRef": "master",
-        "GithubSHA1": "71bc328ab4bfa2962aad1a566f8bc0339095a8f2",
+        "GithubRef": "HEAD",
+        "GithubSHA1": "d420d9532e83c3bc9cb4c69c022c339eeb7871d3",
         "NeedsCompilation": "no",
-        "Packaged": "2023-12-19 20:14:24 UTC; jordanbales",
+        "Packaged": "2024-01-26 13:18:15 UTC; jordanbales",
         "Author": "Scott Jackson [aut, cre],\n  Jason Pickering [aut, rev],\n  Sam Garman [aut],\n  Chris Nemarich [ctb],\n  Christian Domaas [ctb],\n  Fausto Lopez [ctb],\n  Jordan Bales [ctb]",
         "Maintainer": "Scott Jackson <sjackson@baosystems.com>",
-        "Built": "R 4.3.1; ; 2023-12-19 20:14:29 UTC; unix"
+        "Built": "R 4.3.1; ; 2024-01-26 13:18:20 UTC; unix"
       }
     },
     "datimutils": {
@@ -3180,13 +3180,13 @@
       "checksum": "9e2a41641fbec85ec6d8f83edd1f97e1"
     },
     ".Rprofile": {
-      "checksum": "c2ce0e1b3a40799df0e3544cd36356b1"
+      "checksum": "a94a13e8ace0bc857fc3719263f2723e"
     },
     "datapack.log": {
       "checksum": "d41d8cd98f00b204e9800998ecf8427e"
     },
     "DESCRIPTION": {
-      "checksum": "ce097fd8f3a74f340940b052ee17ed64"
+      "checksum": "160e3ff08e1907a7020f294c5fa04b17"
     },
     "LICENSE": {
       "checksum": "9b62b5c75bb467271d2729f6639a8259"
@@ -3201,7 +3201,7 @@
       "checksum": "3574f22ca9f71960e686307781631ac7"
     },
     "renv.lock": {
-      "checksum": "1226d328b8aeca5eabd6c7a15c4117cf"
+      "checksum": "49e90f19e779b1f374e43d5ff59d241d"
     },
     "server.R": {
       "checksum": "f682920d9f553470a8e10e1c41a51b63"
