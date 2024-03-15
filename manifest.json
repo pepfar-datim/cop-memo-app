@@ -536,8 +536,8 @@
         "Type": "Package",
         "Package": "datapackr",
         "Title": "A Package that Packs and Unpacks all Data Packs and Target\nSetting Tools",
-        "Version": "7.4.0",
-        "Date": "2024-02-22",
+        "Version": "7.4.1",
+        "Date": "2024-03-15",
         "Authors@R": "c(\n    person(\"Scott\", \"Jackson\", , \"sjackson@baosystems.com\", role = c(\"aut\", \"cre\")),\n    person(\"Jason\", \"Pickering\", , \"jason.p.pickering@gmail.com\", role = c(\"aut\", \"rev\")),\n    person(\"Sam\", \"Garman\", , \"sgarman@baosystems.com\", role = \"aut\"),\n    person(\"Chris\", \"Nemarich\", , \"cnemarich@guidehouse.com\", role = \"ctb\"),\n    person(\"Christian\", \"Domaas\", , \"cdomaas@baosystems.com\", role = \"ctb\"),\n    person(\"Fausto\", \"Lopez\", , \"flopez@baosystems.com\", role = \"ctb\"),\n    person(\"Jordan\", \"Bales\", , \"jbales@baosystems.com\", role = \"ctb\")\n  )",
         "Description": "Generates and processes PEPFAR Data Packs and Site Tools.",
         "License": "file LICENSE",
@@ -555,16 +555,16 @@
         "RemoteRepo": "datapackr",
         "RemoteUsername": "pepfar-datim",
         "RemoteRef": "HEAD",
-        "RemoteSha": "e0dedf8b812129279921d0661d45c38597dc054a",
+        "RemoteSha": "489ebbd2a2a368acbf19d78ee217611dc6305a9e",
         "GithubRepo": "datapackr",
         "GithubUsername": "pepfar-datim",
         "GithubRef": "HEAD",
-        "GithubSHA1": "e0dedf8b812129279921d0661d45c38597dc054a",
+        "GithubSHA1": "489ebbd2a2a368acbf19d78ee217611dc6305a9e",
         "NeedsCompilation": "no",
-        "Packaged": "2024-02-26 13:07:36 UTC; jordanbales",
+        "Packaged": "2024-03-15 15:14:18 UTC; jordanbales",
         "Author": "Scott Jackson [aut, cre],\n  Jason Pickering [aut, rev],\n  Sam Garman [aut],\n  Chris Nemarich [ctb],\n  Christian Domaas [ctb],\n  Fausto Lopez [ctb],\n  Jordan Bales [ctb]",
         "Maintainer": "Scott Jackson <sjackson@baosystems.com>",
-        "Built": "R 4.3.1; ; 2024-02-26 13:07:40 UTC; unix"
+        "Built": "R 4.3.1; ; 2024-03-15 15:14:23 UTC; unix"
       }
     },
     "datimutils": {
@@ -3180,7 +3180,7 @@
       "checksum": "9e2a41641fbec85ec6d8f83edd1f97e1"
     },
     ".Rprofile": {
-      "checksum": "a32acdc316366ad06dc70339608e4ace"
+      "checksum": "3302b645fc94e47a36807c83d72f6eeb"
     },
     "datapack.log": {
       "checksum": "d41d8cd98f00b204e9800998ecf8427e"
@@ -3201,7 +3201,7 @@
       "checksum": "3574f22ca9f71960e686307781631ac7"
     },
     "renv.lock": {
-      "checksum": "d3ff831bdd29ec585a1b11015f167857"
+      "checksum": "4ab5c8698d6c3673152b04a1a74f984d"
     },
     "server.R": {
       "checksum": "730aa6d54e885fa6f40e34f761a0908a"
